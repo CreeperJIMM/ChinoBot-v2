@@ -5,6 +5,7 @@ Discord Bot V2
 
 [![Top.gg](https://cdn.discordapp.com/attachments/611040945495998464/785459046118326272/68747470733a2f2f746f702e67672f696d616765732f64626c6e65772e706e67.png)](https://top.gg/bot/731408794948730961)  
 <a href="https://www.codefactor.io/repository/github/creeperjimm/chinobot-v2"><img src="https://www.codefactor.io/repository/github/creeperjimm/chinobot-v2/badge" alt="CodeFactor" /></a>
+<a href="https://codebeat.co/projects/github-com-creeperjimm-chinobot-v2-master"><img alt="codebeat badge" src="https://codebeat.co/badges/e1cdf66d-864b-4381-82ba-6e81a6f94c76" /></a>
 <br>
 This is Discord Chino Bot 6.1  
 By discord.js  
