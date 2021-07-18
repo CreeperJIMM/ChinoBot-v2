@@ -1,0 +1,185 @@
+{
+    "zh_TW": {
+        "word": {
+            "No_money": "💸看來你沒有足夠的錢點一隻",
+            "ordered": "你點了一隻",
+            "ordereds": "你點了一盒",
+            "cost": "並花了",
+            "last": "你剩餘",
+            "ordered2": "已點了",
+            "time": "次",
+            "copy": "圖庫BY 苦力怕怕#8558\n 版權歸 【pixiv.net】",
+            "copy_rabbit": "【ご注文はうさぎですか?】 所有"
+        },
+        "role": {
+            "mature": "成熟",
+            "chino": "智乃",
+            "cocoa": "心愛",
+            "tippy": "提比",
+            "other": "分享餐",
+            "S1": "第一季點兔",
+            "S2": "第二季點兔",
+            "S3": "第三季點兔",
+            "shota": "正太",
+            "gura": "鯊鯊 Gura",
+            "fubuki": "狐狸 Fubiki",
+            "peko": "兔兔 Pekora",
+            "chen": "八雲橙",
+            "loli": "蘿莉",
+            "Nakkar": "Nakkar",
+            "sister": "御姊",
+            "vtuber": "Vtuber"
+        },
+        "data": {
+            "title": "觸圖功能指令使用累計:",
+            "footer":"點兔指令總共使用了 ",
+            "footer2": " 次\nVtuber指令總共使用了 "
+        },
+        "report": {
+            "love": "❤已加入收藏!",
+            "share": "🔃分享給其他人",
+            "url": "[點擊下面圖片名稱獲取圖片連結]",
+            "delete": "  /////此畫作已被刪除/////",
+            "report": "[這圖片將會被加入report區,並接受審核]\n畫作: ",
+            "error": "❌圖片上傳發生錯誤! "
+        }
+    },
+    "zh_CN": {
+        "word": {
+            "No_money": "💸看来你没有足够的钱点一只",
+            "ordered": "你点了一只",
+            "ordereds": "你点了一盒",
+            "cost": "并花了",
+            "last": "你剩余",
+            "ordered2": "已点了",
+            "time": "次",
+            "copy": "图库BY 苦力怕怕#8558\n 版权归 【pixiv.net】",
+            "copy_rabbit": "【ご注文はうさぎですか?】 所有"
+        },
+        "role": {
+            "mature": "成熟",
+            "chino": "智乃",
+            "cocoa": "心爱",
+            "tippy": "提比",
+            "other": "分享餐",
+            "S1": "第一季点兔",
+            "S2": "第二季点兔",
+            "S3": "第三季点兔",
+            "shota": "正太",
+            "gura": "鲨鲨 Gura",
+            "fubuki": "狐狸 Fubiki",
+            "peko": "兔兔 Pekora",
+            "chen": "八云橙",
+            "loli": "蘿莉",
+            "Nakkar": "Nakkar",
+            "sister": "御姊",
+            "vtuber": "Vtuber"
+        },
+        "data": {
+            "title": "触图功能指令使用累计:",
+            "footer":"点兔指令总共使用了 ",
+            "footer2": " 次\nVtuber指令总共使用了 "
+        },
+        "report": {
+            "love": "❤已加入收藏!",
+            "share": "🔃分享给其他人",
+            "url": "[点击下面图片名称获取图片连结]",
+            "delete": " /////此画作已被删除/////",
+            "report": "[这图片将会被加入report区,并接受审核]\n画作: ",
+            "error": "❌图片上传发生错误! "
+        }
+    },
+    "en_US": {
+        "word": {
+            "No_money": "💸Seems like you doesnt have enough money",
+            "ordered": "You ordered one",
+            "ordereds": "You ordered a box",
+            "cost": "and costs",
+            "last": "Now you have",
+            "ordered2": "You ordered",
+            "time": "time(s)",
+            "copy": "Images BY 苦力怕怕#8558\n All rights reserved to【pixiv.net】",
+            "copy_rabbit": "【ご注文はうさぎですか?】"
+        },
+        "role": {
+            "mature": "mature",
+            "chino": "Chino",
+            "cocoa": "Cocoa",
+            "tippy": "Tippy",
+            "other": "others",
+            "S1": "Season 1",
+            "S2": "Season 2",
+            "S3": "Season 3",
+            "shota": "shota",
+            "gura": "Gura",
+            "fubuki": "Fubiki",
+            "peko": "Pekora",
+            "chen": "Chen",
+            "loli": "Loli",
+            "Nakkar": "Nakkar",
+            "sister": "Yu-sister",
+            "vtuber": "Vtuber"
+        },
+        "data": {
+            "title": "Art picture commands have been used for:",
+            "footer":"Rabbit commands have been used for",
+            "footer2": " times\nVtuber commands have been used for"
+        },
+        "report": {
+            "love": "❤It has been joined to your favorites!",
+            "share": "🔃Share this to others",
+            "url": "[Click the name below to get the original picture link]",
+            "delete": "  /////This art has been deleted/////",
+            "report": "[This picture will be reported and re-audited]\n畫作: ",
+            "error": "❌Error while uploading the picture! "
+        }
+    },
+    "ja_JP": {
+        "word": {
+            "No_money": "💸君注文するのに十分なお金がないよう ",
+            "ordered": "君注文しました",
+            "ordereds": "君あなたは箱を注文しました",
+            "cost": "そして過ごした",
+            "last": "君残り ",
+            "ordered2": "すでに注文済み",
+            "time": "周波数",
+            "copy": "圖庫BY 苦力怕怕#8558\n 著作権 【pixiv.net】",
+            "copy_rabbit": "【ご注文はうさぎですか?】 すべて"
+        },
+        "role": {
+            "mature": "成熟した",
+            "chino": "チノ",
+            "cocoa": "ココア",
+            "tippy": "ティッピー",
+            "other": "全体像",
+            "S1": "うさぎの最初の季節",
+            "S2": "うさぎのセカンドシーズン",
+            "S3": "うさぎの第3シーズン",
+            "shota": "ショタ",
+            "gura": "Gawr Gura",
+            "fubuki": "白上フブキ",
+            "peko": "兎田ぺこら",
+            "chen": "(八雲)チェン",
+            "loli": "ロリ",
+            "Nakkar": "Nakkar",
+            "sister": "禦姊",
+            "vtuber": "Vtuber"
+        },
+        "data": {
+            "title": "タッチ機能コマンドの累積使用:",
+            "footer":"うさぎコマンドは合計で使用されます ",
+            "footer2": " 周波数\nVtuber 命令は合計を使用しました "
+        },
+        "report": {
+            "love": "❤お気に入りに追加!",
+            "share": "🔃他の人と共有する",
+            "url": "[下の画像名をクリックして、画像のリンクを取得してください]",
+            "delete": "  /////この絵は削除されました/////",
+            "report": "[この写真は検査エリアに追加され、レビューのために受け入れられます]\nペインティング: ",
+            "error": "❌画像のアップロード中にエラーが発生しました！ "
+        }
+    },
+    "es_ES": {
+
+    }
+}

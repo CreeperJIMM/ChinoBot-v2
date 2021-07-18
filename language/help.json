@@ -1,0 +1,385 @@
+{
+    "zh_TW": {
+        "help": {
+            "command": "指令大全",
+            "desc": "歡迎使用本機器人的功能\n下面為一些指令教學\n若需要用到伺服器功能請打`",
+            "desc2": "setup`\n需要用到用戶功能隨意打任何一個`",
+            "desc3":"`指令即可生成Json檔案",
+            "addA": "以下為一些初次使用指令",
+            "addF":"📝想知道指令使用請打 `",
+            "addF2": "command`\n📊伺服器專用指令請打 `",
+            "addF3": "setup help`\n🌎語言設置請打 `",
+            "addF4": "language`\n\n✈使用 `",
+            "addF5": "bi` 可查看機器人資訊  [[top.gg]](https://top.gg/bot/731408794948730961)\n🔎使用 `",
+            "addF6": "inv` 查看邀請介面,或者點擊 [這裡邀請](https://discord.com/oauth2/authorize?client_id=",
+            "addF7": "&scope=applications.commands%20bot&permissions=2134900215)\n💻更多智乃機器人請打 `",
+            "addF8":"bot` \n[🪐智乃小幫手官方網站](https://dckabicord.com/main)\n\n❓[【服主的群組ouob】](https://discord.gg/aX2m9MB) - [【智乃機器人支援群】](https://discord.gg/P2yg5V2)\n⚙使用 `",
+            "addF9": "setup help` 來裝飾自己的咖啡廳吧!"
+        },
+        "invite": {
+            "inv": "邀請機器人[點我]",
+            "desc": "群組協助/提交Bug [ https://discord.gg/R9TmPnf ]",
+            "addF": {
+                "a1": "機器人特色:",
+                "v1": "擁有智乃/心愛/Vtuber等其他觸圖!",
+                "cocoa": "心愛","tippy": "提比","other":"其他"},
+            "addF2": {
+                "a1": "點兔第一季圖","v1":"點兔第二季圖"
+            }
+        },
+        "command": {
+            "common": {
+                "title": "普通指令",
+                "cmd": "`hi` 說嗨指令(?) \n`avatar` 個人大頭貼 \n`savatar` 伺服器頭貼 \n`banner` 伺服器橫幅\n`date` 顯示今天日期 \n`ping` 延遲測試 \n`say [訊息]` 機器人說話 \n`tts [訊息]` 機器人說話(tts)  \n`sinfo` 伺服器資訊 \n`uinfo` 成員資訊 \n`inv` 機器人邀請連結 \n`version` 機器人版本"
+            },
+            "rabbit":{
+               "title": "觸圖功能",
+               "cmd": "[25/35$]`chino` 發出智乃圖片(x367+🔞x45) \n[25/35$]`cocoa` 發出心愛圖片(x29+🔞x3) \n[15$]`tippy` 發出提比圖片(x21) \n[35$]`other` 發出一個歡樂分享餐(?)(x61) \n[25$]`S1` 發出第一季圖片 \n[25$]`S2` 發出第二季圖片\n[25$]`S2` 發出第三季圖片\n[25$/35$]`shark` 發出鯊鯊圖片(161+22) \n[25$]`fubuki` 發出白上吹雪畫作(57+17) \n[25$]`peko` 發出兔兔畫作(42)  \n[25$]`chen` 發出八雲橙畫作(67) \n[25$]`shota` 發出正太畫作(568)\n[25$]`loli` 發出蘿莉畫作(90) \n[25$]`vtuber` 發出vtuber畫作(29) \n[25$]`nakkar` 發出Nakkar的畫作(157) \n`data` 指令統計表"
+            },
+            "admin":{
+                "title": "管理功能",
+                "cmd": "`clear [數量]` 清除訊息 \n`kick [成員]` 踢出成員 \n`ban [成員]` 封鎖成員 \n`vote [文字] [提及]` 投票 \n`perm [成員]` 查看權限\n`server`  伺服器總設定"
+             },
+             "music":{
+                "title": "音樂功能",
+                "cmd": "`cr!play` [網址/關鍵字/歌單] 播放音樂 \n`cr!pause` 暫停音樂\n `cr!queue` 播放清單\n`cr!skip` 跳過歌曲\n`cr!nowplaying` 目前歌曲\n`cr!shuffle` 打亂歌單\n`cr!remove [number]` 移除某歌曲 \n`cr!loop` 循環歌單\n`cr!stop` 清除歌曲並離開語音"
+             },
+             "other":{
+                "title": "其他功能",
+                "cmd": "`cpu` CPU使用量\n`ram` 記憶體使用量\n `setup` 設置json\n`setup help` 查看設置幫助\n`feedback` 建議反饋\n \n`post` 公告 \n `close` 強制關閉(僅作者使用)"
+             },
+             "money":{
+                "title": "金錢功能",
+                "cmd": "`money` 查看金錢\n `daily` 領取每日金錢\n`moneys` 金錢排行榜\n`pay [用戶]` 給錢\n`slot [$]` 拉霸機"
+             },
+             "level":{
+                "title": "等級功能",
+                "cmd": "`rank` 查詢經驗值\n`levels` 等級排行榜"
+             },
+             "user":{
+                "title": "用戶功能",
+                "cmd": "`language` 語言設置\n`marry [用戶]` 與某人結婚\n`divorce` 離婚\n`snipe` 上個訊息\n`card`  識別卡\n`adv`  成就卡\n`pet` 寵物指令"
+             },
+             "game":{
+                "title": "遊戲功能",
+                "cmd": "`mc [IP] [port]` 查詢麥塊伺服器 \n`osu` 查看個人資料 \n`osucard` 圖片資料 \n`rps` 猜拳指令! \n`math` 擲骰子(1-6) \n`love` 智乃愛你的比率(%) \n`pick [問題]` 是或否\n`gay` Gay的比率\n`slot [$]` 拉霸機\n`guess [$]` 三門遊戲\n`rps2 [$]` 新版猜拳指令!"
+             },
+             "text":{
+                "title": "文字功能",
+                "cmd": "`bs [字數] [文字]` 唬爛產生器 \n`ant [文字]` 螞蟻文產生器"
+             },
+             "word": {
+                 "cmds":" 個指令!",
+                 "helpX": "幫助頁面",
+                 "desc": "◆以下指令除了音樂功能, 其他都使用 ",
+                 "desc2": "◆指令旁邊有寫數字代表你需要多少錢來使用此指令!",
+                 "help": "command [參數]` 叫出幫助頁面",
+                 "addF": "參數",
+                 "addV": "- `common` 普通功能\n- `rabbit` 觸圖功能\n- `game` 遊戲功能\n- `admin`  管理功能\n- `music`  音樂功能\n- `other`  其他功能\n- `money`  金錢功能\n- `level`  等級功能\n- `user`   用戶功能\n- `text`   文字功能\n- `all` 全部指令顯示"
+             }
+        },
+        "ver": {
+            "ver": "版本資訊",
+            "the": "第 ","page":" 頁",
+            "all": "共","use": "請使用",
+            "pages": "頁數"
+        },
+        "word": {
+            "command": "指令大全",
+            "ver": "版本: ",
+            "creater": "◆製作者BY ",
+            "me": "苦力怕怕#8558",
+            "copy": "◆[版權所有•All Rights Reserved.]",
+            "all": "◆製作者BY 苦力怕怕#8558\n◆[版權所有•All Rights Reserved.]",
+            "pass": "打 "
+        }
+    },
+    "zh_CN": {
+        "help": {
+            "command": "指令大全",
+            "desc": "欢迎使用本机器人的功能\n下面为一些指令教学\n若需要用到伺服器功能请打`",
+            "desc2": "setup`\n需要用到用户功能随意打任何一个`",
+            "desc3":"`指令即可生成Json档案",
+            "addA": "以下为一些初次使用指令",
+            "addF":"📝想知道指令使用请打 `",
+            "addF2": "command`\n📊伺服器专用指令请打 `",
+            "addF3": "setup help`\n🌎语言设置请打 `",
+            "addF4": "language`\n\n✈使用 `",
+            "addF5": "bi` 可查看机器人资讯 [[top.gg]](https://top.gg/bot/731408794948730961)\n🔎使用 `",
+            "addF6": "inv` 查看邀请介面,或者点击 [这里邀请](https://discord.com/oauth2/authorize?client_id=",
+            "addF7": "&scope=bot&permissions=2134900215)\n💻更多智乃机器人请打 `",
+            "addF8":"bot` \n[🪐智乃小帮手官方网站](https://dckabicord.com/main)\n\n❓[【服主的群组ouob】](https://discord.gg/aX2m9MB) - [【智乃机器人支援群】](https://discord.gg /P2yg5V2)\n⚙使用`",
+            "addF9": "setup help` 来装饰自己的咖啡厅吧!"
+        },
+        "invite": {
+            "inv": "邀请机器人[点我]",
+            "desc": "群组协助/提交Bug [ https://discord.gg/R9TmPnf ]",
+            "addF": {
+                "a1": "机器人特色:",
+                "v1": "擁有智乃/心爱/Vtuber等其他触图!",
+                "cocoa": "心爱","tippy": "提比","other":"其他"},
+            "addF2": {
+                "a1": "点兔第一季图","v1":"点兔第二季图"
+            }
+        },
+        "command": {
+            "common": {
+                "title": "普通指令",
+                "cmd": "`hi` 说嗨指令(?) \n`avatar` 个人大头贴\n`savatar` 伺服器头贴\n`banner` 伺服器横幅\n`date` 显示今天日期\n` ping` 延迟测试\n`say [讯息]` 机器人说话\n`tts [讯息]` 机器人说话(tts) \n`sinfo` 伺服器资讯\n`uinfo` 成员资讯\n`inv` 机器人邀请连结\n`version` 机器人版本"
+            },
+            "rabbit":{
+               "title": "触图功能",
+               "cmd": "[25/35$]`chino` 发出智乃图片(x244+🔞x30) \n[25/35$]`cocoa` 发出心爱图片(x32+🔞x3) \n[15$]`tippy`发出提比图片(x16) \n[35$]`other` 发出一个欢乐分享餐(?)(x62) \n[25$]`S1` 发出第一季图片\n[25$]`S2`发出第二季图片\n[25$]`S2`发出第三季图片\n[25$/35$]`shark` 发出鲨鲨图片\n[25$]`fubuki` 发出白上吹雪画作\n[25$]`peko` 发出兔兔画作\n [25$]`chen` 发出八云橙画作\n[25$]`shota` 发出正太画作\n[25$]`loli` 发出萝莉画作(90) \n[25$]`vtuber` 发出vtuber画作(29) \n[25$]`nakkar` 发出Nakkar的画作(157)\n`data` 指令统计表"
+            },
+            "admin":{
+                "title": "管理功能",
+                "cmd": "`clear [数量]` 清除讯息\n`kick [成员]` 踢出成员\n`ban [成员]` 封锁成员\n`vote [文字] [提及]` 投票\n` perm [成员]` 查看权限\n`server` 伺服器总设定"
+             },
+             "music":{
+                "title": "音乐功能",
+                "cmd": "`cr!play` [网址/关键字/歌单] 播放音乐\n`cr!pause` 暂停音乐\n `cr!queue` 播放清单\n`cr!skip` 跳过歌曲\n`cr!nowplaying ` 目前歌曲\n`cr!shuffle` 打乱歌单\n`cr!remove [number]` 移除某歌曲\n`cr!loop` 循环歌单\n`cr!stop` 清除歌曲并离开语音"
+             },
+             "other":{
+                "title": "其他功能",
+                "cmd": "`cpu` CPU使用量\n`ram` 记忆体使用量\n `setup` 设置json\n`setup help` 查看设置帮助\n`feedback` 建议反馈\n \n`post`公告\n `close` 强制关闭(仅作者使用)"
+             },
+             "money":{
+                "title": "金钱功能",
+                "cmd": "`money` 查看金钱\n `daily` 领取每日金钱\n`moneys` 金钱排行榜\n`pay [用户]` 给钱\n`slot [$]` 拉霸机"
+             },
+             "level":{
+                "title": "等级功能",
+                "cmd": "`rank` 查询经验值\n`levels` 等级排行榜"
+             },
+             "user":{
+                "title": "用户功能",
+                "cmd": "`language` 语言设置\n`marry [用户]` 与某人结婚\n`divorce` 离婚\n`snipe` 上个讯息\n`card` 识别卡\n`adv` 成就卡\n`pet` 宠物指令"
+             },
+             "game":{
+                "title": "游戏功能",
+                "cmd": "`mc [IP] [port]` 查询麦块伺服器\n`osu` 查看个人资料\n`osucard` 图片资料\n`rps` 猜拳指令! \n`math` 掷骰子( 1-6) \n`love` 智乃爱你的比率(%) \n`pick [问题]` 是或否\n`gay` Gay的比率\n`slot [$]` 拉霸机\n` guess [$]` 三门游戏\n`rps2 [$]` 新版猜拳指令!"
+             },
+             "text":{
+                "title": "文字功能",
+                "cmd": "`bs [字数] [文字]` 唬烂产生器 \n`ant [文字]` 蚂蚁文产生器"
+             },
+             "word": {
+                 "cmds":" 个指令!",
+                 "helpX": "帮助页面",
+                 "desc": "◆以下指令除了音乐功能, 其他都使用 ",
+                 "desc2": "◆指令旁边有写数字代表你需要多少钱来使用此指令!",
+                 "help": "command [参数]` 叫出帮助页面",
+                 "addF": "参数",
+                 "addV": "- `common` 普通功能\n- `rabbit` 触图功能\n- `game` 游戏功能\n- `admin` 管理功能\n- `music` 音乐功能\n- `other`其他功能\n- `money` 金钱功能\n- `level` 等级功能\n- `user` 用户功能\n- `text` 文字功能\n- `all` 全部指令显示"
+             }
+        },
+        "ver": {
+            "ver": "版本资讯",
+            "the": "第 ","page":" 页",
+            "all": "共","use": "请使用",
+            "pages": "页数"
+        },
+        "word": {
+            "command": "指令大全",
+            "ver": "版本: ",
+            "creater": "◆制作者BY ",
+            "me": "苦力怕怕#8558",
+            "copy": "◆[版权所有•All Rights Reserved.]",
+            "all": "◆制作者BY 苦力怕怕#8558\n◆[版权所有•All Rights Reserved.]",
+            "pass": "打 "
+        }
+    },
+    "en_US": {
+        "help": {
+            "command": "All commands",
+            "desc": "Welcome to use this bot!\nBelow are some instructions to use the commands\nIf needed to use the server functions please type`",
+            "desc2": "setup`\nIf you need to use user functions please type any`",
+            "desc3":"`commands and will generate Json files",
+            "addA": "Here are some commands you might need",
+            "addF":"📝If you want to know the commands please type `",
+            "addF2": "command`\n📊Server only commands please type `",
+            "addF3": "setup help`\n🌎Language settings please type `",
+            "addF4": "language`\n\n✈Use `",
+            "addF5": "bi` to check out bot infos  [[top.gg]](https://top.gg/bot/731408794948730961)\n🔎Use `",
+            "addF6": "inv` check out the invitation interface,or click [here](https://discord.com/oauth2/authorize?client_id=",
+            "addF7": "&scope=bot&permissions=2134900215)\n💻More Chino bots please type `",
+            "addF8":"bot` \n[🪐Chino Helper Official Website](https://dckabicord.com/main)\n\n❓[【Owners' server ouob】](https://discord.gg/aX2m9MB) - [【Bot support server】](https://discord.gg/P2yg5V2)\n⚙Use `",
+            "addF9": "setup help` to decorate your own Cafe(server)!"
+        },
+        "invite": {
+            "inv": "Invite bot[click me]",
+            "desc": "Server support/bug reporting [ https://discord.gg/R9TmPnf ]",
+            "addF": {
+                "a1": "Bot features:",
+                "v1": "Pictures of Chino/Cocoa and Vtubers!",
+                "cocoa": "Cocoa","tippy": "tippy","other":"other"},
+            "addF2": {
+                "a1": "GochiUsa Season 1 picture","v1":"GochiUsa Season 2 picture"
+            }
+        },
+        "command": {
+            "common": {
+                "title": "Commons",
+                "cmd": "`hi` say hi(?) \n`avatar` Self avatar \n`savatar` Server icon \n`banner` server banner\n`date` shows today's date \n`ping` Delay test \n`say [message]` make bot says your msg \n`tts [message]` bot tts  \n`sinfo` server info \n`uinfo` user info \n`inv` bot invite link \n`version` bot version"
+            },
+            "rabbit":{
+               "title": "Pictures",
+               "cmd": "[25/35$]`chino` send a Chino picture(x244+🔞x30) \n[25/35$]`cocoa` send a Cocoa picture(x32+🔞x3) \n[15$]`tippy` send a tippy picture(x16) \n[35$]`other` send a picture of the others(?)(x62) \n[25$]`S1` send a S1 picture \n[25$]`S2` send a S2 picture\n[25$]`S3` send a S3 picture\n[25$/35$]`shark` send a Gura picture \n[25$]`fubuki` send a Fubuki picture \n[25$]`peko` send a Pekora artwork  \n[25$]`chen` send a Chen artwork \n[25$]`shota` send a shota picture \n[25$]`loli` send a loli picture(90) \n[25$]`vtuber` send a vtuber picture(29) \n[25$]`nakkar` send a Nakkar's picture(157) \n`data` commands count:"
+            },
+            "admin":{
+                "title": "Admin functions",
+                "cmd": "`clear [amount]` Clear messages \n`kick [member]` Kick the member mentioned \n`ban [member]`Ban the member mentioned \n`vote [text] [mention]` create a vote \n`perm [member]` check the perms of the member\n`server`  server settings"
+             },
+             "music":{
+                 "title": "Music Function",
+                "cmd": "`cr!play` [URL/Keyword/Playlist] Play music\n`cr!pause` Pause music\n `cr!queue` Playlist\n`cr!skip` Skip songs\n`cr!nowplaying `Current song\n`cr!shuffle` Shuffle the playlist\n`cr!remove [number]` Remove a song\n`cr!loop` Loop the playlist\n`cr!stop` Clear the song and leave the voice"
+            },
+             "other":{
+                "title": "Other functions",
+                "cmd": "`cpu` CPU usage\n`ram` Memory usage\n `setup` setup json\n`setup help` View setup help\n`feedback` Suggest feedback\n \n`post` Announcement\n `close` forced close (only for author)"
+             },
+             "money":{
+                "title": "Money Function",
+                "cmd": "`money` View money\n `daily` Receive daily money\n`moneys` Money ranking\n`pay [user]` Give money\n`slot [$]` Slot machine"
+             },
+             "level":{
+                "title": "Level Function",
+                "cmd": "`rank` query experience value\n`levels` ranking list"
+             },
+             "user":{
+                "title": "User Features",
+                "cmd": "`language` language settings\n`marry [user]` marry someone\n`divorce` divorce\n`snipe` last message\n`card` identification card\n`adv` achievement card \n`pet` Pet command"
+             },
+             "game":{
+                "title": "Game Features",
+                "cmd": "`mc [IP] [port]` Query wheat block server\n`osu` View personal information\n`osucard` Picture information\n`rps` Guess the boxing command! \n`math` Roll the dice( 1-6) \n`love` The ratio of Chino loving you (%) \n`pick [Question]` Yes or No\n`gay` Gay ratio\n`slot [$]` Slot machine\n` guess [$]` Three-door game\n`rps2 [$]` New version of guessing instructions!"
+             },
+             "text":{
+                "title": "Text Function",
+                "cmd": "`bs [words] [text]` bluff generator \n`ant [text]` ant text generator"
+             },
+             "word": {
+                 "cmds":" Command!",
+                 "helpX": "Help Page",
+                 "desc": "◆The following commands are used except for the music function",
+                 "desc2": "◆The number written next to the command represents how much money you need to use this command!",
+                 "help": "command [parameter]` call up the help page",
+                 "addF": "Parameter",
+                 "addV": "- `common` common function\n- `rabbit` touch picture function\n- `game` game function\n- `admin` management function\n- `music` music function\n- `other` Other functions\n- `money` money function\n- `level` level function\n- `user` user function\n- `text` text function\n- `all` display all commands"
+             }
+        },
+        "ver": {
+            "ver": "Version Information",
+            "the": "the ","page":" page",
+            "all": "Total","use": "Please use",
+            "pages": "Number of pages"
+        },
+        "word": {
+            "command": "Command Collection",
+            "ver": "Version: ",
+            "creater": "◆Maker BY ",
+            "me": "苦力怕怕#8558",
+            "copy": "◆[All Rights Reserved.]",
+            "all": "◆Maker BY 苦力怕怕#8558\n◆[Copyright•All Rights Reserved.]",
+            "pass": "type"
+        }
+    },
+    "ja_JP": {
+        "help": {
+            "command": "指示",
+            "desc": "このロボットの機能を使用することを歓迎します\n以下は教えるためのいくつかの指示です\nサーバー機能を使用する必要がある場合は、をクリックしてください` ",
+            "desc2": "setup`\nユーザー機能を使用する必要があります`",
+            "desc3":"`Jsonファイルを生成するコマンド",
+            "addA": "以下は、最初に使用するためのいくつかの手順です",
+            "addF":"📝手順を知りたい場合は、入力してください `",
+            "addF2": "command`\n📊サーバー固有のコマンドについては、次のように入力してください `",
+            "addF3": "setup help`\n🌎言語設定を押してください `",
+            "addF4": "language`\n\n✈使用する `",
+            "addF5": "bi` ロボット情報を閲覧できます  [[top.gg]](https://top.gg/bot/731408794948730961)\n🔎使用する`",
+            "addF6": "inv` 查看邀請介面,或者點擊 [這裡邀請](https://discord.com/oauth2/authorize?client_id=",
+            "addF7": "&scope=bot&permissions=2134900215)\n💻他の Chino ロボットを招待するには、`",
+            "addF8":"bot` \n [🪐チノ 公式サイト](https://dckabicord.com/main)\n\n❓[【所有者のサーバーouob】](https://discord.gg/aX2m9MB) - [【Chinoロボット支援グループ】](https://discord.gg/P2yg5V2)\n⚙使用 `",
+            "addF9": "setup help`自分のカフェを飾りに来てください！"
+        },
+        "invite": {
+            "inv": "ロボットを招待する [クリックしてください]",
+            "desc": "グループ支援/提出Bug [ https://discord.gg/R9TmPnf ]",
+            "addF": {
+                "a1": "ロボットの機能:",
+                "v1": "チノ / ココア / Vtuber などの他のタッチ画像を所有してください！",
+                "cocoa": "ココア","tippy": "ティッピー","other":"その他"},
+            "addF2": {
+                "a1": "ご注文はうさぎですか？","v1":"ご注文はうさぎですか？？"
+            }
+        },
+        "command": {
+            "common": {
+                "title": "一般的な機能",
+                "cmd": "`hi` こんにちはコマンド（？） \n`avatar` プロフィールの写真 \n`savatar` サーバーヘッダー \n`banner` サーバーバナー\n`date` 今日の日付を表示する \n`ping` 遅延テスト \n`say [訊息]` ロボットの話 \n`tts [訊息]` ロボットの話(tts)  \n`sinfo` サーバー情報 \n`uinfo` メンバー情報 \n`inv` ロボット招待リンク \n`version` ロボット版"
+            },
+            "rabbit":{
+               "title": "タッチ画像機能",
+               "cmd": "[25/35$]`chino` Chinoの写真を送る(x244+🔞x30) \n[25/35$]`cocoa` Cocoaの写真を送る(x32+🔞x3) \n[15$]`tippy` Tippyの写真を送る(x16) \n[35$]`other` 幸せな共有の食事を送る(?)(x62) \n[25$]`S1` 最初のシーズンの写真を送信します \n[25$]`S2` セカンドシーズンの写真を送る\n[25$]`S3` 第3シーズンのポイントウサギを発行します\n[25$/35$]`shark` Gawr Guraの写真を送る\n[25$]`fubuki` 白上フブキの絵を送る \n[25$]`peko` 兎田ぺこらの絵を送る  \n[25$]`chen` (八雲)チェンの絵を送る \n[25$]`shota` ショタの絵を送る \n[25$]`loli` ロリ絵画(90) \n[25$]`vtuber` Vtuber絵画を送る(29) \n[25$]`nakkar` Nakkarの絵を送る(157) \n`data` コマンド統計"
+            },
+            "admin":{
+                "title": "管理機能",
+                "cmd": "`clear [數量]` 明確なメッセージ \n`kick [メンバー]` 追い出されたメンバー \n`ban [成員]` メンバーをブロックする \n`vote [テキスト] [言及する]` 投票 \n`perm [メンバー]` 権限の表示\n`server`  サーバー設定"
+             },
+             "music":{
+                "title": "音楽機能",
+                "cmd": "`cr！play` [URL/キーワード/プレイリスト]音楽を再生する\n`cr！pause`音楽を一時停止する\n`cr！queue`プレイリスト\n`cr！skip`曲をスキップする\n`cr！nowplaying`現在の曲\n`cr！shuffle`プレイリストをシャッフルします\n`cr！remove [number] `曲を削除します\n`cr！loop`プレイリストをループします\n`cr！stop`曲をクリアして音声を残します"
+             },
+             "other":{
+                "title": "その他の機能",
+                "cmd": "`cpu` CPU使用量\n`ram` 記憶體使用量\n `setup` 設置json\n`setup help` 查看設置幫助\n`feedback` 建議反饋\n \n`post` 公告 \n `close` 強制關閉(僅作者使用)"
+             },
+             "money":{
+                "title": "マネー機能",
+                "cmd": "`money` お金を見る\n `daily` 毎日のお金を受け取る\n`moneys` お金のランキング\n`pay [ユーザー]` お金をあげる\n`slot [$]` スロットマシン"
+             },
+             "level":{
+                "title": "レベル機能",
+                "cmd": "`rank` 查詢經驗值\n`levels` 等級排行榜"
+             },
+             "user":{
+                "title": "ユーザー機能",
+                "cmd": "`language` 言語設定\n`marry [ユーザー]` 誰かと結婚する\n`divorce` 別れ\n`snipe` 最後のメッセージ\n`card`  IDカード\n`adv`  成就卡\n`pet` ペットの使用"
+             },
+             "game":{
+                "title": "ゲームの特徴",
+                "cmd": "`mc [IP] [port]` Minecraftサーバーにクエリを実行する \n`osu` osuプロフィールを見る \n`osucard` osuサムネイル情報 \n`rps` 予想ゲーム! \n`math` サイコロ(1-6) \n`love` はあなたの比率を愛しています(%) \n`pick [問題]` 是或否\n`gay` Gay的比率\n`slot [$]` 拉霸機\n`guess [$]` 三門遊戲\n`rps2 [$]` 新版猜拳指令!"
+             },
+             "text":{
+                "title": "テキスト機能",
+                "cmd": "`bs [字數] [文字]` 唬爛発生器 \n`ant [文字]` 蟻文発生器"
+             },
+             "word": {
+                 "cmds":" 個指令!",
+                 "helpX": "ヘルプページ",
+                 "desc": "◆音楽機能に加えて, 他のすべての使用 ",
+                 "desc2": "◆指示の横に書かれている数字は、この指示を使用するために必要な金額を示しています!",
+                 "help": "command [パラメータ]` ヘルプページを呼び出す",
+                 "addF": "パラメータ",
+                 "addV": "- `common` 普通功能\n- `rabbit` 觸圖功能\n- `game` 遊戲功能\n- `admin`  管理功能\n- `music`  音樂功能\n- `other`  其他功能\n- `money`  金錢功能\n- `level`  等級功能\n- `user`   用戶功能\n- `text`   文字功能\n- `all` 全部指令顯示"
+             }
+        },
+        "ver": {
+            "ver": "バージョン情報",
+            "the": "ページ ","page":" 目",
+            "all": "合計","use": "使ってください",
+            "pages": "ページ数"
+        },
+        "word": {
+            "command": "指示",
+            "ver": "バージョン: ",
+            "creater": "◆メーカー BY ",
+            "me": "苦力怕怕#8558",
+            "copy": "◆[全著作権所有•All Rights Reserved.]",
+            "all": "◆メーカーBY 苦力怕怕#8558\n◆[全著作権所有•All Rights Reserved.]",
+            "pass": "入る "
+        }
+    },
+    "es_ES": {
+
+    }
+}

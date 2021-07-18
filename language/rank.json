@@ -1,0 +1,425 @@
+{
+    "zh_TW": {
+        "rank": {
+            "setup": {
+                "title": "等級訊息設置",
+                "desc": "使用 `cr!setup rank [訊息]`\n◆想使用當頻道只要不填入訊息即可\n使用 `cr!setup rank [空兩格]` 來關閉經驗值訊息\n在訊息裡面加上以下東西可以增加參數:\n- `{user}` 及提用戶\n- `{server}` 伺服器名稱\n- `{rank}` 等級"
+            },
+            "title": "你的等級: Level ",
+            "exp": "經驗值: ","card": "的經驗卡 [還需要 ","card2": " 才會升下一等]"
+        },
+        "money": {
+            "money": "你的金錢: ",
+            "daily": "今日薪水: ",
+            "wallet": "的錢包uwu",
+            "d1": "✅已領取!","d2": "❌未領取! 請打`cr!daily` 來領取!",
+            "ranking": {
+                "title":"💸 金錢排行榜     (前30名)",
+                "footer":"此為全部群排名"
+            }
+        },
+        "daily": {
+            "receive":"❌你已經領過了!! 很貪心喔uwu",
+            "adv": "🏅**獲得成就!!**  領薪水!",
+            "clean": "✅你已領取你的每日50薪資!",
+            "dec":"你已連續簽到 ","dec2": " 天\n所以你能領到額外的 ","dec3":"$ \n記得常來咖啡店工作阿uwu",
+            "pay":"💰發薪水囉!"
+        },
+        "level": {
+            "ranking":{
+                "title":"🏆 等級排行榜     (前30名)",
+                "desc": "等級| 經驗值 |  成員\n ",
+                "footer": "此為全部群排名"
+            }
+        },
+        "lang": {
+            "title":"以下為語言設置參數"
+        },
+        "pay":{
+            "cool_down":"❌正在轉移上個交易 請稍等一會再嘗試新的交易!",
+            "cant_own":"❌你不能給予自己!",
+            "pay": "💸已給予 ",
+            "you_will":"你將你的","give":"給了",
+            "now_you":"現在你變成 ","now_have":"現在有 ",
+            "handing_free":"[已從中取0.2%手續費] ","extra":"你花了額外 ","give_someone":"來給予別人錢"
+        },
+        "marry":{
+            "cant_own":"❌你不能跟自己結婚!",
+            "timer": "請對象在20秒內", "answer":"輸入 `yes` 結婚\n輸入 `no` 取消",
+            "marry_complete":"🎉恭喜結婚!","marry_complete2":"💖祝你們長長久久,永不分離!",
+            "has_someone":"❌對方已經有人了:(","you_have":"❌你已經有人了! 貪心喔uwu!"
+        },
+        "divorce": {
+            "sure": "你要確定欸!!",
+            "answer":"輸入 `yes` 離婚\n輸入 `no` 取消",
+            "divorce":"💔已離婚!","divorce2":"希望你們之後可以遇到更好的 :((  ",
+            "hasnt":"❌你沒有結婚!"
+        },
+        "pet":{
+            "add":{
+                "no_own":"❌你不能養自己!",
+                "has_adot":"❌你已經認養這個寵物了!",
+                "timer":"請寵物在20秒內","answer":"輸入 `yes` 被領養\n輸入 `no` 取消",
+                "complete_adot":"🎉恭喜領養!","complete_adot2":"🔰要時常照顧寵物唷!"
+            },
+            "remove":{
+                "no_pet":"❌沒有這個寵物!",
+                "sure": "你要確定欸!!",
+                "answer":"輸入 `yes` 棄養\n輸入 `no` 取消",
+                "remome_adot":"❌已棄養!","remove_adot2":"希望能找到更好的寵物 :((  "
+            },
+            "disconnect":{
+                "not_fond_host":"❌沒有這個主人!",
+                "not_host":"❌請填入要斷開連結的主人",
+                "sure": "你要確定欸!!",
+                "answer":"輸入 `yes` 斷開連結\n輸入 `no` 取消",
+                "disconnect":"❌已斷開關係!","disconnect2":"希望能找到更好的主人 :((  "
+            },
+            "help":{
+                "title":"寵物幫助頁面","desc":"- `add [用戶]` 新增寵物\n- `remove [寵物]` 移除寵物\n- `disconnect [主人]` 與主人斷開關係"
+            }
+        },
+        "card":{
+           "card":" 員工識別卡",
+           "data":"工作資料","money":"金錢: ","exp":"等級/經驗值: ",
+           "interactive":"互動次數","Chino":"智乃: ","Cocoa":"心愛: ","Tippy":"提比: ","Other":"其他: ","times":" 次",
+           "stock":"[圖庫]","loved":"已收藏","report":"已舉報","share":"已分享",
+           "work_all":"累計工作 ","work_last":"連續工作 ","work_first":"首次工作 ",
+           "ID_card":"識別卡 "
+        },
+        "prem":{
+            "perm":" 的權限表",
+            "in":" 至 ",
+            "hight":"最高身分組: ",
+            "owner":"服主: ",
+            "prem2":"權限表",
+            "log":"查看審核日記",
+            "emoji":"編輯表情符號",
+            "ink":"創建連結"
+        },
+        "word":{
+            "mention": "❌你必須提及成員或填入ID!",
+            "type_money": "❌你必須填入數字!",
+            "not_fond_user":"❌沒有這個用戶或這個用戶的資料",
+            "cancel":"❌操作取消!","processing":"🔄處理中","complete":"✅操作完成"
+        }
+    },
+    "zh_CN": {
+        "rank": {
+            "setup": {
+                "title": "等级讯息设置",
+                "desc": "使用`cr!setup rank [讯息]`\n◆想使用当频道只要不填入讯息即可\n使用`cr!setup rank [空两格]` 来关闭经验值讯息\n在讯息里面加上以下东西可以增加参数:\n- `{user}` 及提用户\n- `{server}` 伺服器名称\n- `{rank}` 等级"
+            },
+            "title": "你的等级: Level ",
+            "exp": "经验值: ","card": "的经验卡 [还需要 ","card2": " 才会升下一等]"
+        },
+        "money": {
+            "money": "你的金钱: ",
+            "daily": "今日薪水: ",
+            "wallet": "的钱包uwu",
+            "d1": "✅已领取!","d2": "❌未领取! 请打`cr!daily` 来领取!",
+            "ranking": {
+                "title":"💸 金钱排行榜 (前30名)",
+                "footer":"此为全部群排名"
+            }
+        },
+        "daily": {
+            "receive":"❌你已经领过了!! 很贪心喔uwu",
+            "adv": "🏅**获得成就!!** 领薪水!",
+            "clean": "✅你已领取你的每日50薪资!",
+            "dec":"你已连续签到 ","dec2": " 天\n所以你能领到额外的 ","dec3":"$ \n记得常来咖啡店工作阿uwu",
+            "pay":"💰发薪水啰!"
+        },
+        "level": {
+            "ranking":{
+                "title":"🏆 等级排行榜 (前30名)",
+                "desc": "等级| 经验值 | 成员\n ",
+                "footer": "此为全部群排名"
+            }
+        },
+        "lang": {
+            "title":"以下为语言设置参数"
+        },
+        "pay":{
+            "cool_down":"❌正在转移上个交易 请稍等一会再尝试新的交易!",
+            "cant_own":"❌你不能给予自己!",
+            "pay": "💸已给予 ",
+            "you_will":"你将你的","give":"给了",
+            "now_you":"现在你变成 ","now_have":"现在有 ",
+            "handing_free":"[已从中取0.2%手续费] ","extra":"你花了额外 ","give_someone":"来给予别人钱"
+        },
+        "marry":{
+            "cant_own":"❌你不能跟自己结婚!",
+            "timer": "请对象在20秒内", "answer":"输入 `yes` 结婚\n输入 `no` 取消",
+            "marry_complete":"🎉恭喜结婚!","marry_complete2":"💖祝你们长长久久,永不分离!",
+            "has_someone":"❌对方已经有人了:(","you_have":"❌你已经有人了! 贪心喔uwu!"
+        },
+        "divorce": {
+            "sure": "你要确定欸!!",
+            "answer":"输入 `yes` 离婚\n输入 `no` 取消",
+            "divorce":"💔已离婚!","divorce2":"希望你们之后可以遇到更好的 :(( ",
+            "hasnt":"❌你没有结婚!"
+        },
+        "pet":{
+            "add":{
+                "no_own":"❌你不能养自己!",
+                "has_adot":"❌你已经认养这个宠物了!",
+                "timer":"请宠物在20秒内","answer":"输入 `yes` 被领养\n输入 `no` 取消",
+                "complete_adot":"🎉恭喜领养!","complete_adot2":"🔰要时常照顾宠物唷!"
+            },
+            "remove":{
+                "no_pet":"❌没有这个宠物!",
+                "sure": "你要确定欸!!",
+                "answer":"输入 `yes` 弃养\n输入 `no` 取消",
+                "remome_adot":"❌已弃养!","re​​move_adot2":"希望能找到更好的宠物 :(( "
+            },
+            "disconnect":{
+                "not_fond_host":"❌没有这个主人!",
+                "not_host":"❌请填入要断开连结的主人",
+                "sure": "你要确定欸!!",
+                "answer":"输入 `yes` 断开连结\n输入 `no` 取消",
+                "disconnect":"❌已断开关系!","disconnect2":"希望能找到更好的主人 :(( "
+            },
+            "help":{
+                "title":"宠物帮助页面","desc":"- `add [用户]` 新增宠物\n- `remove [宠物]` 移除宠物\n- `disconnect [主人]` 与主人断开关系"
+            }
+        },
+        "card":{
+           "card":" 员工识别卡",
+           "data":"工作资料","money":"金钱: ","exp":"等级/经验值: ",
+           "interactive":"互动次数","Chino":"智乃: ","Cocoa":"心爱: ","Tippy":"提比: ","Other":"其他: ","times": " 次",
+           "stock":"[图库]","loved":"已收藏","re​​port":"已举报","share":"已分享",
+           "work_all":"累计工作 ","work_last":"连续工作 ","work_first":"首次工作 ",
+           "ID_card":"识别卡 "
+        },
+        "prem":{
+            "perm":" 的权限表",
+            "in":" 至 ",
+            "hight":"最高身分组: ",
+            "owner":"服主: ",
+            "prem2":"权限表",
+            "log":"查看审核日记",
+            "emoji":"编辑表情符号",
+            "ink":"创建连结"
+        },
+        "word":{
+            "mention": "❌你必须提及成员或填入ID!",
+            "type_money": "❌你必须填入数字!",
+            "not_fond_user":"❌没有这个用户或这个用户的资料",
+            "cancel":"❌操作取消!","processing":"🔄处理中","complete":"✅操作完成"
+        }
+    },
+    "en_US": {
+        "rank": {
+            "setup": {
+                "title": "Level Message Settings",
+                "desc": "Use `cr!setup rank [message]`\n◆If you want to use the current channel, just don’t fill in the message.\nUse `cr!setup rank [blank two spaces]` to close the experience value message\n Add the following to the message to add parameters: \n- `{user}` and mention user\n- `{server}` server name\n- `{rank}` rank"
+            },
+            "title": "Your level: Level ",
+            "exp": "Exp: ","card": "Exp card [need ","card2": " exp to next level]"
+        },
+        "money": {
+            "money": "Your money: ",
+            "daily": "Today's salary: ",
+            "wallet": "Wallet uwu",
+            "d1": "✅Received!","d2": "❌Unreceived! Please hit `cr!daily` to claim!",
+            "ranking": {
+                "title":"💸 Money Ranking (Top 30)",
+                "footer":"This is the ranking of all groups"
+            }
+        },
+        "daily": {
+            "receive":"❌You have already received it!! Very greedy uwu",
+            "adv": "🏅**Achievement!!** Get salary!",
+            "clean": "✅You have received your daily salary of 50!",
+            "dec":"You have checked in consecutively","dec2": "days\nso you can get extra ","dec3":"$ \nRemember to come to the coffee shop often to work Uwu",
+            "pay":"💰Pay!"
+        },
+        "level": {
+            "ranking":{
+                "title":"🏆 Ranking Ranking (Top 30)",
+                "desc": "Level| Exp Points | Member\n ",
+                "footer": "This is the ranking of all groups"
+            }
+        },
+        "lang": {
+            "title":"The following are the language setting parameters"
+        },
+        "pay":{
+            "cool_down":"❌The last transaction is being transferred. Please wait a while before trying a new transaction!",
+            "cant_own":"❌You cannot give to yourself!",
+            "pay": "💸 has been given",
+            "you_will":"You will give you","give":"Give",
+            "now_you":"Now you become ","now_have":"now have ",
+            "handing_free":"[0.2% handling fee has been taken from it] ","extra":"You spent extra  ","give_someone":"  to give money to others"
+        },
+        "marry":{
+            "cant_own":"❌You cannot marry yourself!",
+            "timer": "Please enter within 20 seconds", "answer":"Enter `yes` to get married\nEnter `no` to cancel",
+            "marry_complete":"🎉Congratulations on getting married!","marry_complete2":"💖Wish you a long time and never separate!",
+            "has_someone":"❌The other party already has someone:(","you_have":"❌You already have someone! Greedy uwu!"
+        },
+        "divorce": {
+            "sure": "You have to be sure!!",
+            "answer":"Enter `yes` to divorce\nEnter `no` to cancel",
+            "divorce":"💔Divorced!","divorce2":"I hope you can meet better in the future :(( ",
+            "hasnt":"❌You are not married!"
+        },
+        "pet":{
+            "add":{
+                "no_own":"❌You cannot raise yourself!",
+                "has_adot":"❌You have adopted this pet!",
+                "timer":"Please pet within 20 seconds","answer":"Enter `yes` to be adopted\nEnter `no` to cancel",
+                "complete_adot":"🎉Congratulations on adoption!","complete_adot2":"🔰Take care of pets from time to time!"
+            },
+            "remove":{
+                "no_pet":"❌There is no such pet!",
+                "sure": "You have to be sure!!",
+                "answer":"Enter `yes` to abandon raising\nEnter `no` to cancel",
+                "remome_adot":"❌Abandoned!","remove_adot2":"Hope to find a better pet :(( "
+            },
+            "disconnect":{
+                "not_fond_host":"❌There is no such host!",
+                "not_host":"❌Please fill in the host to be disconnected",
+                "sure": "You have to be sure!!",
+                "answer":"Enter `yes` to disconnect\nEnter `no` to cancel",
+                "disconnect":"❌The relationship has been disconnected!","disconnect2":"Hope to find a better owner :(( "
+            },
+            "help":{
+                "title":"Pet Help Page","desc":"- `add [User]` Add pet\n- `remove [Pet]` Remove pet\n- `disconnect [主]` Disconnect from owner relationship"
+            }
+        },
+        "card":{
+           "card":"Employee Identification Card",
+           "data":"work data","money":"money: ","exp":"level/experience: ",
+           "interactive":"Number of interactions","Chino":"Chino: ","Cocoa":"Heart: ","Tippy":"Tippy: ","Other":"Other: ","times": "Times",
+           "stock":"[Gallery]","loved":"Favorite","report":"Reported","share":"Shared",
+           "work_all":"cumulative work","work_last":"continuous work","work_first":"first work",
+           "ID_card":"Identification Card"
+        },
+        "prem":{
+            "perm":" Permission Table",
+            "in":" to ",
+            "hight":"Highest body group: ",
+            "owner":"Server Master: ",
+            "prem2":"Permission Table",
+            "log":"View Audit Diary",
+            "emoji":"Edit emoji",
+            "ink":"Create link"
+        },
+        "word":{
+            "mention": "❌You must mention members or fill in ID!",
+            "type_money": "❌You must fill in numbers!",
+            "not_fond_user":"❌There is no information about this user or this user",
+            "cancel":"❌Operation canceled!","processing":"🔄Processing","complete":"✅Operation completed"
+        }
+    },
+    "ja_JP": {
+        "rank": {
+            "setup": {
+                "title": "レベルメッセージ設定",
+                "desc": "使用する `cr!setup rank [メッセージ]`\n◆現在のチャンネルを使用したい場合は、メッセージを入力しないでください\n使用する `cr!setup rank [2つのスペース]` エクスペリエンスメッセージをオフにするには\nメッセージに次のものを追加してパラメータを追加します:\n- `{user}` そしてユーザーに言及する\n- `{server}` サーバーの名前\n- `{rank}` グレード"
+            },
+            "title": "あなたのレベル: Level ",
+            "exp": "経験: ","card": "体験カード [まだ必要 ","card2": " 次のレベルに昇格します]"
+        },
+        "money": {
+            "money": "あなたのお金: ",
+            "daily": "今日の給料: ",
+            "wallet": " の財布uwu",
+            "d1": "✅受け取りました!","d2": "❌順応していない! 受け取るには `cr！daily` を入力してください！",
+            "ranking": {
+                "title":"💸 お金のランキング     (前30名)",
+                "footer":"これはすべてのサーバーのランキングです"
+            }
+        },
+        "daily": {
+            "receive":"❌あなたはすでに受け取っています!!",
+            "adv": "🏅**実績を取得する!!**  お金をもらう！",
+            "clean": "✅あなたは50のあなたの日給を受け取りました!",
+            "dec":"連続してチェックインしました ","dec2": " 日\nだからあなたは余分を得ることができます ","dec3":"$ \nコーヒーショップで頻繁に仕事に来ることを忘れないでくださいuwu",
+            "pay":"💰給与!"
+        },
+        "level": {
+            "ranking":{
+                "title":"🏆 ランクランキング     (トップ30)",
+                "desc": "グレード  | 経験 |  成員\n ",
+                "footer": "これはすべてのサーバーのランキングです"
+            }
+        },
+        "lang": {
+            "title":"言語設定パラメータは以下のとおりです"
+        },
+        "pay":{
+            "cool_down":"❌最後のトランザクションが転送されています。しばらく待ってから新しいトランザクションを試してください!",
+            "cant_own":"❌あなたは自分に与えることはできません！",
+            "pay": "💸与えられた ",
+            "you_will":"あなたはあなたになります","give":"与えた",
+            "now_you":"今、あなたはなります ","now_have":"がある ",
+            "handing_free":"[0.2％の手数料がかかります] ","extra":"あなたは余分に費やしました ","give_someone":"  他の人にお金を与えるために"
+        },
+        "marry":{
+            "cant_own":"❌あなたは自分と結婚することはできません！",
+            "timer": "20秒以内に被験者に尋ねる", "answer":"入る `yes` 結婚する\n入る `no` キャンセル",
+            "marry_complete":"🎉結婚おめでとうございます！","marry_complete2":"💖祝你們長長久久,永不分離!",
+            "has_someone":"❌相手にはすでに誰かがいます:(","you_have":"❌あなたはすでに誰かを持っています！"
+        },
+        "divorce": {
+            "sure": "あなたは確認する必要があります!!",
+            "answer":"入る `yes` する\n入る `no` キャンセル",
+            "divorce":"💔離婚!","divorce2":"私はあなたがよりよく会うことができることを願っています :((  ",
+            "hasnt":"❌あなたは結婚していません！"
+        },
+        "pet":{
+            "add":{
+                "no_own":"❌あなたは自分を養子にすることはできません!",
+                "has_adot":"❌このペットを採用しました！",
+                "timer":"20秒以内にペットを飼ってください","answer":"入る `yes` 採用\n入る `no` キャンセル",
+                "complete_adot":"🎉採用おめでとうございます！","complete_adot2":"🔰時々あなたのペットの世話をしてください！"
+            },
+            "remove":{
+                "no_pet":"❌ペットなし!",
+                "sure": "あなたは確認する必要があります!!",
+                "answer":"入る `yes` 放棄された\n入る `no` キャンセル",
+                "remome_adot":"❌放棄された!","remove_adot2":"より良いペットを見つけたい :((  "
+            },
+            "disconnect":{
+                "not_fond_host":"❌そのようなマスターはいない！",
+                "not_host":"❌切断する所有者を入力してください",
+                "sure": "あなたは確信しなければなりません！!",
+                "answer":"入る `yes` 切断する\n入る `no` キャンセル",
+                "disconnect":"❌切断されました!","disconnect2":"より良いホストを見つけたい :((  "
+            },
+            "help":{
+                "title":"ペットのヘルプページ","desc":"- `add [ユーザー]` ペットを追加する\n- `remove [ペット]` ペットを削除します\n- `disconnect [ホスト]` 所有者から切断します"
+            }
+        },
+        "card":{
+           "card":" 従業員識別カード",
+           "data":"作業材料","money":"お金: ","exp":"グレード/経験: ",
+           "interactive":"やっていく","Chino":"チノ: ","Cocoa":"ココア: ","Tippy":"ティッピー: ","Other":"その他: ","times":" 周波数",
+           "stock":"[ギャラリー]","loved":"集めました","report":"報告","share":"共有",
+           "work_all":"累積作業 ","work_last":"継続的に働く ","work_first":"最初の仕事 ",
+           "ID_card":"IDカード "
+        },
+        "prem":{
+            "perm":" 許可テーブル",
+            "in":" に ",
+            "hight":"最も高いボディグループ: ",
+            "owner":"サーバント: ",
+            "prem2":"権限テーブル",
+            "log":"監査日記を見る",
+            "emoji":"絵文字を編集する",
+            "ink":"リンクを作成する"
+        },
+        "word":{
+            "mention": "❌メンバーに言及するか、IDを入力する必要があります!",
+            "type_money": "❌あなたは数字を記入しなければなりません！",
+            "not_fond_user":"❌このユーザーまたはこのユーザーのデータはありません",
+            "cancel":"❌操作キャンセル!","processing":"🔄処理...","complete":"✅操作が完了"
+        }
+    },
+    "es_ES": {
+
+    }
+}

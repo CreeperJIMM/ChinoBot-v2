@@ -1,0 +1,97 @@
+{
+    "zh_TW": {
+        "bs": {
+            "type": "請輸入",
+            "theme": "主題",
+            "text": "內文",
+            "bluff": "唬爛產生器"
+        },
+        "election": {
+            "title": "🇺🇸2020美國大選投票📮",
+            "all": "總共 ",
+            "vote": " 票",
+            "allvote": "總票數: ",
+            "ratevote": "得票率: "
+        },
+        "henti": {
+            "No_number":"找不到車號(請填入6位數)",
+            "number":"車號",
+            "the": "第",
+            "all": "共",
+            "page": "頁",
+            "date": "上傳日期"
+        }
+    },
+    "zh_CN": {
+        "bs": {
+            "type": "请输入",
+            "theme": "主题",
+            "text": "内文",
+            "bluff": "唬烂产生器"
+        },
+        "election": {
+            "title": "🇺🇸2020美国大选投票📮",
+            "all": "总共 ",
+            "vote": " 票",
+            "allvote": "总票数: ",
+            "ratevote": "得票率: "
+        },
+        "henti": {
+            "No_number":"找不到车号(请填入6位数)",
+            "number":"车号",
+            "the": "第",
+            "all": "共",
+            "page": "页",
+            "date": "上传日期"
+        }
+    },
+    "en_US": {
+        "bs": {
+            "type": "Please type",
+            "theme": "theme",
+            "text": "Description",
+            "bluff": "Bluff generator"
+        },
+        "election": {
+            "title": "🇺🇸2020 America election📮",
+            "all": "all ",
+            "vote": " votes",
+            "allvote": "Total votes: ",
+            "ratevote": "Voting rate: "
+        },
+        "henti": {
+            "No_number":"Please fill in six digits",
+            "number": "Car number",
+            "the": " ",
+            "all": "Total",
+            "page": "pages",
+            "date": "Upload date"
+        }
+    },
+    "ja_JP": {
+        "bs": {
+            "type": "入ってください",
+            "theme": "テーマ",
+            "text": "テキスト",
+            "bluff": "唬爛発生器"
+        },
+        "election": {
+            "title": "🇺🇸2020米国の選挙投票📮",
+            "all": "合計で ",
+            "vote": "投票",
+            "allvote": "総投票数: ",
+            "ratevote": "投票率: "
+        },
+        "henti": {
+            "No_number":"車両番号（6桁）が見つかりません",
+            "number":"車番号",
+            "the": "番目",
+            "page": "ページ",
+            "all": "合計",
+            "date": "アップロード日"
+        }
+    },
+    "es_ES": {
+
+    }
+}

@@ -1,0 +1,97 @@
+{
+    "zh_TW": {
+        "ping": {
+            "delay": "延遲"
+        },
+        "avatar": {
+            "avatar": "頭貼",
+            "server": "伺服器",
+            "guild": "群",
+            "banner": "橫幅",
+            "No_banner": "❌本伺服器沒有橫幅"
+        },
+        "embed": {
+            "title": "鑲入使用方法 ",
+            "title2": "embed [1] [2] [3] [4] [5] ...",
+            "desc": "(如果參數不需要請空格代替)\n參數對照表:\n[1] 標題 Title\n[2] 內文 Description\n[3] 作者 Author\n[4] 頁腳 Footer\n[5] 顏色代碼(#123456)\n[6] 圖片網址 Image(URL)"
+        },
+        "code": {
+            "type_correct": "❌請填入有效代碼!",
+            "code_error": "❌無效代碼!",
+            "code_wasClean": "❌你已領過這個代碼了!",
+            "code_sueccess": "✅已成功兌換到此代碼獎勵!"
+        }
+    },
+    "zh_CN": {
+        "ping": {
+            "delay": "延迟"
+        },
+        "avatar": {
+            "avatar": "头贴",
+            "server": "伺服器",
+            "guild": "群",
+            "banner": "横幅",
+            "No_banner": "❌本伺服器没有横幅"
+        },
+        "embed": {
+            "title": "镶入使用方法 ",
+            "title2": "embed [1] [2] [3] [4] [5] ...",
+            "desc": "(如果参数不需要请空格代替)\n参数对照表:\n[1] 标题Title\n[2] 内文Description\n[3] 作者Author\n[4] 页脚Footer \n[5] 颜色代码(#123456)\n[6] 图片网址Image(URL)"
+        },
+        "code": {
+            "type_correct": "❌请填入有效代码!",
+            "code_error": "❌无效代码!",
+            "code_wasClean": "❌你已领过这个代码了!",
+            "code_sueccess": "✅已成功兑换到此代码奖励!"
+        }
+    },
+    "en_US": {
+        "ping": {
+            "delay": "delay"
+        },
+        "avatar": {
+            "avatar": "avatar",
+            "server": "server",
+            "guild": "guild",
+            "banner": "banner",
+            "No_banner": "❌This server does not have banner"
+        },
+        "embed": {
+            "title": "How to create an embed ",
+            "title2": "embed [1] [2] [3] [4] [5] ...",
+            "desc": "(Replace the parameter with whitespace if you dont need it)\nParameters:\n[1] Title\n[2] Description\n[3] Author\n[4] Footer\n[5] Color(#123456)\n[6] Image(URL)"
+        },
+        "code": {
+            "type_correct": "❌Please type in valid code!",
+            "code_error": "❌Invalid code!",
+            "code_wasClean": "❌You have already got your code!",
+            "code_sueccess": "✅You have successfully recieved the gift!"
+        }
+    },
+    "ja_JP": {
+        "ping": {
+            "delay": "ディレイ"
+        },
+        "avatar": {
+            "avatar": "ヘッダ",
+            "server": "サーバ",
+            "guild": "グループ",
+            "banner": "バナー",
+            "No_banner": "❌このサーバーにはバナーがありません"
+        },
+        "embed": {
+            "title": "使い方 ",
+            "title2": "embed [1] [2] [3] [4] [5] ...",
+            "desc": "(パラメータが不要な場合は、スペースに置き換えてください)\nパラメータ比較表:\n[1] 標題 Title\n[2] 內文 Description\n[3] 作者 Author\n[4] 頁腳 Footer\n[5] 顏色代碼(#123456)\n[6] 圖片網址 Image(URL)"
+        },
+        "code": {
+            "type_correct": "❌有効なコードを入力してください!",
+            "code_error": "❌無効なコード!",
+            "code_wasClean": "❌あなたはすでにこのコードを受け取っています!",
+            "code_sueccess": "✅このコード報酬への引き換えに成功!"
+        }
+    },
+    "es_ES": {
+
+    }
+}

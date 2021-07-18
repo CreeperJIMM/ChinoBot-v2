@@ -1,0 +1,57 @@
+{
+    "zh_TW": {
+        "channel":"頻道",
+        "message": "訊息",
+        "deleted": "刪除",
+        "member": "成員",
+        "content": "內容",
+        "edit": "編輯",
+        "editb": "編輯前",
+        "edited": "編輯後",
+        "much": "大量",
+        "file": "📎附件",
+        "Bulk": "則訊息被刪除"
+    },
+    "zh_CN": {
+        "channel":"频道",
+        "message": "讯息",
+        "deleted": "删除",
+        "member": "成员",
+        "content": "内容",
+        "edit": "编辑",
+        "editb": "编辑前",
+        "edited": "编辑后",
+        "much": "大量",
+        "file": "📎附件",
+        "Bulk": "则讯息被删除"
+    },
+    "en_US": {
+        "channel":"Channel",
+        "message": "Message",
+        "deleted": "delete",
+        "member": "Member",
+        "content": "Content",
+        "edit": "edit",
+        "editb": "Before",
+        "edited": "After",
+        "much": "Mass",
+        "file": "📎File",
+        "Bulk": "messages delete"
+    },
+    "ja_JP": {
+        "channel":"Channel",
+        "message": "Message",
+        "deleted": "delete",
+        "member": "Member",
+        "content": "Content",
+        "edit": "edit",
+        "editb": "Before",
+        "edited": "After",
+        "much": "Mass",
+        "file": "📎File",
+        "Bulk": "messages delete"
+    },
+    "es_ES": {
+
+    }
+}

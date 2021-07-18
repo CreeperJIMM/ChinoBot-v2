@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@azteam/cloudflare-api": "^1.0.50",
+    "cheerio": "^1.0.0-rc.5",
+    "cloudflare-api": "^1.0.0",
+    "dblapi.js": "^2.4.1",
+    "discord-buttons": "^4.0.0",
+    "discord-slash-commands": "^1.2.4",
+    "discord-slash-commands-client": "^1.1.1",
+    "discord-together": "^1.1.14",
+    "discord.js": "^12.5.1",
+    "express": "^4.17.1",
+    "form-data": "^2.3.3",
+    "formdata": "^0.10.4",
+    "helmet": "^4.4.1",
+    "hypixel-api-reborn": "^6.3.0",
+    "i": "^0.3.6",
+    "image-data-uri": "^1.0.0",
+    "minecraft-server-util": "^3.4.2",
+    "mongodb": "^3.6.5",
+    "mongoose": "^5.12.3",
+    "nana-api": "^1.1.3",
+    "node-hypixel": "^1.0.1",
+    "node-osu": "^2.2.0",
+    "npm": "^7.8.0",
+    "os-utils": "^0.0.14",
+    "request": "^2.88.2",
+    "ytdl-core": "^4.8.3"
+  }
+}

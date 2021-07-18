@@ -1,0 +1,173 @@
+{
+    "zh_TW": {
+        "clear": {
+            "20more": "⚠你確定要刪除20則訊息以上?",
+            "No_perm": "我不能刪訊息;w;",
+            "moreDelete": "💥已大量刪除",
+            "Delete": "💥已刪除",
+            "cancelDelete": "❌已取消清除動作",
+            "messages": "則訊息"
+        },
+        "kick": {
+            "ByAdmin": "被管理員 ",
+            "kick": "踢出",
+            "error": {
+                "kick_error": "❌我無法將這個成員請出 ",
+                "mention": "❌你必須填提及要被踢出的人!"
+            }
+        },
+        "ban": {
+            "ByAdmin": "被管理員 ",
+            "ban": "封鎖",
+            "success": "成功將",
+            "from": "從",
+            "in": "中",
+            "error": {
+                "kick_error": "❌我無法封鎖這位成員 ",
+                "mention": "❌你必須填提及要被封鎖的人!"
+            }
+        },
+        "vote": {
+            "vote": "📦投票!!",
+            "snd": "發出投票者: "
+        },
+        "invites": {
+            "inv": "邀請了 ",
+            "inv2": " 個成員進入 "
+        },
+        "hasvote": {
+            "hasvote": "有投票過!",
+            "user_error": "用戶無效",
+            "novote": "沒有投票!"
+        }
+    },
+    "zh_CN": {
+        "clear": {
+            "20more": "⚠你确定要删除20则讯息以上?",
+            "No_perm": "我不能删讯息;w;",
+            "moreDelete": "💥已大量删除",
+            "Delete": "💥已删除",
+            "cancelDelete": "❌已取消清除动作",
+            "messages": "则讯息"
+        },
+        "kick": {
+            "ByAdmin": "被管理员 ",
+            "kick": "踢出",
+            "error": {
+                "kick_error": "❌我无法将这个成员请出 ",
+                "mention": "❌你必须填提及要被踢出的人!"
+            }
+        },
+        "ban": {
+            "ByAdmin": "被管理员 ",
+            "ban": "封锁",
+            "success": "成功将",
+            "from": "从",
+            "in": "中",
+            "error": {
+                "kick_error": "❌我无法封锁这位成员 ",
+                "mention": "❌你必须填提及要被封锁的人!"
+            }
+        },
+        "vote": {
+            "vote": "📦投票!!",
+            "snd": "发出投票者: "
+        },
+        "invites": {
+            "inv": "邀请了 ",
+            "inv2": " 个成员进入 "
+        },
+        "hasvote": {
+            "hasvote": "有投票过!",
+            "user_error": "用户无效",
+            "novote": "没有投票!"
+        }
+    },
+    "en_US": {
+        "clear": {
+            "20more": "⚠Are you sure you want to delete more than 20 messages?",
+            "No_perm": "I cannot delete the message ;w;",
+            "moreDelete": "💥Much deleted",
+            "Delete": "💥Delete",
+            "cancelDelete": "❌The delete action has been cancelled",
+            "messages": "Messages"
+        },
+        "kick": {
+            "ByAdmin": "ByAdmin",
+            "kick": "Kick out",
+            "error": {
+                "kick_error": "❌I cannot get this member out",
+                "mention": "❌You must mention the person to be kicked out!"
+            }
+        },
+        "ban": {
+            "ByAdmin": "ByAdmin",
+            "ban": "Block",
+            "success": "Successful Will",
+            "from": "from",
+            "in": "中",
+            "error": {
+                "kick_error": "❌I cannot block this member",
+                "mention": "❌You must mention the person to be blocked!"
+            }
+        },
+        "vote": {
+            "vote": "📦Vote!!",
+            "snd": "Send Voter: "
+        },
+        "invites": {
+            "inv": "Invited",
+            "inv2": "members entered"
+        },
+        "hasvote": {
+            "hasvote": "There have been votes!",
+            "user_error": "User is invalid",
+            "novote": "No votes!"
+        }
+    },
+    "ja_JP": {
+        "clear": {
+            "20more": "⚠20を超えるメッセージを削除してもよろしいですか？",
+            "No_perm": "メッセージを削除できません ;w;",
+            "moreDelete": "💥大量削除",
+            "Delete": "💥削除",
+            "cancelDelete": "❌クリアアクションがキャンセルされました",
+            "messages": "メッセージ"
+        },
+        "kick": {
+            "ByAdmin": "管理者による ",
+            "kick": "キックアウト",
+            "error": {
+                "kick_error": "❌このメンバーを出せない ",
+                "mention": "❌追い出される人について言及する必要があります!"
+            }
+        },
+        "ban": {
+            "ByAdmin": "管理者による ",
+            "ban": "封鎖",
+            "success": "成功は",
+            "from": "から",
+            "in": "に",
+            "error": {
+                "kick_error": "❌このメンバーをブロックできません ",
+                "mention": "❌ブロックされる人について言及する必要があります！"
+            }
+        },
+        "vote": {
+            "vote": "📦投票!!",
+            "snd": "有権者: "
+        },
+        "invites": {
+            "inv": "招待 ",
+            "inv2": " 入会したメンバー "
+        },
+        "hasvote": {
+            "hasvote": "投票しました！",
+            "user_error": "無効なユーザー",
+            "novote": "投票なし！"
+        }
+    },
+    "es_ES": {
+
+    }
+}

@@ -1,0 +1,518 @@
+{
+    "zh_TW": {
+        "setup": {
+            "help": "Setup 使用說明",
+            "PBU": "❌本伺服器擁有防炸機器人 <@651095740390834176> \n請將本機器人加入白名單後使用以下指令!\n→ 使用 `s!whitelist add @智乃小幫手#5407` 加入白名單.",
+            "cmd": {
+                "setup": "`setup` - 新增新json資料\n`setup text` - 新增動態文字類別\n`setup voice` - 新增動態語音類別\n`setup join [訊息]` 加入設置\n`setup leave [訊息]` 離開設置",
+                "help": "幫助指令:","help2": "`cr!text help` 動態文字教學 \n`cr!voice help` 動態語音教學\n`cr!join help` 加入訊息設置教學\n`cr!leave help` 離開訊息設置教學\n`cr!rank help` 升級訊息設置教學",
+                "other": "其他設定:","other2": "`cr!setup language [zh_TW/en_US]` 伺服器語言設定\n`cr!setup normal [1/2]` 切換常用機器人1/2 (例如經驗值的給予)\n`cr!setup detect [<#channel id>]` 訊息紀錄",
+                "set":"配置設置:","set2":"`cr!setup snipe [true/false]` 狙擊訊息\n`cr!setup safe [true/false]` 觸圖功能\n`cr!setup react [true/false]` 訊息反應\n`cr!setup slash [true/false]` 斜槓指令(測試版)"
+            },
+            "create": "🔁創建新json檔案中...",
+            "success": "✅已設置基本資料!  如果需要創動態頻道&語音請打 `cr!setup help` 查看說明.",
+            "used": "你已經設置過了!  請打`cr!setup help` 查看更多設置方法!"
+        },
+        "help": {
+            "text": {
+                "title": "甚麼是動態文字?",
+                "desc": "動態文字可以解決想創頻道一個頻道之後要刪除的煩惱\n有自己的文字頻道看起來很棒對吧?\n使用`cr!setup text` 設置!"
+            },
+            "voice": {
+                "title": "甚麼是動態語音?",
+                "desc": "動態語音可以創語音同樂!\n有自己的語音頻道看起來很棒對吧?\n使用`cr!setup voice` 設置!"
+            },
+            "join": {
+                "title": "加入訊息設置",
+                "desc": "使用 `cr!setup join [訊息]`\n◆想關掉只要不填入訊息即可\n在訊息裡面加上以下東西可以增加參數:\n- `{user}` 及提用戶\n- `{server}` 伺服器名稱\n- `{member}` 伺服器總人數"
+            },            
+            "leave": {
+                "title": "離開訊息設置",
+                "desc": "使用 `cr!setup leave [訊息]`\n◆想關掉只要不填入訊息即可\n在訊息裡面加上以下東西可以增加參數:\n- `{user}` 及提用戶\n- `{server}` 伺服器名稱\n- `{member}` 伺服器總人數"
+            }
+        },
+        "text": {
+            "channel": " 的頻道",
+            "crated": "✅你已經創了個人頻道!",
+            "help": " 這裡是你的個人頻道! 請使用`cr!clo` 關閉!\n\n你可以使用以下參數! `cr!set [參數]`\n- `name [名稱]` 重新命名頻道\n- `self / open` 設置讀取權限\n- `nsfw` 設置為限制級頻道",
+            "help2": "請填入以下參數! `cr!set [參數]`\n- `name [名稱]` 重新命名頻道\n- `self / open` 設置讀取權限\n- `nsfw` 設置為限制級頻道",
+            "No_create": "❌你還沒設置動態文字頻道!",
+            "No_owner": "❌你不是這頻道的擁有者!",
+            "close": "🔁正在關閉個人頻道...",
+            "No_text": "❌此頻道不是個人頻道！",
+            "set":{
+                "name": "✅已將頻道命名為 ",
+                "name_err": "❌命名失敗!",
+                "no_perm": "❌請給予智乃小幫手 `管理身分組` 權限!",
+                "self": "✅已設置為私人頻道!",
+                "open": "✅已設置為公開頻道!",
+                "setting": "✅已設置!"
+            }
+        },
+        "code": {
+            "title": "請打以下代碼來獲取驗證",
+            "use": "驗證使用者: ",
+            "error": "❌驗證碼錯誤!",
+            "tryagain": "請再次一次!",
+            "pass": "✅你已通過驗證! 你可以打一些需要驗證的指令了!",
+            "pass2": "備註: 每使用一次就需要再驗證一次"
+        },
+        "snipe": {
+            "no_support": "❌此伺服器不支援最後訊息",
+            "no_snipe": "❌找不到本伺服器的最後訊息!",
+            "close_snipe": "❌伺服器已關閉此功能",
+            "nope": "無",
+            "last": "最後前","message": "則刪除訊息",
+            "file": "📎最後前1則刪除附件",
+            "no_fond":"❌找不到最後第","message2":"則訊息!",
+            "file2":"📎附件"
+        },
+        "server":{
+            "title": " 咖啡廳",
+            "lang": "語言",
+            "delmeg":"上個訊息",
+            "default": "預設",
+            "member": "顧客人數",
+            "owner": "店長",
+            "detect":"機器人觸發",
+            "join":"加入訊息",
+            "leave":"離開訊息",
+            "levelup":"升等訊息",
+            "createTime":"開店日期",
+            "setting": "配置設置",
+            "prest":"預設",
+            "on":"✅開啟",
+            "off":"❌關閉",
+            "set": {
+               "snipe":"狙擊訊息",
+               "safe":"觸圖功能",
+               "react":"訊息反應",
+               "slash":"斜槓指令",
+               "prefix":"前綴"
+            }
+        },
+        "word": {
+            "param": "參數",
+            "No_code": "❌你沒有通過驗證! 請打 `cr!code` 來獲取驗證再使用此指令.",
+            "No_setup": "❌你還沒有設置設定!! 使用`cr!setup`",
+            "crateing": "🔁創建中",
+            "Error_create": "❌創建失敗!",
+            "please_type": "❌請填入參數!",
+            "error_type_in": "❌參數有誤!"
+        },
+        "word2": {
+            "detcet": "本伺服器由 ",
+            "detcet2": " 觸發特定指令",
+            "msg_detect_off": "✅訊息偵測器已停用",
+            "msg_detect_set": "✅訊息偵測器已設置在",
+            "created_channel":"✅你已經創建了動態頻道!",
+            "created_channel2": "這裡是伺服器的個人頻道! 請使用`cr!ind`開啟新的頻道!",
+            "join_off": "✅已將加入設置關閉",
+            "join_set": "✅已成功設置歡迎訊息: ",
+            "join_ing": "🔁正在設置歡迎訊息...",
+            "leave_off": "✅已將離開設置關閉",
+            "leave_set": "✅已成功設置離開訊息: ",
+            "leave_ing": "🔁正在設置離開訊息...",
+            "rank_off": "✅已將等級通知關閉",
+            "rank_set": "✅已成功設置升級訊息: ",
+            "rank_ing": "🔁正在設置升級通知...",
+            "snipe_on": "✅已啟用狙擊訊息",
+            "snipe_off": "❌已關閉狙擊訊息",
+            "react_on": "✅已啟用訊息反應",
+            "react_off": "❌已關閉訊息反應",
+            "safe_on": "✅已開啟觸圖功能\n[⚠]注意! 啟用這功能可能群組不保 請當心.",
+            "safe_off": "❌已關閉觸圖功能\n[✔]現在你的群非常安全!",
+            "slash_on": "✅已開啟斜槓指令功能!\n[Tip] 你現在可以打 `/` 使用此功能.",
+            "slash_off": "❌已關閉斜槓指令功能.\n現在你如果使用斜槓指令機器人將不會理會.",
+            "prefix_update":"✅已修改前綴命令. ",
+            "prefix_tip": "[!]如果你發現更新過的前綴不能使用\n請從網站上改or斜槓指令."
+        }
+    },
+    "zh_CN": {
+        "setup": {
+            "help": "Setup 使用说明",
+            "PBU": "❌本伺服器拥有防炸机器人<@651095740390834176> \n请将本机器人加入白名单后使用以下指令!\n→ 使用`s!whitelist add @智乃小帮手#5407` 加入白名单.",
+            "cmd": {
+                "setup": "`setup` - 新增新json资料\n`setup text` - 新增动态文字类别\n`setup voice` - 新增动态语音类别\n`setup join [讯息]` 加入设置\n`setup leave [讯息]` 离开设置",
+                "help": "帮助指令:","help2": "`cr!text help` 动态文字教学\n`cr!voice help` 动态语音教学\n`cr!join help` 加入讯息设置教学\n` cr!leave help` 离开讯息设置教学\n`cr!rank help` 升级讯息设置教学",
+                "other": "其他设定:","other2": "`cr!setup language [zh_TW/en_US]` 伺服器语言设定\n`cr!setup normal [1/2]` 切换常用机器人1/2 (例如经验值的给予)\n`cr!setup detect [<#channel id>]` 讯息纪录",
+                "set":"配置设置:","set2":"`cr!setup snipe [true/false]` 狙击讯息\n`cr!setup safe [true/false]` 触图功能\n`cr!setup react [true/ false]` 讯息反应\n`cr!setup slash [true/false]` 斜杠指令(测试版)"
+            },
+            "create": "🔁创建新json档案中...",
+            "success": "✅已设置基本资料! 如果需要创动态频道&语音请打 `cr!setup help` 查看说明.",
+            "used": "你已经设置过了! 请打`cr!setup help` 查看更多设置方法!"
+        },
+        "help": {
+            "text": {
+                "title": "什么是动态文字?",
+                "desc": "动态文字可以解决想创频道一个频道之后要删除的烦恼\n有自己的文字频道看起来很棒对吧?\n使用`cr!setup text` 设置!"
+            },
+            "voice": {
+                "title": "什么是动态语音?",
+                "desc": "动态语音可以创语音同乐!\n有自己的语音频道看起来很棒对吧?\n使用`cr!setup voice` 设置!"
+            },
+            "join": {
+                "title": "加入讯息设置",
+                "desc": "使用`cr!setup join [讯息]`\n◆想关掉只要不填入讯息即可\n在讯息里面加上以下东西可以增加参数:\n- `{user}` 及提用户\n- `{server}` 伺服器名称\n- `{member}` 伺服器总人数"
+            },
+            "leave": {
+                "title": "离开讯息设置",
+                "desc": "使用`cr!setup leave [讯息]`\n◆想关掉只要不填入讯息即可\n在讯息里面加上以下东西可以增加参数:\n- `{user}` 及提用户\n- `{server}` 伺服器名称\n- `{member}` 伺服器总人数"
+            }
+        },
+        "text": {
+            "channel": " 的频道",
+            "crated": "✅你已经创了个人频道!",
+            "help": " 这里是你的个人频道! 请使用`cr!clo` 关闭!\n\n你可以使用以下参数! `cr!set [参数]`\n- `name [名称]` 重新命名频道\n- `self / open` 设置读取权限\n- `nsfw` 设置为限制级频道",
+            "help2": "请填入以下参数! `cr!set [参数]`\n- `name [名称]` 重新命名频道\n- `self / open` 设置读取权限\n- `nsfw` 设置为限制级频道",
+            "No_create": "❌你还没设置动态文字频道!",
+            "No_owner": "❌你不是这频道的拥有者!",
+            "close": "🔁正在关闭个人频道...",
+            "No_text": "❌此频道不是个人频道！",
+            "set":{
+                "name": "✅已将频道命名为 ",
+                "name_err": "❌命名失败!",
+                "no_perm": "❌请给予智乃小帮手 `管理身分组` 权限!",
+                "self": "✅已设置为私人频道!",
+                "open": "✅已设置为公开频道!",
+                "setting": "✅已设置!"
+            }
+        },
+        "code": {
+            "title": "请打以下代码来获取验证",
+            "use": "验证使用者: ",
+            "error": "❌验证码错误!",
+            "tryagain": "请再次一次!",
+            "pass": "✅你已通过验证! 你可以打一些需要验证的指令了!",
+            "pass2": "备注: 每使用一次就需要再验证一次"
+        },
+        "snipe": {
+            "no_support": "❌此伺服器不支援最后讯息",
+            "no_snipe": "❌找不到本伺服器的最后讯息!",
+            "close_snipe": "❌伺服器已关闭此功能",
+            "nope": "无",
+            "last": "最后前","message": "则删除讯息",
+            "file": "📎最后前1则删除附件",
+            "no_fond":"❌找不到最后第","message2":"则讯息!",
+            "file2":"📎附件"
+        },
+        "server":{
+            "title": " 咖啡厅",
+            "lang": "语言",
+            "delmeg":"上个讯息",
+            "default": "预设",
+            "member": "顾客人数",
+            "owner": "店长",
+            "detect":"机器人触发",
+            "join":"加入讯息",
+            "leave":"离开讯息",
+            "levelup":"升等讯息",
+            "createTime":"开店日期",
+            "prest":"预设",
+            "on":"✅开启",
+            "off":"❌关闭",
+            "set": {
+                "snipe":"狙击讯息",
+                "safe":"触图功能",
+                "react":"讯息反应",
+                "slash":"斜杠指令",
+                "prefix":"前缀"
+             }
+        },
+        "word": {
+            "param": "参数",
+            "No_code": "❌你没有通过验证! 请打 `cr!code` 来获取验证再使用此指令.",
+            "No_setup": "❌你还没有设置设定!! 使用`cr!setup`",
+            "crateing": "🔁创建中",
+            "Error_create": "❌创建失败!",
+            "please_type": "❌请填入参数!",
+            "error_type_in": "❌参数有误!"
+        },
+        "word2": {
+            "detcet": "本伺服器由 ",
+            "detcet2": " 触发特定指令",
+            "msg_detect_off": "✅讯息侦测器已停用",
+            "msg_detect_set": "✅讯息侦测器已设置在",
+            "created_channel":"✅你已经创建了动态频道!",
+            "created_channel2": "这里是伺服器的个人频道! 请使用`cr!ind`开启新的频道!",
+            "join_off": "✅已将加入设置关闭",
+            "join_set": "✅已成功设置欢迎讯息: ",
+            "join_ing": "🔁正在设置欢迎讯息...",
+            "leave_off": "✅已将离开设置关闭",
+            "leave_set": "✅已成功设置离开讯息: ",
+            "leave_ing": "🔁正在设置离开讯息...",
+            "rank_off": "✅已将等级通知关闭",
+            "rank_set": "✅已成功设置升级讯息: ",
+            "rank_ing": "🔁正在设置升级通知...",
+            "snipe_on": "✅已启用狙击讯息",
+            "snipe_off": "❌已关闭狙击讯息",
+            "react_on": "✅已启用讯息反应",
+            "react_off": "❌已关闭讯息反应",
+            "save_on": "✅已开启触图功能\n[⚠]注意! 启用这功能可能群组不保 请当心.",
+            "save_off": "❌已关闭触图功能\n[✔]现在你的群非常安全!",
+            "slash_on": "✅已开启斜杠指令功能!\n[Tip] 你现在可以打 `/` 使用此功能.",
+            "slash_off": "❌已关闭斜杠指令功能.\n现在你如果使用斜杠指令机器人将不会理会.",
+            "prefix_update":"✅已修改前缀命令. ",
+            "prefix_tip": "[!]如果你发现更新过的前缀不能使用\n请从网站上改or斜杠指令."
+        }
+    },
+    "en_US": {
+        "setup": {
+            "help": "Setup Instructions",
+            "PBU": "❌This server has an anti-explosion robot<@651095740390834176> \nPlease add this robot to the whitelist and use the following command!\n→ Use `s!whitelist add @智乃小帮手#5407` to whitelist .",
+            "cmd": {
+                "setup": "`setup`-add new json data\n`setup text`-add dynamic text category\n`setup voice`-add dynamic voice category\n`setup join [message]` join settings\n`setup leave [message]` leave setup",
+                "help": "Help command:","help2": "`cr!text help` Dynamic text teaching\n`cr!voice help` Dynamic voice teaching\n`cr!join help` Join message setting teaching\n` cr!leave help` to leave the message setting teaching\n`cr!rank help` to upgrade the message setting teaching",
+                "other": "Other settings:","other2": "`cr!setup language [zh_TW/en_US]` Server language setting\n`cr!setup normal [1/2]` Switch common robots 1/2 ( Such as the giving of experience points)\n`cr!setup detect [<#channel id>]` message record",
+                "set":"Configuration settings:","set2":"`cr!setup snipe [true/false]` Sniper message\n`cr!setup safe [true/false]` Touch picture function\n`cr!setup react [true/ false]` message response\n`cr!setup slash [true/false]` slash command.(Beta)"
+            },
+            "create": "🔁 Creating a new json file...",
+            "success": "✅Basic information has been set! If you need to create a dynamic channel & voice, please hit `cr!setup help` to view the instructions.",
+            "used": "You have already set it up! Please type `cr!setup help` to see more setting methods!"
+        },
+        "help": {
+            "text": {
+                "title": "What is dynamic text?",
+                "desc": "Dynamic text can solve the trouble of deleting a channel after creating a channel.\nHaving your own text channel looks great, right?\nUse `cr!setup text` to set it up!"
+            },
+            "voice": {
+                "title": "What is dynamic voice?",
+                "desc": "Dynamic voice can create voice fun!\nIt looks great to have your own voice channel, right?\nUse `cr!setup voice` to set it up!"
+            },
+            "join": {
+                "title": "Join Message Settings",
+                "desc": "Use `cr!setup join [message]`\n◆If you want to turn it off, just don’t fill in the message.\nAdd the following to the message to add parameters:\n- `{user}` and Mention user\n- `{server}` server name\n- `{member}` total number of servers"
+            },
+            "leave": {
+                "title": "Leave message settings",
+                "desc": "Use `cr!setup leave [message]`\n◆If you want to turn it off, just don’t fill in the message.\nAdd the following to the message to add parameters:\n- `{user}` and Mention user\n- `{server}` server name\n- `{member}` total number of servers"
+            }
+        },
+        "text": {
+            "channel": "'s channel",
+            "crated": "✅You have created a personal channel!",
+            "help": "This is your personal channel! Please use `cr!clo` to close!\n\nYou can use the following parameters! `cr!set [parameter]`\n- `name [name]` rename Channel\n- `self / open` set read permission\n- `nsfw` set as restricted channel",
+            "help2": "Please fill in the following parameters! `cr!set [parameter]`\n- `name [name]` rename the channel\n- `self / open` set read permission\n- `nsfw` setting Is a restricted channel",
+            "No_create": "❌You have not set up a dynamic text channel!",
+            "No_owner": "❌You are not the owner of this channel!",
+            "close": "🔁 is closing personal channel...",
+            "No_text": "❌This channel is not a personal channel!",
+            "set":{
+                "name": "✅The channel has been named ",
+                "name_err": "❌Name failed!",
+                "no_perm": "❌Please give Chino assistant the `manage body group` permission!",
+                "self": "✅ has been set as a private channel!",
+                "open": "✅ has been set as a public channel!",
+                "setting": "✅Already set!"
+            }
+        },
+        "code": {
+            "title": "Please type the following code to obtain verification",
+            "use": "Authenticate user: ",
+            "error": "❌Verification code error!",
+            "tryagain": "Please again!",
+            "pass": "✅You have passed the verification! You can type some commands that require verification!",
+            "pass2": "Note: You need to verify it every time you use it"
+        },
+        "snipe": {
+            "no_support": "❌This server does not support the last message",
+            "no_snipe": "❌The last message of this server could not be found!",
+            "close_snipe": "❌The server is closed this feature",
+            "nope": "No",
+            "last": "last before","message": "delete message",
+            "file": "📎The first 1 at the end delete the attachment",
+            "no_fond":"❌The last one cannot be found","message2":"The message!",
+            "file2":"📎Attachment"
+        },
+        "server":{
+            "title": "Cafe",
+            "lang": "Language",
+            "delmeg":"Last Message",
+            "default": "Default",
+            "member": "Number of Customers",
+            "owner": "Store Manager",
+            "detect":"Robot trigger",
+            "join":"Join Message",
+            "leave":"leave message",
+            "levelup":"Upgrade Message",
+            "createTime":"Opening Date",
+            "prest":"<prest>",
+            "on":"✅<ON>",
+            "off":"❌<OFF>",
+            "set": {
+                "snipe":"Sniper Message",
+                "safe":"Picture Function",
+                "react":"Message Reaction",
+                "slash":"Slash Command",
+                "prefix":"prefix"
+             }
+        },
+        "word": {
+            "param": "Parameter",
+            "No_code": "❌You did not pass the verification! Please type `cr!code` to get verification and then use this command.",
+            "No_setup": "❌You have not set the settings yet!! Use `cr!setup`",
+            "crateing": "🔁Creating",
+            "Error_create": "❌Create failed!",
+            "please_type": "❌Please fill in the parameters!",
+            "error_type_in": "❌The parameter is wrong!"
+        },
+        "word2": {
+            "detcet": "This server is hosted by ",
+            "detcet2": "Trigger a specific command",
+            "msg_detect_off": "✅Message detector is disabled",
+            "msg_detect_set": "✅The message detector is set to",
+            "created_channel":"✅You have created a dynamic channel!",
+            "created_channel2": "This is the personal channel of the server! Please use `cr!ind` to open a new channel!",
+            "join_off": "✅The join setting has been turned off",
+            "join_set": "✅The welcome message has been successfully set: ",
+            "join_ing": "🔁 is setting up welcome message...",
+            "leave_off": "✅The leave setting has been turned off",
+            "leave_set": "✅The leave message has been successfully set: ",
+            "leave_ing": "🔁 is setting the leave message...",
+            "rank_off": "✅The rank notification has been turned off",
+            "rank_set": "✅The upgrade message has been successfully set: ",
+            "rank_ing": "🔁Setting up upgrade notification...",
+            "snipe_on": "✅Sniper message is enabled",
+            "snipe_off": "❌Sniper message has been closed",
+            "react_on": "✅Message reaction is enabled",
+            "react_off": "❌Message reaction has been turned off",
+            "save_on": "✅The touch picture function is turned on\n[⚠]Attention! Enabling this function may not be guaranteed by the group. Please be careful.",
+            "save_off": "❌The picture touch function has been turned off\n[✔]Now your group is very safe!",
+            "slash_on": "✅The slash command function is turned on!\n[Tip] You can now type `/` to use this function.",
+            "slash_off": "❌The slash command function has been turned off.\nNow if you use a slash command, the robot will ignore it.",
+            "prefix_update":"✅The prefix command has been modified. ",
+            "prefix_tip": "[!]If you find that the updated prefix cannot be used\nPlease change the or slash command from the website."
+        }
+    },
+    "ja_JP": {
+        "setup": {
+            "help": "Setup 使用說明",
+            "PBU": "❌本伺服器擁有防炸機器人 <@651095740390834176> \n請將本機器人加入白名單後使用以下指令!\n→ 使用 `s!whitelist add @智乃小幫手#5407` 加入白名單.",
+            "cmd": {
+                "setup": "`setup` - 新しいjsonデータを追加する\n`setup text` - 動的テキストカテゴリを追加する\n`setup voice` - 新しいダイナミックボイスカテゴリ\n`setup join [メッセージ]` 参加設定\n`setup leave [メッセージ]` 設定を残す",
+                "help": "ヘルプの説明：","help2": "`cr!text help` ダイナミックテキストティーチング \n`cr!voice help` ダイナミックな音声指導\n`cr!join help` メッセージ設定チュートリアルに参加する\n`cr!leave help` メッセージ設定チュートリアルを残す\n`cr!rank help`アップグレードメッセージ設定ティーチング",
+                "other": "その他の設定：","other2": "`cr!setup language [zh_TW/en_US]`サーバーの言語設定\n`cr!setup normal [1/2]` 一般的なロボットを1/2に切り替えます（たとえば、経験値を与える）\n`cr!setup detect [<#channel id>]` メッセージレコード",
+                "set": "構成設定:", "set2": "`cr!setup snipe [true / false]`狙撃メッセージ\n`cr!setup safe [true / false]`タッチ画像機能\n`cr!setup react [true / false]` メッセージ応答\n`cr!setup slash [true / false]` スラッシュコマンド（ベータ版） "
+            },
+            "create": "🔁新しいjsonファイルを作成しています...",
+            "success": "✅基本情報が設定されました！ダイナミックチャンネルと音声を作成する必要がある場合は、「cr！setuphelp」をクリックして手順を確認してください。",
+           "used": "You have already set it up! Please type `cr!setup help` to see more setting methods!"
+        },
+        "help": {
+            "text": {
+                "title": "ダイナミックテキストとは何ですか？",
+                "desc": "動的テキストを使用すると、チャネルの作成後にチャネルを削除する問題を解決できます\n独自のテキストチャネルがあると便利ですよね？\n「cr！setuptext」を使用して設定してください。"
+            },
+            "voice": {
+                "title": "ダイナミックボイスとは？",
+                "desc": "ダイナミックな音声は、音声と楽しさを生み出すことができます！\n独自の音声チャネルを持っていると、見栄えがしますよね？\n「cr！setupvoice」を使用して設定してください。"
+            },
+            "join": {
+                "title": "メッセージ設定を追加する",
+                "desc": "`cr！setup join [message]`を使用します\n◆オフにする場合は、メッセージを入力しないでください。\nメッセージに次を追加して、パラメータを追加します。\n-` {user} `およびユーザーに言及する\n-` {server} `サーバー名\n-` {member}`サーバーの総数"
+            },            
+            "leave": {
+                "title": "メッセージ設定を残す",
+                "desc": "`cr！setup Leave [message]` \n◆を使用します。オフにする場合は、メッセージを入力しないでください。\nメッセージに次を追加して、パラメータを追加します。\n-` {user} `およびユーザーに言及する\n-` {server} `サーバー名\n-` {member}`サーバーの総数"
+            }
+        },
+        "text": {
+            "チャンネル":"チャンネル",
+            "crated": "✅あなたは個人チャンネルを作成しました！",
+            "help": "これはあなたの個人的なチャンネルです！閉じるには` cr!clo`を使用してください！\n \n次のパラメータを使用できます！ `cr!set [parameter]` \n-` name [name] `rename Channel \n- `self / open`は読み取り権限を設定します\n-`nsfw`は制限付きチャネルとして設定されます",
+            "help2": "次のパラメータを入力してください！` cr!set [パラメータ] `\n-`名前[名前]`チャネルの名前を変更します\n-`自己/オープン `読み取り権限を設定します\n-`nsfw`設定制限されたチャネルです",
+            "No_create": "❌動的テキストチャネルを設定していません！",
+            "No_owner": "❌あなたはこのチャンネルの所有者ではありません！",
+            "close": "🔁は個人チャンネルを閉鎖しています...",
+            "No_text": "❌このチャンネルは個人チャンネルではありません！",
+            "set":{
+                "name": "✅チャンネルの名前は",
+                "name_err": "❌名前が失敗しました！",
+                "no_perm": "❌茅野助手に`体の管理 `許可を与えてください！",
+                "self": "✅がプライベートチャンネルに設定されました！",
+                "open": "✅が公開チャンネルに設定されました！",
+                "setting":"✅設定済み！"
+            }
+        },
+        "code":{
+            "title": "確認を取得するには、次のコードを入力してください",
+            "use": "ユーザーの認証：",
+            "error": "❌検証コードエラー！",
+            "tryagain":"もう一度お願いします！",
+            "pass": "✅検証に合格しました！検証が必要なコマンドをいくつか入力できます！",
+            "pass2": "注：使用するたびに確認する必要があります"
+        },
+        "snipe":{
+            "no_support": "❌このサーバーは最後のメッセージをサポートしていません",
+            "no_snipe": "❌このサーバーの最後のメッセージが見つかりませんでした！",
+            "close_snipe": "❌サーバーはこの機能をオフにしています",
+            "nope":"いいえ",
+            "last":"最後の前","message":"メッセージの削除",
+            "file":"📎最後の最初の1つは添付ファイルを削除します",
+            "no_fond": "❌最後のものが見つかりません","message2": "メッセージ！",
+            "file2":"📎添付ファイル"
+        },
+        "server":{
+            "title":"カフェ",
+            "lang": "Language",
+            "delmeg": "最後のメッセージ",
+            "default":"デフォルト",
+            "member":"お客様数",
+            "owner":"ストアマネージャー",
+            "detect": "ロボットトリガー",
+            "join": "Join Message",
+            "leave": "メッセージを残す",
+            "levelup": "アップグレードメッセージ",
+            "createTime": "開始日",
+            "prest":"プリセット",
+            "on":"✅オン",
+            "off":"❌オフ",
+            "set": {
+                "snipe":"スナイパーメッセージ",
+                "safe":"画像コマンド",
+                "react":"メッセージリアクション",
+                "slash":"スラッシュコマンド",
+                "prefix":"プレフィックス"
+             }
+        },
+        "word": {
+            "param": "パラメータ",
+            "No_code": "❌検証に合格しませんでした。`cr！code`と入力して検証を取得してから、このコマンドを使用してください。",
+            "No_setup": "❌まだ設定していません!!` cr！setup`を使用してください ",
+            "crateing":"🔁作成中",
+            "Error_create": "❌作成に失敗しました！",
+            "please_type": "❌パラメータを入力してください！",
+            "error_type_in": "❌パラメータが間違っています！"
+        },
+        "word2":{
+            "detcet": "このサーバーは",
+            "detcet2": "特定のコマンドをトリガーする",
+            "msg_detect_off": "✅メッセージ検出器が無効になっています",
+            "msg_detect_set": "✅メッセージ検出器はに設定されています",
+            "created_channel": "✅動的チャネルを作成しました！",
+            "created_channel2": "これはサーバーの個人用チャンネルです。`cr！ind`を使用して新しいチャンネルを開いてください！",
+            "join_off": "✅結合設定がオフになっています",
+            "join_set": "✅ウェルカムメッセージが正常に設定されました：",
+            "join_ing": "🔁はウェルカムメッセージを設定しています...",
+            "leave_off": "✅休暇設定がオフになっています",
+            "leave_set": "✅脱退メッセージが正常に設定されました：",
+            "leave_ing": "🔁は休暇メッセージを設定しています...",
+            "rank_off": "✅ランク通知がオフになりました",
+            "rank_set": "✅アップグレードメッセージが正常に設定されました：",
+            "rank_ing": "🔁アップグレード通知を設定しています...",
+            "snipe_on": "✅スナイパーメッセージが有効になっています",
+             "snipe_off": "❌スナイパーメッセージが閉じられました",
+             "react_on": "✅メッセージリアクションが有効になっています",
+             "react_off": "❌メッセージリアクションがオフになりました",
+             "save_on": "✅タッチ画像機能がオンになっています\n [⚠]注意！この機能の有効化は、グループによって保証されない場合があります。注意してください。",
+             "save_off": "❌画像タッチ機能がオフになりました\n [✔]これでグループは非常に安全になりました！",
+             "slash_on": "✅スラッシュコマンド機能がオンになっています！\n [ヒント]この機能を使用するには、` / `と入力できるようになりました。",
+             "slash_off": "❌スラッシュコマンド機能がオフになっています。\nスラッシュコマンドを使用すると、ロボットはそれを無視します。",
+             "prefix_update": "✅prefixコマンドが変更されました。",
+             "prefix_tip": "[！]更新されたプレフィックスを使用できない場合は\nウェブサイトからまたはスラッシュコマンドを変更してください。"
+        }
+    },
+    "es_ES": {
+
+    }
+}

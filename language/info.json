@@ -1,0 +1,338 @@
+{
+    "zh_TW": {
+        "guild": {
+            "server": "伺服器 ",
+            "owner": "服主",
+            "area": "區域",
+            "owner_error": "抓不到QWQ",
+            "avatar": "頭貼",
+            "role": "身分組數 - ",
+            "verification": "驗證等級",
+            "createTime": "創群日期",
+            "member": {
+                "all": "所有成員 - ",
+                "member": "💂‍♂️成員: ",
+                "bot": "🤖機器人: "
+            },
+            "channel": {
+                "all": "頻道總數 - ",
+                "category": "📚類別數: ",
+                "text": "📄文字頻道: ",
+                "voice": "🔊語音頻道: ",
+                "news": "📢公告頻道: ",
+                "store": "🛒商店頻道: "
+            },
+            "emoji": {
+                "all": "表情總數 - ",
+                "emoji": "🖼靜態表情: ",
+                "gif": "🎞動態表情: "
+            },
+            "boosts":{
+                "all": "加成狀態 - ",
+                "level": "<:level:794499253509947445>等級: ",
+                "boost": "<:boosts:794499253489106976>加成: "
+            }
+        },
+        "user": {
+            "name": "📜名稱 ",
+            "bot": "🤖機器人 ",
+            "status": "💻線上狀態",
+            "act": "🗨自訂狀態",
+            "gameAct": "🎮遊戲狀態",
+            "joinTime": "📩加入日期",
+            "lastJoin": "(上次加入)",
+            "firstJoin": "(第一次加入)",
+            "createTime": "📅創帳日期",
+            "emotion": {
+                "?": "💕感情狀態",
+                "alone": "單身",
+                "none": "無"
+            },
+            "gaming": {
+                "Playing": "正在玩 ",
+                "Listening": "正在聽 ",
+                "Watching": "正在看 ",
+                "Streaming": "正在直播 "
+            },
+            "pet": "🐶寵物",
+            "host": "👨‍👦主人",
+            "money": "💰金錢($)",
+            "footer": {
+                "user": "[用戶Discord資料]",
+                "data": " [使用 ","data2":" 來查看更多資料]"
+            }
+        },
+        "bot": {
+            "info": "機器人資訊 ",
+            "prefix": "前綴",
+            "version": "機器人版本",
+            "from": "使用架構",
+            "from_version":"架構版本",
+            "guild": "在群數",
+            "bootup": "累計開機",
+            "inviteTime": "受邀日期",
+            "createTime": "創帳日期"
+        },
+        "status": {
+            "member": "上線人數 - ",
+            "online": "<a:online:772101451463393330> 線上 ",
+            "afk": "<a:afk:772101450833985577> 間置 ",
+            "dnd": "<a:dnd:772101451076993065> 勿擾 ",
+            "offline": "<a:offline:772101451266129920> 離線 ",
+            "error": "發生錯誤！\n請稍後再試！"
+        }
+    },
+
+    "zh_CN": {
+        "guild": {
+            "server": "伺服器 ",
+            "owner": "服主",
+            "area": "区域",
+            "owner_error": "抓不到QWQ",
+            "avatar": "头贴",
+            "role": "身分组数 - ",
+            "verification": "验证等级",
+            "createTime": "创群日期",
+            "member": {
+                "all": "所有成员 - ",
+                "member": "💂‍♂️成员: ",
+                "bot": "🤖机器人: "
+            },
+            "channel": {
+                "all": "频道总数 - ",
+                "category": "📚类别数: ",
+                "text": "📄文字频道: ",
+                "voice": "🔊语音频道: ",
+                "news": "📢公告频道: ",
+                "store": "🛒商店频道: "
+            },
+            "emoji": {
+                "all": "表情总数 - ",
+                "emoji": "🖼静态表情: ",
+                "gif": "🎞动态表情: "
+            },
+            "boosts":{
+                "all": "加成状态 - ",
+                "level": "<:level:794499253509947445>等级: ",
+                "boost": "<:boosts:794499253489106976>加成: "
+            }
+        },
+        "user": {
+            "name": "📜名称 ",
+            "bot": "🤖机器人 ",
+            "status": "💻线上状态",
+            "act": "🗨自订状态",
+            "gameAct": "🎮游戏状态",
+            "joinTime": "📩加入日期",
+            "lastJoin": "(上次加入)",
+            "firstJoin": "(第一次加入)",
+            "createTime": "📅创帐日期",
+            "emotion": {
+                "?": "💕感情状态",
+                "alone": "单身",
+                "none": "无"
+            },
+            "gaming": {
+                "Playing": "正在玩 ",
+                "Listening": "正在听 ",
+                "Watching": "正在看 ",
+                "Streaming": "正在直播 "
+            },
+            "pet": "🐶宠物",
+            "host": "👨‍👦主人",
+            "money": "💰金钱($)",
+            "footer": {
+                "user": "[用户Discord资料]",
+                "data": " [使用 ","data2":" 来查看更多资料]"
+            }
+        },
+        "bot": {
+            "info": "机器人资讯 ",
+            "prefix": "前缀",
+            "version": "机器人版本",
+            "from": "使用架构",
+            "from_version":"架构版本",
+            "guild": "在群数",
+            "bootup": "累计开机",
+            "inviteTime": "受邀日期",
+            "createTime": "创帐日期"
+        },
+        "status": {
+            "member": "上线人数 - ",
+            "online": "<a:online:772101451463393330> 线上 ",
+            "afk": "<a:afk:772101450833985577> 间置 ",
+            "dnd": "<a:dnd:772101451076993065> 勿扰 ",
+            "offline": "<a:offline:772101451266129920> 离线 ",
+            "error": "发生错误！\n请稍后再试！"
+        }
+    },
+    "en_US": {
+        "guild": {
+            "server": "server ",
+            "owner": "owner",
+            "area": " area",
+            "owner_error": "Failed fetching QWQ",
+            "avatar": "Avatar",
+            "role": "roles - ",
+            "verification": "verification level",
+            "createTime": "Created in:",
+            "member": {
+                "all": "All members - ",
+                "member": "💂‍♂️members: ",
+                "bot": "🤖Bots:: "
+            },
+            "channel": {
+                "all": "All Channels - ",
+                "category": "📚Categorys: ",
+                "text": "📄text channels: ",
+                "voice": "🔊Voice channels: ",
+                "news": "📢Announcement channels: ",
+                "store": "🛒Store channels: "
+            },
+            "emoji": {
+                "all": "All Emojis - ",
+                "emoji": "🖼Static emojis: ",
+                "gif": "🎞Gifs: "
+            },
+            "boosts":{
+                "all": "Boost status - ",
+                "level": "<:level:794499253509947445>Level: ",
+                "boost": "<:boosts:794499253489106976>Boosts: "
+            }
+        },
+        "user": {
+            "name": "📜Name ",
+            "bot": "🤖bot ",
+            "status": "💻Online status",
+            "act": "🗨Custom status",
+            "gameAct": "🎮Game status",
+            "joinTime": "📩Join date:",
+            "lastJoin": "(Last time Joined)",
+            "firstJoin": "(First time joined)",
+            "createTime": "📅Created in",
+            "emotion": {
+                "?": "💕Relations",
+                "alone": "Single",
+                "none": "none"
+            },
+            "gaming": {
+                "Playing": "Now Playing ",
+                "Listening": "Now Listening to ",
+                "Watching": "Now watching ",
+                "Streaming": "Now streaming "
+            },
+            "pet": "🐶pet",
+            "host": "👨‍👦Owner",
+            "money": "💰Money($)",
+            "footer": {
+                "user": "[user Discord data]",
+                "data": " [use ","data2":" to check more informations]"
+            }
+        },
+        "bot": {
+            "info": "Bot information ",
+            "prefix": "Prefix",
+            "version": "Bot version",
+            "from": "Framework using",
+            "from_version":"Framework version",
+            "guild": "numbers of server I'm in",
+            "bootup": "Has been on for",
+            "inviteTime": "Invited time",
+            "createTime": "Created time"
+        },
+        "status": {
+            "member": "Online members - ",
+            "online": "<a:online:772101451463393330> Online ",
+            "afk": "<a:afk:772101450833985577> Idle ",
+            "dnd": "<a:dnd:772101451076993065> Do not disturb ",
+            "offline": "<a:offline:772101451266129920> Offline ",
+            "error": "Error occured!\nPlease try again later!"
+        }
+    },
+    "ja_JP": {
+        "guild": {
+            "server": "サーバ ",
+            "owner": "サーバント",
+            "area": "範囲",
+            "owner_error": "捕まえられないQWQ",
+            "avatar": "ヘッダ",
+            "role": "体のグループの数 - ",
+            "verification": "検証レベル",
+            "createTime": "設立日",
+            "member": {
+                "all": "全員 - ",
+                "member": "💂‍♂️メンバー: ",
+                "bot": "🤖ロボット: "
+            },
+            "channel": {
+                "all": "チャネルの総数 - ",
+                "category": "📚カテゴリーを: ",
+                "text": "📄テキストチャンネル: ",
+                "voice": "🔊ボイスチャンネル: ",
+                "news": "📢アナウンスチャネル: ",
+                "store": "🛒ストアチャネル: "
+            },
+            "emoji": {
+                "all": "総絵文字 - ",
+                "emoji": "🖼絵文字: ",
+                "gif": "🎞動的な絵文字: "
+            },
+            "boosts":{
+                "all": "添加状態 - ",
+                "level": "<:level:794499253509947445>グレード: ",
+                "boost": "<:boosts:794499253489106976>添加: "
+            }
+        },
+        "user": {
+            "name": "📜名前 ",
+            "bot": "🤖ロボット ",
+            "status": "💻オンラインステータス",
+            "act": "🗨カスタムステータス",
+            "gameAct": "🎮ゲームの状態",
+            "joinTime": "📩参加日",
+            "lastJoin": "(最後に参加しました)",
+            "firstJoin": "(初めて参加する)",
+            "createTime": "📅アカウント作成日",
+            "emotion": {
+                "?": "💕感情的な状態",
+                "alone": "シングル",
+                "none": "何も"
+            },
+            "gaming": {
+                "Playing": "遊ぶ ",
+                "Listening": "聞いている ",
+                "Watching": "見て ",
+                "Streaming": "生放送 "
+            },
+            "pet": "🐶ペット",
+            "host": "👨‍👦ホスト",
+            "money": "💰お金($)",
+            "footer": {
+                "user": "[ユーザーDiscordプロファイル]",
+                "data": " [使用する ","data2":" 詳細情報を表示するには]"
+            }
+        },
+        "bot": {
+            "info": "ロボット情報 ",
+            "prefix": "プレフィックス",
+            "version": "ロボット版",
+            "from": "アーキテクチャを使用",
+            "from_version":"アーキテクチャバージョン",
+            "guild": "グループの数",
+            "bootup": "累積ブーツ",
+            "inviteTime": "招待日",
+            "createTime": "アカウント作成日"
+        },
+        "status": {
+            "member": "オンラインの人数 - ",
+            "online": "<a:online:772101451463393330> オンライン ",
+            "afk": "<a:afk:772101450833985577> 去る ",
+            "dnd": "<a:dnd:772101451076993065> しないでください乱す ",
+            "offline": "<a:offline:772101451266129920> オフライン ",
+            "error": "エラーが発生しました！\n後でもう一度やり直してください！"
+        }
+    },
+    "es_ES": {
+
+    }
+}

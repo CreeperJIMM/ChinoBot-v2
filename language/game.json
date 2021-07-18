@@ -1,0 +1,457 @@
+{
+    "zh_TW": {
+        "mc": {
+            "title": "MC伺服器狀態",
+            "version": "版本:",
+            "online": "線上人數 ",
+            "maxplayer": "最大人數 ",
+            "mod": "模組: ",
+            "notfound": "❌找不到伺服器",
+            "typeIP": "【MC】請填IP位置"
+        },
+        "rps2": {
+            "title": "🖐猜拳指令幫助頁面",
+            "rule": {
+                "a": "使用說明&規則",
+                "f": "此有連勝加成\n如果贏第一次(money * 1),下次將會是賭注金額x2(money + last money * 2)\n最高加成限制為3倍(若一直連勝將一直x3)\n如果輸了將扣除賭注金額x1.5,並歸零連勝次數\n★如果平手不會歸零連勝次數"
+            },
+            "rps": "剪刀石頭布!!",
+            "choose": "🔰請選擇一個招式 - ",
+            "keepplay": "繼續遊玩?",
+            "player": "遊玩者: ",
+            "out": {
+                "rock": "出了石頭... ",
+                "paper": "出了布... ",
+                "seasen": "出了剪刀... "
+            },
+            "state": {
+                "tie": "平手!",
+                "lose": "你輸了",
+                "win": "你贏了!!"
+            },
+            "inte": {
+                "lose": "[連勝歸零]",
+                "win": "連勝!]"
+            },
+            "gameover": {
+                "lose": "你賠了 ",
+                "happyPlay": "很高興和你一起玩!",
+                "HP": {
+                    "happy": "很高興和 ",
+                    "play": " 一起玩!"
+                },
+                "win": "你贏了 ",
+                "gameover": "👑遊戲結束!",
+                "allwin": "你總連勝次數: ",
+                "wincount": "你最高連勝次數: ",
+                "lastwin": "你最後連勝次數: "
+            }
+        },
+        "door": {
+            "game": "三選一遊戲",
+            "choose": "🚪請選擇一扇門",
+            "open": "你打開這個門後...",
+            "event": {
+                "nothing": "什麼也沒找到。",
+                "bydoor": "有錢在門後面!! (x1.2倍金錢)",
+                "cashbox": "是金庫!!(x1.5倍金錢)",
+                "monster": "乾!!!有怪物!!!(金幣倒扣x2)"
+            },
+            "give": "你獲得",
+            "lose": "你丟失金錢 "
+        },
+        "math": {
+            "type": "你擲出 ",
+            "dot": " 點!",
+            "hastext": "❌內有文字無法計算",
+            "cantcount": "❌無法計算此算式"
+        },
+        "slot": {
+            "help": "❌請填入賭注金額! \n•如果有兩個連線將可以獲得輸入的金額x1.5\n•如果三個都有連線將可以獲得金額x3\n•如果都貢辜將會扣除金額x2",
+            "speed": "💥你打太快了! 慢一點!",
+            "to_maney":"💥太多人使用此指令! 慢一點!",
+            "beat": "[你賭注 ",
+            "win":"你贏了 ",
+            "lose":"你倒賠了 "
+        },
+        "love": {
+            "like": "喜歡",
+            "degree": " 的程度為 ",
+            "love": "💕祝你們 長長久久 終身愛情!",
+            "fbi": "☕FBI! OPEN THE DOOR!"
+        },
+        "gay": {
+            "degree": " 的gay程度為 "
+        },
+        "pick": {
+            "yes": "😉是",
+            "no": "😒不是",
+            "maybe_yes": "🤔或許是",
+            "maybe_no": "🤔也許不是"
+        },
+        "word": {
+            "typemoney": "❌請填入賭注金額!",
+            "hasgame": "❌你有一個遊戲在進行!",
+            "slowchoose": "❌你太慢選擇了!",
+            "player": "遊玩者: "
+        },
+        "osu": {
+            "typename": "❌請填入玩家Name",
+            "grade": " 的OSU!戰績",
+            "not_found": "❌找不到該玩家!",
+            "score": {
+                "country": "國家",
+                "scores": "分數",
+                "playtime": "遊玩時數",
+                "playtimes": "遊玩次數",
+                "rank": "排名/PP",
+                "global": "全球 ",
+                "domestic": "國內 ",
+                "acc": "準確率",
+                "joinTime": "加入時間"
+            }
+        }
+    },
+    "zh_CN": {
+        "mc": {
+            "title": "MC伺服器状态",
+            "version": "版本:",
+            "online": "线上人数 ",
+            "maxplayer": "最大人数 ",
+            "mod": "模组: ",
+            "notfound": "❌找不到伺服器",
+            "typeIP": "【MC】请填IP位置"
+        },
+        "rps2": {
+            "title": "🖐猜拳指令帮助页面",
+            "rule": {
+                "a": "使用说明&规则",
+                "f": "此有连胜加成\n如果赢第一次(money * 1),下次将会是赌注金额x2(money + last money * 2)\n最高加成限制为3倍(若一直连胜将一直x3)\n如果输了将扣除赌注金额x1.5,并归零连胜次数\n★如果平手不会归零连胜次数"
+            },
+            "rps": "剪刀石头布!!",
+            "choose": "🔰请选择一个招式 - ",
+            "keepplay": "继续游玩?",
+            "player": "游玩者: ",
+            "out": {
+                "rock": "出了石头... ",
+                "paper": "出了布... ",
+                "seasen": "出了剪刀... "
+            },
+            "state": {
+                "tie": "平手!",
+                "lose": "你输了",
+                "win": "你赢了!!"
+            },
+            "inte": {
+                "lose": "[连胜归零]",
+                "win": "连胜!]"
+            },
+            "gameover": {
+                "lose": "你赔了 ",
+                "happyPlay": "很高兴和你一起玩!",
+                "HP": {
+                    "happy": "很高兴和 ",
+                    "play": " 一起玩!"
+                },
+                "win": "你赢了 ",
+                "gameover": "👑游戏结束!",
+                "allwin": "你总连胜次数: ",
+                "wincount": "你最高连胜次数: ",
+                "lastwin": "你最后连胜次数: "
+            }
+        },
+        "door": {
+            "game": "三选一游戏",
+            "choose": "🚪请选择一扇门",
+            "open": "你打开这个门后...",
+            "event": {
+                "nothing": "什么也没找到。",
+                "bydoor": "有钱在门后面!! (x1.2倍金钱)",
+                "cashbox": "是金库!!(x1.5倍金钱)",
+                "monster": "干!!!有怪物!!!(金币倒扣x2)"
+            },
+            "give": "你获得",
+            "lose": "你丢失金钱 "
+        },
+        "math": {
+            "type": "你掷出 ",
+            "dot": " 点!",
+            "hastext": "❌内有文字无法计算",
+            "cantcount": "❌无法计算此算式"
+        },
+        "slot": {
+            "help": "❌请填入赌注金额! \n•如果有两个连线将可以获得输入的金额x1.5\n•如果三个都有连线将可以获得金额x3\n•如果都贡辜将会扣除金额x2",
+            "speed": "💥你打太快了! 慢一点!",
+            "to_maney":"💥太多人使用此指令! 慢一点!",
+            "beat": "[你赌注 ",
+            "win":"你赢了 ",
+            "lose":"你倒赔了 "
+        },
+        "love": {
+            "like": "喜欢",
+            "degree": " 的程度为 ",
+            "love": "💕祝你们 长长久久 终身爱情!",
+            "fbi": "☕FBI! OPEN THE DOOR!"
+        },
+        "gay": {
+            "degree": " 的gay程度为 "
+        },
+        "pick": {
+            "yes": "😉是",
+            "no": "😒不是",
+            "maybe_yes": "🤔或许是",
+            "maybe_no": "🤔也许不是"
+        },
+        "word": {
+            "typemoney": "❌请填入赌注金额!",
+            "hasgame": "❌你有一个游戏在进行!",
+            "slowchoose": "❌你太慢选择了!",
+            "player": "游玩者: "
+        },
+        "osu": {
+            "typename": "❌请填入玩家Name",
+            "grade": " 的OSU!战绩",
+            "not_found": "❌找不到该玩家!",
+            "score": {
+                "country": "国家",
+                "scores": "分数",
+                "playtime": "游玩时数",
+                "playtimes": "游玩次数",
+                "rank": "排名/PP",
+                "global": "全球 ",
+                "domestic": "国内 ",
+                "acc": "准确率",
+                "joinTime": "加入时间"
+            }
+        }
+    },
+    "en_US": {
+        "mc": {
+            "title": "MC Server Status",
+            "version": "Version:",
+            "online": " Online Player ",
+            "maxplayer": "Maximum Player ",
+            "mod": "Mods: ",
+            "notfound": "❌No server found",
+            "typeIP": "[MC] Please fill in the IP location"
+        },
+        "rps2": {
+            "title": "🖐Guess the boxing instruction help page",
+            "rule": {
+                "a": "Instructions & Rules",
+                "f": "There is a winning streak bonus\nIf you win the first time (money * 1), the next time it will be the bet amount x2(money + last money * 2)\nThe maximum bonus is limited to 3 times (if The winning streak will always be x3)\nIf you lose, the bet amount x1.5 will be deducted and the number of winning streaks will be returned to zero.\n★If there is a tie, the number of winning streaks will not be returned to zero"
+            },
+            "rps": "Rock Paper Scissors!!",
+            "choose": "🔰Please choose a move-",
+            "keepplay": "Continue to play?",
+            "player": "Player: ",
+            "out": {
+                "rock": "Out of the stone... ",
+                "paper": "Out of the cloth... ",
+                "seasen": "The scissors are out... "
+            },
+            "state": {
+                "tie": "Tie!",
+                "lose": "You lost",
+                "win": "You won!!"
+            },
+            "inte": {
+                "lose": "[Winning Streak to Zero]",
+                "win": "Winning streak!]"
+            },
+            "gameover": {
+                "lose": "You lost",
+                "happyPlay": "It's nice to play with you!",
+                "HP": {
+                    "happy": "Very happy and happy",
+                    "play": "Play together!"
+                },
+                "win": "You won",
+                "gameover": "👑Game over!",
+                "allwin": "Your total winning streak: ",
+                "wincount": "Your highest winning streak: ",
+                "lastwin": "Your last winning streak: "
+            }
+        },
+        "door": {
+            "game": "Three choose one game",
+            "choose": "🚪Please choose a door",
+            "open": "After you open this door...",
+            "event": {
+                "nothing": "Nothing was found.",
+                "bydoor": "There is money behind the door!! (x1.2 times the money)",
+                "cashbox": "It's a vault!! (x1.5 times the money)",
+                "monster": "Fuck!!! There are monsters!!! (Gold coins inverted x2)"
+            },
+            "give": "You get",
+            "lose": "You lost money"
+        },
+        "math": {
+            "type": "You roll out",
+            "dot": "dot!",
+            "hastext": "❌There are texts that cannot be calculated",
+            "cantcount": "❌Cannot calculate this formula"
+        },
+        "slot": {
+            "help": "❌Please fill in the bet amount! \n•If there are two connections, you can get the amount you entered x1.5\n•If all three are connected, you can get the amount x3\n•If both Gong Gu will deduct the amount x2",
+            "speed": "💥You are playing too fast! Slow down!",
+            "to_maney":"💥Too many people use this command! Slow down!",
+            "beat": "[You bet",
+            "win":"You won",
+            "lose": "You lost it"
+        },
+        "love": {
+            "like": "Like",
+            "degree": "The degree of ",
+            "love": "💕I wish you a long, long and lifetime love!",
+            "fbi": "☕FBI! OPEN THE DOOR!"
+        },
+        "gay": {
+            "degree": "The gay degree of 'is"
+        },
+        "pick": {
+            "yes": "😉Yes",
+            "no": "😒No",
+            "maybe_yes": "🤔Maybe it is",
+            "maybe_no": "🤔Maybe not"
+        },
+        "word": {
+            "typemoney": "❌Please fill in the bet amount!",
+            "hasgame": "❌You have a game in progress!",
+            "slowchoose": "❌You are too slow to choose!",
+            "player": "Player: "
+        },
+        "osu": {
+            "typename": "❌Please fill in the player name",
+            "grade": "OSU! Record",
+            "not_found": "❌The player cannot be found!",
+            "score": {
+                "country": "Country",
+                "scores": "Scores",
+                "playtime": "Playtime",
+                "playtimes": "Playtimes",
+                "rank": "rank/PP",
+                "global": "Global",
+                "domestic": "domestic",
+                "acc": "Accuracy",
+                "joinTime": "Join Time"
+            }
+        }
+    },
+    "ja_JP": {
+        "mc": {
+            "タイトル": "MCサーバーステータス",
+            "バージョン": "バージョン：",
+            "オンライン": "オンラインの人数",
+            "maxplayer": "最大プレーヤー",
+            "mod": "モジュール：",
+            "notfound": "❌サーバーが見つかりません",
+            "typeIP": "[MC] IPの場所を入力してください"
+        },
+        "rps2": {
+            "title": "🖐推測の説明のヘルプページ",
+            "rule": {
+                "a": "指示とルール",
+                "f": "これには連勝ボーナスがあります\n最初に勝った場合（お金* 1）、次回は賭け金額x2（お金+最後のお金* 2）になります\n最大ボーナスは3回に制限されています（勝った場合）ストリーク、常にx3になります）\n負けた場合、ベット額x1.5が差し引かれ、勝ちストリークの数はゼロに戻ります。\n同点の場合、勝ちストリークの数はに戻されません。ゼロ"
+            },
+            "rps": "最初はグー、じゃんけん！！",
+            "choose": "🔰動きを選択してください - ",
+            "keepplay": "再生し続けます？",
+            "player": "プレーヤー：",
+            "out": {
+                "rock": "石から... ",
+                "paper": "布から... ",
+                "seasen": "はさみから... "
+            },
+            "state": {
+                "tie": "ネクタイ！",
+                "lose": "あなたが失う",
+                "win": "あなたが勝ちます！"
+            },
+            "inte": {
+                "lose": "【連勝ゼロ】",
+                "win": "ストリーク！]"
+            },
+            "gameover": {
+                "lose": "あなたが負けた ",
+                "happyPlay": "一緒に遊んでよかった！",
+                "HP": {
+                    "happy": "とても幸せで",
+                    "play": " と遊ぶ!"
+                },
+                "win": "あなたが勝つ ",
+                "gameover": "👑ゲームオーバーです！",
+                "allwin": "あなたの総連勝：",
+                "wincount": "あなたの最高の連勝：",
+                "lastwin": "あなたの最後の連勝："
+            }
+        },
+        "door": {
+            "game": "3人が1つのゲームを選ぶ",
+            "choose": "🚪ドアを選んでください",
+            "open": "このドアを開けたら...",
+            "event": {
+                "nothing": "何も見つかりませんでした。",
+                "bydoor": "ドアの後ろにお金があります!!（x1.2倍のお金）",
+                "cashbox": "それは金庫です!!（x1.5倍のお金）",
+                "monster": "ファック!!!モンスターがいます!!!（金貨を逆さにしたx2）"
+            },
+            "give": "あなたが得る ",
+            "lose": "あなたはお金を失います "
+        },
+        "math": {
+            "type": "あなたは転がります ",
+            "dot": " ポイント！",
+            "hastext": "❌計算できないテキストがあります",
+            "cantcount": "❌この式を計算できません"
+        },
+        "slot": {
+            "help": "❌賭け金額を入力してください！\n•接続が2つある場合は、入力した金額x1.5を取得できます\n•3つすべてが接続されている場合は、金額x3を取得できます\n•接続が2つある場合は、金額は2倍差し引かれます",
+            "speed": "💥あなたはあまりにも速く遊んでいます！遅くしてください！",
+            "to_maney":"💥このコマンドを使用する人が多すぎます！速度を落とします！",
+            "beat": "[あなたは賭けます ",
+            "win":"あなたが勝つ ",
+            "lose":"あなたが負けた "
+        },
+        "love": {
+            "like": "お気に入り",
+            "degree": " 程度は ",
+            "love": "💕長く、長く、生涯にわたる愛をお祈りします!",
+            "fbi": "☕FBI! OPEN THE DOOR!"
+        },
+        "gay": {
+            "degree": " 同性愛者の程度は "
+        },
+        "pick": {
+            "yes": "😉はい",
+            "no": "😒ではありません",
+            "maybe_yes": "🤔おそらく",
+            "maybe_no": "🤔そうでないかもしれない"
+        },
+        "word": {
+            "typemoney": "❌賭け金額を記入してください！",
+            "hasgame": "❌ゲームが進行中です!",
+            "slowchoose": "❌あなたは遅すぎて選ぶことができません！",
+            "player": "プレーヤー: "
+        },
+        "osu": {
+            "typename": "❌プレイヤー名を入力してください",
+            "grade": " OSU！レコード",
+            "not_found": "❌プレイヤーが見つかりません！",
+            "score": {
+                "country": "国",
+                "scores": "分数",
+                "playtime": "プレイ時間",
+                "playtimes": "再生時間",
+                "rank": "ランク/PP",
+                "global": "グローバル ",
+                "domestic": "国内の ",
+                "acc": "正確さ",
+                "joinTime": "参加時間"
+            }
+        }
+    },
+    "es_ES": {
+
+    }
+}
