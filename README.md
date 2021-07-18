@@ -4,6 +4,7 @@ Discord Bot V2
 <img align="right" src="https://cdn.discordapp.com/attachments/611040945495998464/785454420766490644/62549335_p0.jpg" height="200" width="200">  
 
 [![Top.gg](https://cdn.discordapp.com/attachments/611040945495998464/785459046118326272/68747470733a2f2f746f702e67672f696d616765732f64626c6e65772e706e67.png)](https://top.gg/bot/731408794948730961)  
+<a href="https://www.codefactor.io/repository/github/creeperjimm/chinobot-v2"><img src="https://www.codefactor.io/repository/github/creeperjimm/chinobot-v2/badge" alt="CodeFactor" /></a>
 This is Discord Chino Bot 6.1  
 By discord.js  
 Run node.js  
