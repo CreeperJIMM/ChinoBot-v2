@@ -99,6 +99,7 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             var os 	= require('os-utils');
+            try {
             os.cpuFree(function(f){
             let cpuEmbed = new Discord.MessageEmbed()
             .setTitle(k.bot.info)
@@ -106,9 +107,11 @@ module.exports= {
             .addField(k.cpu.all, (2.50 - f).toFixed(2) + "Ghz / "+ "2.50" + "Ghz" )
             .addField(k.cpu.use , (((2.50 - f).toFixed(2) /2.50) *100).toFixed(2) + "%")
             .addField(k.cpu.runing, (os.sysUptime()/60).toFixed(1) + l.time.minute )
-             message.channel.send(cpuEmbed);   
+             message.channel.send(cpuEmbed);
+            })            
+            } catch (error) {
+             message.channel.send(`Error!\n\`\`\`js\n${error}\n\`\`\``)   
             }
-        )
     }
     },
     "restart": {
