@@ -80,7 +80,7 @@ function main() {
       })});
     //////////////// Slash command /////////////////////////
     let slash = require("./function/slashCommand")
-    slash.main(client,clientDB)
+    slash.main(client,clientDB,prefix)
     /////////////////////////////////////////////////////////////
     console.log(`該程序目前總共使用了${Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100}MB的RAM`)
     client.login(token);

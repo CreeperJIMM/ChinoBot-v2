@@ -7,7 +7,7 @@ for (file of slashfiles) {
   let q = require(`../slashs/${file}`);
   Object.assign(slashcommand, q);
 }
-module.exports.main = function (client, clientDB) {
+module.exports.main = function (client, clientDB,prefix) {
   client.ws.on("INTERACTION_CREATE", (interaction) => {
     const slashes = interaction.data.name;
     const args = interaction.data.options;

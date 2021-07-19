@@ -39,7 +39,6 @@ module.exports.ifpicture = function (msg,uwu,prefix) {
       if (uwu.language.setting) {
         if (uwu.language.setting.safe === false) {
           if (safecommand.indexOf(msg.content.replace(prefix, "").split(" ")[0]) != -1)
-            msg.channel.send("⛔此指令被本群管理員禁止.\nThis command has been disabled by server admin.");
             return true;
         }
       }

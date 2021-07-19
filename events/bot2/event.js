@@ -89,9 +89,12 @@ module.exports= [
           let uwu = GuildCache.get(msg.author.id);
           if(!uwu) {
             uwu = await msgcmd.guildcache(msg,uwu,clientDB)
+            if(uwu === false) {
+              return zh_TW(client, msg,"zh_TW",clientDB)
+            }
             GuildCache.set(msg.guild.id, uwu);
           }
-          if(msgcmd.ifpicture(msg,uwu,prefix)) return;
+          if(msgcmd.ifpicture(msg,uwu,prefix)) return msg.channel.send("⛔此指令被本群管理員禁止.\nThis command has been disabled by server admin.");
           msg.channel.startTyping(1)
               if (cooldown.has(msg.author.id)) {
                   msg.channel.stopTyping();

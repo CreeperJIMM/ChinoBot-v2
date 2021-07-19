@@ -475,4 +475,62 @@ module.exports = {
 
         }
     },
+    "emoji": {
+        description: "表情",
+        authority: "everyone",
+        fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
+            let l = lan.zh_TW,k = gameX.zh_TW
+            if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+            }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+            const hasEmoteRegex = /<a?:.+:\d+>/gm
+            const emoteRegex = /<:.+:(\d+)>/gm
+            const nameRegex = /:.+:/gm
+            const animatedEmoteRegex = /<a:.+:(\d+)>/gm
+            if(!message.content.match(hasEmoteRegex)) return message.channel.send("未找到表情符號.")
+          
+            if (emoji = emoteRegex.exec(message)) {
+            const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".png?v=1"
+            message.channel.send(url)
+            }
+            else if (emoji = animatedEmoteRegex.exec(message)) {
+            const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".gif?v=1"
+            message.channel.send(url)
+            }
+            else {
+            message.channel.send("Couldn't find an emoji to paste!")
+            }
+            }
+        },
+        "emojiadd": {
+            description: "表情",
+            authority: "everyone",
+            fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
+                let l = lan.zh_TW,k = gameX.zh_TW
+                if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+                }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+                const hasEmoteRegex = /<a?:.+:\d+>/gm
+                const emoteRegex = /<:.+:(\d+)>/gm
+                const nameRegex = /:.+:/gm
+                const animatedEmoteRegex = /<a:.+:(\d+)>/gm
+                if(!message.content.match(hasEmoteRegex)) return message.channel.send("未找到表情符號.")
+
+                if (emoji = emoteRegex.exec(message)) {
+                const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".png?v=1"
+                let name = nameRegex.exec(message)[0]
+                name = name.substring(1,name.length-1)
+                message.guild.emojis.create(url,name)
+                message.channel.send(url)
+                }
+                else if (emoji = animatedEmoteRegex.exec(message)) {
+                const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".gif?v=1"
+                let name = nameRegex.exec(message)[0]
+                name = name.substring(1,name.length-1)
+                message.guild.emojis.create(url,name)
+                message.channel.send(url)
+                }
+                else {
+                message.channel.send("Couldn't find an emoji to paste!")
+                }
+                }
+            }
 }
