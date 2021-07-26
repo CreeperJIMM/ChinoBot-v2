@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const fs = require("fs")
 const request = require("request");
 const lan = require('../commands/lang.json');
+let BotOnline = require("../function/BotOnline")
 const gameX = require('../language/bot.json');
 var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
@@ -378,8 +379,8 @@ module.exports= {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            fs.readFile('./server.json',function (err,userInfo) {
-                if(err) {return message.channel.send(l.error.Run_Command_error)}else{var user = userInfo.toString();user = JSON.parse(user);
+            BotOnline.Mongoload(clientDB).then((user) => {
+                if(user === false) {return message.channel.send(l.error.Run_Command_error)}else{
             let bot = new Discord.MessageEmbed()
             .setColor('#2d9af8').setTitle(k.status.list)
             .setDescription(k.status.info)

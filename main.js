@@ -23,7 +23,7 @@ function main() {
     //////////////////////////////////////////////
     let onlineSET = require("./function/BotOnline")
     client.on('ready', async () => {
-        onlineSET.main1(client,1)
+        onlineSET.main1(client,1,clientDB)
         console.log(`苦力怕機器人讀取成功! 版本: ${version} Time: ` + new Date().toUTCString());
     });
     ///////////////////////////////////////////

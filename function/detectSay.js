@@ -15,7 +15,7 @@ function deleteCooldown(message) {
     setTimeout(() => {
       channelcooldown.delete(message.channel.id)}, 1 * 700)
   }
-
+let times = 1
 module.exports.send = function(text1, text2, text3, text4,text5,text6, author = null) {
     return function (rand, msg) {
         if (cooldown.has(msg.author.id)) {
