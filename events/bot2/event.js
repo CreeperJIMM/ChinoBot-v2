@@ -100,6 +100,7 @@ module.exports= [
               if (cooldown.has(msg.author.id)) {
                   msg.channel.stopTyping();
                   if (user2.language) {
+                    if(!languages[user2.language]) return;
                       let lsay = languages[user2.language].error.TooSpeed
                       msg.channel.send(lsay);
                       adv.speed(client, msg, user2.language,clientDB)
