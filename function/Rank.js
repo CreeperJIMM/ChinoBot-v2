@@ -4,7 +4,8 @@ let Mongo = require('./MongoData')
 module.exports.main = function(message,user,clientDB,client,num) {
     if (user === false) {
         if (!message.guild) return;
-        if (!message.content.startsWith("cr!")) return;
+        if(num === 1) if (!message.content.startsWith("cr!")) return;
+        if(num === 2) if (!message.content.startsWith("cr?")) return;
         Mongo.loadGuild(clientDB, message.guild.id).then((ser) => {
         if (ser === false) { return }
         if(ser.language.run) {if(ser.language.run != num) return;}

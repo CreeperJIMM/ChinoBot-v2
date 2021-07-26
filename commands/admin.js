@@ -1,6 +1,7 @@
 const Discord = require("discord.js")
 const DBL = require("dblapi.js");
-const dbl = new DBL("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczMTQwODc5NDk0ODczMDk2MSIsImJvdCI6dHJ1ZSwiaWF0IjoxNjAyOTg3NjE1fQ.x0l6rjH6HivY0g39ibccJTh6r3knw5JCV-LZARnfg9U", { webhookAuth: 'ChinoBot' });
+let {topToken} = require("../token.json")
+const dbl = new DBL(topToken, { webhookAuth: 'ChinoBot' });
 const lan = require('../commands/lang.json');
 const adminX = require('../language/admin.json');
 const MongoClient = require('mongodb').MongoClient;

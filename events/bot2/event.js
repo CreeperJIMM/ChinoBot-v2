@@ -12,6 +12,7 @@ let Mongo = require('../../function/MongoData')
 let cooldown = new Set(),cdseconds = 3,channelcooldown = new Set(),channelcdseconds = 2,snipecool = new Set(),times = 0
 const { prefix, token, prefix2, version, owner} = require('../../config2.json');
 const fs = require('fs');
+let languages = require("../../commands/lang.json")
 let command = {}
 let commandfiles = fs.readdirSync("./commands")
 commandfiles.splice(7,1)
@@ -99,9 +100,9 @@ module.exports= [
               if (cooldown.has(msg.author.id)) {
                   msg.channel.stopTyping();
                   if (user2.language) {
-                      let lsay = languages.lan[user2.language].error.TooSpeed
+                      let lsay = languages[user2.language].error.TooSpeed
                       msg.channel.send(lsay);
-                      adv.speed(client, msg, user2.language)
+                      adv.speed(client, msg, user2.language,clientDB)
                   } else {
                       msg.channel.send("請等等再來使用此指令!\nplease wait.");
                       speed(client, msg)

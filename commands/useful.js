@@ -6,7 +6,6 @@ var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.d
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-
 const disbut = require('discord-buttons');
 var loadping = async(client) => {
   /*讀取公會檔案*/let dbo =client.db("mydb"),query = { "type": "ping" };
@@ -15,7 +14,6 @@ var loadping = async(client) => {
   user = user[0]
   return user
 }
-
 module.exports = {
     "hi":{
         description: "測試",
@@ -88,8 +86,10 @@ module.exports = {
           }}else{              
             let member=bot.users.cache.get(ag[0])
             if(!isNaN(ag[0])) {
-              if (member) { member = user }else { member = message.author }
-               }else{member = message.guild.members.cache.find(m => m.displayName.includes(ag[0])).user }
+              if (!member) member = message.author
+               }else{
+                 let nickname = message.guild.members.cache.find(m => m.displayName.includes(ag[0]))
+                 if(nickname) member = nickname.user }
            if(member){
               const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(member.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
               message.channel.send(emb)
@@ -341,4 +341,81 @@ module.exports = {
         })}
       }
   },
+  "sauce":{
+    description: "測試",
+    fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
+      let lang = lan.zh_TW,useful2 = useful.zh_TW
+      if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
+      }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
+      if(!message.attachments.first()) return message.channel.send("Not found!")      
+      let url = message.attachments.first().proxyURL;
+      if(!url) return message.channel.send("Not found!")
+      let ascii2d = require("ascii2d")
+      message.channel.send("🔄請等一下喔...🔎搜尋中!")
+      ascii2d.searchByUrl(url,"bovw").then((result2) => {
+        if (!result2 || result2.length < 1)
+        return message.channel.send("No result!");
+        SendEmbed(result2)
+        /*result2 = JSON.stringify(result2)
+        fs.writeFileSync("./events/test.json",result2)*/
+      }).catch((err) => {
+        console.log(err)
+      })
+      let page = 0
+      function SendEmbed(result2) {
+        let embed = new Discord.MessageEmbed()
+        .setTitle("🔄Loading...")
+        let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
+        button.setStyle('gray').setID("left").setEmoji('⬅')
+        button2.setStyle('gray').setID("right").setEmoji("➡")
+        let row = new disbut.MessageActionRow().addComponents(button, button2);
+          message.channel.send(embed,row).then((w) => {
+            editEmbed(result2,w)
+        })
+      }
+      function ping(reply) {
+        bot.api.interactions(reply.discordID,reply.token).callback.post({
+            data: {
+            type: 6
+        }})
+    }
+    function editEmbed(result2,msg) {
+          let length = result2.items.length
+          let embed = new Discord.MessageEmbed()
+          if(result2.items[page].source.author) {embed.setAuthor("作者: "+result2.items[page].source.author.name,null,result2.items[page].source.author.url)}
+          else{embed.setAuthor("作者: "+" [未知]")}
+          let best = ""
+          if(page <= 0) best = "[最佳比對]"
+          embed.setTitle(`[${result2.items[page].source.type}] ${best}`)
+          .setDescription(result2.items[page].source.title)
+          //.setThumbnail(result2.items[page].thumbnailUrl)
+          .setImage(result2.items[page].thumbnailUrl)
+          .setURL(result2.items[page].source.url)
+          .setFooter(`[${page+1}/${length+1}] ${result2.items[page].height}x${result2.items[page].width}`)
+          let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
+          button.setStyle('gray').setID("left").setEmoji('⬅')
+          button2.setStyle('gray').setID("right").setEmoji("➡")
+          if(page <= 0) button.setStyle('grey').setID("left").setEmoji('⬅').setDisabled(true)
+          if(page === length) button2.setStyle('grey').setID("right").setEmoji("➡").setDisabled(true)
+          let row = new disbut.MessageActionRow().addComponents(button, button2);
+          msg.edit(embed,row)
+          const filter = (button) => button.clicker.id === message.author.id
+          msg.awaitButtons(filter,{max: 1,time: 15000,errors:['time']})
+          .then(async(buttons) => {
+            button = buttons.first()
+            ping(button)
+            if(button.id === "left") {
+              page = page - 1
+              return editEmbed(result2,msg)
+            }else if(button.id === "right") {
+              page = page + 1
+              return editEmbed(result2,msg)
+            }
+          }).catch((err) => {
+            console.log(err)
+            return;
+          })
+        }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 let Mongo = require('./MongoData')
-module.exports.notfound = async function (bot, message ,lang) {
+module.exports.notfound = async function (bot, message ,lang,clientDB) {
   Mongo.loadUser(clientDB, message.author.id).then((user) => {
     if (user === false) {
       return;
@@ -15,7 +15,7 @@ module.exports.notfound = async function (bot, message ,lang) {
     }
   });
 };
-module.exports.speed = async function (bot, message ,lang) {
+module.exports.speed = async function (bot, message ,lang,clientDB) {
   Mongo.loadUser(clientDB, message.author.id).then((user) => {
     if (user === false) {
       return;
