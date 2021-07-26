@@ -262,3 +262,4 @@ async function detects(client,message, guild, channel, gid, length,clientDB) {
         if (ser === false) { return }
         detectMsg.main(message, guild, channel, gid, length,clientDB,client,ser,1)
 };
+///
