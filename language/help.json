@@ -18,7 +18,8 @@
         },
         "invite": {
             "inv": "邀請機器人[點我]",
-            "desc": "群組協助/提交Bug [ https://discord.gg/R9TmPnf ]",
+            "desc": "新版邀請連結: [[點我]](https://discord.com/oauth2/authorize?client_id=",
+            "desc2":"&scope=applications.commands%20bot&permissions=1476668478)\n群組協助/提交Bug [ https://discord.gg/R9TmPnf ]",
             "addF": {
                 "a1": "機器人特色:",
                 "v1": "擁有智乃/心愛/Vtuber等其他觸圖!",
@@ -113,7 +114,8 @@
         },
         "invite": {
             "inv": "邀请机器人[点我]",
-            "desc": "群组协助/提交Bug [ https://discord.gg/R9TmPnf ]",
+            "desc": "新版邀请连结: [[点我]](https://discord.com/oauth2/authorize?client_id=",
+            "desc2":"&scope=applications.commands%20bot&permissions=1476668478)\n群组协助/提交Bug [ https://discord.gg/R9TmPnf ]",
             "addF": {
                 "a1": "机器人特色:",
                 "v1": "擁有智乃/心爱/Vtuber等其他触图!",
@@ -208,7 +210,8 @@
         },
         "invite": {
             "inv": "Invite bot[click me]",
-            "desc": "Server support/bug reporting [ https://discord.gg/R9TmPnf ]",
+            "desc": "New invite link: [[click me]](https://discord.com/oauth2/authorize?client_id=",
+            "desc2":"&scope=applications.commands%20bot&permissions=1476668478)\nServer support/Bug report [https://discord.gg/R9TmPnf ]",
             "addF": {
                 "a1": "Bot features:",
                 "v1": "Pictures of Chino/Cocoa and Vtubers!",
@@ -302,8 +305,9 @@
             "addF9": "setup help`自分のカフェを飾りに来てください！"
         },
         "invite": {
-            "inv": "ロボットを招待する [クリックしてください]",
-            "desc": "グループ支援/提出Bug [ https://discord.gg/R9TmPnf ]",
+            "inv": "ロボットを招待する [ここをクリック]",
+            "desc": "New invite link: [[click me]](https://discord.com/oauth2/authorize?client_id=",
+            "desc2":"&scope=applications.commands%20bot&permissions=1476668478)\nグループ支援/提出Bug [ https://discord.gg/R9TmPnf ]",
             "addF": {
                 "a1": "ロボットの機能:",
                 "v1": "チノ / ココア / Vtuber などの他のタッチ画像を所有してください！",

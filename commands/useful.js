@@ -382,16 +382,22 @@ module.exports = {
     function editEmbed(result2,msg) {
           let length = result2.items.length
           let embed = new Discord.MessageEmbed()
-          if(result2.items[page].source.author) {embed.setAuthor("作者: "+result2.items[page].source.author.name,null,result2.items[page].source.author.url)}
-          else{embed.setAuthor("作者: "+" [未知]")}
+          embed.setAuthor("作者: "+" [未知]")
           let best = ""
           if(page <= 0) best = "[最佳比對]"
-          embed.setTitle(`[${result2.items[page].source.type}] ${best}`)
-          .setDescription(result2.items[page].source.title)
-          //.setThumbnail(result2.items[page].thumbnailUrl)
-          .setImage(result2.items[page].thumbnailUrl)
-          .setURL(result2.items[page].source.url)
-          .setFooter(`[${page+1}/${length+1}] ${result2.items[page].height}x${result2.items[page].width}`)
+          if(result2.items[page].source) {
+            embed.setTitle(`[${result2.items[page].source.type}] ${best}`)
+            .setDescription(result2.items[page].source.title)
+            //.setThumbnail(result2.items[page].thumbnailUrl)
+            .setImage(result2.items[page].thumbnailUrl)
+            .setURL(result2.items[page].source.url)
+          if(result2.items[page].source.author) {embed.setAuthor("作者: "+result2.items[page].source.author.name,null,result2.items[page].source.author.url)}
+          else{embed.setAuthor("作者: "+" [未知]")}}else{
+            embed.setTitle(`[無標題] [無出處]`)
+            .setDescription(`[無內文]`)
+            .setImage(result2.items[page].thumbnailUrl)
+          }
+          embed.setFooter(`[${page+1}/${length+1}] ${result2.items[page].height}x${result2.items[page].width}`)
           let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
           button.setStyle('gray').setID("left").setEmoji('⬅')
           button2.setStyle('gray').setID("right").setEmoji("➡")
@@ -412,8 +418,20 @@ module.exports = {
               return editEmbed(result2,msg)
             }
           }).catch((err) => {
-            console.log(err)
-            return;
+            let embederr = new Discord.MessageEmbed()
+            if(result2.items[page].source) {
+              let best2 = ""
+              if(page <= 0) best2 = "[最佳比對]"
+              embederr.setTitle(`[${result2.items[page].source.type}] ${best2}`)
+              .setDescription(result2.items[page].source.title)
+              .setURL(result2.items[page].source.url)
+              .setFooter(`${result2.items[page].height}x${result2.items[page].width}`)
+            }else{
+              embederr.setTitle(`[無標題] [無出處]`)
+              .setDescription(`[無內文]`)
+              .setFooter(`${result2.items[page].height}x${result2.items[page].width}`)
+            }
+            return msg.edit(embederr,null)
           })
         }
     }
