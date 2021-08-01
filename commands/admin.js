@@ -12,7 +12,10 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports = {
     "clear": {
-        description: "測試",
+        description: {zh_TW:"清除訊息.",en_US:"Clear messages.",ja_JP:""},
+        authority: "owner",
+        instructions: "clear [number]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -57,7 +60,10 @@ module.exports = {
         }
     },
     "kick": {
-        description: "測試",
+        description: {zh_TW:"踢出成員.",en_US:"Kick member.",ja_JP:""},
+        authority: "admin",
+        instructions: "kick [@mention/ID]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -85,7 +91,10 @@ module.exports = {
         }
     },
     "ban": {
-        description: "測試",
+        description: {zh_TW:"封鎖成員.",en_US:"Ban member.",ja_JP:""},
+        authority: "admin",
+        instructions: "ban [@mention/ID]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -113,7 +122,10 @@ module.exports = {
         }
     },
     "vote": {
-        description: "測試",
+        description: {zh_TW:"投票指令.",en_US:"Vote something.",ja_JP:""},
+        authority: "everyone",
+        instructions: "vote [text] & [@mention＊]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP
@@ -146,7 +158,10 @@ module.exports = {
         }
     },
     "invites": {
-        description: "測試",
+        description: {zh_TW:"檢查成員邀請多少人.",en_US:"Check member how many member to invite.",ja_JP:""},
+        authority: "everyone",
+        instructions: "invites [@mention]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP
@@ -172,7 +187,10 @@ module.exports = {
         }
     },
     "hasvote": {
-        description: "測試",
+        description: {zh_TW:"top.gg是否投票.",en_US:"Check member has vote in top.gg.",ja_JP:""},
+        authority: "everyone",
+        instructions: "hasvote [@mention]",
+        category: "admin",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP

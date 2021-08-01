@@ -10,74 +10,112 @@ var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 
 module.exports= {
+    "userinfo":{
+        description: {zh_TW:"dc用戶信息",en_US:"Discord user info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "userinfo",
+        category: "normal",
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+            userinfo(bot,message,args,p,clientDB,language)
+        }
+    },
     "uinfo":{
-        description: "用戶資料",
+        description: {zh_TW:"dc用戶信息",en_US:"Discord user info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "uinfo",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             userinfo(bot,message,args,p,clientDB,language)
         }
     },
     "ui":{
-        description: "用戶資料",
+        description: {zh_TW:"dc用戶信息",en_US:"Discord user info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "userinfo",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             userinfo(bot,message,args,p,clientDB,language)
         }
     },
     "sinfo":{
-        description: "伺服器資料",
+        description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "sinfo",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
     },
     "si":{
-        description: "伺服器資料",
+        description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "si",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
     },
     "gi":{
-        description: "伺服器資料",
+        description: {zh_TW:"dc伺服器信息",en_US:"Discord guild info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gi",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
     },
     "guildinfo":{
-        description: "伺服器資料",
+        description: {zh_TW:"dc伺服器信息",en_US:"Discord guild info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "guildinfo",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
     },
     "serverinfo":{
-        description: "伺服器資料",
+        description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "serverinfo",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
     },
     "binfo":{
-        description: "機器人資料",
+        description: {zh_TW:"智乃機器人信息",en_US:"Chino bot info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "binfo",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             botinfo(bot,message,args,language)
         }
     },
     "bi":{
-        description: "機器人資料",
+        description: {zh_TW:"智乃機器人信息",en_US:"Chino bot info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "bi",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             botinfo(bot,message,args,p,language)
         }
     },
     "gm":{
-        description: "機器人資料",
+        description: {zh_TW:"dc伺服器成員信息",en_US:"Servr member info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gm",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             guildmember(bot,message,args,p,language)
         }
     },
     "guildmember":{
-        description: "機器人資料",
+        description: {zh_TW:"dc伺服器成員信息",en_US:"Servr member info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gm",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             guildmember(bot,message,args,p,language)
         }
     },
     "role":{
-        description: "機器人資料",
+        description: {zh_TW:"身分組列表",en_US:"servr member info.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gm",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             role(bot,message,args,p,language)
         }

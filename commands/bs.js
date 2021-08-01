@@ -10,7 +10,8 @@ const FormData = require('form-data');
 const disbut = require('discord-buttons');
 module.exports = {
     "bs": {
-        description: "唬爛產生器",
+        description: {zh_TW:"唬爛產生器.",en_US:"Bluff generator.",ja_JP:""},
+        category: "text",
         authority: "everyone",
         instructions: "bs [字數] [文字]",
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
@@ -40,9 +41,10 @@ module.exports = {
         }
     },
     "fortune": {
-        description: "唬爛產生器",
+        description: {zh_TW:"運勢",en_US:"Your fortune.",ja_JP:""},
+        category: "fun",
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "fortune",
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -73,9 +75,9 @@ module.exports = {
         }
     },
     "運勢": {
-        description: "唬爛產生器",
+        description: "運勢",
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "運勢",
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -106,9 +108,10 @@ module.exports = {
         }
     },
     "covid-19": {
-        description: "唬爛產生器",
+        description: {zh_TW:"台灣新冠疫情狀態.",en_US:"Taiwan covid-19 status.",ja_JP:""},
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "covid-19",
+        category: "other",
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -130,9 +133,10 @@ module.exports = {
         }
     },
     "loli1": {
-        description: "蘿莉產生器",
+        description: {zh_TW:"你的蘿莉控程度",en_US:"Your lolicon level.(only Chinese)",ja_JP:""},
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "loli1",
+        category: "text",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -164,9 +168,10 @@ module.exports = {
         }
     },
     "shota1": {
-        description: "蘿莉產生器",
+        description: {zh_TW:"你的正太控程度.",en_US:"Your shotacon level.",ja_JP:""},
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "shota1",
+        category: "text",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -225,9 +230,10 @@ module.exports = {
         }
     },
     "together": {
-        description: "唬爛產生器",
+        description: {zh_TW:"語音遊戲.",en_US:"Voice games.",ja_JP:""},
         authority: "everyone",
-        instructions: "bs [字數] [文字]",
+        instructions: "together [game] \nYou must join voice channel.",
+        category: "game",
         fun: function (client, message, prefix,clientDB,language,agrs) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -272,8 +278,10 @@ module.exports = {
         }
     },
     "nhentai": {
-        description: "看本本指令",
+        description: {zh_TW:"看本本指令.",en_US:"Watch nhentai.",ja_JP:""},
         authority: "everyone",
+        instructions: "nhentai [number]",
+        category: "other",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -322,7 +330,7 @@ module.exports = {
                     const filter= (button) => {
                         return ['read','cancel'].includes(button.id) && button.clicker.id === message.author.id
                     }
-                    im.awaitButtons(filter, { max: 1, time: 70000, errors: ['time'] })
+                    im.awaitButtons(filter, { max: 1, time: 30000, errors: ['time'] })
                         .then(collected => {
                             const reaction = collected.first();
                             if (reaction.id == "read") {
@@ -420,8 +428,10 @@ module.exports = {
         }}
     },
     "ant": {
-        description: "螞蟻文產生器",
+        description: {zh_TW:"螞蟻文指令.",en_US:"Ant text.",ja_JP:""},
         authority: "everyone",
+        instructions: "ant [text]",
+        category: "text",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -439,8 +449,10 @@ module.exports = {
         }
     },
     "election": {
-        description: "選舉",
+        description: {zh_TW:"2020美國選舉.",en_US:"2020 America election.",ja_JP:""},
         authority: "everyone",
+        instructions: "election",
+        category: "other",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -476,8 +488,10 @@ module.exports = {
         }
     },
     "emoji": {
-        description: "表情",
+        description: {zh_TW:"或取表情圖片",en_US:"Get emoji picture.",ja_JP:""},
         authority: "everyone",
+        instructions: "emoji [emoji]",
+        category: "normal",
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -502,8 +516,10 @@ module.exports = {
             }
         },
         "emojiadd": {
-            description: "表情",
-            authority: "everyone",
+            description: {zh_TW:"將外部表情變成此伺服器的表情.",en_US:"Let external emoji become the emoji of this server.",ja_JP:""},
+            authority: "admin",
+            instructions: "emojiadd [emoji]",
+            category: "admin",
             fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

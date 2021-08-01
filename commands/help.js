@@ -9,7 +9,10 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports = {
     "help":{
-        description: "幫助指令",
+        description: {zh_TW:"智乃幫助頁面",en_US:"Chino help page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "help",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -24,19 +27,27 @@ module.exports = {
         }
     },
     "command":{
-        description: "指令頁面",
+        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "command [function]",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
         }
     },
     "cmd":{
-        description: "指令頁面",
+        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "command [function]",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
         }
     },
     "invite":{
-        description: "邀請指令",
+        description: {zh_TW:"智乃邀請頁面",en_US:"Chino invite page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "invite",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -60,7 +71,9 @@ module.exports = {
         }
     },
     "inv":{
-        description: "邀請指令",
+        description: {zh_TW:"智乃邀請頁面",en_US:"Chino invite page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "inv",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -84,7 +97,9 @@ module.exports = {
         }
     },
     "ver":{
-        description:"版本指令",
+        description: {zh_TW:"智乃版本頁面",en_US:"Chino version page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "ver [page]",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)
@@ -99,6 +114,10 @@ module.exports = {
         }}
     },
     "version":{
+        description: {zh_TW:"智乃版本頁面",en_US:"Chino version page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "version [page]",
+        category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)

@@ -34,11 +34,12 @@ const GuildCache = new Map()
 setInterval(() => {
   GuildCache.clear()
 }, 600000);
-
+//let MusicFun = require("../../function/Music/main")
 module.exports= [
 {
 "name":"ready",
 "fun": function(client,clientDB,prefix) {
+  //MusicFun.main(client,clientDB,prefix)
     let timer = 1
     let Open = new Date()
     setInterval(() => {

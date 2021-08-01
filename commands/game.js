@@ -40,6 +40,9 @@ const disbut = require('discord-buttons');
 
 module.exports = {
     "mc": {
+        description: {zh_TW:"獲取麥塊用戶資料",en_US:"Get Minecraft player data.",ja_JP:""},
+        authority: "everyone",
+        instructions: "mc [player name]",
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -56,6 +59,10 @@ module.exports = {
         }
     },
     "mc-user": {
+        description: {zh_TW:"獲取麥塊用戶資料",en_US:"Get Minecraft player data.",ja_JP:""},
+        authority: "everyone",
+        instructions: "mc-user [player name]",
+        category: "game",
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -72,6 +79,10 @@ module.exports = {
         }
     },
     "mc-hypixel": {
+        description: {zh_TW:"獲取麥塊用戶Hypixel資料",en_US:"Get Minecraft player hypixel data.",ja_JP:""},
+        authority: "everyone",
+        instructions: "mc-hypixel [player name]",
+        category: "game",
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -132,7 +143,10 @@ module.exports = {
         }
     },
     "mc-server": {
-        description: "麥塊指令",
+        description: {zh_TW:"獲取麥塊伺服器資料",en_US:"Get Minecraft server data.",ja_JP:""},
+        authority: "everyone",
+        instructions: "mc-server [IP]",
+        category: "game",
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -201,7 +215,10 @@ module.exports = {
             }
     },
     "rps": {
-        description: "猜拳",
+        description: {zh_TW:"初代猜拳指令",en_US:"First Generation mora command.",ja_JP:""},
+        authority: "everyone",
+        instructions: "rps [r/p/s]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -225,7 +242,10 @@ module.exports = {
         }
     },
     "rps2": {
-        description: "猜拳",
+        description: {zh_TW:"新版猜拳指令",en_US:"New mora command.",ja_JP:""},
+        authority: "everyone",
+        instructions: "rps2 [$money]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -419,7 +439,10 @@ module.exports = {
         }
     },
     "guess": {
-        description: "猜拳",
+        description: {zh_TW:"三門遊戲",en_US:"Three-door game.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gurss [$money]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -481,7 +504,10 @@ module.exports = {
         }
     },
     "math": {
-        description: "隨機數字",
+        description: {zh_TW:"擲骰子",en_US:"Dice.",ja_JP:""},
+        authority: "everyone",
+        instructions: "math [number]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args,number, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -496,7 +522,10 @@ module.exports = {
         }
     },
     "count": {
-        description: "隨機數字",
+        description: {zh_TW:"三門遊戲",en_US:"Three-door game.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gurss [$money]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -509,7 +538,10 @@ module.exports = {
         }
     },
     "slot": {
-        description: "拉霸機",
+        description: {zh_TW:"老虎機遊戲",en_US:"slot game.",ja_JP:""},
+        authority: "everyone",
+        instructions: "slot [$money]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -574,7 +606,10 @@ module.exports = {
         }
     },
     "love": {
-        description: "比率",
+        description: {zh_TW:"智乃愛你的程度",en_US:"Chino love you of degree.",ja_JP:""},
+        authority: "everyone",
+        instructions: "love [@mention/ID＊] [@mention/ID＊]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -635,7 +670,10 @@ module.exports = {
         }
     },
     "gay": {
-        description: "比率",
+        description: {zh_TW:"你同性戀的程度",en_US:"Your gay of degree.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gay [@mention/ID＊]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -670,7 +708,10 @@ module.exports = {
         }
     },
     "pick": {
-        description: "是否",
+        description: {zh_TW:"事情的是或否",en_US:"Yes or No.",ja_JP:""},
+        authority: "everyone",
+        instructions: "pick [event(text)]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -705,20 +746,41 @@ module.exports = {
         }
     },
     "osucard": {
-        description: "OSU!",
-        fun: function(bot, message, p, ag) {
+        description: {zh_TW:"osu戰績圖表",en_US:"osu! player recored chart.",ja_JP:""},
+        authority: "everyone",
+        instructions: "osucard [player name] [mode＊]\nMode:\n`0` osu\n`1` taiko\n`2` catch\n `3` mania",
+        category: "game",
+        fun: function(bot, message, p,clientDB,language,args, ...ag) {
             let l = lan.zh_TW;
             let k = gameX.zh_TW
-            if (ag == "" || ag == null) return message.channel.send(k.osu.typename)
+            if (args[0] == "" || args[0] == null) return message.channel.send(k.osu.typename)
+            let mode = "0"
+            switch (args[1]) {
+                case "0":
+                   mode = 0
+                   break;
+                case "1":
+                   mode = 1
+                   break;
+                case "2":
+                   mode = 2
+                   break;
+                case "3":
+                   mode = 3
+                   break;
+            }
             let pickEmbed = new Discord.MessageEmbed()
-                .setTitle(ag + k.osu.grade)
-                .setImage("https://lemmmy.pw/osusig/sig.php?colour=hexf16ea9&uname=" + ag + "&mode=0&pp=2&removeavmargin&flagshadow&darktriangles&opaqueavatar&onlineindicator=undefined&xpbar&xpbarhex")
+                .setTitle(args[0] + k.osu.grade)
+                .setImage("https://lemmmy.pw/osusig/sig.php?colour=hexf16ea9&uname=" + args[0] + "&mode="+mode+"&pp=2&removeavmargin&flagshadow&darktriangles&opaqueavatar&onlineindicator=undefined&xpbar&xpbarhex")
             message.channel.send(pickEmbed);
 
         }
     },
     "osu": {
-        description: "OSU!",
+        description: {zh_TW:"osu詳細戰績表",en_US:"osu detailed record.",ja_JP:""},
+        authority: "everyone",
+        instructions: "osu [player name]",
+        category: "game",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

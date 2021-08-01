@@ -16,7 +16,10 @@ var loadping = async(client) => {
 }
 module.exports = {
     "hi":{
-        description: "測試",
+      description: {zh_TW:"說嗨(?)",en_US:"Say hi(?)",ja_JP:""},
+      authority: "everyone",
+      instructions: "hi",
+      category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -38,7 +41,10 @@ module.exports = {
         }
     },
     "ping":{
-        description: "ping",
+      description: {zh_TW:"智乃延遲",en_US:"Chino ping",ja_JP:""},
+      authority: "everyone",
+      instructions: "ping",
+      category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -47,9 +53,9 @@ module.exports = {
             if(message.author.bot) return;
           message.channel.send("pong!").then(( lastMessage) => {
             let time2 = new Date(),DBtime = new Date()
+            let time3 = (time2.getUTCMilliseconds() - time.getUTCMilliseconds())
             loadping(clientDB).then((ping) => {
             let DB2 = (new Date().getUTCMilliseconds() - DBtime.getUTCMilliseconds())
-            let time3 = (time2.getUTCMilliseconds() - time.getUTCMilliseconds())
             let time4 = new Date();
             if(lastMessage.content === `pong!`) {
               lastMessage.edit("pong!!").then((editmessage) => {
@@ -58,7 +64,10 @@ module.exports = {
           )}})})
     }},
     "date":{
-        description: "日期",
+      description: {zh_TW:"現在日期",en_US:"now date",ja_JP:""},
+      authority: "everyone",
+      instructions: "date",
+      category: "normal",
         fun: function (bot, msg, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -72,7 +81,10 @@ module.exports = {
         }
     },
     "avatar":{
-        description: "大頭貼",
+      description: {zh_TW:"成員的頭貼",en_US:"user's avatar",ja_JP:""},
+      authority: "everyone",
+      instructions: "avatar [@muention/ID＊]",
+      category: "normal",
         fun: function (bot, message, p,clientDB,language,ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -104,7 +116,9 @@ module.exports = {
         }
     },
     "savatar":{
-        description: "群組大頭貼",
+      description: {zh_TW:"伺服器的頭貼",en_US:"server avatar",ja_JP:""},
+      authority: "everyone",
+      instructions: "savatar",
         fun: function (bot, message, p,clientDB,language,args) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -119,7 +133,10 @@ module.exports = {
         }
     },
     "serveravatar":{
-      description: "群組大頭貼",
+      description: {zh_TW:"伺服器頭貼",en_US:"server avatar",ja_JP:""},
+      authority: "everyone",
+      instructions: "serveravatar",
+      category: "normal",
       fun: function (bot, message, p,clientDB,language,args) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -134,7 +151,10 @@ module.exports = {
       }
   },
   "banner":{
-    description: "群組橫幅",
+    description: {zh_TW:"伺服器橫幅",en_US:"server banner",ja_JP:""},
+    authority: "everyone",
+    instructions: "banner",
+    category: "normal",
     fun: function (bot, message, p,clientDB,language,args) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -173,7 +193,10 @@ module.exports = {
     }
   },
     "say": {
-        description: "機器人說話",
+      description: {zh_TW:"智乃說話",en_US:"Chino talk",ja_JP:""},
+      authority: "everyone",
+      instructions: "say [text]",
+      category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -203,7 +226,10 @@ module.exports = {
       }
     },
     "tts": {
-        description: "機器人說話(tts)",
+      description: {zh_TW:"智乃說話(tts)",en_US:"chino talk(tts)",ja_JP:""},
+      authority: "everyone",
+      instructions: "tts",
+      category: "normal",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -234,7 +260,10 @@ module.exports = {
     }
     },
     "feedback": {
-      description: "意見箱",
+      description: {zh_TW:"意見箱",en_US:"feedback",ja_JP:""},
+      authority: "everyone",
+      instructions: "feedback [text]",
+      category: "other",
       fun: function (bot, message, p,clientDB,language,hi, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -257,7 +286,10 @@ module.exports = {
       }
     },
     "embed":{
-      description: "鑲入",
+      description: {zh_TW:"自訂義embed",en_US:"Custom embed",ja_JP:""},
+      authority: "everyone",
+      instructions: "embed [title] [descrription] [author] [footer] [color#abcde] [image(URL)]",
+      category: "normal",
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -293,7 +325,10 @@ module.exports = {
       }
     },
     "chinocode":{
-      description: "測試",
+      description: {zh_TW:"智乃秘密代碼",en_US:"Chino secret code",ja_JP:""},
+      authority: "everyone",
+      instructions: "chinocode [code]\nwhere is the code??\nin my guild announcement :))",
+      category: "other",
       fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -342,7 +377,10 @@ module.exports = {
       }
   },
   "sauce":{
-    description: "測試",
+    description: {zh_TW:"搜索圖片",en_US:"Search image",ja_JP:""},
+    authority: "everyone",
+    instructions: "sauce\n+ update some picture",
+    category: "other",
     fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP

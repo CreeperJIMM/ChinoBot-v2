@@ -10,7 +10,10 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports= {
     "setup":{
-        description: "設置",
+      description: {zh_TW:"設置伺服器資料",en_US:"Setup server data.",ja_JP:""},
+      authority: "everyone",
+      instructions: "setup [function]",
+      category: "guild",
         fun: function (bot, message, p,clientDB,language,args ,nubmer, ...text) { 
           let l = lan.zh_TW,k = gameX.zh_TW
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -149,13 +152,15 @@ module.exports= {
         }
     },
     "ind":{
-        description: "測試",
+      description: {zh_TW:"新建動態頻道\n(必須在主動態頻道內使用)",en_US:"create dynamic channel.\n(Please use this command in master dynamic channel)",ja_JP:""},
+      authority: "everyone",
+      instructions: "ind",
+      category: "guild",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let l = lan.zh_TW,k = gameX.zh_TW
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
           }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
           if(!message.guild) return message.channel.send(l.error.No_DM)
-            if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
               loadGuild(clientDB,message.guild.id).then((user) => {
                 if (user === false) {
                   message.channel.send(k.word.No_setup) }else{
@@ -180,13 +185,16 @@ module.exports= {
                   message.channel.send(k.text.crated+" <#"+ id + ">")
                   Channel.send("<@" + message.author.id + "> "+k.text.help)
                   user.text.push(Channel.id)
-                  writeGuild(clientDB,message.guild.id,user).then(() => {}).catch((err) => {
+                  writeGuild(clientDB,message.guild.id,user).catch((err) => {
                 if(err) { message.channel.send(k.word.Error_create)}})
         })}else{message.channel.send(k.text.No_create)}}});
-        }}
+        }
     },
     "clo":{
-        description: "測試",
+      description: {zh_TW:"關閉你的動態頻道\n(必須在你個人的頻道使用)",en_US:"Close your dynmic channel\n(Please use this command in your own channel.)",ja_JP:""},
+      authority: "own",
+      instructions: "clo",
+      category: "guild",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let l = lan.zh_TW,k = gameX.zh_TW
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -213,7 +221,10 @@ module.exports= {
         })}
     },
     "set":{
-      description: "測試",
+      description: {zh_TW:"設定你的動態頻道\n(必須在你個人的頻道使用)",en_US:"setup your dynmic channel\n(Please use this command in your own channel.)",ja_JP:""},
+      authority: "own",
+      instructions: "set [value]\nvalue:\n`name` setup your channel name.\n`self / open` setup your channel visible.\n`nsfw` setup your channel nsfw.",
+      category: "guild",
       fun: function (bot, message, p,clientDB,language,args, ...text) { 
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -263,7 +274,10 @@ module.exports= {
       })}
   },
     "code":{
-        description: "測試",
+      description: {zh_TW:"驗證指令(某些指令需要)",en_US:"verify.(some command need)",ja_JP:""},
+      authority: "everyone",
+      instructions: "code",
+      category: "guild",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let l = lan.zh_TW,k = gameX.zh_TW
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -292,7 +306,10 @@ module.exports= {
         }
     },
     "snipes":{
-      description: "最後訊息",
+      description: {zh_TW:"檢視前10個刪除訊息",en_US:"View top ten delete messages.",ja_JP:""},
+      authority: "admin",
+      instructions: "snipes",
+      category: "guild",
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -341,7 +358,10 @@ module.exports= {
       }
     },
     "snipe":{
-      description: "最後訊息",
+      description: {zh_TW:"檢視上一個刪除訊息",en_US:"View last delete message.",ja_JP:""},
+      authority: "everyone",
+      instructions: "snipe [number＊]",
+      category: "guild",
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -407,7 +427,10 @@ module.exports= {
           }
     },
     "server":{
-      description: "伺服器資料",
+      description: {zh_TW:"伺服器總體資料",en_US:"Show server data.",ja_JP:""},
+      authority: "everyone",
+      instructions: "server",
+      category: "guild",
       fun: async function (bot, message, p,clientDB,language,args, ...ag) { 
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

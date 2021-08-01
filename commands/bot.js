@@ -11,7 +11,10 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports= {
     "setupuser":{
-        description: "測試",
+        description: {zh_TW:"手動生成用戶資料",en_US:"To spawn user data.",ja_JP:""},
+        authority: "everyone",
+        instructions: "setupuser",
+        category: "user",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -67,7 +70,10 @@ module.exports= {
         }
     },
     "close":{
-        description: "測試",
+        description: {zh_TW:"關閉機器人.",en_US:"close bot.",ja_JP:""},
+        authority: "owner",
+        instructions: "close",
+        category: "other",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -78,7 +84,10 @@ module.exports= {
         }
     },
     "ram": {
-        description: "記憶體",
+        description: {zh_TW:"機器人記憶體用量.",en_US:"Bot ram status.",ja_JP:""},
+        authority: "everyone",
+        instructions: "ram",
+        category: "other",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -94,7 +103,10 @@ module.exports= {
         }
     },
     "cpu": {
-        description: "CPU",
+        description: {zh_TW:"機器人cpu用量.",en_US:"Bot cpu status.",ja_JP:""},
+        authority: "everyone",
+        instructions: "cpu",
+        category: "other",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -116,7 +128,10 @@ module.exports= {
     }
     },
     "restart": {
-        description: "重啟",
+        description: {zh_TW:"重啟機器人.",en_US:"Restart bot.",ja_JP:""},
+        authority: "everyone",
+        instructions: "restart",
+        category: "other",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -374,7 +389,10 @@ module.exports= {
         }
     },
     "bot": {
-        description: "測試",
+        description: {zh_TW:"所有智乃機器人狀態.",en_US:"All Chino bot status.",ja_JP:""},
+        authority: "everyone",
+        instructions: "bot",
+        category: "normal",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -394,7 +412,10 @@ module.exports= {
         }
     },
     "post": {
-        description: "測試",
+        description: {zh_TW:"智乃公告.",en_US:"Chino post.",ja_JP:""},
+        authority: "everyone",
+        instructions: "post",
+        category: "other",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

@@ -9,7 +9,10 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports = {
     "chino": {
-        description: "智乃指令",
+        description: {zh_TW:"點一隻智乃",en_US:"Order a Chino.",ja_JP:""},
+        authority: "everyone",
+        instructions: "chino\nmoney:\nnormal: 25\nNsfw: 35",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -115,7 +118,10 @@ module.exports = {
         }
     },
     "cocoa": {
-        description: "心愛指令",
+        description: {zh_TW:"點一隻心愛",en_US:"Order a Cocoa.",ja_JP:""},
+        authority: "everyone",
+        instructions: "cocoa\nmoney:\nnormal: 25\nNsfw: 35",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -212,13 +218,19 @@ module.exports = {
         }
     },
     "gura": {
-        description: "鯊魚指令",
+        description: {zh_TW:"點一隻鯊鯊(Gura)",en_US:"Order a Gawr Gura.",ja_JP:""},
+        authority: "everyone",
+        instructions: "gura\nmoney:\nnormal: 25\nNsfw: 35",
+        category: "image",
         fun: function(bot, msg,p,clientDB,language) {
             shark0(bot, msg,clientDB,language)
         }
     },
     "tippy": {
-        description: "提比指令",
+        description: {zh_TW:"點一隻提比",en_US:"Order a Tippy.",ja_JP:""},
+        authority: "everyone",
+        instructions: "tippy\nmoney:\nnormal: 15",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -265,7 +277,10 @@ module.exports = {
         }
     },
     "other": {
-        description: "分享餐!",
+        description: {zh_TW:"點一盒綜合餐",en_US:"Order one comprehensive meal.",ja_JP:""},
+        authority: "everyone",
+        instructions: "other\nmoney:\nnormal: 35",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let lang = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = rabbitX.ja_JP
@@ -312,7 +327,10 @@ module.exports = {
         }
     },
     "fubuki": {
-        description: "狐狸",
+        description: {zh_TW:"點一隻狐狸(Fubuki)",en_US:"Order a Fubuki",ja_JP:""},
+        authority: "everyone",
+        instructions: "fubuki\nmoney:\nnormal: 25\nNsfw: 35",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -403,7 +421,10 @@ module.exports = {
         }
     },
     "shota": {
-        description: "正太",
+        description: {zh_TW:"點一隻正太",en_US:"Order a Shota",ja_JP:""},
+        authority: "everyone",
+        instructions: "shota\nmoney:\nnormal: 25",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -450,7 +471,10 @@ module.exports = {
         }
     },
     "loli": {
-        description: "蘿莉",
+        description: {zh_TW:"點一隻蘿莉",en_US:"Order a loli",ja_JP:""},
+        authority: "everyone",
+        instructions: "loli\nmoney:\nnormal: 25\nNsfw: 35",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -539,7 +563,10 @@ module.exports = {
         }
     },
     "chen": {
-        description: "八雲橙!",
+        description: {zh_TW:"點一隻八雲橙(Chen)",en_US:"Order a Chen",ja_JP:""},
+        authority: "everyone",
+        instructions: "chen\nmoney:\nnormal: 25",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -586,7 +613,10 @@ module.exports = {
         }
     },
     "nakkar": {
-        description: "八雲橙!",
+        description: {zh_TW:"點一隻Nakkar",en_US:"Order a Nakkar",ja_JP:""},
+        authority: "everyone",
+        instructions: "nakkar\nmoney:\nnormal: 25",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -633,7 +663,10 @@ module.exports = {
         }
     },
     "vtuber": {
-        description: "Vtuber",
+        description: {zh_TW:"點一隻VTuber",en_US:"Order a VTuber",ja_JP:""},
+        authority: "everyone",
+        instructions: "vtuber\nmoney:\nnormal: 25",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -680,7 +713,10 @@ module.exports = {
         }
     },
     "peko": {
-        description: "兔子!",
+        description: {zh_TW:"點一隻配摳拉(pekora)",en_US:"Order a pekora",ja_JP:""},
+        authority: "everyone",
+        instructions: "peko\nmoney:\nnormal: 25",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -727,7 +763,10 @@ module.exports = {
         }
     },
     "S1": {
-        description: "點兔第一季",
+        description: {zh_TW:"點一張第一季點兔",en_US:"Order a rabbit S1",ja_JP:""},
+        authority: "everyone",
+        instructions: "S1\nmoney:\nnormal: 15",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -773,7 +812,10 @@ module.exports = {
         }
     },
     "S2": {
-        description: "點兔第二季",
+        description: {zh_TW:"點一張第二季點兔",en_US:"Order a rabbit S2",ja_JP:""},
+        authority: "everyone",
+        instructions: "S2\nmoney:\nnormal: 15",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -819,7 +861,10 @@ module.exports = {
         }
     },
     "S3": {
-        description: "點兔第三季",
+        description: {zh_TW:"點一張第三季點兔",en_US:"Order a rabbit S3",ja_JP:""},
+        authority: "everyone",
+        instructions: "S3\nmoney:\nnormal: 15",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -866,7 +911,10 @@ module.exports = {
         }
     },
     "data": {
-        description: "點兔資料",
+        description: {zh_TW:"查看圖片資料",en_US:"View image data",ja_JP:""},
+        authority: "everyone",
+        instructions: "data",
+        category: "image",
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
