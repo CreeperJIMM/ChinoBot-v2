@@ -15,6 +15,8 @@ module.exports= {
         authority: "everyone",
         instructions: "setupuser",
         category: "user",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -74,6 +76,8 @@ module.exports= {
         authority: "owner",
         instructions: "close",
         category: "other",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -88,6 +92,8 @@ module.exports= {
         authority: "everyone",
         instructions: "ram",
         category: "other",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -107,6 +113,8 @@ module.exports= {
         authority: "everyone",
         instructions: "cpu",
         category: "other",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -129,9 +137,11 @@ module.exports= {
     },
     "restart": {
         description: {zh_TW:"重啟機器人.",en_US:"Restart bot.",ja_JP:""},
-        authority: "everyone",
+        authority: "owner",
         instructions: "restart",
         category: "other",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -393,6 +403,8 @@ module.exports= {
         authority: "everyone",
         instructions: "bot",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -416,6 +428,8 @@ module.exports= {
         authority: "everyone",
         instructions: "post",
         category: "other",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

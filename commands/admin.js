@@ -16,6 +16,8 @@ module.exports = {
         authority: "owner",
         instructions: "clear [number]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -64,6 +66,8 @@ module.exports = {
         authority: "admin",
         instructions: "kick [@mention/ID]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -95,6 +99,8 @@ module.exports = {
         authority: "admin",
         instructions: "ban [@mention/ID]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP}else if(language === "en_US") {l = lan.en_US;h = adminX.en_US}
@@ -126,6 +132,8 @@ module.exports = {
         authority: "everyone",
         instructions: "vote [text] & [@mention＊]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP
@@ -162,6 +170,8 @@ module.exports = {
         authority: "everyone",
         instructions: "invites [@mention]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP
@@ -191,6 +201,8 @@ module.exports = {
         authority: "everyone",
         instructions: "hasvote [@mention]",
         category: "admin",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,h = adminX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = adminX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = adminX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = adminX.ja_JP

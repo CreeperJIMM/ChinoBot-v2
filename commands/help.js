@@ -13,6 +13,8 @@ module.exports = {
         authority: "everyone",
         instructions: "help",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -31,6 +33,8 @@ module.exports = {
         authority: "everyone",
         instructions: "command [function]",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
         }
@@ -39,6 +43,8 @@ module.exports = {
         description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
         authority: "everyone",
         instructions: "command [function]",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
         }
@@ -48,6 +54,8 @@ module.exports = {
         authority: "everyone",
         instructions: "invite",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -74,6 +82,8 @@ module.exports = {
         description: {zh_TW:"智乃邀請頁面",en_US:"Chino invite page.",ja_JP:""},
         authority: "everyone",
         instructions: "inv",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -100,6 +110,8 @@ module.exports = {
         description: {zh_TW:"智乃版本頁面",en_US:"Chino version page.",ja_JP:""},
         authority: "everyone",
         instructions: "ver [page]",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)
@@ -118,6 +130,8 @@ module.exports = {
         authority: "everyone",
         instructions: "version [page]",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)

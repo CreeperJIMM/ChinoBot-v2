@@ -15,6 +15,8 @@ module.exports= {
         authority: "everyone",
         instructions: "userinfo",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             userinfo(bot,message,args,p,clientDB,language)
         }
@@ -23,6 +25,8 @@ module.exports= {
         description: {zh_TW:"dc用戶信息",en_US:"Discord user info.",ja_JP:""},
         authority: "everyone",
         instructions: "uinfo",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             userinfo(bot,message,args,p,clientDB,language)
         }
@@ -31,6 +35,8 @@ module.exports= {
         description: {zh_TW:"dc用戶信息",en_US:"Discord user info.",ja_JP:""},
         authority: "everyone",
         instructions: "userinfo",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             userinfo(bot,message,args,p,clientDB,language)
         }
@@ -39,6 +45,8 @@ module.exports= {
         description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
         authority: "everyone",
         instructions: "sinfo",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
@@ -47,6 +55,8 @@ module.exports= {
         description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
         authority: "everyone",
         instructions: "si",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
@@ -55,6 +65,8 @@ module.exports= {
         description: {zh_TW:"dc伺服器信息",en_US:"Discord guild info.",ja_JP:""},
         authority: "everyone",
         instructions: "gi",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
@@ -64,6 +76,8 @@ module.exports= {
         authority: "everyone",
         instructions: "guildinfo",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
@@ -72,6 +86,8 @@ module.exports= {
         description: {zh_TW:"dc伺服器信息",en_US:"Discord servr info.",ja_JP:""},
         authority: "everyone",
         instructions: "serverinfo",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             server(bot,message,args,language)
         }
@@ -80,6 +96,8 @@ module.exports= {
         description: {zh_TW:"智乃機器人信息",en_US:"Chino bot info.",ja_JP:""},
         authority: "everyone",
         instructions: "binfo",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             botinfo(bot,message,args,language)
         }
@@ -89,6 +107,8 @@ module.exports= {
         authority: "everyone",
         instructions: "bi",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             botinfo(bot,message,args,p,language)
         }
@@ -98,6 +118,8 @@ module.exports= {
         authority: "everyone",
         instructions: "gm",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             guildmember(bot,message,args,p,language)
         }
@@ -107,6 +129,8 @@ module.exports= {
         authority: "everyone",
         instructions: "gm",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             guildmember(bot,message,args,p,language)
         }
@@ -116,6 +140,8 @@ module.exports= {
         authority: "everyone",
         instructions: "gm",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             role(bot,message,args,p,language)
         }

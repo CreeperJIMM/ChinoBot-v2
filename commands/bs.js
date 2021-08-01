@@ -14,6 +14,8 @@ module.exports = {
         category: "text",
         authority: "everyone",
         instructions: "bs [字數] [文字]",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -45,6 +47,8 @@ module.exports = {
         category: "fun",
         authority: "everyone",
         instructions: "fortune",
+        vote: true,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -78,6 +82,8 @@ module.exports = {
         description: "運勢",
         authority: "everyone",
         instructions: "運勢",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -112,6 +118,8 @@ module.exports = {
         authority: "everyone",
         instructions: "covid-19",
         category: "other",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, nubmer, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -137,6 +145,8 @@ module.exports = {
         authority: "everyone",
         instructions: "loli1",
         category: "text",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -172,6 +182,8 @@ module.exports = {
         authority: "everyone",
         instructions: "shota1",
         category: "text",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -206,6 +218,8 @@ module.exports = {
         description: "蘿莉產生器",
         authority: "everyone",
         instructions: "bs [字數] [文字]",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -234,6 +248,8 @@ module.exports = {
         authority: "everyone",
         instructions: "together [game] \nYou must join voice channel.",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (client, message, prefix,clientDB,language,agrs) { // nubmer接指令後第一個參數  ...text的意思是接第一個以後的所有參數
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -282,6 +298,8 @@ module.exports = {
         authority: "everyone",
         instructions: "nhentai [number]",
         category: "other",
+        vote: true,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -432,6 +450,8 @@ module.exports = {
         authority: "everyone",
         instructions: "ant [text]",
         category: "text",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -453,6 +473,8 @@ module.exports = {
         authority: "everyone",
         instructions: "election",
         category: "other",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -492,6 +514,8 @@ module.exports = {
         authority: "everyone",
         instructions: "emoji [emoji]",
         category: "normal",
+        vote: false,
+        help: false,
         fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -520,6 +544,8 @@ module.exports = {
             authority: "admin",
             instructions: "emojiadd [emoji]",
             category: "admin",
+            vote: false,
+            help: false,
             fun: function (bot, message, prefix,clientDB,language,agrs, ...text) { 
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

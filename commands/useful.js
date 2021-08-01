@@ -20,6 +20,8 @@ module.exports = {
       authority: "everyone",
       instructions: "hi",
       category: "normal",
+      vote: false,
+      help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -45,6 +47,8 @@ module.exports = {
       authority: "everyone",
       instructions: "ping",
       category: "normal",
+      vote: false,
+      help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -68,6 +72,8 @@ module.exports = {
       authority: "everyone",
       instructions: "date",
       category: "normal",
+      vote: false,
+      help: false,
         fun: function (bot, msg, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -85,6 +91,8 @@ module.exports = {
       authority: "everyone",
       instructions: "avatar [@muention/ID＊]",
       category: "normal",
+      vote: false,
+      help: false,
         fun: function (bot, message, p,clientDB,language,ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -119,6 +127,8 @@ module.exports = {
       description: {zh_TW:"伺服器的頭貼",en_US:"server avatar",ja_JP:""},
       authority: "everyone",
       instructions: "savatar",
+      vote: false,
+      help: false,
         fun: function (bot, message, p,clientDB,language,args) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -137,6 +147,8 @@ module.exports = {
       authority: "everyone",
       instructions: "serveravatar",
       category: "normal",
+      vote: false,
+      help: false,
       fun: function (bot, message, p,clientDB,language,args) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -155,6 +167,8 @@ module.exports = {
     authority: "everyone",
     instructions: "banner",
     category: "normal",
+    vote: false,
+    help: false,
     fun: function (bot, message, p,clientDB,language,args) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -171,6 +185,8 @@ module.exports = {
 },
     "hooksay":{
       description: "測試",
+      vote: true,
+      help: false,
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -197,6 +213,8 @@ module.exports = {
       authority: "everyone",
       instructions: "say [text]",
       category: "normal",
+      vote: false,
+      help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -230,6 +248,8 @@ module.exports = {
       authority: "everyone",
       instructions: "tts",
       category: "normal",
+      vote: true,
+      help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -264,6 +284,8 @@ module.exports = {
       authority: "everyone",
       instructions: "feedback [text]",
       category: "other",
+      vote: false,
+      help: false,
       fun: function (bot, message, p,clientDB,language,hi, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -290,6 +312,8 @@ module.exports = {
       authority: "everyone",
       instructions: "embed [title] [descrription] [author] [footer] [color#abcde] [image(URL)]",
       category: "normal",
+      vote: true,
+      help: false,
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -329,6 +353,8 @@ module.exports = {
       authority: "everyone",
       instructions: "chinocode [code]\nwhere is the code??\nin my guild announcement :))",
       category: "other",
+      vote: false,
+      help: false,
       fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -381,6 +407,8 @@ module.exports = {
     authority: "everyone",
     instructions: "sauce\n+ update some picture",
     category: "other",
+    vote: true,
+    help: false,
     fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP

@@ -4,7 +4,7 @@ module.exports = {
             authority: "owner",
             instructions: "load [檔案名稱]",
             fun: function(bot, message, filename) {
-                bot.is_owner(message)
+                if(!bot.is_owner(message)) return message.channel.send("You not a owner!");
                 if (filename === undefined) {
                     message.channel.send("請輸入檔案名稱")
                     return
@@ -22,7 +22,7 @@ module.exports = {
             authority: "owner",
             instructions: "unload [檔案名稱]",
             fun: function(bot, message, filename) {
-                bot.is_owner(message)
+                if(!bot.is_owner(message)) return message.channel.send("You not a owner!");
                 if (filename === undefined) {
                     message.channel.send("請輸入檔案名稱")
                     return
@@ -40,7 +40,7 @@ module.exports = {
             authority: "owner",
             instructions: "reload [檔案名稱]",
             fun: function(bot, message, filename) {
-                bot.is_owner(message)
+                if(!bot.is_owner(message)) return message.channel.send("You not a owner!");
                 if (filename === undefined) {
                     message.channel.send("請輸入檔案名稱")
                     return
@@ -56,7 +56,7 @@ module.exports = {
         },
         "list": {
            fun: function(bot, message) {
-            bot.is_owner(message)
+            if(!bot.is_owner(message)) return message.channel.send("You not a owner!");
             message.channel.send(bot.command)
         }
     }

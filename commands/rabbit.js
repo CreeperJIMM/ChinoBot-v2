@@ -13,6 +13,8 @@ module.exports = {
         authority: "everyone",
         instructions: "chino\nmoney:\nnormal: 25\nNsfw: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -122,6 +124,8 @@ module.exports = {
         authority: "everyone",
         instructions: "cocoa\nmoney:\nnormal: 25\nNsfw: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -213,6 +217,8 @@ module.exports = {
     },
     "shark": {
         description: "鯊魚指令",
+        vote: false,
+        help: false,
         fun: function(bot, msg,p,clientDB,language) {
             shark0(bot, msg,clientDB,language)
         }
@@ -222,6 +228,8 @@ module.exports = {
         authority: "everyone",
         instructions: "gura\nmoney:\nnormal: 25\nNsfw: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function(bot, msg,p,clientDB,language) {
             shark0(bot, msg,clientDB,language)
         }
@@ -231,6 +239,8 @@ module.exports = {
         authority: "everyone",
         instructions: "tippy\nmoney:\nnormal: 15",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -281,6 +291,8 @@ module.exports = {
         authority: "everyone",
         instructions: "other\nmoney:\nnormal: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let lang = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = rabbitX.ja_JP
@@ -331,6 +343,8 @@ module.exports = {
         authority: "everyone",
         instructions: "fubuki\nmoney:\nnormal: 25\nNsfw: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -425,6 +439,8 @@ module.exports = {
         authority: "everyone",
         instructions: "shota\nmoney:\nnormal: 25",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -475,6 +491,8 @@ module.exports = {
         authority: "everyone",
         instructions: "loli\nmoney:\nnormal: 25\nNsfw: 35",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -567,6 +585,8 @@ module.exports = {
         authority: "everyone",
         instructions: "chen\nmoney:\nnormal: 25",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -617,6 +637,8 @@ module.exports = {
         authority: "everyone",
         instructions: "nakkar\nmoney:\nnormal: 25",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -667,6 +689,8 @@ module.exports = {
         authority: "everyone",
         instructions: "vtuber\nmoney:\nnormal: 25",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -717,6 +741,8 @@ module.exports = {
         authority: "everyone",
         instructions: "peko\nmoney:\nnormal: 25",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -767,6 +793,8 @@ module.exports = {
         authority: "everyone",
         instructions: "S1\nmoney:\nnormal: 15",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -816,6 +844,8 @@ module.exports = {
         authority: "everyone",
         instructions: "S2\nmoney:\nnormal: 15",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -865,6 +895,8 @@ module.exports = {
         authority: "everyone",
         instructions: "S3\nmoney:\nnormal: 15",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP
@@ -915,6 +947,8 @@ module.exports = {
         authority: "everyone",
         instructions: "data",
         category: "image",
+        vote: false,
+        help: false,
         fun: function (bot, msg, p,clientDB,language) { 
             let l = lan.zh_TW,h = rabbitX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;h = rabbitX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;h = rabbitX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;h = rabbitX.ja_JP

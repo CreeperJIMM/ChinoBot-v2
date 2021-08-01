@@ -43,6 +43,8 @@ module.exports = {
         description: {zh_TW:"獲取麥塊用戶資料",en_US:"Get Minecraft player data.",ja_JP:""},
         authority: "everyone",
         instructions: "mc [player name]",
+        vote: false,
+        help: false,
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -63,6 +65,8 @@ module.exports = {
         authority: "everyone",
         instructions: "mc-user [player name]",
         category: "game",
+        vote: false,
+        help: false,
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -83,6 +87,8 @@ module.exports = {
         authority: "everyone",
         instructions: "mc-hypixel [player name]",
         category: "game",
+        vote: false,
+        help: false,
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -147,6 +153,8 @@ module.exports = {
         authority: "everyone",
         instructions: "mc-server [IP]",
         category: "game",
+        vote: false,
+        help: false,
         fun: async function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -219,6 +227,8 @@ module.exports = {
         authority: "everyone",
         instructions: "rps [r/p/s]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,ag, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -246,6 +256,8 @@ module.exports = {
         authority: "everyone",
         instructions: "rps2 [$money]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -443,6 +455,8 @@ module.exports = {
         authority: "everyone",
         instructions: "gurss [$money]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -508,6 +522,8 @@ module.exports = {
         authority: "everyone",
         instructions: "math [number]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args,number, ...text) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -526,6 +542,8 @@ module.exports = {
         authority: "everyone",
         instructions: "gurss [$money]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -542,6 +560,8 @@ module.exports = {
         authority: "everyone",
         instructions: "slot [$money]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -610,6 +630,8 @@ module.exports = {
         authority: "everyone",
         instructions: "love [@mention/ID＊] [@mention/ID＊]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -674,6 +696,8 @@ module.exports = {
         authority: "everyone",
         instructions: "gay [@mention/ID＊]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -712,6 +736,8 @@ module.exports = {
         authority: "everyone",
         instructions: "pick [event(text)]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -750,6 +776,8 @@ module.exports = {
         authority: "everyone",
         instructions: "osucard [player name] [mode＊]\nMode:\n`0` osu\n`1` taiko\n`2` catch\n `3` mania",
         category: "game",
+        vote: false,
+        help: false,
         fun: function(bot, message, p,clientDB,language,args, ...ag) {
             let l = lan.zh_TW;
             let k = gameX.zh_TW
@@ -781,6 +809,8 @@ module.exports = {
         authority: "everyone",
         instructions: "osu [player name]",
         category: "game",
+        vote: false,
+        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

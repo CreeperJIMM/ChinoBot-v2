@@ -15,6 +15,8 @@ module.exports= {
         authority: "everyone",
         instructions: "rank [@muention/ID＊]",
         category: "rank",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -50,6 +52,8 @@ module.exports= {
         authority: "everyone",
         instructions: "money [@muention/ID＊]",
         category: "user",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -85,6 +89,8 @@ module.exports= {
         authority: "everyone",
         instructions: "daily [@muention/ID＊]",
         category: "money",
+        vote: true,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -122,6 +128,8 @@ module.exports= {
         authority: "everyone",
         instructions: "levels",
         category: "rank",
+        vote: true,
+        help: false,
         fun: async function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -172,6 +180,8 @@ module.exports= {
         authority: "everyone",
         instructions: "moneys",
         category: "rank",
+        vote: true,
+        help: false,
         fun: async function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -223,6 +233,8 @@ module.exports= {
         description: {zh_TW:"查看金錢最高排行榜",en_US:"View moneys high ranking.",ja_JP:""},
         authority: "everyone",
         instructions: "moneyshigh",
+        vote: true,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -262,6 +274,8 @@ module.exports= {
         description: {zh_TW:"增加用戶金錢",en_US:"Add user money.",ja_JP:""},
         authority: "owner",
         instructions: "moneyadd [ID] [money]",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -280,6 +294,8 @@ module.exports= {
         description: {zh_TW:"減少用戶金錢",en_US:"remove user money.",ja_JP:""},
         authority: "owner",
         instructions: "moneyremove [ID] [money]",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -298,6 +314,8 @@ module.exports= {
         description: {zh_TW:"設定用戶金錢",en_US:"Set user money.",ja_JP:""},
         authority: "owner",
         instructions: "moneyset [ID] [money]",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -317,6 +335,8 @@ module.exports= {
         authority: "everyone",
         instructions: "language [lang]",
         category: "user",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -373,6 +393,8 @@ module.exports= {
         authority: "everyone",
         instructions: "language [lang]",
         category: "money",
+        vote: true,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -421,6 +443,8 @@ module.exports= {
         authority: "everyone",
         instructions: "marry [@mention/ID]",
         category: "user",
+        vote: false,
+        help: false,
         fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -479,6 +503,8 @@ module.exports= {
         authority: "everyone",
         instructions: "divorce [@mention/ID]",
         category: "user",
+        vote: false,
+        help: false,
     fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -522,6 +548,8 @@ else{message2.channel.send(k.divorce.hasnt)
     authority: "everyone",
     instructions: "marry [to do] [@mention/ID]",
     category: "user",
+    vote: false,
+    help: false,
     fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -687,6 +715,8 @@ else{message2.channel.send(k.divorce.hasnt)
     authority: "everyone",
     instructions: "card [@mention/ID]",
     category: "user",
+    vote: false,
+    help: false,
     fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -740,6 +770,8 @@ else{message2.channel.send(k.divorce.hasnt)
         description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
         authority: "everyone",
         instructions: "permissions [@mention/ID＊]",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args) {
             access(bot,message,args,clientDB,language)
        }
@@ -748,6 +780,8 @@ else{message2.channel.send(k.divorce.hasnt)
         description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
         authority: "everyone",
         instructions: "permission [@mention/ID＊]",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args) {
             access(bot,message,args,clientDB,language)
        }
@@ -757,6 +791,8 @@ else{message2.channel.send(k.divorce.hasnt)
         authority: "everyone",
         instructions: "banlist",
         category: "guild",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -791,6 +827,8 @@ else{message2.channel.send(k.divorce.hasnt)
         authority: "everyone",
         instructions: "adv",
         category: "user",
+        vote: false,
+        help: false,
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP

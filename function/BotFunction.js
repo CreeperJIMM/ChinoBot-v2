@@ -26,7 +26,7 @@ module.exports = [
     "name":"is_owner",
     fun: function (message) { //是不是作者
     if (Number(message.author.id) != owner) {
-        throw new Error("You are not the owner.")
+      return false;
     }
   }
 },
@@ -38,14 +38,14 @@ module.exports = [
             return
         }
     }
-    throw new Error("You are not the role.")
+    return false;
   },
 },
 {
     "name":"is_guild_owner",
     fun: function (message) { //是否為伺服器持有者
     if (message.guild.owner !== message.member.id) {
-        throw new Error("You are not guild owner.")
+      return false;
     }
   }
 },
