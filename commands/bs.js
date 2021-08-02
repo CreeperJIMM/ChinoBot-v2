@@ -44,7 +44,7 @@ module.exports = {
     },
     "fortune": {
         description: {zh_TW:"運勢",en_US:"Your fortune.",ja_JP:""},
-        category: "fun",
+        category: "game",
         authority: "everyone",
         instructions: "fortune",
         vote: true,

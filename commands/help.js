@@ -2,6 +2,7 @@ const Discord = require("discord.js")
 const { version } = require('../config.json')
 const lan = require('../commands/lang.json');
 const helpX = require('../language/help.json');
+const fs = require("fs")
 var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
@@ -28,7 +29,7 @@ module.exports = {
             {message.channel.send(helpEmbed)};
         }
     },
-    "command":{
+    "oldcommand":{
         description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
         authority: "everyone",
         instructions: "command [function]",
@@ -39,7 +40,7 @@ module.exports = {
             help(bot,message,language,p,args)
         }
     },
-    "cmd":{
+    "oldcmd":{
         description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
         authority: "everyone",
         instructions: "command [function]",
@@ -47,6 +48,26 @@ module.exports = {
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
+        }
+    },
+    "cmd":{
+        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "newcommand [function]",
+        vote: false,
+        help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) {
+            newcmd(bot,message,language,p,args)
+        }
+    },
+    "command":{
+        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
+        authority: "everyone",
+        instructions: "newcommand [function]",
+        vote: false,
+        help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) {
+            newcmd(bot,message,language,p,args)
         }
     },
     "invite":{
@@ -388,4 +409,97 @@ async function help(bot,message,language,p,args) {
         .setFooter(`${h.word.creater} ${h.word.me}\n${h.word.copy}`)
         message.channel.send(helpEmbed)
     }
+}
+function newcmd(bot,message,language,p,args) {
+    let lang = lan.zh_TW,h = helpX.zh_TW
+    if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
+    }else if(language === "en_US") {lang = lan.en_US;h = helpX.en_US}
+    let command = {}
+    let commandfiles = fs.readdirSync("./commands")
+    commandfiles.splice(7,1)
+    for (file of commandfiles) {
+        let q = require(`../commands/${file}`)
+        Object.assign(command, q)
+    }
+    let a = ["other","admin","user","guild","game","normal","image","money","user","rank","text","undefined"]
+    let b = {}
+    a.forEach(element => {
+          b[element] = []  
+    });
+    let number = 0
+    for (const key in command) {
+        if (Object.hasOwnProperty.call(command, key)) {
+            const element = command[key];
+            try {
+                number++
+                b[element.category].push(key)
+            } catch (error) {
+                console.log(element.category)
+            }
+        }
+    }
+    //console.log(b)
+    if(args[0] === "all") {
+        const helpEmbed = new Discord.MessageEmbed()
+        .setColor('#2d9af8')
+        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
+        .setDescription('◆以下指令都使用 `'+p+'` \n◆如果要查看詳細說明請打 `[指令] help` 例如: `cr!chino help`')
+        .setTimestamp()
+        .setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
+        let all = []
+        for (const key in b) {
+            if (Object.hasOwnProperty.call(b, key)) {
+                const element = b[key];
+                if(key != "undefined") {
+                    all.push(key+" "+element.join("\n"))
+                }
+            }
+        }
+        all.sort(function(a, b) {
+            return a - b;
+        })
+        setTimeout(() => {
+            all.forEach(element => {
+                let sp = element.split(" ")
+                helpEmbed.addField(sp[0],sp[1],true) 
+            });
+            helpEmbed.fields.sort(function(a, b) {
+                return b.name - a.name;
+            })
+            message.channel.send(helpEmbed)     
+        }, 400);
+    }else if(a.indexOf(args[0]) === -1) {
+        const helpEmbed = new Discord.MessageEmbed()
+        .setColor('#2d9af8')
+        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
+        .setDescription(`◆請使用 \`${p}command [以下參數]\` 來查閱各類別的指令`)
+        .setTimestamp()
+        .setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
+        a.pop()
+        helpEmbed.addField("[參數]",a.join("\n")+"\n或者你打 `all` 可以查看全部類別的指令",true)
+        message.channel.send(helpEmbed)
+    }else{
+        const helpEmbed = new Discord.MessageEmbed()
+        .setColor('#2d9af8')
+        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
+        .setDescription('◆以下指令都使用 `'+p+'` \n◆如果要查看詳細說明請打 `[指令] help` 例如: `cr!chino help`')
+        .setTimestamp()
+        for (const key in b) {
+            if (Object.hasOwnProperty.call(b, key)) {
+                const element = b[key];
+                    if(key === args[0]) {
+                    if(key === "undefined") {
+                    helpEmbed.addField("喔哇!","你找到了一個神奇的類別\n但這些指令有些可能不能用\n或是有些指令重複到了\n不然就是苦力怕怕才能使用的:P")
+                    number = element.length
+                    helpEmbed.addField(key,element.join("\n"),true)                                
+                    }else{
+                    number = element.length
+                    helpEmbed.addField(key,element.join("\n"),true)
+                    }
+                }
+            }
+        }
+        helpEmbed.setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
+        message.channel.send(helpEmbed)
+}
 }

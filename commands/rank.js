@@ -70,9 +70,8 @@ module.exports= {
                 loadUser(clientDB,member.id).then((user) => {
                     if (user === false) {return}
                else{
-                fs.readFile('./user.json',function (err2,user2) {
-                    if(err2) {return message.channel.send(l.error.Try_again)}
-                    var users = user2.toString();users = JSON.parse(users);
+                Mongo.loadDaily(clientDB).then((users) => {
+                    if(users === false) {return message.channel.send(l.error.Try_again)}
                 if(users.daily.indexOf(member.id) != "-1") {var today = k.money.d1}else{var today = k.money.d2}
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')

@@ -127,6 +127,7 @@ module.exports = {
       description: {zh_TW:"伺服器的頭貼",en_US:"server avatar",ja_JP:""},
       authority: "everyone",
       instructions: "savatar",
+      category: "normal",
       vote: false,
       help: false,
         fun: function (bot, message, p,clientDB,language,args) { 

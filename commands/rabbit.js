@@ -11,7 +11,7 @@ module.exports = {
     "chino": {
         description: {zh_TW:"點一隻智乃",en_US:"Order a Chino.",ja_JP:""},
         authority: "everyone",
-        instructions: "chino\nmoney:\nnormal: 25\nNsfw: 35",
+        instructions: "chino\n[money]\nnormal: 25$\nNsfw: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -122,7 +122,7 @@ module.exports = {
     "cocoa": {
         description: {zh_TW:"點一隻心愛",en_US:"Order a Cocoa.",ja_JP:""},
         authority: "everyone",
-        instructions: "cocoa\nmoney:\nnormal: 25\nNsfw: 35",
+        instructions: "cocoa\n[money]\nnormal: 25$\nNsfw: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -226,7 +226,7 @@ module.exports = {
     "gura": {
         description: {zh_TW:"點一隻鯊鯊(Gura)",en_US:"Order a Gawr Gura.",ja_JP:""},
         authority: "everyone",
-        instructions: "gura\nmoney:\nnormal: 25\nNsfw: 35",
+        instructions: "gura\n[money]\nnormal: 25$\nNsfw: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -237,7 +237,7 @@ module.exports = {
     "tippy": {
         description: {zh_TW:"點一隻提比",en_US:"Order a Tippy.",ja_JP:""},
         authority: "everyone",
-        instructions: "tippy\nmoney:\nnormal: 15",
+        instructions: "tippy\n[money]\nnormal: 15$",
         category: "image",
         vote: false,
         help: false,
@@ -289,7 +289,7 @@ module.exports = {
     "other": {
         description: {zh_TW:"點一盒綜合餐",en_US:"Order one comprehensive meal.",ja_JP:""},
         authority: "everyone",
-        instructions: "other\nmoney:\nnormal: 35",
+        instructions: "other\n[money]\nnormal: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -341,7 +341,7 @@ module.exports = {
     "fubuki": {
         description: {zh_TW:"點一隻狐狸(Fubuki)",en_US:"Order a Fubuki",ja_JP:""},
         authority: "everyone",
-        instructions: "fubuki\nmoney:\nnormal: 25\nNsfw: 35",
+        instructions: "fubuki\n[money]\nnormal: 25$\nNsfw: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -437,7 +437,7 @@ module.exports = {
     "shota": {
         description: {zh_TW:"點一隻正太",en_US:"Order a Shota",ja_JP:""},
         authority: "everyone",
-        instructions: "shota\nmoney:\nnormal: 25",
+        instructions: "shota\n[money]\nnormal: 25$",
         category: "image",
         vote: false,
         help: false,
@@ -489,7 +489,7 @@ module.exports = {
     "loli": {
         description: {zh_TW:"點一隻蘿莉",en_US:"Order a loli",ja_JP:""},
         authority: "everyone",
-        instructions: "loli\nmoney:\nnormal: 25\nNsfw: 35",
+        instructions: "loli\n[money]\nnormal: 25$\nNsfw: 35$",
         category: "image",
         vote: false,
         help: false,
@@ -583,7 +583,7 @@ module.exports = {
     "chen": {
         description: {zh_TW:"點一隻八雲橙(Chen)",en_US:"Order a Chen",ja_JP:""},
         authority: "everyone",
-        instructions: "chen\nmoney:\nnormal: 25",
+        instructions: "chen\n[money]\nnormal: 25$",
         category: "image",
         vote: false,
         help: false,
@@ -635,7 +635,7 @@ module.exports = {
     "nakkar": {
         description: {zh_TW:"點一隻Nakkar",en_US:"Order a Nakkar",ja_JP:""},
         authority: "everyone",
-        instructions: "nakkar\nmoney:\nnormal: 25",
+        instructions: "nakkar\n[money]\nnormal: 25$",
         category: "image",
         vote: false,
         help: false,
@@ -687,7 +687,7 @@ module.exports = {
     "vtuber": {
         description: {zh_TW:"點一隻VTuber",en_US:"Order a VTuber",ja_JP:""},
         authority: "everyone",
-        instructions: "vtuber\nmoney:\nnormal: 25",
+        instructions: "vtuber\n[money]\nnormal: 25$",
         category: "image",
         vote: false,
         help: false,
@@ -739,7 +739,7 @@ module.exports = {
     "peko": {
         description: {zh_TW:"點一隻配摳拉(pekora)",en_US:"Order a pekora",ja_JP:""},
         authority: "everyone",
-        instructions: "peko\nmoney:\nnormal: 25",
+        instructions: "peko\n[money]\nnormal: 25$",
         category: "image",
         vote: false,
         help: false,
@@ -791,7 +791,7 @@ module.exports = {
     "S1": {
         description: {zh_TW:"點一張第一季點兔",en_US:"Order a rabbit S1",ja_JP:""},
         authority: "everyone",
-        instructions: "S1\nmoney:\nnormal: 15",
+        instructions: "S1\n[money]\nnormal: 15$",
         category: "image",
         vote: false,
         help: false,
@@ -842,7 +842,7 @@ module.exports = {
     "S2": {
         description: {zh_TW:"點一張第二季點兔",en_US:"Order a rabbit S2",ja_JP:""},
         authority: "everyone",
-        instructions: "S2\nmoney:\nnormal: 15",
+        instructions: "S2\n[money]\nnormal: 15$",
         category: "image",
         vote: false,
         help: false,
@@ -893,7 +893,7 @@ module.exports = {
     "S3": {
         description: {zh_TW:"點一張第三季點兔",en_US:"Order a rabbit S3",ja_JP:""},
         authority: "everyone",
-        instructions: "S3\nmoney:\nnormal: 15",
+        instructions: "S3\n[money]\nnormal: 15$",
         category: "image",
         vote: false,
         help: false,
