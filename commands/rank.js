@@ -4,6 +4,7 @@ const lan = require('../commands/lang.json');
 const gameX = require('../language/rank.json');
 let daily = new Set();
 let payd = new Set();
+let Mongo = require('../function/MongoData')
 var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
@@ -87,7 +88,7 @@ module.exports= {
     "daily":{
         description: {zh_TW:"領取今日金錢",en_US:"Receive daily money.",ja_JP:""},
         authority: "everyone",
-        instructions: "daily [@muention/ID＊]",
+        instructions: "daily",
         category: "money",
         vote: true,
         help: false,
@@ -95,22 +96,35 @@ module.exports= {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {return message.channel.send(l.error.Try_again)}
                else{
-                fs.readFile('./user.json',function (err2,user2) {
-                    if(err2) {return message.channel.send(l.error.Try_again)}
-                    var users = user2.toString();users = JSON.parse(users);
+                   Mongo.loadDaily(clientDB).then((users) => {
+                    if(users === false) {return message.channel.send(l.error.Try_again)}
                 if(users.daily.indexOf(message.author.id) != "-1") {return message.channel.send(k.daily.receive)}else{
-                users.daily.push(message.author.id);var str2 = JSON.stringify(users);setTimeout(() => {fs.writeFileSync('./user.json',str2)}, 1000);
+                users.daily.push(message.author.id)
+                Mongo.writeDaily(clientDB,users)
                 let tody = 50
                 user.work++
-                let tod = new Date()
-                user.worktoal = {time: user.worktoal.time,work: user.worktoal.work}
-                if(user.worktoal.time == 30 || user.worktoal.time == 31) {if(tod.getUTCDate() != 1 || tod.getUTCDate() != 31) user.worktoal.work = 0}else{if(tod.getUTCDate()-1 != user.worktoal.time) user.worktoal.work = 0}
-                user.worktoal = {time: tod.getUTCDate() ,work: (user.worktoal.work)+1}
+                let tod = new Date().getTime()
+                user.worktoal = {time: user.worktoal.time,work: user.worktoal.work,top: user.worktoal.top}
+                if(!isNaN(parseInt(user.worktoal.time))) {
+                a=(parseInt(user.worktoal.time) - tod)/(24*60*60*1000);a=Math.ceil(a);
+                if(a >= 2) user.worktoal.work = 0
+                }else{
+                    user.worktoal.work = 0
+                }
+                let top = 0
+                if(user.worktoal.top) {
+                    if((user.worktoal.work)+1 >= user.worktoal.top) {
+                        top = (user.worktoal.work)+1
+                    }else{
+                        top = user.worktoal.top
+                    }
+                }
+                user.worktoal = {time: tod ,work: (user.worktoal.work)+1,top: top}
                 user.money = user.money + tody + ((user.worktoal.work)*5)
-                if(user.adv.indexOf("daily") == "-1") {user.adv.push("daily");message.author.send(k.daily.adv);var str = JSON.stringify(user);}
+                if(user.adv.indexOf("daily") == "-1") {user.adv.push("daily");message.author.send(k.daily.adv);}
                 writeUser(clientDB,message.author.id,user)
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')

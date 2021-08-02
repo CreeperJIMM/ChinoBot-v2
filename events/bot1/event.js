@@ -192,6 +192,8 @@ module.exports= [
   }
 },
 ]
+const language  = require("../../commands/lang.json");
+let DBL = require("dblapi.js")
 ///////////////// Command ////////////////////////
 async function zh_TW(bot, msg, userlang,clientDB) {
   time(bot, msg)
@@ -200,9 +202,41 @@ async function zh_TW(bot, msg, userlang,clientDB) {
   deleteCooldown(msg)
   if (Object.keys(command).includes(msg.content.replace(prefix, "").split(" ")[0])) {
       setTimeout(() => {
+        const {topToken} = require("../../token.json")
+        const dbl = new DBL(topToken, {webhookAuth: 'ChinoBot'}, bot);
           try {
-              let ag = msg.content.split(" ")
-              ag.shift()
+            let cmd = command[msg.content.replace(prefix, "").split(" ")[0]]
+            if(!language[userlang]) userlang = "zh_TW"
+            if(cmd.vote) {
+              dbl.hasVoted(msg.author.id).then(voted => {
+              if(!voted) {
+                if(msg.author.id != "546144403958398988") {
+                if(msg.content.replace(prefix, "").split(" ")[0] === "daily") {
+                  let dvote = new Discord.MessageEmbed()
+                  .setTitle(language[userlang].error.No_vote.titledaily)
+                  .setDescription(language[userlang].error.No_vote.descdaily)
+                  return msg.channel.send(dvote)
+                }else{
+                  let vote = new Discord.MessageEmbed()
+                  .setTitle(language[userlang].error.No_vote.title)
+                  .setDescription(language[userlang].error.No_vote.desc)
+                  return msg.channel.send(vote)
+                }
+              }
+            }
+          });
+          }
+          let ag = msg.content.split(" ")
+          ag.shift()
+          if(!cmd.help) {
+            if(ag[0] === "help") {
+              let helper = new Discord.MessageEmbed()
+              .setTitle(msg.content.replace(prefix, "").split(" ")[0])
+              .setDescription("📄說明:\n"+cmd.description.zh_TW+`\n\n✏使用方式:\n${cmd.instructions}\n`)
+              .setFooter("📊類別: "+cmd.category+"\n🗳是否投票: "+cmd.vote+"\n🎭指令權限: "+cmd.authority+"\n註: ＊ 非必填")
+              return msg.channel.send(helper)
+            }
+          }
               command[msg.content.replace(prefix, "").split(" ")[0]]["fun"](bot, msg, prefix, clientDB, userlang, ag, ...ag)
               msg.channel.stopTyping()
           } catch (error) {

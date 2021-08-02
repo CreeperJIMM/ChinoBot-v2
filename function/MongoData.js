@@ -39,3 +39,23 @@ module.exports.writeGuild = function(client, id, data) {
     if (err) return err;
   });
 }
+module.exports.loadDaily = async (client) => {
+  /*讀取用戶檔案*/ let dbo = client.db("mydb"),
+    query = { id:"daily" };
+  let user = await dbo.collection("daily").find(query).toArray();
+  if (user[0] === undefined) return false;
+  user = user[0];
+  return user;
+};
+
+module.exports.writeDaily = function (client, data) {
+  /*寫入用戶檔案*/ let dbo = client.db("mydb"),
+    query = { id:"daily" };
+  let user = dbo.collection("daily").find(query).toArray();
+  var myquery = { id:"daily" };
+  user = data;
+  var newvalues = { $set: user };
+  dbo.collection("daily").updateOne(myquery, newvalues, function (err, res) {
+    if (err) return err;
+  });
+}
