@@ -127,8 +127,7 @@ async function zh_TW(bot, msg, userlang,clientDB) {
             if(!language[userlang]) userlang = "zh_TW"
             if(cmd.vote) {
               dbl.hasVoted(msg.author.id).then(voted => {
-              if(!voted) {
-                if(msg.author.id != "546144403958398988") {
+              if(!voted && msg.author.id != "546144403958398988") {
                 if(msg.content.replace(prefix, "").split(" ")[0] === "daily") {
                   let dvote = new Discord.MessageEmbed()
                   .setTitle(language[userlang].error.No_vote.titledaily)
@@ -140,8 +139,11 @@ async function zh_TW(bot, msg, userlang,clientDB) {
                   .setDescription(language[userlang].error.No_vote.desc)
                   return msg.channel.send(vote)
                 }
-              }
-            }});};
+            }else{
+              mainCommand()
+            }
+          });}else{mainCommand()};
+          function mainCommand() {
             let ag = msg.content.split(" ")
             ag.shift()
             if(!cmd.help) {
@@ -155,6 +157,7 @@ async function zh_TW(bot, msg, userlang,clientDB) {
             }
               command[msg.content.replace(prefix, "").split(" ")[0]]["fun"](bot, msg, prefix, clientDB, userlang, ag, ...ag)
               msg.channel.stopTyping()
+          }
           } catch (error) {
               msg.channel.stopTyping();
               msg.channel.send("❌嘗試執行發生錯誤!\n```js\n" + error + "\n```")
