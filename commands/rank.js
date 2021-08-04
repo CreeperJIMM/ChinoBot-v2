@@ -9,7 +9,13 @@ var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.d
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-
+const disbut = require('discord-buttons');
+let pooluser = new Set()
+function deletepool(id) {
+    setTimeout(() => {
+        
+    }, 60000);
+}
 module.exports= {
     "rank":{
         description: {zh_TW:"查看經驗值",en_US:"View rank.",ja_JP:""},
@@ -81,6 +87,122 @@ module.exports= {
                 message.channel.send(rankembed)
                }
             )}})
+            }
+        }
+    },
+    "work":{
+        description: {zh_TW:"查看金錢",en_US:"View money.",ja_JP:""},
+        authority: "everyone",
+        instructions: "work [ job type]\n\n[jobs]\n-`fish`",
+        category: "money",
+        vote: false,
+        help: false,
+        fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
+            //fish 釣魚
+            //mine 挖礦
+            //teacher 批改
+            let l = lan.zh_TW,k = gameX.zh_TW
+            if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+            }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+            let member = message.author 
+            if(member){
+                loadUser(clientDB,member.id).then((user) => {
+                    if (user === false) {return}else{
+                let workembed = new Discord.MessageEmbed()
+                if(!args[0] || args[0] === "" || args[0] === null) {
+                    return message.channel.send("❌你沒有告訴我你要哪個工作啊\n-`fish` 釣魚")
+                }
+                if(user.money >= 400) return message.channel.send("❌抱歉.\n這指令只能給低於400塊的成員和負債的成員使用!")
+                if(pooluser.has(message.author.id)) return message.channel.send("💀連續工作會爆肝阿!\n60秒後再來吧.")
+                let money = 0
+                pooluser.add(message.author.id)
+                deletepool(message.author.id)
+                switch (args[0]) {
+                    case "fish":
+                        let ro = "<:rope:872014636688494632>"
+                        let fishMain = new Discord.MessageEmbed()
+                        .setTitle("釣魚場").setDescription(`
+                        ⬛⬛🚣⬛⬛
+                        🟦🟦${ro}🟦🟦
+                        🟦🟦🪝🟦🟦
+                        🟦🟦🟦🟦🟦
+                        🟦🟦🟦🟦🟦
+                        `).setFooter(`${message.author.username} 的魚場`)
+                        let button = new disbut.MessageButton()
+                        button.setStyle('green').setEmoji("🎣").setID("pick")
+                        message.channel.send(fishMain,button).then((im) => {
+                            work_fish(im)
+                        })
+                        break;
+                    case "mine":
+                        work_mine()
+                        break;
+                    case "teacher":
+                        work_teacher()
+                        break;
+                    default:
+                        break;
+                }
+                function work_fish(im) {
+                    let fishnum = Math.ceil(Math.random()*3)
+                    let fishs = ["🐟","🐠","🦐","💣"]
+                    let prices = [10,30,60,null]
+                    let fish = fishs[fishnum]
+                    let price = prices[fishnum]
+                    let num = Math.floor(Math.random()*15)
+                    let ro = "<:rope:872014636688494632>"
+                    setTimeout(() => {
+                        let fishMain = new Discord.MessageEmbed()
+                        .setTitle("釣魚場").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n${fish}🟦🟦🟦🟦`).setFooter(`${message.author.username} 的魚場\n[目前已賺到 ${money}$]`)
+                        let num2 = Math.floor(Math.random()*10)
+                        im.edit(fishMain)
+                        setTimeout(() => {
+                            fishMain.setTitle("釣魚場 [上鉤了 快收竿!]")
+                            fishMain.setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦${fish}🟦🟦\n🟦🟦🟦🟦🟦`)
+                            im.edit(fishMain)
+                            close(fishMain)
+                        }, num2*1000);
+                    }, num*1000);
+                    function close(fishMain) {
+                        let num2 = Math.floor(Math.random()*4)
+                            const filter= (button) => {return ['pick'].includes(button.id) && button.clicker.id === message.author.id}
+                            im.awaitButtons(filter, { max: 1, time: 900+num2*1000, errors: ['time'] })
+                                .then(collected => {
+                                    const reaction = collected.first()
+                                    ping(reaction,bot)
+                                    if(fishnum != 3) {
+                                        fishMain.setTitle(`釣魚場 [恭喜賺到 ${price}]`).setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
+                                        money = money + price
+                                        im.edit(fishMain)
+                                        work_fish(im)
+                                        }else{
+                                            fishMain.setTitle("釣魚場 [你釣到炸彈!] [遊戲結束]").setDescription(`⬛⬛💀⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
+                                            im.edit(fishMain)
+                                            user.money = user.money + money
+                                            writeUser(clientDB,message.author.id,user)
+                                        }                                    
+                                }).catch((err) => {
+                                    if(fishnum != 3) {
+                                    fishMain.setTitle("唉呀! 魚跑走了:( [遊戲結束]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
+                                    im.edit(fishMain)
+                                    user.money = user.money + money
+                                    writeUser(clientDB,message.author.id,user)
+                                    }else{
+                                        fishMain.setTitle("釣魚場 [已跳過炸彈]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
+                                        im.edit(fishMain)
+                                        work_fish(im)
+                                    }
+                                })
+                    }
+                }
+                function work_mine() {
+
+                }
+                function work_teacher() {
+
+                }
+
+            }})
             }
         }
     },
@@ -917,3 +1039,9 @@ async function payto(bot, message ,args) {
         payd.delete(message.author.id)
     }, 20000);
 };
+function ping(reply,bot) {
+    bot.api.interactions(reply.discordID,reply.token).callback.post({
+        data: {
+        type: 6
+    }})
+}

@@ -426,7 +426,7 @@ module.exports = {
         /*result2 = JSON.stringify(result2)
         fs.writeFileSync("./events/test.json",result2)*/
       }).catch((err) => {
-        console.log(err)
+        return message.channel.send("Image too big!");
       })
       let page = 0
       function SendEmbed(result2) {
