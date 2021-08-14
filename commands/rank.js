@@ -13,7 +13,7 @@ const disbut = require('discord-buttons');
 let pooluser = new Set()
 function deletepool(id) {
     setTimeout(() => {
-        
+        pooluser.delete(id)
     }, 60000);
 }
 module.exports= {
@@ -230,8 +230,8 @@ module.exports= {
                 let tod = new Date().getTime()
                 user.worktoal = {time: user.worktoal.time,work: user.worktoal.work,top: user.worktoal.top}
                 if(!isNaN(parseInt(user.worktoal.time))) {
-                a=(parseInt(user.worktoal.time) - tod)/(24*60*60*1000);a=Math.ceil(a);
-                if(a >= 2) user.worktoal.work = 0
+                a=(parseInt(tod - user.worktoal.time))/(24*60*60*1000);a=Math.ceil(a*10)/10;
+                if(a >= 1.5) user.worktoal.work = 0
                 }else{
                     user.worktoal.work = 0
                 }

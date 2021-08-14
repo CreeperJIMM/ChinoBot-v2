@@ -15,7 +15,7 @@ module.exports= {
       instructions: "setup [function]",
       category: "guild",
       vote: false,
-      help: false,
+      help: true,
         fun: function (bot, message, p,clientDB,language,args ,nubmer, ...text) { 
           let l = lan.zh_TW,k = gameX.zh_TW
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
