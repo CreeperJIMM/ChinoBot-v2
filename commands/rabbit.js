@@ -1049,8 +1049,8 @@ async function report(bot, message,clientDB, number, spot, r18, draw) {
         if (user === false)  return;
             Mongo.loadUser(clientDB,message.author.id).then((user2) => {
                 if (user2 === false)  return;
-                const filter = (button) => button.clicker.id === message.author.id
-                draw.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                const filter = (button) => button.user.id === message.author.id
+                draw.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                       .then(collected => {
                         api.ping(bot,collected)
                         if (collected.customId === 'A') {

@@ -1,21 +1,17 @@
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 const fs =require("fs");
 const lan = require('../commands/lang.json');
 const gameX = require('../language/rank.json');
 let daily = new Set();
 let payd = new Set();
-let Mongo = require('../function/MongoData')
-var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-let pooluser = new Set()
+let Mongo = require("../function/MongoData");
+let pooluser = new Set();
 function deletepool(id) {
     setTimeout(() => {
         pooluser.delete(id)
     }, 60000);
 }
-let api = require("../function/apiping")
+let api = require("../function/apiping");
 module.exports= {
     "rank":{
         description: {zh_TW:"查看經驗值",en_US:"View rank.",ja_JP:""},
@@ -41,7 +37,7 @@ module.exports= {
                         if (user) { member = user }else { member = message.author }
                     } else { member = message.author }
                     if(member){
-                        loadUser(clientDB,member.id).then((user) => {
+                        Mongo.loadUser(clientDB,member.id).then((user) => {
                             if (user === false) {return}else{
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')
@@ -73,7 +69,7 @@ module.exports= {
                 if (user) { member = user }else { member = message.author }
             } else { member = message.author }
             if(member){
-                loadUser(clientDB,member.id).then((user) => {
+                Mongo.loadUser(clientDB,member.id).then((user) => {
                     if (user === false) {return}
                else{
                 Mongo.loadDaily(clientDB).then((users) => {
@@ -106,7 +102,7 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             let member = message.author 
             if(member){
-                loadUser(clientDB,member.id).then((user) => {
+                Mongo.loadUser(clientDB,member.id).then((user) => {
                     if (user === false) {return}else{
                 let workembed = new Discord.MessageEmbed()
                 if(!args[0] || args[0] === "" || args[0] === null) {
@@ -166,8 +162,8 @@ module.exports= {
                     }, num*1000);
                     function close(fishMain) {
                         let num2 = Math.floor(Math.random()*4)
-                            const filter = (button) => button.clicker.id === message.author.id
-                            im.awaitMessageComponent(filter, { max: 1, time: 900+num2*1000, errors: ['time'] })
+                            const filter = (button) => button.user.id === message.author.id
+                            im.awaitMessageComponent({filter, max: 1, time: 900+num2*1000, errors: ['time'] })
                                 .then(collected => {
                                     api.ping(bot,collected)
                                     if(fishnum != 3) {
@@ -179,14 +175,14 @@ module.exports= {
                                             fishMain.setTitle("釣魚場 [你釣到炸彈!] [遊戲結束]").setDescription(`⬛⬛💀⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                             im.edit({embeds: [fishMain],components:[row]})
                                             user.money = user.money + money
-                                            writeUser(clientDB,message.author.id,user)
+                                            Mongo.writeUser(clientDB,message.author.id,user)
                                         }                                    
                                 }).catch((err) => {
                                     if(fishnum != 3) {
                                     fishMain.setTitle("唉呀! 魚跑走了:( [遊戲結束]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                     im.edit({embeds: [fishMain],components:[row]})
                                     user.money = user.money + money
-                                    writeUser(clientDB,message.author.id,user)
+                                    Mongo.writeUser(clientDB,message.author.id,user)
                                     }else{
                                         fishMain.setTitle("釣魚場 [已跳過炸彈]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                         im.edit({embeds: [fishMain],components:[row]})
@@ -217,7 +213,7 @@ module.exports= {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            Mongo.loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {return message.channel.send(l.error.Try_again)}
                else{
                    Mongo.loadDaily(clientDB).then((users) => {
@@ -246,7 +242,7 @@ module.exports= {
                 user.worktoal = {time: tod ,work: (user.worktoal.work)+1,top: top}
                 user.money = user.money + tody + ((user.worktoal.work)*5)
                 if(user.adv.indexOf("daily") == "-1") {user.adv.push("daily");message.author.send(k.daily.adv);}
-                writeUser(clientDB,message.author.id,user)
+                Mongo.writeUser(clientDB,message.author.id,user)
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')
                 .setTitle(k.daily.clean)
@@ -416,12 +412,12 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(message.author.id !== '546144403958398988') return;
-            loadUser(clientDB,args[0]).then((user) => {
+            Mongo.loadUser(clientDB,args[0]).then((user) => {
                 if (user === false) {return message.channel.send("❌沒有這個用戶資料")}
                else{
                 user.money = (user.money + parseInt(args[1]))
                 message.channel.send("你讓用戶 " + user.name + "的金錢增加了 `" + args[1] + "`\n現在他有 `" + user.money + "`$ 了")
-                writeUser(clientDB,args[0],user)
+                Mongo.writeUser(clientDB,args[0],user)
             }})
         }
     },
@@ -436,12 +432,12 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(message.author.id !== '546144403958398988') return;
-            loadUser(clientDB,args[0]).then((user) => {
+            Mongo.loadUser(clientDB,args[0]).then((user) => {
                 if (user === false) {return message.channel.send("❌沒有這個用戶資料")}
                else{
                 user.money = (user.money - parseInt(args[1]))
                 message.channel.send("你讓用戶 " + user.name + "的金錢減少了 `" + args[1] + "`\n現在他變成 `" + user.money + "`$ 了")
-                writeUser(clientDB,args[0],user)
+                Mongo.writeUser(clientDB,args[0],user)
             }})
         }
     },
@@ -456,12 +452,12 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(message.author.id !== '546144403958398988') return;
-            loadUser(clientDB,args[0]).then((user) => {
+            Mongo.loadUser(clientDB,args[0]).then((user) => {
                 if (user === false) {return message.channel.send("❌沒有這個用戶資料")}
                else{
                 user.money = parseInt(args[1])
                 message.channel.send("你將用戶 " + user.name + "的金錢調成 `" + args[1] + "`$")
-                writeUser(clientDB,args[0],user)
+                Mongo.writeUser(clientDB,args[0],user)
             }})
         }
     },
@@ -477,35 +473,35 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(args[0] == "zh_TW") {
-                loadUser(clientDB,message.author.id).then((user) => {
+                Mongo.loadUser(clientDB,message.author.id).then((user) => {
                     if (user === false) {return message.channel.send(l.error.Try_again)}
                    else{
                     user.language = "zh_TW"
                     message.channel.send("你的語言已設置成 `中文(繁體)`")
-                    writeUser(clientDB,message.author.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user)
             }})}else if(args[0] == "zh_CN") {
-                loadUser(clientDB,message.author.id).then((user) => {
+                Mongo.loadUser(clientDB,message.author.id).then((user) => {
                     if(err) {return message.channel.send(l.error.Try_again)}
                    else{
                     user.language = "zh_CN"
                     message.channel.send("你的语言已设置成 `中文(简体)`")
-                    writeUser(clientDB,message.author.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user)
             }})}else if(args[0] == "en_US") {
-                loadUser(clientDB,message.author.id).then((user) => {
+                Mongo.loadUser(clientDB,message.author.id).then((user) => {
                     if(user === false) {return message.channel.send("❌Write Error!")}
                    else{
                     user.language = "en_US"
                     message.channel.send("Your language is set to `English`")
-                    writeUser(clientDB,message.author.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user)
             }})}else if(args[0] == "ja_JP") {
-                loadUser(clientDB,message.author.id).then((user) => {
+                Mongo.loadUser(clientDB,message.author.id).then((user) => {
                     if(user === false) {return message.channel.send("❌Write Error!")}
                    else{
                     user.language = "ja_JP"
                     message.channel.send("あなたの言語は `日本語` に設定されています")
-                    writeUser(clientDB,message.author.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user)
             }})}else{
-                loadUser(clientDB,message.author.id).then((user) => {
+                Mongo.loadUser(clientDB,message.author.id).then((user) => {
                     if(user === false) {return message.channel.send(l.error.Try_again)}
                     let langes = "你現在的語言為 預設(繁體)"
                     if(user.language == "zh_TW") {langes = "你現在的語言為 中文(繁體)"}else if(user.language == "zh_CN") {langes = "你現在的语言為 `中文(简体)"}else if(user.language == "ja_JP") {langes = "あなたの言語は `日本語`"}else if(user.language == "en_US") {langes = "You language is `English`"} 
@@ -544,7 +540,7 @@ module.exports= {
             if(!args[1].indexOf(".")) return message.channel.send(l.error.type_integer)
             args[1] = Math.round(args[1])
             if(payd.has(message.author.id)) return message.channel.send(k.pay.cool_down)
-            loadUser(clientDB,message.author.id).then((user2) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user2) => {
                 let user = bot.users.cache.get(args[0])
                 let member = null;
                 if(message.mentions.users.size){
@@ -553,7 +549,7 @@ module.exports= {
                     member=user
                 }else{return message.channel.send(l.error.Not_found_User)}
                 if(member){
-                    loadUser(clientDB,member.id).then((user) => {
+                    Mongo.loadUser(clientDB,member.id).then((user) => {
                         if (user === false) {return message.channel.send(l.error.Not_found_User)}
                     if (user2 === false) {return message.channel.send(l.error.cant_load)}
                    else{
@@ -567,8 +563,8 @@ module.exports= {
                     .setDescription(k.pay.you_will+" `" + args[1] + "`$ "+k.pay.give+" **" + user.name + "**\n"+k.pay.now_you+" `" + user2.money + "`$ \n" + user.name + " "+k.pay.now_have+" `" + user.money + "` $")
                     .setFooter("[$] "+k.pay.handing_free+"\n"+k.pay.extra+ Math.floor(parseInt(args[1])* 0.02) +"$ "+k.pay.give_someone).setTimestamp()
                     message.channel.send({embeds: [pay]})
-                    writeUser(clientDB,member.id,user)
-                    writeUser(clientDB,message.author.id,user2)
+                    Mongo.writeUser(clientDB,member.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user2)
                 }
                 })}
         })}
@@ -585,7 +581,7 @@ module.exports= {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
         if(!message2.guild) return message2.channel.send(l.error.No_DM)
-        loadUser(clientDB,message2.author.id).then((user2) => {
+        Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
             if (user2 === false) {return message2.channel.send(l.error.cant_load)}
             let mary = [user2.marry]
             if(mary == "[object Object]" || mary == "") {
@@ -600,7 +596,7 @@ module.exports= {
             if(member){
                 if(member.id === message2.author.id) {return message2.channel.send(k.marry.cant_own)}
                 message2.channel.send(k.word.processing).then((message) => {
-                    loadUser(clientDB,member.id).then((user) => {
+                    Mongo.loadUser(clientDB,member.id).then((user) => {
                         if (user === false) {return message.channel.send(k.word.not_fond_user)}else{
                         let mary2 = [user.marry]
                         if(mary2 == "[object Object]" || mary2 == "") {
@@ -611,7 +607,7 @@ module.exports= {
                 message.channel.send({embeds: [marry]}).then((message) => {
                         const filter = answer => {
                             return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
-                message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+                message.channel.awaitMessages({filter, max: 1, time: 20000, errors: ['time'] })
                     .then((ms) => {
                         if(ms.array()[0].content === "yes") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
@@ -619,9 +615,9 @@ module.exports= {
                     let marry1 = new Discord.MessageEmbed().setTitle(k.marry.marry_complete).setDescription(user2.name + "💕" + user.name).setFooter(k.marry.marry_complete2).setTimestamp()
                     message.channel.send({embeds: [marry1]});
                     user.marry = message2.author.id
-                    writeUser(clientDB,member.id,user)
+                    Mongo.writeUser(clientDB,member.id,user)
                     user2.marry = member.id
-                    writeUser(clientDB,message2.author.id,user2)
+                    Mongo.writeUser(clientDB,message2.author.id,user2)
                 }else if(ms.array()[0].content === "no") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                         message.edit({embeds: [marry2]})}
@@ -644,11 +640,11 @@ module.exports= {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
         }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-        loadUser(clientDB,message2.author.id).then((user2) => {
+        Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
             if (user2 === false) {return message2.channel.send(l.error.cant_load)}
         let mary = [user2.marry]
         if(mary != "[object Object]" || mary != "") {
-            loadUser(clientDB,mary[0]).then((user) => {
+            Mongo.loadUser(clientDB,mary[0]).then((user) => {
                 if (user === false) {return message2.channel.send(k.word.not_fond_user)}else{
                 var other = user2.marry
                 let marry = new Discord.MessageEmbed()
@@ -657,7 +653,7 @@ module.exports= {
                 message2.channel.send(marry).then((message) => {
                     const filter = answer => {
                         return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
-            message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
+            message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
                 .then((ms) => {
                     if(ms.array()[0].content === "yes") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
@@ -665,9 +661,9 @@ module.exports= {
                 let marry1 = new Discord.MessageEmbed().setTitle(k.divorce.divorce).setDescription(user2.name + "💔" + user.name).setFooter(k.divorce.divorce2).setTimestamp()
                 message.channel.send({embeds: [marry1]});
                 user.marry = ""
-                writeUser(clientDB,other,user)
+                Mongo.writeUser(clientDB,other,user)
                 user2.marry = ""
-                writeUser(clientDB,message2.author.id,user2)
+                Mongo.writeUser(clientDB,message2.author.id,user2)
             }else if(ms.array()[0].content === "no") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                 message.edit({embeds: [marry2]})}
@@ -691,7 +687,7 @@ else{message2.channel.send(k.divorce.hasnt)
         }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
         if(!message2.guild) return message2.channel.send(l.error.No_DM)
         if(args[0] === "add") {
-            loadUser(clientDB,message2.author.id).then((user2) => {
+            Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
                 if (user2 === false) {return message2.channel.send(l.error.cant_load)}
             if(args[1] == ``) {message2.channel.send(k.word.not_fond_user)}else{
                 let user = bot.users.cache.get(args[1])
@@ -705,7 +701,7 @@ else{message2.channel.send(k.divorce.hasnt)
                     if(member.id === message2.author.id) {return message2.channel.send(k.pet.add.no_own)}
                     if(user2.pet.indexOf(member.id) != -1) {return message2.channel.send(k.pet.add.has_adot)}
                     message2.channel.send(k.word.processing).then((message) => {
-                        loadUser(clientDB,member.id).then((user) => {
+                        Mongo.loadUser(clientDB,member.id).then((user) => {
                             if (user === false) {return message.channel.send(k.word.not_fond_user)}else{
                         let marry = new Discord.MessageEmbed()
                         .setTitle(k.pet.add.timer)
@@ -714,7 +710,7 @@ else{message2.channel.send(k.divorce.hasnt)
                     message.channel.send({embeds: [marry]}).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
-                    message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+                    message.channel.awaitMessages({filter, max: 1, time: 20000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
@@ -723,10 +719,10 @@ else{message2.channel.send(k.divorce.hasnt)
                         message.channel.send(marry1);
                         user.host.push(message2.author.id)
                         user.hostname = user.hostname + message2.author.username + "#" + message2.author.discriminator+"\n"
-                        writeUser(clientDB,member.id,user)
+                        Mongo.writeUser(clientDB,member.id,user)
                         user2.pet.push(member.id)
                         user2.petname = user2.petname + member.username + "#" + member.discriminator+"\n"
-                        writeUser(clientDB,message2.author.id,user2)
+                        Mongo.writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no") {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                                 message.edit({embeds: [marry2]})
@@ -737,7 +733,7 @@ else{message2.channel.send(k.divorce.hasnt)
                    })
                 }})})}
         }})}else if(args[0] === "remove") {
-            loadUser(clientDB,message2.author.id).then((user2) => {
+            Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
                 if (user2 === false) {return message2.channel.send(l.error.cant_load)}
                         if(args[1] == ``) {message2.channel.send(k.word.not_fond_user)}else{
                             let user = bot.users.cache.get(args[1])
@@ -751,7 +747,7 @@ else{message2.channel.send(k.divorce.hasnt)
                             let id = member.id
                             if(id === message2.author.id) {return message2.channel.send(k.pet.add.no_own)}
                             if(user2.pet.indexOf(id) === -1) {return message2.channel.send(k.pet.remove.no_pet)}
-                            loadUser(clientDB,member.id).then((user) => {
+                            Mongo.loadUser(clientDB,member.id).then((user) => {
                                 if (user === false){return message2.channel.send(k.word.not_fond_user)}else{
                             if(user2.pet.indexOf(member.id) != "-1") {
                                 message2.channel.send("🔄處理中").then((message) => {
@@ -765,7 +761,7 @@ else{message2.channel.send(k.divorce.hasnt)
                         message2.channel.send({embeds: [marry]}).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
-                    message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
+                    message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
@@ -777,13 +773,13 @@ else{message2.channel.send(k.divorce.hasnt)
                         if (index> -1) {array.splice(index, 1);}
                         var str2 = user.hostname
                         user.hostname = str2.replace(message2.author.username + "#" + message2.author.discriminator + "\n", '').replace(message2.author.username + "#" + message2.author.discriminator, '')
-                        writeUser(clientDB,member.id,user)
+                        Mongo.writeUser(clientDB,member.id,user)
                         var array2 = user2.pet
                         var index2 = array2.indexOf(member.id)
                         if (index2> -1) {array2.splice(index2, 1);}
                         var str2 = user2.petname
                         user2.petname = str2.replace(member.username + "#" + member.discriminator + "\n", '').replace(member.username + "#" + member.discriminator, '')
-                        writeUser(clientDB,message2.author.id,user2)
+                        Mongo.writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no")  {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                                 message.edit({embeds: [marry2]})
@@ -794,7 +790,7 @@ else{message2.channel.send(k.divorce.hasnt)
                             })}})})}}})}
                         }})
         }else if(args[0] === "disconnect") {
-            loadUser(clientDB,message2.author.id).then((user2) => {
+            Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
                 if (user2 === false) return message2.channel.send(l.error.cant_load)
                 let member = null;
                 let user=bot.users.cache.get(args[1])
@@ -804,13 +800,13 @@ else{message2.channel.send(k.divorce.hasnt)
                   let id = member.id
                   if(user2.host.indexOf(id) === -1) {return message2.channel.send(k.pet.disconnect.not_fond_host)}
                   message2.channel.send(k.word.processing).then((message) => {
-                    loadUser(clientDB,member.id).then((user) => {
+                    Mongo.loadUser(clientDB,member.id).then((user) => {
                         if (user === false) {return message.channel.send(k.word.not_fond_user)}else{
         let marry = new Discord.MessageEmbed().setTitle(k.pet.disconnect.sure).setDescription(k.pet.disconnect.answer)
         message2.channel.send({embeds: [marry]}).then((message) => {
             const filter = answer => {
                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
-    message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
+    message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
         .then((ms) => {
             if(ms.array()[0].content === "yes") {
         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
@@ -822,13 +818,13 @@ else{message2.channel.send(k.divorce.hasnt)
         if (index> -1) {array.splice(index, 1);}
         let str2 = user2.hostname
         user2.hostname = str2.replace(member.username + "#" + member.discriminator + "\n", '').replace(member.username + "#" + member.discriminator, '').replace(user2.name+"#"+ member.discriminator, '')
-        writeUser(clientDB,message2.author.id,user2)
+        Mongo.writeUser(clientDB,message2.author.id,user2)
         var array2 = user.pet
         var index2 = array2.indexOf(message2.author.id)
         if (index2> -1) {array2.splice(index2, 1);}
         let str3 = user.petname
         user.petname = str3.replace(message2.author.username + "#" + message2.author.discriminator + "\n", '').replace(message2.author.username + "#" + message2.author.discriminator, '').replace(user2.name + "#" + message2.author.discriminator, '')
-        writeUser(clientDB,member.id,user)
+        Mongo.writeUser(clientDB,member.id,user)
             }else if(ms.array()[0].content === "no")  {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                 message.edit({embeds: [marry2]})
@@ -865,7 +861,7 @@ else{message2.channel.send(k.divorce.hasnt)
         if (user) { member = user }else { member = message.author }
     } else { member = message.author }
     if(member){
-        loadUser(clientDB,member.id).then((user) => {
+        Mongo.loadUser(clientDB,member.id).then((user) => {
             if (user === false) {return message.channel.send(l.error.Not_found_Member)}
             let role = ""
             if(user.role.indexOf("S1_moneyA") != -1) {
@@ -968,7 +964,7 @@ else{message2.channel.send(k.divorce.hasnt)
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {return}else{
                     var adv = new Array();
                     if(user.adv.indexOf("notfound") == "-1") {"無"}else{adv.push("[ 好像打錯了...(˘•ω•˘) ] - 打錯指令\n")}

@@ -305,7 +305,7 @@ module.exports= {
               .setColor('#2d9af8') .setTitle(k.code.title).setDescription(codeX).setFooter(k.code.use+message.author.username)
               message.channel.send(codeEmbed).then((ms) => {
                 const filter = m => m.author.id == message.author.id;
-                ms.channel.awaitMessages(filter,{max: 1, time: 10000})
+                ms.channel.awaitMessages({filter,max: 1, time: 10000})
                   .then(collected => {
                     if(collected.first().content != codeX) {
                       let error = new Discord.MessageEmbed().setTitle(k.code.error).setDescription(k.code.tryagain).setFooter(k.code.use+message.author.username)

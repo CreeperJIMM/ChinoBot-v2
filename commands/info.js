@@ -4,10 +4,7 @@ const { version } = require('../config.json')
 const { prefix } = require('../config.json');
 const lan = require('../commands/lang.json');
 const infoX = require('../language/info.json');
-var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
+let Mongo = require("../function/MongoData")
 
 module.exports= {
     "userinfo":{
@@ -280,7 +277,7 @@ async function userinfo(bot,message,args,p,clientDB,language) {
             gameact = member.presence.activities[1].name
             }else{gameact = lang.word.none;gameing = ""}}else{gameact = lang.word.none;gameing = ""}
     if(member2.nickname == null) {nick = ""}else{nick = "("+member2.nickname+")"}
-    loadUser(clientDB,member.id).then((user) => {
+    Mongo.loadUser(clientDB,member.id).then((user) => {
         if (user === false) {
     const infoEmbed = new Discord.MessageEmbed()
       .setColor( clour )
@@ -335,7 +332,8 @@ async function userinfo(bot,message,args,p,clientDB,language) {
         .setFooter(h.user.footer.user+h.user.footer.data+p+"card"+h.user.footer.data2).setTimestamp()
         {message.channel.send({embeds: [infoEmbed]})}
       }}
-)}};
+)}
+}
 async function server(bot,message,ag,language) {
     let lang = lan.zh_TW,h = infoX.zh_TW
     if(language === "zh_TW") {lang = lan.zh_TW;h = infoX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = infoX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = infoX.ja_JP

@@ -35,8 +35,8 @@ module.exports = {
                         button2.setStyle('DANGER').setLabel("No").setCustomId("no")
                         let row = new Discord.MessageActionRow().addComponents(button1,button2)
                         message.reply({content:  h.clear["20more"],components: [row]}).then(async(draw) => {
-                            const filter = (button) => button.clicker.id === message.author.id
-                          draw.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                            const filter = (button) => button.user.id === message.author.id
+                          draw.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                                 .then(async collected => {
                                     api.ping(bot,collected)
                                     if (collected.customId === 'yes') {

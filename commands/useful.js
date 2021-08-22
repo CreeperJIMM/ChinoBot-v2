@@ -1,18 +1,9 @@
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 const fs = require('fs');
 const lan = require('../commands/lang.json');
 const useful = require('../language/useful.json');
-var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadping = async(client) => {
-  /*讀取公會檔案*/let dbo =client.db("mydb"),query = { "type": "ping" };
-  let user = await dbo.collection("report").find(query).toArray();
-  if(user[0] === undefined) return false;
-  user = user[0]
-  return user
-}
+let Mongo = require("../function/MongoData");
+let api = require("../function/apiping");
 module.exports = {
     "hi":{
       description: {zh_TW:"說嗨(?)",en_US:"Say hi(?)",ja_JP:""},
@@ -29,8 +20,8 @@ module.exports = {
           button2.setStyle('SUCCESS').setLabel("uwu").setCustomId("uwu")
           let row = new Discord.MessageActionRow().addComponents(button2)
             message.reply({content: lang.word.hihi ,components: [row]}).then((w) => {
-              const filter = (button) => button.clicker.id === message.author.id
-            w.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']}).then(async(buttons) => {
+              const filter = (button) => button.user.id === message.author.id
+            w.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']}).then(async(buttons) => {
               buttons = buttons
               await buttons.deferReply()
               await buttons.editReply("uwu")
@@ -56,7 +47,7 @@ module.exports = {
           message.channel.send("pong!").then(( lastMessage) => {
             let time2 = new Date(),DBtime = new Date()
             let time3 = (time2.getUTCMilliseconds() - time.getUTCMilliseconds())
-            loadping(clientDB).then((ping) => {
+            Mongo.loadping(clientDB).then((ping) => {
             let DB2 = (new Date().getUTCMilliseconds() - DBtime.getUTCMilliseconds())
             let time4 = new Date();
             if(lastMessage.content === `pong!`) {
@@ -411,7 +402,7 @@ module.exports = {
           let args = ag.join(" ")
           if(args == null || args == "") return message.channel.send(useful2.code.type_correct)
           if(code.indexOf(args) == "-1") {return message.channel.send(useful2.code.code_error)}else{
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
               fs.readFile('./code.json',function (err2,userInfo2) {
               if (user === false) {return message.channel.send()};
             var data = userInfo2.toString();data = JSON.parse(data);
@@ -420,7 +411,7 @@ module.exports = {
               if(data.update42.indexOf(message.author.id) != "-1") return message.channel.send(useful2.code.code_wasClean)
               message.channel.send(useful2.code.code_sueccess+"\n`100$`")
               user.money = user.money + 100
-              writeUser(clientDB,message.author.id,user)
+              Mongo.writeUser(clientDB,message.author.id,user)
               data.update42.push(message.author.id)
               var json2 = JSON.stringify(data);fs.writeFileSync('./code.json',json2);}
               if(args === "chino 1st anniversary") {
@@ -428,7 +419,7 @@ module.exports = {
                 message.channel.send(useful2.code.code_sueccess+"\n`200$` `Lv +1`\n智乃機器人一周年大禮!!")
                 user.money = user.money + 200
                 user.rank = user.rank +1
-                writeUser(clientDB,message.author.id,user)
+                Mongo.writeUser(clientDB,message.author.id,user)
                 data.update61.push(message.author.id)
                 var json2 = JSON.stringify(data);fs.writeFileSync('./code.json',json2);}
               if(args === "chino hbd") {
@@ -436,14 +427,14 @@ module.exports = {
                 message.channel.send(useful2.code.code_sueccess+"\n`400$` `Lv +2`\n記得祝智乃生日快樂唷!")
                 user.money = user.money + 300
                 user.rank = user.rank +2
-                writeUser(clientDB,message.author.id,user)
+                Mongo.writeUser(clientDB,message.author.id,user)
                 data.chinohbd.push(message.author.id)
                 var json2 = JSON.stringify(data);fs.writeFileSync('./code.json',json2);}
                 if(args === "repair") {
                   if(data.repair.indexOf(message.author.id) != "-1") return message.channel.send(useful2.code.code_wasClean)
                   message.channel.send(useful2.code.code_sueccess+"\n`100$`\n若有不便請見諒!")
                   user.money = user.money + 100
-                  writeUser(clientDB,message.author.id,user)
+                  Mongo.writeUser(clientDB,message.author.id,user)
                   data.repair.push(message.author.id)
                   var json2 = JSON.stringify(data);fs.writeFileSync('./code.json',json2);}
                 })
@@ -487,12 +478,6 @@ module.exports = {
             editEmbed(result2,w)
         })
       }
-      function ping(reply) {
-        bot.api.interactions(reply.discordID,reply.token).callback.post({
-            data: {
-            type: 6
-        }})
-    }
     function editEmbed(result2,msg) {
           let length = result2.items.length
           let embed = new Discord.MessageEmbed()
@@ -519,15 +504,15 @@ module.exports = {
           if(page === length) button2.setStyle('grey').setCustomId("right").setEmoji("➡").setDisabled(true)
           let row = new Discord.MessageActionRow().addComponents(button, button2);
           msg.edit(embed,row)
-          const filter = (button) => button.clicker.id === message.author.id
-          msg.awaitButtons(filter,{max: 1,time: 15000,errors:['time']})
-          .then(async(buttons) => {
-            button = buttons.first()
-            ping(button)
-            if(button.id === "left") {
+          const filter = (button) => button.user.id === message.author.id
+          msg.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
+            .then(collected => {
+            button = collected
+            api.ping(bot,button)
+            if(button.customId === "left") {
               page = page - 1
               return editEmbed(result2,msg)
-            }else if(button.id === "right") {
+            }else if(button.customId === "right") {
               page = page + 1
               return editEmbed(result2,msg)
             }

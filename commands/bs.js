@@ -346,8 +346,8 @@ module.exports = {
                 let row = new Discord.MessageActionRow().addComponents(buttonUP,buttonDOWN);
                 message.channel.send({embeds: [imgembed],components: [row]}).then((im) => {
                     let number = 1
-                    const filter = (button) => button.clicker.id === message.author.id
-                    im.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                    const filter = (button) => button.user.id === message.author.id
+                    im.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                           .then(collected => {
                             api.ping(bot,collected)
                             if (collected.customId == "read") {
@@ -382,8 +382,8 @@ module.exports = {
                         }
                         let row = new Discord.MessageActionRow().addComponents([[buttonUP,buttonDOWN],[buttonHOME,buttonJUMP,buttonEND]])
                         im.edit({embeds: [reading],components:[row]})
-                        const filter = (button) => button.clicker.id === message.author.id
-                        im.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                        const filter = (button) => button.user.id === message.author.id
+                        im.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                               .then(collected => {
                                         if (collected.customId == "last") {
                                             api.ping(bot,collected)

@@ -250,7 +250,7 @@ async function zh_TW(bot, msg, userlang,clientDB) {
               console.log(error)
           }
   }
-};
+}
 /////////////////////////// Rank ////////////////////////////
 let rank = new Set();
 function deleRank(message) {
@@ -276,7 +276,7 @@ async function detectrank(message,clientDB,client) {
         let user = cache
         rankMain.main(message,user,clientDB,client,1)
 }
-};
+}
 /////////////////////////////////////////////////////////////
 function deleteMessage(message,clientDB,client) {
 if (!message.guild) return;
