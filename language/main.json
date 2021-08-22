@@ -10,7 +10,8 @@
         "edited": "編輯後",
         "much": "大量",
         "file": "📎附件",
-        "Bulk": "則訊息被刪除"
+        "Bulk": "則訊息被刪除",
+        "msgid":"訊息ID:"
     },
     "zh_CN": {
         "channel":"频道",
@@ -23,7 +24,8 @@
         "edited": "编辑后",
         "much": "大量",
         "file": "📎附件",
-        "Bulk": "则讯息被删除"
+        "Bulk": "则讯息被删除",
+        "msgid":"讯息ID:"
     },
     "en_US": {
         "channel":"Channel",
@@ -36,7 +38,8 @@
         "edited": "After",
         "much": "Mass",
         "file": "📎File",
-        "Bulk": "messages delete"
+        "Bulk": "messages delete",
+        "msgid":"message ID:"
     },
     "ja_JP": {
         "channel":"Channel",
@@ -49,7 +52,8 @@
         "edited": "After",
         "much": "Mass",
         "file": "📎File",
-        "Bulk": "messages delete"
+        "Bulk": "messages delete",
+        "msgid":"message ID:"
     },
     "es_ES": {
 

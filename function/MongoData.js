@@ -59,3 +59,38 @@ module.exports.writeDaily = function (client, data) {
     if (err) return err;
   });
 }
+
+module.exports.loaddata = async (client) => {
+  /*讀取用戶檔案*/ let dbo = client.db("mydb"),
+    query = { id:"data" };
+  let user = await dbo.collection("status").find(query).toArray();
+  if (user[0] === undefined) return false;
+  user = user[0];
+  return user;
+};
+
+module.exports.writedata = function (client, data) {
+  /*寫入用戶檔案*/ let dbo = client.db("mydb"),
+    query = { id:"data" };
+  let user = dbo.collection("status").find(query).toArray();
+  var myquery = { id:"data" };
+  user = data;
+  var newvalues = { $set: user };
+  dbo.collection("status").updateOne(myquery, newvalues, function (err, res) {
+    if (err) return err;
+  });
+}
+module.exports.loadPicture = async(client) => {
+  /*讀取公會檔案*/let dbo =client.db("mydb"),query = { "type": "report" };
+  let user = await dbo.collection("report").find(query).toArray();
+  if(user[0] === undefined) return false;
+  user = user[0]
+  return user
+}
+module.exports.writePicture = function(client,data) {
+  /*寫入公會檔案*/let dbo =client.db("mydb"),query = { "type": "report" };
+  let user = dbo.collection("report").find(query).toArray();var myquery = { "type": "report"}
+  user = data;
+  var newvalues = {$set: user};
+  dbo.collection("report").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})
+}

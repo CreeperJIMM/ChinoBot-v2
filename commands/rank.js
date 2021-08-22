@@ -9,13 +9,13 @@ var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.d
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-const disbut = require('discord-buttons');
 let pooluser = new Set()
 function deletepool(id) {
     setTimeout(() => {
         pooluser.delete(id)
     }, 60000);
 }
+let api = require("../function/apiping")
 module.exports= {
     "rank":{
         description: {zh_TW:"查看經驗值",en_US:"View rank.",ja_JP:""},
@@ -48,7 +48,7 @@ module.exports= {
                 .setTitle(k.rank.title + user.rank)
                 .setDescription(k.rank.exp + user.exp + "/" + (1000+50*user.rank))
                 .setFooter(member.username + k.rank.card + ((1000+50*user.rank) - user.exp) + k.rank.card2)
-                message.channel.send(rankembed)
+                message.channel.send({embeds: [rankembed]})
                }
             })
         }
@@ -84,7 +84,7 @@ module.exports= {
                 .setTitle(k.money.money + user.money + "$")
                 .setDescription(k.money.daily + today)
                 .setFooter(member.username + k.money.wallet)
-                message.channel.send(rankembed)
+                message.channel.send({embeds: [rankembed]})
                }
             )}})
             }
@@ -117,6 +117,9 @@ module.exports= {
                 let money = 0
                 pooluser.add(message.author.id)
                 deletepool(message.author.id)
+                let button = new Discord.MessageButton()
+                button.setStyle('SUCCESS').setEmoji("🎣").setCustomId("pick")
+                let row = new Discord.MessageActionRow().addComponents(button)
                 switch (args[0]) {
                     case "fish":
                         let ro = "<:rope:872014636688494632>"
@@ -128,9 +131,7 @@ module.exports= {
                         🟦🟦🟦🟦🟦
                         🟦🟦🟦🟦🟦
                         `).setFooter(`${message.author.username} 的魚場`)
-                        let button = new disbut.MessageButton()
-                        button.setStyle('green').setEmoji("🎣").setID("pick")
-                        message.channel.send(fishMain,button).then((im) => {
+                        message.channel.send({embeds: [fishMain],components:[row]}).then((im) => {
                             work_fish(im)
                         })
                         break;
@@ -155,41 +156,40 @@ module.exports= {
                         let fishMain = new Discord.MessageEmbed()
                         .setTitle("釣魚場").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n${fish}🟦🟦🟦🟦`).setFooter(`${message.author.username} 的魚場\n[目前已賺到 ${money}$]`)
                         let num2 = Math.floor(Math.random()*10)
-                        im.edit(fishMain)
+                        im.edit({embeds: [fishMain],components:[row]})
                         setTimeout(() => {
                             fishMain.setTitle("釣魚場 [上鉤了 快收竿!]")
                             fishMain.setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦${fish}🟦🟦\n🟦🟦🟦🟦🟦`)
-                            im.edit(fishMain)
+                            im.edit({embeds: [fishMain],components:[row]})
                             close(fishMain)
                         }, num2*1000);
                     }, num*1000);
                     function close(fishMain) {
                         let num2 = Math.floor(Math.random()*4)
-                            const filter= (button) => {return ['pick'].includes(button.id) && button.clicker.id === message.author.id}
-                            im.awaitButtons(filter, { max: 1, time: 900+num2*1000, errors: ['time'] })
+                            const filter = (button) => button.clicker.id === message.author.id
+                            im.awaitMessageComponent(filter, { max: 1, time: 900+num2*1000, errors: ['time'] })
                                 .then(collected => {
-                                    const reaction = collected.first()
-                                    ping(reaction,bot)
+                                    api.ping(bot,collected)
                                     if(fishnum != 3) {
                                         fishMain.setTitle(`釣魚場 [恭喜賺到 ${price}]`).setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                         money = money + price
-                                        im.edit(fishMain)
+                                        im.edit({embeds: [fishMain],components:[row]})
                                         work_fish(im)
                                         }else{
                                             fishMain.setTitle("釣魚場 [你釣到炸彈!] [遊戲結束]").setDescription(`⬛⬛💀⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                            im.edit(fishMain)
+                                            im.edit({embeds: [fishMain],components:[row]})
                                             user.money = user.money + money
                                             writeUser(clientDB,message.author.id,user)
                                         }                                    
                                 }).catch((err) => {
                                     if(fishnum != 3) {
                                     fishMain.setTitle("唉呀! 魚跑走了:( [遊戲結束]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                    im.edit(fishMain)
+                                    im.edit({embeds: [fishMain],components:[row]})
                                     user.money = user.money + money
                                     writeUser(clientDB,message.author.id,user)
                                     }else{
                                         fishMain.setTitle("釣魚場 [已跳過炸彈]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                        im.edit(fishMain)
+                                        im.edit({embeds: [fishMain],components:[row]})
                                         work_fish(im)
                                     }
                                 })
@@ -252,7 +252,7 @@ module.exports= {
                 .setTitle(k.daily.clean)
                 .setDescription(k.daily.dec+user.worktoal.work+k.daily.dec2+(user.worktoal.work)*5+k.daily.dec3)
                 .setFooter(message.author.username + k.daily.pay)
-                message.channel.send(rankembed)
+                message.channel.send({embeds: [rankembed]})
                 
                }})}
             })
@@ -306,7 +306,7 @@ module.exports= {
             .setTitle(k.level.ranking.title)
             .setDescription(k.level.ranking.desc+"```js\n"+list.join("\n") + "\n```")
             .setFooter(k.level.ranking.footer)
-            message.channel.send(levelembed)
+            message.channel.send({embeds: [levelembed]})
         }, 600);
         })}
     },
@@ -360,7 +360,7 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send(levelembed)
+            message.channel.send({embeds: [levelembed]})
         }, 600);
     })
     }},
@@ -401,7 +401,7 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send(levelembed)
+            message.channel.send({embeds: [levelembed]})
         }, 600);
     })
     }},
@@ -518,7 +518,7 @@ module.exports= {
                 .addField("日本語","`ja_JP`")
                 .setFooter("◆本翻譯不是100%準確.\nThis translation is not 100% accurate.")
                 .setTimestamp()
-                message.channel.send(langembed)
+                message.channel.send({embeds: [langembed]})
                 })
             }
         }
@@ -526,7 +526,7 @@ module.exports= {
     "pay": {
         description: {zh_TW:"設置語言",en_US:"Set your languages.",ja_JP:""},
         authority: "everyone",
-        instructions: "language [lang]",
+        instructions: "pay [@muention/ID＊] [money]",
         category: "money",
         vote: true,
         help: false,
@@ -566,7 +566,7 @@ module.exports= {
                     let pay = new Discord.MessageEmbed().setTitle(k.pay.pay+user.name+" "+args[1]+"$")
                     .setDescription(k.pay.you_will+" `" + args[1] + "`$ "+k.pay.give+" **" + user.name + "**\n"+k.pay.now_you+" `" + user2.money + "`$ \n" + user.name + " "+k.pay.now_have+" `" + user.money + "` $")
                     .setFooter("[$] "+k.pay.handing_free+"\n"+k.pay.extra+ Math.floor(parseInt(args[1])* 0.02) +"$ "+k.pay.give_someone).setTimestamp()
-                    message.channel.send(pay)
+                    message.channel.send({embeds: [pay]})
                     writeUser(clientDB,member.id,user)
                     writeUser(clientDB,message.author.id,user2)
                 }
@@ -608,26 +608,26 @@ module.exports= {
                     .setTitle(k.marry.timer)
                     .setDescription(k.marry.answer)
                     message.edit("<@" + member.id + "> ")
-                message.channel.send(marry).then((message) => {
+                message.channel.send({embeds: [marry]}).then((message) => {
                         const filter = answer => {
                             return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                 message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
                     .then((ms) => {
                         if(ms.array()[0].content === "yes") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                    message.edit(marry2);
+                    message.edit({embeds: [marry2]});
                     let marry1 = new Discord.MessageEmbed().setTitle(k.marry.marry_complete).setDescription(user2.name + "💕" + user.name).setFooter(k.marry.marry_complete2).setTimestamp()
-                    message.channel.send(marry1);
+                    message.channel.send({embeds: [marry1]});
                     user.marry = message2.author.id
                     writeUser(clientDB,member.id,user)
                     user2.marry = member.id
                     writeUser(clientDB,message2.author.id,user2)
                 }else if(ms.array()[0].content === "no") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                        message.edit(marry2)}
+                        message.edit({embeds: [marry2]})}
                     }).catch(() => {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                        message.edit(marry2)});
+                        message.edit({embeds: [marry2]})});
                })}else{message.edit(k.marry.has_someone)}
             }})})}}}
     else{message2.channel.send(k.marry.you_have)
@@ -661,19 +661,19 @@ module.exports= {
                 .then((ms) => {
                     if(ms.array()[0].content === "yes") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                message.edit(marry2);
+                message.edit({embeds: [marry2]});
                 let marry1 = new Discord.MessageEmbed().setTitle(k.divorce.divorce).setDescription(user2.name + "💔" + user.name).setFooter(k.divorce.divorce2).setTimestamp()
-                message.channel.send(marry1);
+                message.channel.send({embeds: [marry1]});
                 user.marry = ""
                 writeUser(clientDB,other,user)
                 user2.marry = ""
                 writeUser(clientDB,message2.author.id,user2)
             }else if(ms.array()[0].content === "no") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit(marry2)}
+                message.edit({embeds: [marry2]})}
                 }).catch(() => {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                    message.edit(marry2)});
+                    message.edit({embeds: [marry2]})});
                     })}})}
 else{message2.channel.send(k.divorce.hasnt)
 }
@@ -711,14 +711,14 @@ else{message2.channel.send(k.divorce.hasnt)
                         .setTitle(k.pet.add.timer)
                         .setDescription(k.pet.add.answer)
                         message.edit("<@" + member.id + "> ")
-                    message.channel.send(marry).then((message) => {
+                    message.channel.send({embeds: [marry]}).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                     message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                        message.edit(marry2);
+                        message.edit({embeds: [marry2]});
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.add.complete_adot).setDescription(user2.name + "🔗" + user.name).setFooter(k.pet.add.complete_adot2).setTimestamp()
                         message.channel.send(marry1);
                         user.host.push(message2.author.id)
@@ -729,11 +729,11 @@ else{message2.channel.send(k.divorce.hasnt)
                         writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no") {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit(marry2)
+                                message.edit({embeds: [marry2]})
                             }
                         }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit(marry2)});
+                            message.edit({embeds: [marry2]})});
                    })
                 }})})}
         }})}else if(args[0] === "remove") {
@@ -762,16 +762,16 @@ else{message2.channel.send(k.divorce.hasnt)
                         let marry = new Discord.MessageEmbed()
                         .setTitle(k.pet.remove.sure)
                         .setDescription(k.pet.remove.answer)
-                        message2.channel.send(marry).then((message) => {
+                        message2.channel.send({embeds: [marry]}).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
                     message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                        message.edit(marry2);
+                        message.edit({embeds: [marry2]});
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.remove.remome_adot).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.remove.remove_adot2).setTimestamp()
-                        message.channel.send(marry1);
+                        message.channel.send({embeds: [marry1]});
                         var array = user.host
                         var index = array.indexOf(message2.author.id)
                         if (index> -1) {array.splice(index, 1);}
@@ -786,11 +786,11 @@ else{message2.channel.send(k.divorce.hasnt)
                         writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no")  {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit(marry2)
+                                message.edit({embeds: [marry2]})
                             }
                     }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit(marry2)});
+                            message.edit({embeds: [marry2]})});
                             })}})})}}})}
                         }})
         }else if(args[0] === "disconnect") {
@@ -807,16 +807,16 @@ else{message2.channel.send(k.divorce.hasnt)
                     loadUser(clientDB,member.id).then((user) => {
                         if (user === false) {return message.channel.send(k.word.not_fond_user)}else{
         let marry = new Discord.MessageEmbed().setTitle(k.pet.disconnect.sure).setDescription(k.pet.disconnect.answer)
-        message2.channel.send(marry).then((message) => {
+        message2.channel.send({embeds: [marry]}).then((message) => {
             const filter = answer => {
                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
     message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
         .then((ms) => {
             if(ms.array()[0].content === "yes") {
         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-        message.edit(marry2);
+        message.edit({embeds: [marry2]});
         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.disconnect.disconnect).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.disconnect.disconnect2).setTimestamp()
-        message.channel.send(marry1);
+        message.channel.send({embeds: [marry1]});
         var array = user2.host
         var index = array.indexOf(member.id)
         if (index> -1) {array.splice(index, 1);}
@@ -831,7 +831,7 @@ else{message2.channel.send(k.divorce.hasnt)
         writeUser(clientDB,member.id,user)
             }else if(ms.array()[0].content === "no")  {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit(marry2)
+                message.edit({embeds: [marry2]})
             }
         })
         })}})})})
@@ -841,7 +841,7 @@ else{message2.channel.send(k.divorce.hasnt)
 
         }else{
             let pethelp = new Discord.MessageEmbed().setColor( message2.member.roles.highest.color).setTitle(k.pet.help.title).setDescription(k.pet.help.desc).setTimestamp()
-            message2.channel.send(pethelp)
+            message2.channel.send({embeds: [pethelp]})
         }
     }
 },
@@ -898,7 +898,7 @@ else{message2.channel.send(k.divorce.hasnt)
         .addField(k.card.work_all + user.work + k.card.times+" \n"+k.card.work_last + user.worktoal.work + l.date.day,k.card.work_first + user.time)
         .setFooter(k.card.ID_card+" ▋▏▎▍▋▍▋▏▏▍▋▏▍▍▋▏▋▍▉▏▍")
         .setTimestamp()
-        message.channel.send(userdata)
+        message.channel.send({embeds: [userdata]})
 })}
 }},
     "permissions": {
@@ -937,7 +937,7 @@ else{message2.channel.send(k.divorce.hasnt)
                 guild = bot.guilds.cache.get(args[0])
             }else{
                 guild = message.guild;}
-            guild.fetchBans()
+            guild.bans.fetch()
     .then(banned => {
         let list = banned.map(ban => ban.user.tag).join('\n');
 
@@ -984,7 +984,7 @@ else{message2.channel.send(k.divorce.hasnt)
                     .setTitle(message.member.displayName + " 成就表")
                     .setDescription(message.author.username+"#"+message.author.discriminator)
                     .addField("🏅成就表","\n " + adv)
-                    message.channel.send(advs)
+                    message.channel.send({embeds: [advs]})
                 }})
         }}
 }
@@ -1011,27 +1011,26 @@ async function access(bot,message,args,clientDB,language) {
          }else { member = message.member }
     } else { member = message.member }
     if(member){
-    if(member.presence.member.hasPermission(['ADMINISTRATOR'])) {var admi = "✅"}else{var admi = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_CHANNELS'])) {var manage = "✅"}else{var manage = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_GUILD'])) {var guild = "✅"}else{var guild = "❌"}
-    if(member.presence.member.hasPermission(['VIEW_AUDIT_LOG'])) {var log = "✅"}else{var log = "❌"}
-    if(member.presence.member.hasPermission(['KICK_MEMBERS'])) {var kick = "✅"}else{var kick = "❌"}
-    if(member.presence.member.hasPermission(['BAN_MEMBERS'])) {var ban = "✅"}else{var ban = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_ROLES'])) {var role = "✅"}else{var role = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_WEBHOOKS'])) {var hook = "✅"}else{var hook = "❌"}
-    if(member.presence.member.hasPermission(['MENTION_EVERYONE'])) {var tag = "✅"}else{var tag = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_EMOJIS'])) {var emoji = "✅"}else{var emoji = "❌"}
-    if(member.presence.member.hasPermission(['MANAGE_MESSAGES'])) {var msg = "✅"}else{var msg = "❌"}
-    if(member.presence.member.hasPermission(['CREATE_INSTANT_INVITE'])) {var inv = "✅"}else{var inv = "❌"}
-    try {
-     if(guild2.owner.user.id == member.id) {var owner = "👑 是"}else{var owner = "💂‍♂️ 否"}   
-    } catch (error) {var owner = "❓"} 
+    if(member.presence.member.permissions.has(['ADMINISTRATOR'])) {var admi = "✅"}else{var admi = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_CHANNELS'])) {var manage = "✅"}else{var manage = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_GUILD'])) {var guild = "✅"}else{var guild = "❌"}
+    if(member.presence.member.permissions.has(['VIEW_AUDIT_LOG'])) {var log = "✅"}else{var log = "❌"}
+    if(member.presence.member.permissions.has(['KICK_MEMBERS'])) {var kick = "✅"}else{var kick = "❌"}
+    if(member.presence.member.permissions.has(['BAN_MEMBERS'])) {var ban = "✅"}else{var ban = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_ROLES'])) {var role = "✅"}else{var role = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_WEBHOOKS'])) {var hook = "✅"}else{var hook = "❌"}
+    if(member.presence.member.permissions.has(['MENTION_EVERYONE'])) {var tag = "✅"}else{var tag = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_EMOJIS'])) {var emoji = "✅"}else{var emoji = "❌"}
+    if(member.presence.member.permissions.has(['MANAGE_MESSAGES'])) {var msg = "✅"}else{var msg = "❌"}
+    if(member.presence.member.permissions.has(['CREATE_INSTANT_INVITE'])) {var inv = "✅"}else{var inv = "❌"}
+    let owners = await guild2.fetchOwner(),owner = "❓"
+    if(owners.user.id == member.id) {owner = "👑 是"}else{owner = "💂‍♂️ 否"}   
     let acc = new Discord.MessageEmbed()
     .setColor(member.presence.member.roles.highest.color)
     .setTitle(member.user.username +k.prem.perm+k.prem.in+guild2.name)
     .setDescription(k.prem.hight + "<@&" + member.presence.member.roles.highest + "> \n"+k.prem.owner+ owner)
     .addField(k.prem.prem2, `${l.prem.ADMINISTRATOR} `+admi+`\n${l.prem.manage_guild} `+guild+`\n${l.prem.manage_channel} `+manage+`\n${k.prem.log} `+log+`\n${l.prem.kick_members} `+kick+ `\n${l.prem.ban_members} `+ban+`\n${l.prem.manage_roles} `+role+`\n${l.prem.manage_messages} `+msg+`\n${l.prem.manage_webhooks} `+hook+`\n${l.prem.mention_everyone} `+tag+`\n${k.prem.emoji} `+emoji+`\n${k.prem.ink} `+inv)
-    message.channel.send(acc)
+    message.channel.send({embeds: [acc]})
     }
 };
 async function payto(bot, message ,args) {
@@ -1039,9 +1038,3 @@ async function payto(bot, message ,args) {
         payd.delete(message.author.id)
     }, 20000);
 };
-function ping(reply,bot) {
-    bot.api.interactions(reply.discordID,reply.token).callback.post({
-        data: {
-        type: 6
-    }})
-}

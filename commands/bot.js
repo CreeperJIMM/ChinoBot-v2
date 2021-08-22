@@ -4,11 +4,7 @@ const request = require("request");
 const lan = require('../commands/lang.json');
 let BotOnline = require("../function/BotOnline")
 const gameX = require('../language/bot.json');
-var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-
+let Mongo = require("../function/MongoData")
 module.exports= {
     "setupuser":{
         description: {zh_TW:"手動生成用戶資料",en_US:"To spawn user data.",ja_JP:""},
@@ -21,7 +17,7 @@ module.exports= {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            loadUser(clientDB, message.author.id).then((user) => {
+            Mongo.loadUser(clientDB, message.author.id).then((user) => {
             if (user === false) {
             var obj = {
                 name: [message.author.username],
@@ -105,7 +101,7 @@ module.exports= {
             .setTitle(k.bot.info)
             .addField(k.ram.all, (usedMemory/ Math.pow(1024, 3)).toFixed(2) +"GB / " + (totalMemory/ Math.pow(1024, 3)).toFixed(2) + "GB" )
             .addField(k.ram.use , getpercentage);
-             message.channel.send(ramEmbed);
+             message.channel.send({embeds: [ramEmbed]});
         }
     },
     "cpu": {
@@ -128,7 +124,7 @@ module.exports= {
             .addField(k.cpu.all, (2.50 - f).toFixed(2) + "Ghz / "+ "2.50" + "Ghz" )
             .addField(k.cpu.use , (((2.50 - f).toFixed(2) /2.50) *100).toFixed(2) + "%")
             .addField(k.cpu.runing, (os.sysUptime()/60).toFixed(1) + l.time.minute )
-             message.channel.send(cpuEmbed);
+             message.channel.send({embeds: [cpuEmbed]});
             })            
             } catch (error) {
              message.channel.send(`Error!\n\`\`\`js\n${error}\n\`\`\``)   
@@ -234,7 +230,7 @@ module.exports= {
             let user = await dbo.collection("users").find(query).toArray();
             for (let file of user) {
                  try {
-                    loadUser(clientDB,user.id).then((data) => {
+                    Mongo.loadUser(clientDB,user.id).then((data) => {
                     if(!data) return list.push(file.id)
                     if(!data.id) return list.push(file.id)
                     if(isNaN(data.money)) list.push(file.id)
@@ -253,7 +249,7 @@ module.exports= {
             let guser = await dbo.collection("guilds").find(query).toArray();
             for (let file of guser) {
                 try {
-                   loadUser(clientDB,guser.id).then((data) => {
+                   Mongo.loadUser(clientDB,guser.id).then((data) => {
                    if(!data) return guildlist.push(file.id)
                    if(!data.id) return guildlist.push(file.id)
                    })
@@ -357,7 +353,7 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if (message.author.id !== '546144403958398988') return;
             var list = new Array();
-            for(let guild_ of bot.guilds.cache.array()) {
+            bot.guilds.cache.forEach((guild_) => {
                 if(guild_.memberCount < 10) {
                     var exp = "000"+ guild_.memberCount}
                 else if(guild_.memberCount < 100) {
@@ -367,7 +363,7 @@ module.exports= {
                     else{var exp = guild_.memberCount}
                 list.push(exp+" | "+guild_.name+" | "+guild_.id)
                 list.sort(function(a, b) {return a > b;})
-            }
+            })
             setTimeout(() => {
                 list.sort();
                 list.splice(40);
@@ -378,7 +374,7 @@ module.exports= {
                     .setTitle("📦所有咖啡廳☕")
                     .setDescription("群名稱| ID        |  成員數\n ```js\n"+list.join("\n") + "\n```")
                     .setFooter("此為全部群")
-                    message.channel.send(levelembed)
+                    message.channel.send({embeds: [levelembed]})
                 }, 1000);
         }
     },
@@ -419,7 +415,7 @@ module.exports= {
             .addField("智乃小幫手•Canary#9156",k.status.inv3+"\n"+user.chinoc.member+"  |  "+user.chinoc.guild+"  |  "+user.chinoc.status+" |  `cr*`  |  ❌  |  ❌  |  ❌  |  ✅  |  ❌  |[測試用暫不開放]")
             .setFooter(k.status.footer)
             .setTimestamp()
-            message.channel.send(bot)
+            message.channel.send({embeds: [bot]})
         }})
         }
     },
@@ -436,11 +432,10 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             message.channel.send("<a:load:776980097054933063> "+k.post.loading).then((loadmessage) => {
             let bots = message.guild.me
-            fs.readFile('./data.json',function (err, userInfo) {
-                if(err) {return message.channel.send(l.error.Run_Command_error)}
-                var user = userInfo.toString();
-                user = JSON.parse(user);
+            Mongo.loaddata(clientDB).then((user) => { 
+                if(!user) {return message.channel.send(l.error.Run_Command_error)}
                 let Time = new Date()
+                user = user.data
             setTimeout(() => {
                 let post = new Discord.MessageEmbed()
                 .setColor('#2d9af8').setTitle(k.post.title)
@@ -450,8 +445,9 @@ module.exports= {
                 .addField(k.post.update,"```json\n"+user.post.update+"\n```")
                 .setFooter(k.post.time+user.post.time+" | ").setTimestamp()
                 loadmessage.edit(k.post.success_load)
-                loadmessage.edit(post)
+                loadmessage.edit({embeds: [post]})
             }, 2000);
-        })})}
+        })
+    })}
     },
 }

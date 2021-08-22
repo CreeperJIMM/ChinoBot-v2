@@ -26,7 +26,7 @@ module.exports = {
             .setDescription(h.help.desc +p+ h.help.desc2 +p+ h.help.desc3)
             .addField(h.help.addA ,h.help.addF +p+h.help.addF2+p+h.help.addF3+p+h.help.addF4+p+h.help.addF5+p+h.help.addF6+bot.user.id+h.help.addF7+p+h.help.addF8+p+h.help.addF9)
             .setFooter(h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-            {message.channel.send(helpEmbed)};
+            {message.channel.send({embeds: [helpEmbed]})};
         }
     },
     "oldcommand":{
@@ -96,7 +96,7 @@ module.exports = {
             .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
             .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
             .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send(invEmbed)};
+          {message.channel.send({embeds: [invEmbed]})};
         }
     },
     "inv":{
@@ -124,7 +124,7 @@ module.exports = {
             .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
             .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
             .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send(invEmbed)};
+          {message.channel.send({embeds: [invEmbed]})};
         }
     },
     "ver":{
@@ -178,7 +178,7 @@ const helpEmbed = new Discord.MessageEmbed()
 .addField(`${h.ver.use} ${p} ver [${h.ver.pages}]`, `${h.ver.all} 4 ${h.ver.page}`)
 .setTimestamp()
 .setFooter(`[${h.ver.the} 0 ${h.ver.page}]\n${h.word.creater} ${h.word.me}  ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-{message.channel.send(helpEmbed)};
+{message.channel.send({embeds: [helpEmbed]})};
 }
 async function ver1(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -211,7 +211,7 @@ async function ver1(bot,message,language) {
     .addField('0.9.0 (7/29)','修復&指令優化+新增猜拳指令')
     .setTimestamp()
     .setFooter(`[${h.ver.the} 1/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send(helpEmbed)};
+    {message.channel.send({embeds: [helpEmbed]})};
 }
 async function ver2(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -246,7 +246,7 @@ async function ver2(bot,message,language) {
     .addField('2.9.0 (9/27)',"加入離開設置優化")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 2/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send(helpEmbed)};
+    {message.channel.send({embeds: [helpEmbed]})};
 }
 async function ver3(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -271,7 +271,7 @@ async function ver3(bot,message,language) {
     .addField('3.9.0 (11/14)',"公告指令 狀態指令\n修復部分bug")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 3/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send(helpEmbed)};
+    {message.channel.send({embeds: [helpEmbed]})};
 }
 async function ver4(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -284,7 +284,7 @@ async function ver4(bot,message,language) {
     .addField('4.0.0 (10/1)',"新增fubuki chen  gay指令")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 4/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send(helpEmbed)};
+    {message.channel.send({embeds: [helpEmbed]})};
 }
 async function help(bot,message,language,p,args) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -298,7 +298,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.common.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆11 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "rabbit") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -307,7 +307,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.rabbit.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆10 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "admin") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -316,7 +316,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.admin.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆6 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "music") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -325,7 +325,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.music.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆10+ ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "other") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -334,7 +334,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.other.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆6 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "money") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -343,7 +343,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.money.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆5 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "level") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -352,7 +352,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.level.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆2 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "user") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -361,7 +361,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.user.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆7 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "game") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -370,7 +370,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.game.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆11 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "text") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -379,7 +379,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.text.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆2 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed);
+        message.channel.send({embeds: [helpEmbed]});
     }else if(args[0] == "all") {
         const helpEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
@@ -399,7 +399,7 @@ async function help(bot,message,language,p,args) {
             )
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆64 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        {message.channel.send(helpEmbed)};
+        {message.channel.send({embeds: [helpEmbed]})};
     }else{
         const helpEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
@@ -407,7 +407,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.word.pass+" `"+p+h.command.word.help)
         .addField(h.command.word.addF, h.command.word.addV)
         .setFooter(`${h.word.creater} ${h.word.me}\n${h.word.copy}`)
-        message.channel.send(helpEmbed)
+        message.channel.send({embeds: [helpEmbed]})
     }
 }
 function newcmd(bot,message,language,p,args) {
@@ -466,7 +466,7 @@ function newcmd(bot,message,language,p,args) {
             helpEmbed.fields.sort(function(a, b) {
                 return b.name - a.name;
             })
-            message.channel.send(helpEmbed)     
+            message.channel.send({embeds: [helpEmbed]})     
         }, 400);
     }else if(a.indexOf(args[0]) === -1) {
         const helpEmbed = new Discord.MessageEmbed()
@@ -477,7 +477,7 @@ function newcmd(bot,message,language,p,args) {
         .setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
         a.pop()
         helpEmbed.addField("[參數]",a.join("\n")+"\n或者你打 `all` 可以查看全部類別的指令",true)
-        message.channel.send(helpEmbed)
+        message.channel.send({embeds: [helpEmbed]})
     }else{
         const helpEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
@@ -500,6 +500,6 @@ function newcmd(bot,message,language,p,args) {
             }
         }
         helpEmbed.setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send(helpEmbed)
+        message.channel.send({embeds: [helpEmbed]})
 }
 }

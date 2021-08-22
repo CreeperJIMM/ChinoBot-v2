@@ -1,3 +1,4 @@
+const { setupMaster } = require("cluster");
 const Discord = require("discord.js")
 let fs =require("fs");
 const lan = require('../commands/lang.json');
@@ -57,7 +58,7 @@ module.exports= {
                 sethelpEmbed.addField(k.setup.cmd.help , k.setup.cmd.help2)
                 sethelpEmbed.addField(k.setup.cmd.other,k.setup.cmd.other2)
                 sethelpEmbed.addField(k.setup.cmd.set,k.setup.cmd.set2)
-                message.channel.send(sethelpEmbed);
+                message.channel.send({embeds:[sethelpEmbed]});
             }else{
               if(!message.guild) return message.channel.send(l.error.No_DM)
               loadGuild(clientDB,message.guild.id).then((ser) => {
@@ -108,7 +109,7 @@ module.exports= {
                 .setTitle(k.help.text.title)
                 .setDescription(k.help.text.desc)
                 .setImage('https://cdn.discordapp.com/attachments/611040945495998464/746265308083519488/a59e501bd38b6299.gif')
-                message.channel.send(textEmbed);
+                message.channel.send({embeds: [textEmbed]});
             }
         }
     },
@@ -125,7 +126,7 @@ module.exports= {
                 .setTitle(k.help.voice.title)
                 .setDescription(k.help.voice.desc)
                 .setImage('https://cdn.discordapp.com/attachments/611040945495998464/746265305042387074/1bca1519d1f116e3.gif')
-                message.channel.send(voiceEmbed);
+                message.channel.send({embeds: [voiceEmbed]});
             }
         }
     },
@@ -141,7 +142,7 @@ module.exports= {
               let voiceEmbed = new Discord.MessageEmbed()
               .setTitle(k.help.join.title)
               .setDescription(k.help.join.desc)
-              message.channel.send(voiceEmbed);
+              message.channel.send({embeds: [voiceEmbed]});
           }
       }
   },
@@ -157,7 +158,7 @@ module.exports= {
             let voiceEmbed = new Discord.MessageEmbed()
             .setTitle(k.help.leave.title)
             .setDescription(k.help.leave.desc)
-            message.channel.send(voiceEmbed);
+            message.channel.send({embeds: [voiceEmbed]});
             }
         }
     },
@@ -179,26 +180,27 @@ module.exports= {
                 if(user.text2.indexOf(message.channel.id) != "-1") {
                   message.channel.send(k.word.crateing)
                 let name = message.author.username;
-                let gid = message.channel.parentID
-                message.channel.clone({name: name + k.text.channel} , {type: 'text'}, {reason: '請使用 cr!clo 關閉' })
+                let gid = message.channel.parentId
+                let site = message.channel.parent.children.size
+                message.channel.clone({name: name + k.text.channel} , {type: 'text',reason: '請使用 cr!clo 關閉',position: site})
                 .then(Channel => {
-                  code.delete(message.author.id)
+                  code.delete(message.author.id)               
                   Channel.setParent(gid , { lockPermissions: true })
                   let id = Channel.id
                   setTimeout(() => {
-                    Channel.createOverwrite(message.guild.me ,{
+                    Channel.permissionOverwrites.create(message.guild.me ,{
                       SEND_MESSAGES: true,
                       MANAGE_CHANNELS: true,
                       VIEW_CHANNEL: true})
-                    Channel.createOverwrite(message.author, {
+                    Channel.permissionOverwrites.create(message.author, {
                         SEND_MESSAGES: true,
                         MANAGE_CHANNELS: true,
                         VIEW_CHANNEL: true})}, 2000);
+                        Channel.setPosition(site)
                   message.channel.send(k.text.crated+" <#"+ id + ">")
                   Channel.send("<@" + message.author.id + "> "+k.text.help)
                   user.text.push(Channel.id)
-                  writeGuild(clientDB,message.guild.id,user).catch((err) => {
-                if(err) { message.channel.send(k.word.Error_create)}})
+                  writeGuild(clientDB,message.guild.id,user)
         })}else{message.channel.send(k.text.No_create)}}});
         }
     },
@@ -214,14 +216,12 @@ module.exports= {
           if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
           }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
           if(!message.guild) return message.channel.send(l.error.No_DM)
-          if(!message.guild.me.hasPermission(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
-          if(!message.channel.permissionOverwrites.get(message.author.id)) return message.channel.send(k.text.No_owner)
+          if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
+          if(!message.channel.permissionOverwrites.cache.get(message.author.id)) return message.channel.send(k.text.No_owner)
           loadGuild(clientDB,message.guild.id).then((user) => {
             if (user === false) {
                   message.channel.send(k.word.No_setup)
                 }else{
-                  var user = userInfo.toString();
-                  user = JSON.parse(user);
                   if(user.text.indexOf(message.channel.id) != "-1") {message.channel.send(k.text.close)
                   setTimeout(function(){ message.channel.delete() } ,1200);
                   var array = user.text
@@ -249,34 +249,34 @@ module.exports= {
         loadGuild(clientDB,message.guild.id).then((user) => {
           if (user === false) return message.channel.send("❌發生錯誤!")
                 if(user.text.indexOf(message.channel.id) != "-1") {
-                  if(!message.guild.me.hasPermission(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me+l.prem.manage_channel)
-                  if(!message.channel.permissionOverwrites.get(message.author.id)) return message.channel.send(k.text.No_owner)
+                  if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me+l.prem.manage_channel)
+                  if(!message.channel.permissionOverwrites.cache.get(message.author.id)) return message.channel.send(k.text.No_owner)
                   if(args[0] == "name") {
-                    message.channel.setName(text.join(" ")).then(() => {
-                    message.channel.send(k.text.set.name+ text.join(" "))}).catch(k.text.set.name_err)
+                    message.channel.setName(text.join(" ").replace("name","")).then(() => {
+                    message.channel.send(k.text.set.name+ text.join(" ").replace("name",""))}).catch(k.text.set.name_err)
                   }else if(args[0] == "self") {
-                    if(!message.member.guild.me.hasPermission(['MANAGE_ROLES'])) {return message.channel.send(k.text.set.no_perm)}
-                    message.channel.createOverwrite(message.author, {
+                    if(!message.member.guild.me.permissions.has(['MANAGE_ROLES'])) {return message.channel.send(k.text.set.no_perm)}
+                    message.channel.permissionOverwrites.create(message.author, {
                       SEND_MESSAGES: true,
                       MANAGE_CHANNELS: true,
                       VIEW_CHANNEL: true})
-                      message.channel.createOverwrite(message.guild.me ,{
+                      message.channel.permissionOverwrites.create(message.guild.me ,{
                         SEND_MESSAGES: true,
                         VIEW_CHANNEL: true})
-                    message.channel.createOverwrite(message.guild.roles.everyone ,{
+                    message.channel.permissionOverwrites.create(message.guild.roles.everyone ,{
                       SEND_MESSAGES: false,
                       VIEW_CHANNEL: false})
                     message.channel.send(k.text.set.self)
                   }else if(args[0] == "open") {
-                    if(!message.member.guild.me.hasPermission(['MANAGE_ROLES'])) {return message.channel.send(k.text.set.no_perm)}
-                    message.channel.createOverwrite(message.author, {
+                    if(!message.member.guild.me.permissions.has(['MANAGE_ROLES'])) {return message.channel.send(k.text.set.no_perm)}
+                    message.channel.permissionOverwrites.create(message.author, {
                       SEND_MESSAGES: null,
                       MANAGE_CHANNELS: true,
                       VIEW_CHANNEL: null})
-                    message.channel.createOverwrite(message.guild.roles.everyone ,{
+                    message.channel.permissionOverwrites.create(message.guild.roles.everyone ,{
                       SEND_MESSAGES: null,
                       VIEW_CHANNEL: null})
-                      message.channel.createOverwrite(message.guild.me ,{
+                      message.channel.permissionOverwrites.create(message.guild.me ,{
                         SEND_MESSAGES: null,
                         VIEW_CHANNEL: null})
                     message.channel.send(k.text.set.open)
@@ -309,16 +309,16 @@ module.exports= {
                   .then(collected => {
                     if(collected.first().content != codeX) {
                       let error = new Discord.MessageEmbed().setTitle(k.code.error).setDescription(k.code.tryagain).setFooter(k.code.use+message.author.username)
-                      return ms.edit(error);
+                      return ms.edit({embeds: [error]});
                     }
                     let codeEmbed2 = new Discord.MessageEmbed()
               .setColor('#2d9af8') .setTitle(k.code.pass) .setDescription(k.code.pass2).setFooter(k.code.use+message.author.username).setTimestamp()
-                ms.edit(codeEmbed2)
+                ms.edit({embeds: [codeEmbed2]})
                 code.add(message.author.id)
                 collected.first().delete()
             }).catch(err => {
               let error = new Discord.MessageEmbed().setTitle(k.code.error).setDescription(k.code.tryagain).setFooter(k.code.use+message.author.username)
-              ms.edit(error)
+              ms.edit({embeds: [error]})
                   })
               })
         }
@@ -335,7 +335,7 @@ module.exports= {
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
         }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
         if(!message.guild) return message.channel.send(l.error.No_DM);
-        if(!message.member.hasPermission(['MENTION_EVERYONE'])) if(message.author.id == '546144403958398988') {}else{return message.channel.send("❌你沒有足夠的權限去察看這個.")}
+        if(!message.member.permissions.has(['MENTION_EVERYONE'])) if(message.author.id == '546144403958398988') {}else{return message.channel.send("❌你沒有足夠的權限去察看這個.")}
         loadGuild(clientDB,message.guild.id).then((user) => {
           if (user === false) {return message.channel.send(k.snipe.no_support)}
           var text = JSON.stringify(user.snipe);var text2 = text.toString();text2 = JSON.parse(text2);
@@ -374,7 +374,7 @@ module.exports= {
               if(member10) {snipe.addField(k.snipe.last+"10"+k.snipe.message +" - "+ member10.username + "#" + member10.discriminator, text2.t10+"\n"+texttime2.t10)}
               if(file2.file != "無") {
                 snipe.addField("\n\n"+k.snipe.file+" \n", `[${file2.name}](${file2.file})`)}
-            message.channel.send(snipe)}})
+            message.channel.send({embeds: [snipe]})}})
       }
     },
     "snipe":{
@@ -413,7 +413,7 @@ module.exports= {
                 snipe.setDescription(text2.t1)
                 if(file2.file != "無") {
                   snipe.addField("\n📎附件 \n", `[${file2.name}](${file2.file})`)}
-              message.channel.send(snipe)}})
+              message.channel.send({embeds: [snipe]})}})
           }else{
           if(isNaN(args[0]) === true) {return message.channel.send(l.error.type_number)}
           if(args[0] > 10) {return message.channel.send(l.error.less_then+"10")}
@@ -444,7 +444,7 @@ module.exports= {
                 snipe.setDescription(text0)
                 if(file2.file != "無") {
                   snipe.addField("\n"+k.snipe.file2+" \n", `[${file2.name}](${file2.file})`)}
-              message.channel.send(snipe)
+              message.channel.send({embeds: [snipe]})
             }})}
           }
     },
@@ -474,7 +474,7 @@ module.exports= {
           .setDescription("ID:  " + message.guild.id)
           if(user.language.lan) {if(user.language.lan == "zh_TW") {server.addField(k.server.lang, "繁體中文",true)}else if(user.language.lan == "en_US") {server.addField(k.server.lang, "English",true)}else if(user.language.lan == "ja_JP") {server.addField(k.server.lang, "日本語",true)}else if(user.language.lan == "zh_CN") {server.addField(k.server.lang, "简体中文",true)}}else{server.addField(k.server.lang, k.server.default+"(中文)",true)}
           server.addField(k.server.delmeg," <@" + textid2.t1 + "> \n◆"+snipe,true)
-          server.addField(k.server.member, message.guild.memberCount,true)
+          server.addField(k.server.member, message.guild.memberCount.toString(),true)
           try{server.addField(k.server.owner," <@" + message.guild.owner.user.id + "> \n◆" + `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`,true)}catch{server.addField(k.server.owner,"發生錯誤QwQ",true)}
           if(user.language.run) {if(user.language.run == "1") {server.addField(k.server.detect, "智乃小幫手#5407",true)}else if(user.language.run == "2") {server.addField(k.server.detect, "智乃小幫手2#5127",true)}}else{server.addField(k.server.detect, k.server.default,true)}
           let snipes = `(${k.server.prest})開啟`,safe = `(${k.server.prest})開啟`,react= `(${k.server.prest})開啟`,slash= `(${k.server.prest})開啟`
@@ -493,7 +493,7 @@ module.exports= {
           server.addField(k.server.leave," <#" + leaveid + "> \n◆"+user.leave2,false)
           server.addField(k.server.levelup, "◆"+user.rank2,true)
           server.addField(k.server.createTime, time)
-          message.channel.send(server)
+          message.channel.send({embeds: [server]})
         })
       }
     },
@@ -608,8 +608,8 @@ async function lang(bot,message,clientDB,language,args,number, ...text) {
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+" `[zh_TW / en_US]`")
@@ -633,8 +633,8 @@ async function nor(bot,message,clientDB,language,args,number, ...text) {
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+" `[1 / 2]`")
@@ -658,8 +658,8 @@ async function setsnipe(bot,message,clientDB,language,prefix,args,number, ...tex
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+"```\n[true / false]```")
@@ -689,8 +689,8 @@ async function setsafes(bot,message,clientDB,language,prefix,args,number, ...tex
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+"```\n[true / false]```")
@@ -720,8 +720,8 @@ async function setreact(bot,message,clientDB,language,prefix,args,number, ...tex
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+"```\n[true / false]```")
@@ -751,8 +751,8 @@ async function setslash(bot,message,clientDB,language,prefix,args,number, ...tex
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+"```\n[true / false]```")
@@ -782,8 +782,8 @@ async function setprefix(bot,message,clientDB,language,prefix,args,number, ...te
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) {return message.channel.send(k.word.No_setup)}
     if(args[1] === "" || args[1] === null) return message.channel.send(k.word.please_type+"```\n[ rest ] or [ Custom prefix ]```")
@@ -817,8 +817,8 @@ async function detects(bot,message,clientDB,language,args,number, ...text) {
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
   if(!message.guild) return message.channel.send(l.error.No_DM)
-  if(!message.guild.me.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
-  if(!message.member.hasPermission(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
+  if(!message.guild.me.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_guild}\``)
+  if(!message.member.permissions.has(['MANAGE_GUILD'])) return message.channel.send(l.error.No_Prem+l.prem.manage_guild+l.error.No_Prem2)
   loadGuild(clientDB,message.guild.id).then((ser) => {
     if (ser === false) return message.channel.send(k.word.No_setup);
     let channel = null;
@@ -843,8 +843,8 @@ async function text2(bot,message,clientDB,language) {
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
     if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
-    if(message.member.hasPermission(['MANAGE_CHANNELS'])) {
-        if(message.guild.me.hasPermission(['MANAGE_CHANNELS'])) {
+    if(message.member.permissions.has(['MANAGE_CHANNELS'])) {
+        if(message.guild.me.permissions.has(['MANAGE_CHANNELS'])) {
           code.delete(message.author.id)
           loadGuild(clientDB,message.guild.id).then((user) => {
             if (user === false) {
@@ -874,8 +874,8 @@ async function voice(bot,message,clientDB,language) {
   if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
   }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
     if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
-    if(message.member.hasPermission(['MANAGE_CHANNELS'])) {
-        if(message.guild.me.hasPermission(['MANAGE_CHANNELS'])) {
+    if(message.member.permissions.has(['MANAGE_CHANNELS'])) {
+        if(message.guild.me.permissions.has(['MANAGE_CHANNELS'])) {
           code.delete(message.author.id)
           loadGuild(clientDB,message.guild.id).then((user) => {
             if (user === false) {
@@ -907,7 +907,7 @@ async function Join(bot,message,clientDB,language,args, nubmer, ...text) {
     message.channel.send(l.error.less_then+" 100")
     return;}
     if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
-        if(message.member.hasPermission(['MANAGE_CHANNELS'])) {
+        if(message.member.permissions.has(['MANAGE_CHANNELS'])) {
         code.delete(message.author.id)
         if(text.join(" ").toLowerCase().includes('<script>')) return message.channel.send(l.error.type_text+ "`Has Illegal text`")
         if(text.join(" ").toLowerCase().includes('</script>')) return message.channel.send(l.error.type_text+ "`Has Illegal text`")
@@ -943,7 +943,7 @@ async function leave(bot,message,clientDB,language,args, nubmer, ...text) {
     message.channel.send(l.error.less_then+" 100")
     return;}
     if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
-    if(message.member.hasPermission(['MANAGE_CHANNELS'])) {
+    if(message.member.permissions.has(['MANAGE_CHANNELS'])) {
         code.delete(message.author.id)
         if(text.join(" ").toLowerCase().includes('<script>')) return message.channel.send(l.error.type_text+ "`Has Illegal text`")
         if(text.join(" ").toLowerCase().includes('</script>')) return message.channel.send(l.error.type_text+ "`Has Illegal text`")
@@ -979,7 +979,7 @@ async function rank(bot,message,clientDB,language,args, nubmer, ...text) {
     message.channel.send(l.error.less_then+"100")
     return;}
   if(!code.has(message.author.id)) {message.channel.send(k.word.No_code)}else{
-  if(message.member.hasPermission(['MANAGE_CHANNELS'])) {
+  if(message.member.permissions.has(['MANAGE_CHANNELS'])) {
       code.delete(message.author.id)
       loadGuild(clientDB,message.guild.id).then((user) => {
         if (user === false) {

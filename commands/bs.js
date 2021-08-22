@@ -7,7 +7,8 @@ const fs = require('fs')
 const NanaAPI = require('nana-api');
 const nana = new NanaAPI()
 const FormData = require('form-data');
-const disbut = require('discord-buttons');
+let api = require("../function/apiping")
+
 module.exports = {
     "bs": {
         description: {zh_TW:"唬爛產生器.",en_US:"Bluff generator.",ja_JP:""},
@@ -35,7 +36,7 @@ module.exports = {
                     embed.setTitle(k.bs.bluff)
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
                 })
             } else {
                 message.channel.send(l.error.type_number + l.error.less_then + "1000")
@@ -75,7 +76,7 @@ module.exports = {
                 embed.setTitle(`${message.member.nickname} 的運勢`)
                 embed.setDescription(`${fort}`)
                 embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                message.channel.send(embed)
+                message.channel.send({embeds: [embed]})
         }
     },
     "運勢": {
@@ -110,7 +111,7 @@ module.exports = {
                 embed.setTitle(`${message.member.nickname} 的運勢`)
                 embed.setDescription(`${fort}`)
                 embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                message.channel.send(embed)
+                message.channel.send({embeds: [embed]})
         }
     },
     "covid-19": {
@@ -135,7 +136,7 @@ module.exports = {
                     embed.setTitle("<:covid:843663053852639292> 台灣新冠肺炎(COVID-19) 統計")
                     embed.setDescription(`**國內通報總計**\n📣通報數: ${data[0].送驗}\n✅已排除: ${data[0].排除}\n😷確診: ${data[0].確診}\n💀死亡: ${data[0].死亡} \n🔓解除隔離: ${data[0].解除隔離}\n\n**昨日新增**\n📣通報數: ${data[0].昨日送驗}\n✅已排除: ${data[0].昨日排除}\n😷確診: ${data[0].昨日確診}`)
                     embed.setFooter(`總計檢驗件數: ${time[0].檢驗件數}\n總計檢驗人數: ${time[0].檢驗人數}\n資料更新時間: ${time[0].資料更新時間}`, message.author.avatarURL())
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
                 })
             })
         }
@@ -173,7 +174,7 @@ module.exports = {
                     embed.setTitle("你的蘿莉控程度為")
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
                 })
         }
     },
@@ -210,7 +211,7 @@ module.exports = {
                     embed.setTitle("你的正太控程度為")
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
                 })
         }
     },
@@ -239,7 +240,7 @@ module.exports = {
                     embed.setTitle(k.bs.bluff)
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\`\`\`fix\n${c}\n\`\`\``)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send(embed)
+                    message.channel.send({embeds: [embed]})
                 })
         }
     },
@@ -257,31 +258,31 @@ module.exports = {
                 let content = message.content.split(" ")[1]
                 if(content === "poker") {
                     if(message.member.voice.channel) {
-                        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'poker').then(async invite => {
+                        client.discordTogether.createTogetherCode(message.member.voice.channelId, 'poker').then(async invite => {
                             return message.channel.send(`♣一起遊玩德州撲克牌吧!\n ${invite.code}`);
                         });
                     }
                 }else if(content === "yt" || content === "youtube") {
                     if(message.member.voice.channel) {
-                        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'youtube').then(async invite => {
+                        client.discordTogether.createTogetherCode(message.member.voice.channelId, 'youtube').then(async invite => {
                             return message.channel.send(`[YT]一起觀看Youtube吧!\n ${invite.code}`);
                         });
                     }
                 } else if(content === "chess") {
                     if(message.member.voice.channel) {
-                        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'chess').then(async invite => {
+                        client.discordTogether.createTogetherCode(message.member.voice.channelId, 'chess').then(async invite => {
                             return message.channel.send(`♟️一起下棋吧!\n ${invite.code}`);
                         });
                     }
                 } else if(content === "betrayal") {
                     if(message.member.voice.channel) {
-                        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'betrayal').then(async invite => {
+                        client.discordTogether.createTogetherCode(message.member.voice.channelId, 'betrayal').then(async invite => {
                             return message.channel.send(`一起玩betrayal吧!\n ${invite.code}`);
                         });
                     }
                 } else if(content === "fishing" || content === "fish") {
                     if(message.member.voice.channel) {
-                        client.discordTogether.createTogetherCode(message.member.voice.channelID, 'fishing').then(async invite => {
+                        client.discordTogether.createTogetherCode(message.member.voice.channelId, 'fishing').then(async invite => {
                             return message.channel.send(`🎣一起釣魚吧!\n ${invite.code}`);
                         });
                     }
@@ -289,7 +290,7 @@ module.exports = {
                     let help = new Discord.MessageEmbed()
                     .setTitle("一起在語音遊玩!")
                     .setDescription("使用 `cr!together [遊戲]` 來一起玩!\n- `poker` 德州撲克\n- `youtube` 觀看Youtube \n- `chess` 下棋\n-`betrayal` betrayal.io\n- `fish` 釣魚")
-                    message.channel.send(help)
+                    message.channel.send({embeds: [help]})
                 }
         }
     },
@@ -339,23 +340,20 @@ module.exports = {
                 .setColor("#e61c63")
                 .setImage("https://t.nhentai.net/galleries/"+img+"/cover."+cover)
                 .setFooter(k.henti.date +`: `+ ti+`\n請點擊✅開始閱讀\n`+message.author.tag,message.author.avatarURL())
-                let buttonUP = new disbut.MessageButton(),buttonDOWN = new disbut.MessageButton()
-                buttonUP.setStyle('green').setEmoji("✅").setID("read")
-                buttonDOWN.setStyle('red').setEmoji("❌").setID("cancel")
-                let row = new disbut.MessageActionRow().addComponents(buttonUP,buttonDOWN);
-                message.channel.send(imgembed,row).then((im) => {
+                let buttonUP = new Discord.MessageButton(),buttonDOWN = new Discord.MessageButton()
+                buttonUP.setStyle('SUCCESS').setEmoji("✅").setCustomId("read")
+                buttonDOWN.setStyle('DANGER').setEmoji("❌").setCustomId("cancel")
+                let row = new Discord.MessageActionRow().addComponents(buttonUP,buttonDOWN);
+                message.channel.send({embeds: [imgembed],components: [row]}).then((im) => {
                     let number = 1
-                    const filter= (button) => {
-                        return ['read','cancel'].includes(button.id) && button.clicker.id === message.author.id
-                    }
-                    im.awaitButtons(filter, { max: 1, time: 30000, errors: ['time'] })
-                        .then(collected => {
-                            const reaction = collected.first();
-                            if (reaction.id == "read") {
+                    const filter = (button) => button.clicker.id === message.author.id
+                    im.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                          .then(collected => {
+                            api.ping(bot,collected)
+                            if (collected.customId == "read") {
                                 number = 1
-                                ping(reaction)
                                 read(im)
-                            }else if(reaction.id == "cancel") {
+                            }else if(collected.customId  == "cancel") {
                                 reaction.reply.send("你取消閱讀:(")                                
                                 im.delete()
                             }
@@ -363,12 +361,6 @@ module.exports = {
                             im.delete()
                             message.channel.send("你沒有回應是否閱讀:(")
                         })
-                        function ping(reply) {
-                            bot.api.interactions(reply.discordID,reply.token).callback.post({
-                                data: {
-                                type: 6
-                            }})
-                        }
                         function read(im) {
                             let imgs = null;
                             if(g.images.pages[number-1].t === "j") {imgs = "jpg"}else if(g.images.pages[number-1].t === "p") {imgs = "png"}
@@ -376,46 +368,44 @@ module.exports = {
                             .setTitle(g.title.japanese).setURL("https://nhentai.net/g/"+agrs[0]+"/"+number).setDescription(`Number: **${agrs[0]}**\n[**${k.henti.the} ${number} ${k.henti.page}**] [**${k.henti.all} ${g.num_pages} ${k.henti.page}**]`).setColor("#e61c63")
                             .setFooter(`操作者: ${message.author.tag} \n[◀]上一頁  [▶]下一頁 \n[⏺]回到第一頁 [🔎]跳到指定頁數 \n[❌]結束閱讀`)
                             .setImage("https://i.nhentai.net/galleries/"+img+"/"+number+"."+imgs)
-                            let buttonUP = new disbut.MessageButton(),buttonDOWN = new disbut.MessageButton(),buttonHOME = new disbut.MessageButton(),buttonJUMP = new disbut.MessageButton(),buttonEND = new disbut.MessageButton()
-                            buttonUP.setStyle('grey').setLabel("上一頁").setEmoji("◀").setID("last")
-                            buttonDOWN.setStyle('grey').setLabel("下一頁").setEmoji("▶").setID("next")
-                            buttonHOME.setStyle('blurple').setLabel("首頁").setEmoji("⏺").setID("first")
-                            buttonJUMP.setStyle('green').setLabel("跳到指定頁數").setEmoji("🔎").setID("jump")
-                            buttonEND.setStyle('red').setLabel("結束").setEmoji("❌").setID("end")  
+                            let buttonUP = new Discord.MessageButton(),buttonDOWN = new Discord.MessageButton(),buttonHOME = new Discord.MessageButton(),buttonJUMP = new Discord.MessageButton(),buttonEND = new Discord.MessageButton()
+                            buttonUP.setStyle('SECONDARY').setLabel("上一頁").setEmoji("◀").setCustomId("last")
+                            buttonDOWN.setStyle('SECONDARY').setLabel("下一頁").setEmoji("▶").setCustomId("next")
+                            buttonHOME.setStyle('PRIMARY').setLabel("首頁").setEmoji("⏺").setCustomId("first")
+                            buttonJUMP.setStyle('SUCCESS').setLabel("跳到指定頁數").setEmoji("🔎").setCustomId("jump")
+                            buttonEND.setStyle('DANGER').setLabel("結束").setEmoji("❌").setCustomId("end")  
                         if(number === 1) {
                             buttonUP.setDisabled(true)
                         }else if(number === g.num_pages) {
                             buttonDOWN.set
                             Disabled(true)
                         }
-                        let row = new disbut.MessageActionRow().addComponents([[buttonUP,buttonDOWN],[buttonHOME,buttonJUMP,buttonEND]])
-                        im.edit(reading,row)
-                        const filter= (button) => {
-                            return ['last','next','first','jump','end'].includes(button.id) && button.clicker.id === message.author.id
-                        }
-                            im.awaitButtons(filter, { max: 1, time: 60000, errors: ['time'] })
-                                .then(collected => {
-                                        const reaction = collected.first();
-                                        if (reaction.id == "last") {
+                        let row = new Discord.MessageActionRow().addComponents([[buttonUP,buttonDOWN],[buttonHOME,buttonJUMP,buttonEND]])
+                        im.edit({embeds: [reading],components:[row]})
+                        const filter = (button) => button.clicker.id === message.author.id
+                        im.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                              .then(collected => {
+                                        if (collected.customId == "last") {
+                                            api.ping(bot,collected)
                                             number = number-1
-                                            ping(reaction)
                                             read(im)
-                                        }else if(reaction.id == "next") {
+                                        }else if(collected.customId == "next") {
+                                            api.ping(bot,collected)
                                             number++
-                                            ping(reaction)
                                             read(im)
-                                        }else if(reaction.id == "first") {
+                                        }else if(collected.customId == "first") {
+                                            api.ping(bot,collected)
                                             number = 1
-                                            ping(reaction)
                                             read(im)
-                                        }else if(reaction.id == "jump") {
+                                        }else if(collected.customId == "jump") {
+                                            api.ping(bot,collected)
                                         let secrth = new Discord.MessageEmbed().setTitle("請輸入你要跳轉的頁數").setDescription("例如\n`2`\n`12`\n`32`").setFooter(`操作者: ${message.author.tag}`).setColor("#e61c63")
-                                        im.edit(secrth)
-                                        ping(reaction)
+                                        im.edit({embeds: [secrth]})
                                         const filter2 = m => m.author.id == message.author.id;
-                                        im.channel.awaitMessages(filter2,{max: 1, time: 15000})
+                                        im.channel.awaitMessages({filter2,max: 1, time: 15000})
                                         .then(collected => {
                                             let num = collected.first().content
+                                            num = parseInt(num)
                                             if(!isNaN(num) && num > 0) {
                                                 if(num >= g.num_pages) {
                                                 number = g.num_pages-1
@@ -431,14 +421,13 @@ module.exports = {
                                             im.delete()
                                             message.channel.send("❌你太慢輸入了\n重打一次指令吧:(")
                                         })
-                                       }else if(reaction.id == "end") {
+                                       }else if(collected.customId == "end") {
+                                        collected.reply("🔰感謝你的閱讀!\n最後的頁數: "+number)
                                         im.delete()
-                                        reaction.reply.send("🔰感謝你的閱讀!\n最後的頁數: "+number)
                                     }
                                     }).catch(err => {
                                         im.delete()
-                                    
-                                        message.channel.send("已取消閱讀")
+                                        message.reply("已取消閱讀")
                                     })
                         }
                 });
@@ -503,7 +492,7 @@ module.exports = {
                 if(time.getHours() > 12) {var h = (time.getHours())-12;var h2 = "PM"}else{var h = time.getHours();var h2 = "AM"}
                 embed.setFooter("更新日期: "+ (time.getUTCMonth()+1)+"月"+time.getUTCDate()+"日 "+h+":"+time.getMinutes()+h2+"\n")
                 embed.setTimestamp()
-                message.channel.send(embed)
+                message.channel.send({embeds: [embed]})
                 
             })
 
@@ -550,6 +539,8 @@ module.exports = {
                 let l = lan.zh_TW,k = gameX.zh_TW
                 if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
                 }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+                if(!message.guild.me.permissions.has(['MANAGE_EMOJIS_AND_STICKERS'])) return message.channel.send(l.error.No_perm_me +`\`${l.prem.manage_emojis}\``)
+                if(!message.member.permissions.has(['MANAGE_EMOJIS_AND_STICKERS'])) return message.channel.send(l.error.No_Prem +`\`${l.prem.manage_emojis}\``+l.error.No_Prem2)
                 const hasEmoteRegex = /<a?:.+:\d+>/gm
                 const emoteRegex = /<:.+:(\d+)>/gm
                 const nameRegex = /:.+:/gm
@@ -560,15 +551,31 @@ module.exports = {
                 const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".png?v=1"
                 let name = nameRegex.exec(message)[0]
                 name = name.substring(1,name.length-1)
-                message.guild.emojis.create(url,name)
-                message.channel.send(url)
+                let emo = message.guild.emojis.create(url,name)
+                emo.then((emoji) => {
+                    message.channel.send("Added this emoji in this guild!") 
+                    setTimeout(() => {
+                    let emoji2 = `<a:${emoji.name}:${emoji.id}> `
+                    message.channel.send(emoji2+emoji2+emoji2)   
+                }, 1800);                
+                }).catch((err) => {
+                    message.channel.send(l.error.Run_Command_error+err)
+                })
                 }
                 else if (emoji = animatedEmoteRegex.exec(message)) {
                 const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".gif?v=1"
                 let name = nameRegex.exec(message)[0]
                 name = name.substring(1,name.length-1)
-                message.guild.emojis.create(url,name)
-                message.channel.send(url)
+                let emo = message.guild.emojis.create(url,name)
+                emo.then((emoji) => {
+                    message.channel.send("Added this emoji in this guild!") 
+                    setTimeout(() => {
+                    let emoji2 = `<a:${emoji.name}:${emoji.id}> `
+                    message.channel.send(emoji2+emoji2+emoji2)
+                }, 1800);                
+                }).catch((err) => {
+                    message.channel.send(l.error.Run_Command_error+err)
+                })
                 }
                 else {
                 message.channel.send("Couldn't find an emoji to paste!")
