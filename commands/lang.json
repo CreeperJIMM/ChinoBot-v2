@@ -23,13 +23,7 @@
             "type_number": "❌請填入數字!",
             "type_text": "❌請填入文字!",
             "type_positive": "❌請填入正數!",
-            "type_integer": "❌請填入整數!",
-            "No_vote": {
-                "title":"嗚! 你發現了一個高級指令!",
-                "titledaily":"嗚! 你想領取今日薪水嗎?\n",
-                "desc":"如果你想要使用此指令請為智乃小幫手投票!\n投票連結 [[點我]](https://top.gg/bot/731408794948730961/vote)",
-                "descdaily":"你可以為智乃小幫手投票!\n投票連結 [[點我]](https://top.gg/bot/731408794948730961/vote)\n\n如果你不想為了薪水而投票\n你可以來智乃官方網站領取! [[點我]](https://dckabicord.com/cmd?cmd=daily)"
-            }
+            "type_integer": "❌請填入整數!"
         },
         "success": {
             "send": "✅已成功送達!",
@@ -113,7 +107,6 @@
             "manage_guild": "管理伺服器",
             "manage_webhooks": "管理Webhooks",
             "manage_roles": "管理身分組",
-            "manage_emojis": "管理表情符號",
             "manage_messages": "管理訊息",
             "kick_members": "踢出成員",
             "ban_members": "驅逐成員",
@@ -146,13 +139,7 @@
             "type_number": "❌请填入数字!",
             "type_text": "❌请填入文字!",
             "type_positive": "❌请填入正数!",
-            "type_integer": "❌请填入整数!",
-            "No_vote": {
-                "title":"呜! 你发现了一个高级指令!",
-                "titledaily":"呜! 你想领取今日薪水吗?\n",
-                "desc":"如果你想要使用此指令请为智乃小帮手投票!\n投票连结 [[点我]](https://top.gg/bot/731408794948730961/vote)",
-                "descdaily":"你可以为智乃小帮手投票!\n投票连结 [[点我]](https://top.gg/bot/731408794948730961/vote)\n\n如果你不想为了薪水而投票\n你可以来智乃官方网站领取! [[点我]](https://dckabicord.com/cmd?cmd=daily)"
-            }
+            "type_integer": "❌请填入整数!"
         },
         "success": {
             "send": "✅已成功送达!",
@@ -236,7 +223,6 @@
             "manage_guild": "管理伺服器",
             "manage_webhooks": "管理Webhooks",
             "manage_roles": "管理身分组",
-            "manage_emojis": "管理表情符號",
             "manage_messages": "管理讯息",
             "kick_members": "踢出成员",
             "ban_members": "驱逐成员",
@@ -269,13 +255,7 @@
             "type_number": "❌Please type in numbers!",
             "type_text": "❌Please type in letters!",
             "type_positive": "❌Negative numbers are not allowed!",
-            "type_integer": "❌Only integers are allowed!",
-            "No_vote": {
-                "title":"Woo! You found an advanced command!",
-                "titledaily":"Woo! Do you want to receive today's salary?\n",
-                "desc":"If you want to use this command, please vote for Chino helper!\nVote link [[click me]](https://top.gg/bot/731408794948730961/vote)",
-                "descdaily":"You can vote for Chino helper!\nVote link[[Click me]](https://top.gg/bot/731408794948730961/vote)\n\nIf you don’t want to vote for salary\nYou can come to Chino's official website to get it! [[click me]](https://dckabicord.com/cmd?cmd=daily)"
-            }
+            "type_integer": "❌Only integers are allowed!"
         },
         "success": {
             "send": "✅The message has been successfully sent!",
@@ -359,7 +339,6 @@
             "manage_guild": "Manage guild(server)",
             "manage_webhooks": "Manage Webhooks",
             "manage_roles": "Manage roles",
-            "manage_emojis": "Manage emojis",
             "manage_messages": "Manage messages",
             "kick_members": "Kick members",
             "ban_members": "Ban members",
@@ -392,13 +371,7 @@
             "type_number": "❌数字を記入してください！",
             "type_text": "❌テキストを記入してください！",
             "type_positive": "❌正の数を入力してください！",
-            "type_integer": "❌整数を入力してください！",
-            "No_vote":{
-                "title": "うわー！高度なコマンドが見つかりました！",
-                "titledaily": "うわー！今日の給料を受け取りますか？\n",
-                "desc": "このコマンドを使用する場合は、茅野のヘルパーに投票してください！\n投票リンク[[点我]](https://top.gg/bot/731408794948730961/vote)",
-                "descdaily": "茅野のアシスタントに投票できます！\n投票リンク[[クリックしてください]](https://top.gg/bot/731408794948730961/vote)\n\n給与に投票したくない場合\n茅野の公式サイトにアクセスして入手できます！[[点我]](https://dckabicord.com/cmd?cmd=daily)"
-            }
+            "type_integer": "❌整数を入力してください！"
         },
         "success": {
             "send": "✅正常に配信されました!",
@@ -481,7 +454,6 @@
             "manage_channel": "チャネルの管理/編集",
             "manage_guild": "管理サーバー",
             "manage_webhooks": "管理Webhooks",
-            "manage_emojis": "管理Emojis",
             "manage_roles": "管理グループ",
             "manage_messages": "メッセージを管理する",
             "kick_members": "追放メンバー",

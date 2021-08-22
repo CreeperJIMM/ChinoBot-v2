@@ -1,11 +1,12 @@
 const fs = require('fs');
-module.exports.main1 = function (client,num,clientDB) {
-  let a = Math.floor(Math.random()*20)
+module.exports.main1 = function (client,num) {
   setInterval(() => {
-    this.Mongoload(clientDB).then((user) => {
-      if (user === false) {
+    fs.readFile("./server.json", function (err, userInfo) {
+      if (err) {
         return;
       } else {
+        var user = userInfo.toString();
+        user = JSON.parse(user);
         if(num == 1) {
           user.chino.guild = client.guilds.cache.size;
         }else if(num == 2) {
@@ -15,28 +16,9 @@ module.exports.main1 = function (client,num,clientDB) {
           user.chinoc.member = client.users.cache.size;
           user.chinoc.guild = client.guilds.cache.size;
         }
-        this.Mongowrite(clientDB,user)
+        var str = JSON.stringify(user);
+        fs.writeFileSync("./server.json", str);
       }
     });
-  }, 42000+a);
+  }, 42000);
 };
-module.exports.Mongoload = async (client) => {
-  /*讀取用戶檔案*/ let dbo = client.db("mydb"),
-    query = { id: "status" };
-  let user = await dbo.collection("status").find(query).toArray();
-  if (user[0] === undefined) return false;
-  user = user[0];
-  return user;
-};
-
-module.exports.Mongowrite = function (client, data) {
-  /*寫入用戶檔案*/ let dbo = client.db("mydb"),
-    query = { id: "status" };
-  let user = dbo.collection("status").find(query).toArray();
-  var myquery = { id: "status" };
-  user = data;
-  var newvalues = { $set: user };
-  dbo.collection("status").updateOne(myquery, newvalues, function (err, res) {
-    if (err) return err;
-  });
-}
