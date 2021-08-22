@@ -1,10 +1,10 @@
-const Discord = require("discord.js")
-const util = require('minecraft-server-util')
+const Discord = require("discord.js");
+const util = require('minecraft-server-util');
 const osu = require('node-osu');
-const image = require('image-data-uri')
+const image = require('image-data-uri');
 const fs = require("fs");
 const {osuToken,hypixelToken} = require('../token.json');
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
 const osuApi = new osu.Api(osuToken, {
     // baseUrl: sets the base api url (default: https://osu.ppy.sh/api)
     notFoundAsError: true, // Throw an error on not found instead of returning nothing. (default: true)
@@ -31,10 +31,7 @@ async function getId(playername) {
 });}
 const Hypixel = require('hypixel-api-reborn');
 const hypixel = new Hypixel.Client(hypixelToken);
-var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
-function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
+let Mongo = require("../function/MongoData")
 let api = require("../function/apiping")
 module.exports = {
     "mc": {
@@ -48,7 +45,7 @@ module.exports = {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(!ag[0]) return message.channel.send("❌請填入ID")
-            const id = await getId(ag[0])
+            const id = await getId(ag[0]);
             if(id === "Not Found") return message.channel.send("❌找不到該玩家")
             if(!id) return message.channel.send("❌找不到該玩家")
             let mc_user = new Discord.MessageEmbed()
@@ -265,7 +262,7 @@ module.exports = {
             if (args[0] < 1) return message.channel.send(l.error.type_positive)
             if (args[0] > 2000) return message.channel.send(l.error.less_then + "2000!")
             if (Math.round(args[0]) != args[0]) return message.channel.send(l.error.type_integer)
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) { return message.channel.send(l.error.Try_again) }
                 if (time.has(message.author.id)) return message.channel.send(k.word.hasgame)
                 if (user.money < args[0]) return message.channel.send(l.error.No_enough_monery)
@@ -288,8 +285,8 @@ module.exports = {
                     })
                 //////////////////////////////////{embeds: [],components: []}
                 function rps_main(ms) {
-                    const filter = (button) => button.clicker.id === message.author.id
-                    ms.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                    const filter = (button) => button.user.id === message.author.id
+                    ms.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                           .then(collected => {
                               let reaction = collected
                               api.ping(bot,collected)
@@ -401,8 +398,8 @@ module.exports = {
                 }
 
                 function playagain(ms) {
-                    const filter = (button) => button.clicker.id === message.author.id
-                    ms.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                    const filter = (button) => button.user.id === message.author.id
+                    ms.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                           .then(collected => {
                               let reaction = collected
                               api.ping(bot,collected)
@@ -430,7 +427,7 @@ module.exports = {
                     ms.edit({embeds: [over],components: []})
                     time.delete(message.author.id);
                     user.money = parseInt(user.money) + money;
-                    writeUser(clientDB,message.author.id,user)
+                    Mongo.writeUser(clientDB,message.author.id,user)
                 }
             })
         }
@@ -451,7 +448,7 @@ module.exports = {
             if (args[0] < 1) return message.channel.send(l.error.type_positive)
             if (args[0] > 8000) return message.channel.send(l.error.less_then + "8000!")
             if (Math.round(args[0]) != args[0]) return message.channel.send(l.error.type_integer)
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) { return message.channel.send(l.error.Try_again) }
                 if (user.money < args[0]) return message.channel.send(l.error.No_enough_monery)
                 let guess = new Discord.MessageEmbed().setTitle(k.door.game).setDescription("🚪🚪🚪").setFooter(k.door.choose).setTimestamp()
@@ -461,8 +458,8 @@ module.exports = {
                 button3.setStyle('SECONDARY').setEmoji("3️⃣").setCustomId("C")
                 let row = new Discord.MessageActionRow().addComponents(button1,button2,button3)
                 message.channel.send({embeds:[guess],components:[row]}).then((ms) => {
-                    const filter = (button) => button.clicker.id === message.author.id
-                    ms.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']})
+                    const filter = (button) => button.user.id === message.author.id
+                    ms.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
                           .then(collected => {
                               api.ping(bot,collected)
                             let math = Math.floor(Math.random() * 5) + 1
@@ -473,17 +470,17 @@ module.exports = {
                                 let gu1 = new Discord.MessageEmbed().setTitle(k.door.game + " [x1.2]").setDescription(k.door.open + " \n" + k.door.event.bydoor).setTimestamp().setFooter("🚪[" + k.door.give + " " + args[0] * 1 + " $]")
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 1);
-                                writeUser(clientDB,message.author.id,user)
+                                Mongo.writeUser(clientDB,message.author.id,user)
                             } else if (math == "4") {
                                 let gu1 = new Discord.MessageEmbed().setTitle(k.door.game + " [x1.5]").setDescription(k.door.open + " \n" + k.door.event.cashbox).setTimestamp().setFooter("🚪[" + k.door.give + " " + args[0] * 1.5 + " $]")
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 1.5);
-                                writeUser(clientDB,message.author.id,user)
+                                Mongo.writeUser(clientDB,message.author.id,user)
                             } else if (math == "5" || math == "6") {
                                 let gu1 = new Discord.MessageEmbed().setTitle(k.door.game + " [Monster -x2]").setDescription(k.door.open + "\n...\n" + k.door.event.monster).setTimestamp().setFooter("🚪[" + k.door.lose + args[0] * 2 * -1 + " $]")
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 3 * -1);
-                                writeUser(clientDB,message.author.id,user)
+                                Mongo.writeUser(clientDB,message.author.id,user)
                             }
                         }).catch(() => {
                             let guess = new Discord.MessageEmbed().setTitle(k.door.game).setDescription(k.word.slowchoose).setFooter("🚪").setTimestamp()
@@ -559,7 +556,7 @@ module.exports = {
             let text = [spin, spin, spin]
             if (time.has(message.author.id)) return message.channel.send(k.slot.speed)
             if (server.has(message.guild.id)) return message.channel.send(k.slot.to_maney)
-            loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {
                return message.channel.send(l.error.Run_Command_error)}
             if (user.money <  parseInt(args[0])) return message.channel.send(l.error.No_enough_monery)
@@ -592,7 +589,7 @@ module.exports = {
                 }
                 if (side === "win") { how = k.slot.win } else { how = k.slot.lose }
                 user.money = user.money + money;
-                writeUser(clientDB,message.author.id,user)
+                Mongo.writeUser(clientDB,message.author.id,user)
                 slot2 = new Discord.MessageEmbed().setTitle(" ==🎰== [" + side + "]").setDescription(text.join("")).setColor("#ff53d0").setFooter(message.author.username + k.slot.beat + args[0] + "$] [" + how + " " + money + "$] ", message.author.avatarURL()).setTimestamp();
                 ms.edit({embeds: [slot2]}).then(() => {
                     time.delete(message.author.id);
@@ -635,7 +632,7 @@ module.exports = {
                     if (user2) { member2 = user2 }
                      }else{
                         if(message.guild.members.cache.find(m => m.displayName.includes(args[1]))) {
-                            member2 = message.guild.members.cache.find(m => m.displayName.includes(args[1])).user}}
+                            member2 = message.guild.members.cache.find(m => m.displayName.includes(args[1])).user};}
             } else { member = message.author }
             if (member.id != message.author.id) {
                 owo = member.username;

@@ -250,7 +250,7 @@ async function zh_TW(bot, msg, userlang,clientDB) {
               console.log(error)
           }
   }
-};
+}
 /////////////////////////// Rank ////////////////////////////
 let rank = new Set();
 function deleRank(message) {
