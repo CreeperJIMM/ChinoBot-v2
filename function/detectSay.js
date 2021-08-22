@@ -15,7 +15,7 @@ function deleteCooldown(message) {
     setTimeout(() => {
       channelcooldown.delete(message.channel.id)}, 1 * 700)
   }
-let times = 1
+
 module.exports.send = function(text1, text2, text3, text4,text5,text6, author = null) {
     return function (rand, msg) {
         if (cooldown.has(msg.author.id)) {
@@ -23,7 +23,6 @@ module.exports.send = function(text1, text2, text3, text4,text5,text6, author = 
         } else {
             let sendtext = [text1, text2, text3, text4, text5,text6]
             if (author === null) {
-                if(!sendtext[rand]) return;
                 msg.channel.send(sendtext[rand])
                 cooldown.add(msg.author.id)
                 deleteCooldown(msg)
@@ -69,7 +68,6 @@ module.exports.data = {
 
 module.exports.detectsay = async function (msg,num,clientDB) {
     if (!msg.guild) return;
-    if (msg.author.bot) return;
     let ser= UserCache.get(msg.author.id)
     if(!ser) {
       await Mongo.loadGuild(clientDB,msg.guild.id).then((user) => {
@@ -81,6 +79,7 @@ module.exports.detectsay = async function (msg,num,clientDB) {
         if (ser === false) { return }
         if (ser.language) { if (ser.language.run != num) return;}
         if(ser.language.setting) {if(ser.language.setting.react === false) return;}
+        if (msg.author.bot) return;
         let a = Math.round(Math.random() * 6)
         if (Object.keys(this.data).includes(msg.content))
             this.data[`${msg.content}`](a, msg)

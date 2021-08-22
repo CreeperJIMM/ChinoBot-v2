@@ -4,26 +4,14 @@ const lan = require('../commands/lang.json');
 const gameX = require('../language/rank.json');
 let daily = new Set();
 let payd = new Set();
-let Mongo = require('../function/MongoData')
 var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
-let pooluser = new Set()
-function deletepool(id) {
-    setTimeout(() => {
-        pooluser.delete(id)
-    }, 60000);
-}
-let api = require("../function/apiping")
+
 module.exports= {
     "rank":{
-        description: {zh_TW:"查看經驗值",en_US:"View rank.",ja_JP:""},
-        authority: "everyone",
-        instructions: "rank [@muention/ID＊]",
-        category: "rank",
-        vote: false,
-        help: false,
+        description: "等級查詢",
         fun: function(bot, message, prefix,clientDB , language, args) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -48,19 +36,14 @@ module.exports= {
                 .setTitle(k.rank.title + user.rank)
                 .setDescription(k.rank.exp + user.exp + "/" + (1000+50*user.rank))
                 .setFooter(member.username + k.rank.card + ((1000+50*user.rank) - user.exp) + k.rank.card2)
-                message.channel.send({embeds: [rankembed]})
+                message.channel.send(rankembed)
                }
             })
         }
         }}
     },
     "money":{
-        description: {zh_TW:"查看金錢",en_US:"View money.",ja_JP:""},
-        authority: "everyone",
-        instructions: "money [@muention/ID＊]",
-        category: "user",
-        vote: false,
-        help: false,
+        description: "金錢查詢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -76,195 +59,57 @@ module.exports= {
                 loadUser(clientDB,member.id).then((user) => {
                     if (user === false) {return}
                else{
-                Mongo.loadDaily(clientDB).then((users) => {
-                    if(users === false) {return message.channel.send(l.error.Try_again)}
+                fs.readFile('./user.json',function (err2,user2) {
+                    if(err2) {return message.channel.send(l.error.Try_again)}
+                    var users = user2.toString();users = JSON.parse(users);
                 if(users.daily.indexOf(member.id) != "-1") {var today = k.money.d1}else{var today = k.money.d2}
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')
                 .setTitle(k.money.money + user.money + "$")
                 .setDescription(k.money.daily + today)
                 .setFooter(member.username + k.money.wallet)
-                message.channel.send({embeds: [rankembed]})
+                message.channel.send(rankembed)
                }
             )}})
             }
         }
     },
-    "work":{
-        description: {zh_TW:"查看金錢",en_US:"View money.",ja_JP:""},
-        authority: "everyone",
-        instructions: "work [ job type]\n\n[jobs]\n-`fish`",
-        category: "money",
-        vote: false,
-        help: false,
-        fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
-            //fish 釣魚
-            //mine 挖礦
-            //teacher 批改
-            let l = lan.zh_TW,k = gameX.zh_TW
-            if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
-            }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            let member = message.author 
-            if(member){
-                loadUser(clientDB,member.id).then((user) => {
-                    if (user === false) {return}else{
-                let workembed = new Discord.MessageEmbed()
-                if(!args[0] || args[0] === "" || args[0] === null) {
-                    return message.channel.send("❌你沒有告訴我你要哪個工作啊\n-`fish` 釣魚")
-                }
-                if(user.money >= 400) return message.channel.send("❌抱歉.\n這指令只能給低於400塊的成員和負債的成員使用!")
-                if(pooluser.has(message.author.id)) return message.channel.send("💀連續工作會爆肝阿!\n60秒後再來吧.")
-                let money = 0
-                pooluser.add(message.author.id)
-                deletepool(message.author.id)
-                let button = new Discord.MessageButton()
-                button.setStyle('SUCCESS').setEmoji("🎣").setCustomId("pick")
-                let row = new Discord.MessageActionRow().addComponents(button)
-                switch (args[0]) {
-                    case "fish":
-                        let ro = "<:rope:872014636688494632>"
-                        let fishMain = new Discord.MessageEmbed()
-                        .setTitle("釣魚場").setDescription(`
-                        ⬛⬛🚣⬛⬛
-                        🟦🟦${ro}🟦🟦
-                        🟦🟦🪝🟦🟦
-                        🟦🟦🟦🟦🟦
-                        🟦🟦🟦🟦🟦
-                        `).setFooter(`${message.author.username} 的魚場`)
-                        message.channel.send({embeds: [fishMain],components:[row]}).then((im) => {
-                            work_fish(im)
-                        })
-                        break;
-                    case "mine":
-                        work_mine()
-                        break;
-                    case "teacher":
-                        work_teacher()
-                        break;
-                    default:
-                        break;
-                }
-                function work_fish(im) {
-                    let fishnum = Math.ceil(Math.random()*3)
-                    let fishs = ["🐟","🐠","🦐","💣"]
-                    let prices = [10,30,60,null]
-                    let fish = fishs[fishnum]
-                    let price = prices[fishnum]
-                    let num = Math.floor(Math.random()*15)
-                    let ro = "<:rope:872014636688494632>"
-                    setTimeout(() => {
-                        let fishMain = new Discord.MessageEmbed()
-                        .setTitle("釣魚場").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n${fish}🟦🟦🟦🟦`).setFooter(`${message.author.username} 的魚場\n[目前已賺到 ${money}$]`)
-                        let num2 = Math.floor(Math.random()*10)
-                        im.edit({embeds: [fishMain],components:[row]})
-                        setTimeout(() => {
-                            fishMain.setTitle("釣魚場 [上鉤了 快收竿!]")
-                            fishMain.setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦${fish}🟦🟦\n🟦🟦🟦🟦🟦`)
-                            im.edit({embeds: [fishMain],components:[row]})
-                            close(fishMain)
-                        }, num2*1000);
-                    }, num*1000);
-                    function close(fishMain) {
-                        let num2 = Math.floor(Math.random()*4)
-                            const filter = (button) => button.clicker.id === message.author.id
-                            im.awaitMessageComponent(filter, { max: 1, time: 900+num2*1000, errors: ['time'] })
-                                .then(collected => {
-                                    api.ping(bot,collected)
-                                    if(fishnum != 3) {
-                                        fishMain.setTitle(`釣魚場 [恭喜賺到 ${price}]`).setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                        money = money + price
-                                        im.edit({embeds: [fishMain],components:[row]})
-                                        work_fish(im)
-                                        }else{
-                                            fishMain.setTitle("釣魚場 [你釣到炸彈!] [遊戲結束]").setDescription(`⬛⬛💀⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                            im.edit({embeds: [fishMain],components:[row]})
-                                            user.money = user.money + money
-                                            writeUser(clientDB,message.author.id,user)
-                                        }                                    
-                                }).catch((err) => {
-                                    if(fishnum != 3) {
-                                    fishMain.setTitle("唉呀! 魚跑走了:( [遊戲結束]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                    im.edit({embeds: [fishMain],components:[row]})
-                                    user.money = user.money + money
-                                    writeUser(clientDB,message.author.id,user)
-                                    }else{
-                                        fishMain.setTitle("釣魚場 [已跳過炸彈]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
-                                        im.edit({embeds: [fishMain],components:[row]})
-                                        work_fish(im)
-                                    }
-                                })
-                    }
-                }
-                function work_mine() {
-
-                }
-                function work_teacher() {
-
-                }
-
-            }})
-            }
-        }
-    },
     "daily":{
-        description: {zh_TW:"領取今日金錢",en_US:"Receive daily money.",ja_JP:""},
-        authority: "everyone",
-        instructions: "daily",
-        category: "money",
-        vote: true,
-        help: false,
+        description: "金錢查詢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            Mongo.loadUser(clientDB,message.author.id).then((user) => {
+            loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {return message.channel.send(l.error.Try_again)}
                else{
-                   Mongo.loadDaily(clientDB).then((users) => {
-                    if(users === false) {return message.channel.send(l.error.Try_again)}
+                fs.readFile('./user.json',function (err2,user2) {
+                    if(err2) {return message.channel.send(l.error.Try_again)}
+                    var users = user2.toString();users = JSON.parse(users);
                 if(users.daily.indexOf(message.author.id) != "-1") {return message.channel.send(k.daily.receive)}else{
-                users.daily.push(message.author.id)
-                Mongo.writeDaily(clientDB,users)
+                users.daily.push(message.author.id);var str2 = JSON.stringify(users);setTimeout(() => {fs.writeFileSync('./user.json',str2)}, 1000);
                 let tody = 50
                 user.work++
-                let tod = new Date().getTime()
-                user.worktoal = {time: user.worktoal.time,work: user.worktoal.work,top: user.worktoal.top}
-                if(!isNaN(parseInt(user.worktoal.time))) {
-                a=(parseInt(tod - user.worktoal.time))/(24*60*60*1000);a=Math.ceil(a*10)/10;
-                if(a >= 1.5) user.worktoal.work = 0
-                }else{
-                    user.worktoal.work = 0
-                }
-                let top = 0
-                if(user.worktoal.top) {
-                    if((user.worktoal.work)+1 >= user.worktoal.top) {
-                        top = (user.worktoal.work)+1
-                    }else{
-                        top = user.worktoal.top
-                    }
-                }
-                user.worktoal = {time: tod ,work: (user.worktoal.work)+1,top: top}
+                let tod = new Date()
+                user.worktoal = {time: user.worktoal.time,work: user.worktoal.work}
+                if(user.worktoal.time == 30 || user.worktoal.time == 31) {if(tod.getUTCDate() != 1 || tod.getUTCDate() != 31) user.worktoal.work = 0}else{if(tod.getUTCDate()-1 != user.worktoal.time) user.worktoal.work = 0}
+                user.worktoal = {time: tod.getUTCDate() ,work: (user.worktoal.work)+1}
                 user.money = user.money + tody + ((user.worktoal.work)*5)
-                if(user.adv.indexOf("daily") == "-1") {user.adv.push("daily");message.author.send(k.daily.adv);}
+                if(user.adv.indexOf("daily") == "-1") {user.adv.push("daily");message.author.send(k.daily.adv);var str = JSON.stringify(user);}
                 writeUser(clientDB,message.author.id,user)
                 let rankembed = new Discord.MessageEmbed()
                 .setColor('#2d9af8')
                 .setTitle(k.daily.clean)
                 .setDescription(k.daily.dec+user.worktoal.work+k.daily.dec2+(user.worktoal.work)*5+k.daily.dec3)
                 .setFooter(message.author.username + k.daily.pay)
-                message.channel.send({embeds: [rankembed]})
+                message.channel.send(rankembed)
                 
                }})}
             })
         }
     },
     "levels": {
-        description: {zh_TW:"查看經驗排行榜",en_US:"View level ranking.",ja_JP:""},
-        authority: "everyone",
-        instructions: "levels",
-        category: "rank",
-        vote: true,
-        help: false,
+        description: "排行",
         fun: async function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -306,17 +151,12 @@ module.exports= {
             .setTitle(k.level.ranking.title)
             .setDescription(k.level.ranking.desc+"```js\n"+list.join("\n") + "\n```")
             .setFooter(k.level.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            message.channel.send(levelembed)
         }, 600);
         })}
     },
     "moneys": {
-        description: {zh_TW:"查看金錢排行榜",en_US:"View money ranking.",ja_JP:""},
-        authority: "everyone",
-        instructions: "moneys",
-        category: "rank",
-        vote: true,
-        help: false,
+        description: "排行",
         fun: async function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -360,16 +200,12 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            message.channel.send(levelembed)
         }, 600);
     })
     }},
     "moneyshigh": {
-        description: {zh_TW:"查看金錢最高排行榜",en_US:"View moneys high ranking.",ja_JP:""},
-        authority: "everyone",
-        instructions: "moneyshigh",
-        vote: true,
-        help: false,
+        description: "排行",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -401,16 +237,12 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            message.channel.send(levelembed)
         }, 600);
     })
     }},
     "moneyadd": {
-        description: {zh_TW:"增加用戶金錢",en_US:"Add user money.",ja_JP:""},
-        authority: "owner",
-        instructions: "moneyadd [ID] [money]",
-        vote: false,
-        help: false,
+        description: "增加金錢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -426,11 +258,7 @@ module.exports= {
         }
     },
     "moneyremove": {
-        description: {zh_TW:"減少用戶金錢",en_US:"remove user money.",ja_JP:""},
-        authority: "owner",
-        instructions: "moneyremove [ID] [money]",
-        vote: false,
-        help: false,
+        description: "減少金錢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -446,11 +274,7 @@ module.exports= {
         }
     },
     "moneyset": {
-        description: {zh_TW:"設定用戶金錢",en_US:"Set user money.",ja_JP:""},
-        authority: "owner",
-        instructions: "moneyset [ID] [money]",
-        vote: false,
-        help: false,
+        description: "設置金錢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -466,12 +290,7 @@ module.exports= {
         }
     },
     "language": {
-        description: {zh_TW:"設置語言",en_US:"Set your languages.",ja_JP:""},
-        authority: "everyone",
-        instructions: "language [lang]",
-        category: "user",
-        vote: false,
-        help: false,
+        description: "設置語言",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -518,18 +337,13 @@ module.exports= {
                 .addField("日本語","`ja_JP`")
                 .setFooter("◆本翻譯不是100%準確.\nThis translation is not 100% accurate.")
                 .setTimestamp()
-                message.channel.send({embeds: [langembed]})
+                message.channel.send(langembed)
                 })
             }
         }
     },
     "pay": {
-        description: {zh_TW:"設置語言",en_US:"Set your languages.",ja_JP:""},
-        authority: "everyone",
-        instructions: "pay [@muention/ID＊] [money]",
-        category: "money",
-        vote: true,
-        help: false,
+        description: "給予金錢",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -566,7 +380,7 @@ module.exports= {
                     let pay = new Discord.MessageEmbed().setTitle(k.pay.pay+user.name+" "+args[1]+"$")
                     .setDescription(k.pay.you_will+" `" + args[1] + "`$ "+k.pay.give+" **" + user.name + "**\n"+k.pay.now_you+" `" + user2.money + "`$ \n" + user.name + " "+k.pay.now_have+" `" + user.money + "` $")
                     .setFooter("[$] "+k.pay.handing_free+"\n"+k.pay.extra+ Math.floor(parseInt(args[1])* 0.02) +"$ "+k.pay.give_someone).setTimestamp()
-                    message.channel.send({embeds: [pay]})
+                    message.channel.send(pay)
                     writeUser(clientDB,member.id,user)
                     writeUser(clientDB,message.author.id,user2)
                 }
@@ -574,12 +388,7 @@ module.exports= {
         })}
     }},
     "marry": {
-        description: {zh_TW:"與某人接婚",en_US:"Marry someone.",ja_JP:""},
-        authority: "everyone",
-        instructions: "marry [@mention/ID]",
-        category: "user",
-        vote: false,
-        help: false,
+        description: "結婚系統",
         fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -608,38 +417,33 @@ module.exports= {
                     .setTitle(k.marry.timer)
                     .setDescription(k.marry.answer)
                     message.edit("<@" + member.id + "> ")
-                message.channel.send({embeds: [marry]}).then((message) => {
+                message.channel.send(marry).then((message) => {
                         const filter = answer => {
                             return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                 message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
                     .then((ms) => {
                         if(ms.array()[0].content === "yes") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                    message.edit({embeds: [marry2]});
+                    message.edit(marry2);
                     let marry1 = new Discord.MessageEmbed().setTitle(k.marry.marry_complete).setDescription(user2.name + "💕" + user.name).setFooter(k.marry.marry_complete2).setTimestamp()
-                    message.channel.send({embeds: [marry1]});
+                    message.channel.send(marry1);
                     user.marry = message2.author.id
                     writeUser(clientDB,member.id,user)
                     user2.marry = member.id
                     writeUser(clientDB,message2.author.id,user2)
                 }else if(ms.array()[0].content === "no") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                        message.edit({embeds: [marry2]})}
+                        message.edit(marry2)}
                     }).catch(() => {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                        message.edit({embeds: [marry2]})});
+                        message.edit(marry2)});
                })}else{message.edit(k.marry.has_someone)}
             }})})}}}
     else{message2.channel.send(k.marry.you_have)
 }
 })}},
     "divorce": {
-        description: {zh_TW:"與某人離婚",en_US:"Divorce someone.",ja_JP:""},
-        authority: "everyone",
-        instructions: "divorce [@mention/ID]",
-        category: "user",
-        vote: false,
-        help: false,
+    description: "離婚系統",
     fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -661,30 +465,25 @@ module.exports= {
                 .then((ms) => {
                     if(ms.array()[0].content === "yes") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                message.edit({embeds: [marry2]});
+                message.edit(marry2);
                 let marry1 = new Discord.MessageEmbed().setTitle(k.divorce.divorce).setDescription(user2.name + "💔" + user.name).setFooter(k.divorce.divorce2).setTimestamp()
-                message.channel.send({embeds: [marry1]});
+                message.channel.send(marry1);
                 user.marry = ""
                 writeUser(clientDB,other,user)
                 user2.marry = ""
                 writeUser(clientDB,message2.author.id,user2)
             }else if(ms.array()[0].content === "no") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit({embeds: [marry2]})}
+                message.edit(marry2)}
                 }).catch(() => {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                    message.edit({embeds: [marry2]})});
+                    message.edit(marry2)});
                     })}})}
 else{message2.channel.send(k.divorce.hasnt)
 }
 })}},
 "pet": {
-    description: {zh_TW:"寵物指令",en_US:"Pet command.",ja_JP:""},
-    authority: "everyone",
-    instructions: "marry [to do] [@mention/ID]",
-    category: "user",
-    vote: false,
-    help: false,
+    description: "寵物系統",
     fun: function(bot, message2, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -711,14 +510,14 @@ else{message2.channel.send(k.divorce.hasnt)
                         .setTitle(k.pet.add.timer)
                         .setDescription(k.pet.add.answer)
                         message.edit("<@" + member.id + "> ")
-                    message.channel.send({embeds: [marry]}).then((message) => {
+                    message.channel.send(marry).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                     message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                        message.edit({embeds: [marry2]});
+                        message.edit(marry2);
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.add.complete_adot).setDescription(user2.name + "🔗" + user.name).setFooter(k.pet.add.complete_adot2).setTimestamp()
                         message.channel.send(marry1);
                         user.host.push(message2.author.id)
@@ -729,11 +528,11 @@ else{message2.channel.send(k.divorce.hasnt)
                         writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no") {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit({embeds: [marry2]})
+                                message.edit(marry2)
                             }
                         }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit({embeds: [marry2]})});
+                            message.edit(marry2)});
                    })
                 }})})}
         }})}else if(args[0] === "remove") {
@@ -762,16 +561,16 @@ else{message2.channel.send(k.divorce.hasnt)
                         let marry = new Discord.MessageEmbed()
                         .setTitle(k.pet.remove.sure)
                         .setDescription(k.pet.remove.answer)
-                        message2.channel.send({embeds: [marry]}).then((message) => {
+                        message2.channel.send(marry).then((message) => {
                             const filter = answer => {
                                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
                     message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
                         .then((ms) => {
                             if(ms.array()[0].content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-                        message.edit({embeds: [marry2]});
+                        message.edit(marry2);
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.remove.remome_adot).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.remove.remove_adot2).setTimestamp()
-                        message.channel.send({embeds: [marry1]});
+                        message.channel.send(marry1);
                         var array = user.host
                         var index = array.indexOf(message2.author.id)
                         if (index> -1) {array.splice(index, 1);}
@@ -786,11 +585,11 @@ else{message2.channel.send(k.divorce.hasnt)
                         writeUser(clientDB,message2.author.id,user2)
                             }else if(ms.array()[0].content === "no")  {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit({embeds: [marry2]})
+                                message.edit(marry2)
                             }
                     }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit({embeds: [marry2]})});
+                            message.edit(marry2)});
                             })}})})}}})}
                         }})
         }else if(args[0] === "disconnect") {
@@ -807,16 +606,16 @@ else{message2.channel.send(k.divorce.hasnt)
                     loadUser(clientDB,member.id).then((user) => {
                         if (user === false) {return message.channel.send(k.word.not_fond_user)}else{
         let marry = new Discord.MessageEmbed().setTitle(k.pet.disconnect.sure).setDescription(k.pet.disconnect.answer)
-        message2.channel.send({embeds: [marry]}).then((message) => {
+        message2.channel.send(marry).then((message) => {
             const filter = answer => {
                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
     message.channel.awaitMessages(filter, { max: 1, time: 10000, errors: ['time'] })
         .then((ms) => {
             if(ms.array()[0].content === "yes") {
         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
-        message.edit({embeds: [marry2]});
+        message.edit(marry2);
         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.disconnect.disconnect).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.disconnect.disconnect2).setTimestamp()
-        message.channel.send({embeds: [marry1]});
+        message.channel.send(marry1);
         var array = user2.host
         var index = array.indexOf(member.id)
         if (index> -1) {array.splice(index, 1);}
@@ -831,7 +630,7 @@ else{message2.channel.send(k.divorce.hasnt)
         writeUser(clientDB,member.id,user)
             }else if(ms.array()[0].content === "no")  {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit({embeds: [marry2]})
+                message.edit(marry2)
             }
         })
         })}})})})
@@ -841,17 +640,12 @@ else{message2.channel.send(k.divorce.hasnt)
 
         }else{
             let pethelp = new Discord.MessageEmbed().setColor( message2.member.roles.highest.color).setTitle(k.pet.help.title).setDescription(k.pet.help.desc).setTimestamp()
-            message2.channel.send({embeds: [pethelp]})
+            message2.channel.send(pethelp)
         }
     }
 },
 "card": {
-    description: {zh_TW:"用戶的咖啡廳資料",en_US:"User data of cafe.",ja_JP:""},
-    authority: "everyone",
-    instructions: "card [@mention/ID]",
-    category: "user",
-    vote: false,
-    help: false,
+    description: "用戶資料",
     fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
         let l = lan.zh_TW,k = gameX.zh_TW
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -898,36 +692,23 @@ else{message2.channel.send(k.divorce.hasnt)
         .addField(k.card.work_all + user.work + k.card.times+" \n"+k.card.work_last + user.worktoal.work + l.date.day,k.card.work_first + user.time)
         .setFooter(k.card.ID_card+" ▋▏▎▍▋▍▋▏▏▍▋▏▍▍▋▏▋▍▉▏▍")
         .setTimestamp()
-        message.channel.send({embeds: [userdata]})
+        message.channel.send(userdata)
 })}
 }},
     "permissions": {
-        description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
-        authority: "everyone",
-        instructions: "permissions [@mention/ID＊]",
-        vote: false,
-        help: false,
+        description: "權限",
         fun: function(bot, message, prefix ,clientDB, language, args) {
             access(bot,message,args,clientDB,language)
        }
     },
     "permission": {
-        description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
-        authority: "everyone",
-        instructions: "permission [@mention/ID＊]",
-        vote: false,
-        help: false,
+        description: "權限",
         fun: function(bot, message, prefix ,clientDB, language, args) {
             access(bot,message,args,clientDB,language)
        }
     },
     "banlist": {
-        description: {zh_TW:"伺服器的封鎖名單",en_US:"Ban list of server.",ja_JP:""},
-        authority: "everyone",
-        instructions: "banlist",
-        category: "guild",
-        vote: false,
-        help: false,
+        description: "權限",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -937,7 +718,7 @@ else{message2.channel.send(k.divorce.hasnt)
                 guild = bot.guilds.cache.get(args[0])
             }else{
                 guild = message.guild;}
-            guild.bans.fetch()
+            guild.fetchBans()
     .then(banned => {
         let list = banned.map(ban => ban.user.tag).join('\n');
 
@@ -949,21 +730,13 @@ else{message2.channel.send(k.divorce.hasnt)
        }
     },
     "perm": {
-        description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
-        authority: "everyone",
-        instructions: "perm [@mention/ID＊]",
-        category: "guild",
+        description: "權限",
         fun: function(bot, message, prefix ,clientDB, language, args) {
             access(bot,message,args,clientDB,language)
        }
     },
     "adv": {
-        description: {zh_TW:"用戶的成就",en_US:"user of adv",ja_JP:""},
-        authority: "everyone",
-        instructions: "adv",
-        category: "user",
-        vote: false,
-        help: false,
+        description: "成就",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -984,7 +757,7 @@ else{message2.channel.send(k.divorce.hasnt)
                     .setTitle(message.member.displayName + " 成就表")
                     .setDescription(message.author.username+"#"+message.author.discriminator)
                     .addField("🏅成就表","\n " + adv)
-                    message.channel.send({embeds: [advs]})
+                    message.channel.send(advs)
                 }})
         }}
 }
@@ -1011,26 +784,27 @@ async function access(bot,message,args,clientDB,language) {
          }else { member = message.member }
     } else { member = message.member }
     if(member){
-    if(member.presence.member.permissions.has(['ADMINISTRATOR'])) {var admi = "✅"}else{var admi = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_CHANNELS'])) {var manage = "✅"}else{var manage = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_GUILD'])) {var guild = "✅"}else{var guild = "❌"}
-    if(member.presence.member.permissions.has(['VIEW_AUDIT_LOG'])) {var log = "✅"}else{var log = "❌"}
-    if(member.presence.member.permissions.has(['KICK_MEMBERS'])) {var kick = "✅"}else{var kick = "❌"}
-    if(member.presence.member.permissions.has(['BAN_MEMBERS'])) {var ban = "✅"}else{var ban = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_ROLES'])) {var role = "✅"}else{var role = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_WEBHOOKS'])) {var hook = "✅"}else{var hook = "❌"}
-    if(member.presence.member.permissions.has(['MENTION_EVERYONE'])) {var tag = "✅"}else{var tag = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_EMOJIS'])) {var emoji = "✅"}else{var emoji = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_MESSAGES'])) {var msg = "✅"}else{var msg = "❌"}
-    if(member.presence.member.permissions.has(['CREATE_INSTANT_INVITE'])) {var inv = "✅"}else{var inv = "❌"}
-    let owners = await guild2.fetchOwner(),owner = "❓"
-    if(owners.user.id == member.id) {owner = "👑 是"}else{owner = "💂‍♂️ 否"}   
+    if(member.presence.member.hasPermission(['ADMINISTRATOR'])) {var admi = "✅"}else{var admi = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_CHANNELS'])) {var manage = "✅"}else{var manage = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_GUILD'])) {var guild = "✅"}else{var guild = "❌"}
+    if(member.presence.member.hasPermission(['VIEW_AUDIT_LOG'])) {var log = "✅"}else{var log = "❌"}
+    if(member.presence.member.hasPermission(['KICK_MEMBERS'])) {var kick = "✅"}else{var kick = "❌"}
+    if(member.presence.member.hasPermission(['BAN_MEMBERS'])) {var ban = "✅"}else{var ban = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_ROLES'])) {var role = "✅"}else{var role = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_WEBHOOKS'])) {var hook = "✅"}else{var hook = "❌"}
+    if(member.presence.member.hasPermission(['MENTION_EVERYONE'])) {var tag = "✅"}else{var tag = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_EMOJIS'])) {var emoji = "✅"}else{var emoji = "❌"}
+    if(member.presence.member.hasPermission(['MANAGE_MESSAGES'])) {var msg = "✅"}else{var msg = "❌"}
+    if(member.presence.member.hasPermission(['CREATE_INSTANT_INVITE'])) {var inv = "✅"}else{var inv = "❌"}
+    try {
+     if(guild2.owner.user.id == member.id) {var owner = "👑 是"}else{var owner = "💂‍♂️ 否"}   
+    } catch (error) {var owner = "❓"} 
     let acc = new Discord.MessageEmbed()
     .setColor(member.presence.member.roles.highest.color)
     .setTitle(member.user.username +k.prem.perm+k.prem.in+guild2.name)
     .setDescription(k.prem.hight + "<@&" + member.presence.member.roles.highest + "> \n"+k.prem.owner+ owner)
     .addField(k.prem.prem2, `${l.prem.ADMINISTRATOR} `+admi+`\n${l.prem.manage_guild} `+guild+`\n${l.prem.manage_channel} `+manage+`\n${k.prem.log} `+log+`\n${l.prem.kick_members} `+kick+ `\n${l.prem.ban_members} `+ban+`\n${l.prem.manage_roles} `+role+`\n${l.prem.manage_messages} `+msg+`\n${l.prem.manage_webhooks} `+hook+`\n${l.prem.mention_everyone} `+tag+`\n${k.prem.emoji} `+emoji+`\n${k.prem.ink} `+inv)
-    message.channel.send({embeds: [acc]})
+    message.channel.send(acc)
     }
 };
 async function payto(bot, message ,args) {

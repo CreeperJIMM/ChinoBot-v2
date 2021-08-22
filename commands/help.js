@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const { version } = require('../config.json')
 const lan = require('../commands/lang.json');
 const helpX = require('../language/help.json');
-const fs = require("fs")
 var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
@@ -10,12 +9,7 @@ function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("m
 
 module.exports = {
     "help":{
-        description: {zh_TW:"智乃幫助頁面",en_US:"Chino help page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "help",
-        category: "normal",
-        vote: false,
-        help: false,
+        description: "幫助指令",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -26,85 +20,23 @@ module.exports = {
             .setDescription(h.help.desc +p+ h.help.desc2 +p+ h.help.desc3)
             .addField(h.help.addA ,h.help.addF +p+h.help.addF2+p+h.help.addF3+p+h.help.addF4+p+h.help.addF5+p+h.help.addF6+bot.user.id+h.help.addF7+p+h.help.addF8+p+h.help.addF9)
             .setFooter(h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-            {message.channel.send({embeds: [helpEmbed]})};
+            {message.channel.send(helpEmbed)};
         }
     },
-    "oldcommand":{
-        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "command [function]",
-        category: "normal",
-        vote: false,
-        help: false,
-        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            help(bot,message,language,p,args)
-        }
-    },
-    "oldcmd":{
-        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "command [function]",
-        vote: false,
-        help: false,
+    "command":{
+        description: "指令頁面",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             help(bot,message,language,p,args)
         }
     },
     "cmd":{
-        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "newcommand [function]",
-        vote: false,
-        help: false,
-        fun: function (bot, message, p,clientDB,language,args, ...ag) {
-            newcmd(bot,message,language,p,args)
-        }
-    },
-    "command":{
-        description: {zh_TW:"指令幫助頁面",en_US:"Command help page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "newcommand [function]",
-        vote: false,
-        help: false,
-        fun: function (bot, message, p,clientDB,language,args, ...ag) {
-            newcmd(bot,message,language,p,args)
+        description: "指令頁面",
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+            help(bot,message,language,p,args)
         }
     },
     "invite":{
-        description: {zh_TW:"智乃邀請頁面",en_US:"Chino invite page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "invite",
-        category: "normal",
-        vote: false,
-        help: false,
-        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            let lang = lan.zh_TW,h = helpX.zh_TW
-            if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
-            }else if(language === "en_US") {lang = lan.en_US;h = helpX.en_US}
-            const invEmbed = new Discord.MessageEmbed()
-            .setColor('#2d9af8')
-            .setTitle(h.invite.inv)
-            .setURL('https://discord.com/oauth2/authorize?client_id='+bot.user.id+'&scope=applications.commands%20bot&permissions=2134900215')
-            .setAuthor(bot.user.username + "#" + bot.user.discriminator, bot.user.displayAvatarURL())
-            .setDescription(h.invite.desc+bot.user.id+h.invite.desc2)
-            .setThumbnail('https://cdn.discordapp.com/attachments/611040945495998464/732973619319275640/289100043sq324qp55p7.gif')
-            .addFields(
-              { name: h.invite.addF.a1, value: h.invite.addF.v1 },
-              { name: lang.word.chino, value: h.invite.addF.cocoa, inline: true },
-              { name: h.invite.addF.tippy, value: h.invite.addF.other, inline: true },
-            )
-            .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
-            .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
-            .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send({embeds: [invEmbed]})};
-        }
-    },
-    "inv":{
-        description: {zh_TW:"智乃邀請頁面",en_US:"Chino invite page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "inv",
-        vote: false,
-        help: false,
+        description: "邀請指令",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
@@ -124,15 +56,35 @@ module.exports = {
             .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
             .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
             .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send({embeds: [invEmbed]})};
+          {message.channel.send(invEmbed)};
+        }
+    },
+    "inv":{
+        description: "邀請指令",
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+            let lang = lan.zh_TW,h = helpX.zh_TW
+            if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
+            }else if(language === "en_US") {lang = lan.en_US;h = helpX.en_US}
+            const invEmbed = new Discord.MessageEmbed()
+            .setColor('#2d9af8')
+            .setTitle(h.invite.inv)
+            .setURL('https://discord.com/oauth2/authorize?client_id='+bot.user.id+'&scope=applications.commands%20bot&permissions=2134900215')
+            .setAuthor(bot.user.username + "#" + bot.user.discriminator, bot.user.displayAvatarURL())
+            .setDescription(h.invite.desc)
+            .setThumbnail('https://cdn.discordapp.com/attachments/611040945495998464/732973619319275640/289100043sq324qp55p7.gif')
+            .addFields(
+              { name: h.invite.addF.a1, value: h.invite.addF.v1 },
+              { name: lang.word.chino, value: h.invite.addF.cocoa, inline: true },
+              { name: h.invite.addF.tippy, value: h.invite.addF.other, inline: true },
+            )
+            .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
+            .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
+            .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
+          {message.channel.send(invEmbed)};
         }
     },
     "ver":{
-        description: {zh_TW:"智乃版本頁面",en_US:"Chino version page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "ver [page]",
-        vote: false,
-        help: false,
+        description:"版本指令",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)
@@ -147,12 +99,6 @@ module.exports = {
         }}
     },
     "version":{
-        description: {zh_TW:"智乃版本頁面",en_US:"Chino version page.",ja_JP:""},
-        authority: "everyone",
-        instructions: "version [page]",
-        category: "normal",
-        vote: false,
-        help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
             if(ag[0] == "1") {
                 ver1(bot,message,language)
@@ -178,7 +124,7 @@ const helpEmbed = new Discord.MessageEmbed()
 .addField(`${h.ver.use} ${p} ver [${h.ver.pages}]`, `${h.ver.all} 4 ${h.ver.page}`)
 .setTimestamp()
 .setFooter(`[${h.ver.the} 0 ${h.ver.page}]\n${h.word.creater} ${h.word.me}  ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-{message.channel.send({embeds: [helpEmbed]})};
+{message.channel.send(helpEmbed)};
 }
 async function ver1(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -211,7 +157,7 @@ async function ver1(bot,message,language) {
     .addField('0.9.0 (7/29)','修復&指令優化+新增猜拳指令')
     .setTimestamp()
     .setFooter(`[${h.ver.the} 1/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send({embeds: [helpEmbed]})};
+    {message.channel.send(helpEmbed)};
 }
 async function ver2(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -246,7 +192,7 @@ async function ver2(bot,message,language) {
     .addField('2.9.0 (9/27)',"加入離開設置優化")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 2/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send({embeds: [helpEmbed]})};
+    {message.channel.send(helpEmbed)};
 }
 async function ver3(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -271,7 +217,7 @@ async function ver3(bot,message,language) {
     .addField('3.9.0 (11/14)',"公告指令 狀態指令\n修復部分bug")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 3/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send({embeds: [helpEmbed]})};
+    {message.channel.send(helpEmbed)};
 }
 async function ver4(bot,message,language) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -284,7 +230,7 @@ async function ver4(bot,message,language) {
     .addField('4.0.0 (10/1)',"新增fubuki chen  gay指令")
     .setTimestamp()
     .setFooter(`[${h.ver.the} 4/4 ${h.ver.page}]\n${h.word.creater} ${h.word.me}   ◆v.${version} \n${h.word.copy}  `, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-    {message.channel.send({embeds: [helpEmbed]})};
+    {message.channel.send(helpEmbed)};
 }
 async function help(bot,message,language,p,args) {
     let lang = lan.zh_TW,h = helpX.zh_TW
@@ -298,7 +244,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.common.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆11 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "rabbit") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -307,7 +253,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.rabbit.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆10 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "admin") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -316,7 +262,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.admin.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆6 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "music") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,  bot.user.displayAvatarURL())
@@ -325,7 +271,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.music.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆10+ ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "other") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -334,7 +280,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.other.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆6 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "money") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -343,7 +289,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.money.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆5 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "level") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -352,7 +298,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.level.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆2 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "user") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -361,7 +307,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.user.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆7 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "game") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -370,7 +316,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.game.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆11 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "text") {
         const helpEmbed = new Discord.MessageEmbed()
         .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` , bot.user.displayAvatarURL())
@@ -379,7 +325,7 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.command.text.cmd)
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆2 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]});
+        message.channel.send(helpEmbed);
     }else if(args[0] == "all") {
         const helpEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
@@ -399,7 +345,7 @@ async function help(bot,message,language,p,args) {
             )
         .setTimestamp()
         .setFooter(`${h.word.creater} ${h.word.me}\n◆64 ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        {message.channel.send({embeds: [helpEmbed]})};
+        {message.channel.send(helpEmbed)};
     }else{
         const helpEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
@@ -407,99 +353,6 @@ async function help(bot,message,language,p,args) {
         .setDescription(h.word.pass+" `"+p+h.command.word.help)
         .addField(h.command.word.addF, h.command.word.addV)
         .setFooter(`${h.word.creater} ${h.word.me}\n${h.word.copy}`)
-        message.channel.send({embeds: [helpEmbed]})
+        message.channel.send(helpEmbed)
     }
-}
-function newcmd(bot,message,language,p,args) {
-    let lang = lan.zh_TW,h = helpX.zh_TW
-    if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
-    }else if(language === "en_US") {lang = lan.en_US;h = helpX.en_US}
-    let command = {}
-    let commandfiles = fs.readdirSync("./commands")
-    commandfiles.splice(7,1)
-    for (file of commandfiles) {
-        let q = require(`../commands/${file}`)
-        Object.assign(command, q)
-    }
-    let a = ["other","admin","user","guild","game","normal","image","money","user","rank","text","undefined"]
-    let b = {}
-    a.forEach(element => {
-          b[element] = []  
-    });
-    let number = 0
-    for (const key in command) {
-        if (Object.hasOwnProperty.call(command, key)) {
-            const element = command[key];
-            try {
-                number++
-                b[element.category].push(key)
-            } catch (error) {
-                console.log(element.category)
-            }
-        }
-    }
-    //console.log(b)
-    if(args[0] === "all") {
-        const helpEmbed = new Discord.MessageEmbed()
-        .setColor('#2d9af8')
-        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
-        .setDescription('◆以下指令都使用 `'+p+'` \n◆如果要查看詳細說明請打 `[指令] help` 例如: `cr!chino help`')
-        .setTimestamp()
-        .setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        let all = []
-        for (const key in b) {
-            if (Object.hasOwnProperty.call(b, key)) {
-                const element = b[key];
-                if(key != "undefined") {
-                    all.push(key+" "+element.join("\n"))
-                }
-            }
-        }
-        all.sort(function(a, b) {
-            return a - b;
-        })
-        setTimeout(() => {
-            all.forEach(element => {
-                let sp = element.split(" ")
-                helpEmbed.addField(sp[0],sp[1],true) 
-            });
-            helpEmbed.fields.sort(function(a, b) {
-                return b.name - a.name;
-            })
-            message.channel.send({embeds: [helpEmbed]})     
-        }, 400);
-    }else if(a.indexOf(args[0]) === -1) {
-        const helpEmbed = new Discord.MessageEmbed()
-        .setColor('#2d9af8')
-        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
-        .setDescription(`◆請使用 \`${p}command [以下參數]\` 來查閱各類別的指令`)
-        .setTimestamp()
-        .setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        a.pop()
-        helpEmbed.addField("[參數]",a.join("\n")+"\n或者你打 `all` 可以查看全部類別的指令",true)
-        message.channel.send({embeds: [helpEmbed]})
-    }else{
-        const helpEmbed = new Discord.MessageEmbed()
-        .setColor('#2d9af8')
-        .setAuthor(bot.user.username + "#" + bot.user.discriminator+` ${h.word.command}  V.${version}` ,bot.user.displayAvatarURL())
-        .setDescription('◆以下指令都使用 `'+p+'` \n◆如果要查看詳細說明請打 `[指令] help` 例如: `cr!chino help`')
-        .setTimestamp()
-        for (const key in b) {
-            if (Object.hasOwnProperty.call(b, key)) {
-                const element = b[key];
-                    if(key === args[0]) {
-                    if(key === "undefined") {
-                    helpEmbed.addField("喔哇!","你找到了一個神奇的類別\n但這些指令有些可能不能用\n或是有些指令重複到了\n不然就是苦力怕怕才能使用的:P")
-                    number = element.length
-                    helpEmbed.addField(key,element.join("\n"),true)                                
-                    }else{
-                    number = element.length
-                    helpEmbed.addField(key,element.join("\n"),true)
-                    }
-                }
-            }
-        }
-        helpEmbed.setFooter(`${h.word.creater} ${h.word.me}\n◆${number} ${h.command.word.cmds} \n${h.word.copy}`, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-        message.channel.send({embeds: [helpEmbed]})
-}
 }

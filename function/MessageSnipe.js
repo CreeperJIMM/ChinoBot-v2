@@ -14,7 +14,7 @@ module.exports.main = function (message,clientDB,user) {
     var texttime = JSON.stringify(user.snipetime); var texttime2 = texttime.toString(); texttime2 = JSON.parse(texttime2);
     var textfile = JSON.stringify(user.snipefile); var textfile2 = textfile.toString(); textfile2 = JSON.parse(textfile2);
     if (message.attachments.size > 0) {
-        var Attachment = (message.attachments);
+        var Attachment = (message.attachments).array();
         Attachment.forEach(function (attachment) {
             var file = attachment.proxyURL
             var filename = attachment.name

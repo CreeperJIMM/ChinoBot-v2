@@ -1,11 +1,15 @@
 const { Client, Intents } = require("discord.js");
+let intents = new Intents(Intents.NON_PRIVILEGED);
 const Discord = require("discord.js")
 const fs = require('fs');
 const {mongo} = require('./token.json');
 function main() {
-    const client = new Client({intents: [Intents.FLAGS.GUILDS,"GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES",/*"GUILD_PRESENCES","GUILD_MEMBERS",*/"GUILD_VOICE_STATES"] })
+    intents.add('GUILD_MEMBERS');
+    const client = new Discord.Client() //({ ws: {intents: intents} });
     const { DiscordTogether } = require('discord-together');
     client.discordTogether = new DiscordTogether(client);
+    const disbut = require('discord-buttons');
+    disbut(client);
     /////////////////////// Mongo /////////////////
     const MongoClient = require('mongodb').MongoClient;
     const clientDB = new MongoClient(mongo, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -15,11 +19,11 @@ function main() {
     /////////////// Mongo data //////////////////
     let Mongo = require("./function/MongoData")
     ////////////////////////////////////////////  版本: 6.1
-    const { prefix, token, version} = require('./config.json');
+    const { prefix, token, prefix2, version, owner} = require('./config.json');
     //////////////////////////////////////////////
     let onlineSET = require("./function/BotOnline")
-    client.once('ready', async () => {
-        onlineSET.main1(client,1,clientDB)
+    client.on('ready', async () => {
+        onlineSET.main1(client,1)
         console.log(`苦力怕機器人讀取成功! 版本: ${version} Time: ` + new Date().toUTCString());
     });
     ///////////////////////////////////////////
@@ -44,7 +48,7 @@ function main() {
                     }
                 }
             }
-            client[file.type](file.name, w(file.fun))
+            client.on(file.name, w(file.fun))
         } catch (error) {
             console.log(`file:${file.name}\nError:\n`)
             console.log(error)

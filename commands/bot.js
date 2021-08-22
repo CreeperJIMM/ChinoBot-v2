@@ -2,22 +2,20 @@ const Discord = require("discord.js")
 const fs = require("fs")
 const request = require("request");
 const lan = require('../commands/lang.json');
-let BotOnline = require("../function/BotOnline")
 const gameX = require('../language/bot.json');
-let Mongo = require("../function/MongoData")
+var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.db("mydb"),id = userid,query = { "id": id };let user = await dbo.collection("users").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
+function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
+var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
+function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
+
 module.exports= {
     "setupuser":{
-        description: {zh_TW:"手動生成用戶資料",en_US:"To spawn user data.",ja_JP:""},
-        authority: "everyone",
-        instructions: "setupuser",
-        category: "user",
-        vote: false,
-        help: false,
+        description: "測試",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            Mongo.loadUser(clientDB, message.author.id).then((user) => {
+            loadUser(clientDB, message.author.id).then((user) => {
             if (user === false) {
             var obj = {
                 name: [message.author.username],
@@ -68,12 +66,7 @@ module.exports= {
         }
     },
     "close":{
-        description: {zh_TW:"關閉機器人.",en_US:"close bot.",ja_JP:""},
-        authority: "owner",
-        instructions: "close",
-        category: "other",
-        vote: false,
-        help: false,
+        description: "測試",
         fun: function(bot, message, prefix,clientDB , language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -84,12 +77,7 @@ module.exports= {
         }
     },
     "ram": {
-        description: {zh_TW:"機器人記憶體用量.",en_US:"Bot ram status.",ja_JP:""},
-        authority: "everyone",
-        instructions: "ram",
-        category: "other",
-        vote: false,
-        help: false,
+        description: "記憶體",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -101,16 +89,11 @@ module.exports= {
             .setTitle(k.bot.info)
             .addField(k.ram.all, (usedMemory/ Math.pow(1024, 3)).toFixed(2) +"GB / " + (totalMemory/ Math.pow(1024, 3)).toFixed(2) + "GB" )
             .addField(k.ram.use , getpercentage);
-             message.channel.send({embeds: [ramEmbed]});
+             message.channel.send(ramEmbed);
         }
     },
     "cpu": {
-        description: {zh_TW:"機器人cpu用量.",en_US:"Bot cpu status.",ja_JP:""},
-        authority: "everyone",
-        instructions: "cpu",
-        category: "other",
-        vote: false,
-        help: false,
+        description: "CPU",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -124,7 +107,7 @@ module.exports= {
             .addField(k.cpu.all, (2.50 - f).toFixed(2) + "Ghz / "+ "2.50" + "Ghz" )
             .addField(k.cpu.use , (((2.50 - f).toFixed(2) /2.50) *100).toFixed(2) + "%")
             .addField(k.cpu.runing, (os.sysUptime()/60).toFixed(1) + l.time.minute )
-             message.channel.send({embeds: [cpuEmbed]});
+             message.channel.send(cpuEmbed);
             })            
             } catch (error) {
              message.channel.send(`Error!\n\`\`\`js\n${error}\n\`\`\``)   
@@ -132,12 +115,7 @@ module.exports= {
     }
     },
     "restart": {
-        description: {zh_TW:"重啟機器人.",en_US:"Restart bot.",ja_JP:""},
-        authority: "owner",
-        instructions: "restart",
-        category: "other",
-        vote: false,
-        help: false,
+        description: "重啟",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
@@ -230,7 +208,7 @@ module.exports= {
             let user = await dbo.collection("users").find(query).toArray();
             for (let file of user) {
                  try {
-                    Mongo.loadUser(clientDB,user.id).then((data) => {
+                    loadUser(clientDB,user.id).then((data) => {
                     if(!data) return list.push(file.id)
                     if(!data.id) return list.push(file.id)
                     if(isNaN(data.money)) list.push(file.id)
@@ -249,7 +227,7 @@ module.exports= {
             let guser = await dbo.collection("guilds").find(query).toArray();
             for (let file of guser) {
                 try {
-                   Mongo.loadUser(clientDB,guser.id).then((data) => {
+                   loadUser(clientDB,guser.id).then((data) => {
                    if(!data) return guildlist.push(file.id)
                    if(!data.id) return guildlist.push(file.id)
                    })
@@ -353,7 +331,7 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if (message.author.id !== '546144403958398988') return;
             var list = new Array();
-            bot.guilds.cache.forEach((guild_) => {
+            for(let guild_ of bot.guilds.cache.array()) {
                 if(guild_.memberCount < 10) {
                     var exp = "000"+ guild_.memberCount}
                 else if(guild_.memberCount < 100) {
@@ -363,7 +341,7 @@ module.exports= {
                     else{var exp = guild_.memberCount}
                 list.push(exp+" | "+guild_.name+" | "+guild_.id)
                 list.sort(function(a, b) {return a > b;})
-            })
+            }
             setTimeout(() => {
                 list.sort();
                 list.splice(40);
@@ -374,7 +352,7 @@ module.exports= {
                     .setTitle("📦所有咖啡廳☕")
                     .setDescription("群名稱| ID        |  成員數\n ```js\n"+list.join("\n") + "\n```")
                     .setFooter("此為全部群")
-                    message.channel.send({embeds: [levelembed]})
+                    message.channel.send(levelembed)
                 }, 1000);
         }
     },
@@ -395,47 +373,38 @@ module.exports= {
         }
     },
     "bot": {
-        description: {zh_TW:"所有智乃機器人狀態.",en_US:"All Chino bot status.",ja_JP:""},
-        authority: "everyone",
-        instructions: "bot",
-        category: "normal",
-        vote: false,
-        help: false,
+        description: "測試",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            BotOnline.Mongoload(clientDB).then((user) => {
-                if(user === false) {return message.channel.send(l.error.Run_Command_error)}else{
+            fs.readFile('./server.json',function (err,userInfo) {
+                if(err) {return message.channel.send(l.error.Run_Command_error)}else{var user = userInfo.toString();user = JSON.parse(user);
             let bot = new Discord.MessageEmbed()
             .setColor('#2d9af8').setTitle(k.status.list)
             .setDescription(k.status.info)
-            .addField("智乃小幫手#5407",k.status.inv1+" [[top.gg]](https://top.gg/bot/731408794948730961)\n"+ user.chino.member+"  |  "+user.chino.guild+"  |  "+user.chino.status+" |  `cr!`   |  ✅  |  ✅  |  ✅  |  ✅  |  ❌ |[[邀請(管理者)]](https://discord.com/oauth2/authorize?client_id=731408794948730961&scope=applications.commands%20bot&permissions=1476668478)|[[邀請(無管理者)]](https://discord.com/oauth2/authorize?client_id=731408794948730961&scope=applications.commands%20bot&permissions=2134900215)|")
-            .addField("智乃小幫手2#5127",k.status.inv2+"\n"+ user.chino2.member+"  |  "+user.chino2.guild+"  |  "+user.chino2.status+" |  `cr?`   |  ✅  |  ❌  |  ✅  |  ✅  |  ✅ |[[邀請(管理者)]](https://discord.com/oauth2/authorize?client_id=775702812348776478&scope=applications.commands%20bot&permissions=1476668478)|[[邀請(無管理者)]](https://discord.com/oauth2/authorize?client_id=775702812348776478&scope=applications.commands%20bot&permissions=2134900215)")
-            .addField("智乃小幫手•Canary#9156",k.status.inv3+"\n"+user.chinoc.member+"  |  "+user.chinoc.guild+"  |  "+user.chinoc.status+" |  `cr*`  |  ❌  |  ❌  |  ❌  |  ✅  |  ❌  |[測試用暫不開放]")
+            .addField("智乃小幫手#5407",k.status.inv1+"\n"+ user.chino.member+"  |  "+user.chino.guild+"  |  "+user.chino.status+" |  `cr!`   |  ✅  |  ✅  |  ✅  |  ✅  |  ❌  | [[邀請]](https://discord.com/oauth2/authorize?client_id=731408794948730961&scope=applications.commands%20bot&permissions=2134900215) | [[top.gg]](https://top.gg/bot/731408794948730961)")
+            .addField("智乃小幫手2#5127",k.status.inv2+"\n"+ user.chino2.member+"  |  "+user.chino2.guild+"  |  "+user.chino2.status+" |  `cr?`   |  ✅  |  ❌  |  ✅  |  ✅  |  ✅  | [[邀請]](https://discord.com/oauth2/authorize?client_id=775702812348776478&scope=applications.commands%20bot&permissions=2134900215)")
+            .addField("智乃小幫手•Canary#9156",k.status.inv3+"\n"+user.chinoc.member+"  |  "+user.chinoc.guild+"  |  "+user.chinoc.status+" |  `cr*`  |  ❌  |  ❌  |  ❌  |  ✅  |  ❌  |[[邀請]](https://discord.com/oauth2/authorize?client_id=747992207323168808&scope=applications.commands%20bot&permissions=2134900215)")
             .setFooter(k.status.footer)
             .setTimestamp()
-            message.channel.send({embeds: [bot]})
+            message.channel.send(bot)
         }})
         }
     },
     "post": {
-        description: {zh_TW:"智乃公告.",en_US:"Chino post.",ja_JP:""},
-        authority: "everyone",
-        instructions: "post",
-        category: "other",
-        vote: false,
-        help: false,
+        description: "測試",
         fun: function(bot, message, prefix ,clientDB, language, args ,...ag) {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             message.channel.send("<a:load:776980097054933063> "+k.post.loading).then((loadmessage) => {
             let bots = message.guild.me
-            Mongo.loaddata(clientDB).then((user) => { 
-                if(!user) {return message.channel.send(l.error.Run_Command_error)}
+            fs.readFile('./data.json',function (err, userInfo) {
+                if(err) {return message.channel.send(l.error.Run_Command_error)}
+                var user = userInfo.toString();
+                user = JSON.parse(user);
                 let Time = new Date()
-                user = user.data
             setTimeout(() => {
                 let post = new Discord.MessageEmbed()
                 .setColor('#2d9af8').setTitle(k.post.title)
@@ -445,9 +414,8 @@ module.exports= {
                 .addField(k.post.update,"```json\n"+user.post.update+"\n```")
                 .setFooter(k.post.time+user.post.time+" | ").setTimestamp()
                 loadmessage.edit(k.post.success_load)
-                loadmessage.edit({embeds: [post]})
+                loadmessage.edit(post)
             }, 2000);
-        })
-    })}
+        })})}
     },
 }

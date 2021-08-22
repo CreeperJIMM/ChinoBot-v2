@@ -6,6 +6,7 @@ var loadUser = async (client,userid) => {/*讀取用戶檔案*/let dbo =client.d
 function writeUser(client,id,data) {/*寫入用戶檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("users").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("users").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
 var loadGuild = async(client,guildid) => {/*讀取公會檔案*/let dbo =client.db("mydb"),id = guildid,query = { "id": id };let user = await dbo.collection("guilds").find(query).toArray();if(user[0] === undefined) return false;user = user[0][id];return user}
 function writeGuild(client,id,data) {/*寫入公會檔案*/let dbo =client.db("mydb"),query = { [id]: Object };let user = dbo.collection("guilds").find(query).toArray();var myquery = { "id": id };user[id] = data;var newvalues = {$set: user};dbo.collection("guilds").updateOne(myquery, newvalues, function(err,res) {;if(err) return err;})}
+const disbut = require('discord-buttons');
 var loadping = async(client) => {
   /*讀取公會檔案*/let dbo =client.db("mydb"),query = { "type": "ping" };
   let user = await dbo.collection("report").find(query).toArray();
@@ -15,25 +16,21 @@ var loadping = async(client) => {
 }
 module.exports = {
     "hi":{
-      description: {zh_TW:"說嗨(?)",en_US:"Say hi(?)",ja_JP:""},
-      authority: "everyone",
-      instructions: "hi",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "測試",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
-         let button2 = new Discord.MessageButton()
-          button2.setStyle('SUCCESS').setLabel("uwu").setCustomId("uwu")
-          let row = new Discord.MessageActionRow().addComponents(button2)
-            message.reply({content: lang.word.hihi ,components: [row]}).then((w) => {
+          let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
+          //button.setStyle('url').setLabel("test").setURL("https://dckabicord.com/")
+          button2.setStyle('green').setLabel("uwu").setID("uwu")
+          //let row = new disbut.MessageActionRow().addComponents(button, button2);
+            message.reply(lang.word.hihi,button2).then((w) => {
               const filter = (button) => button.clicker.id === message.author.id
-            w.awaitMessageComponent(filter,{max: 1,time: 10000,errors:['time']}).then(async(buttons) => {
-              buttons = buttons
-              await buttons.deferReply()
-              await buttons.editReply("uwu")
+            w.awaitButtons(filter,{max: 1,time: 10000,errors:['time']}).then(async(buttons) => {
+              buttons = buttons.first()
+              await buttons.reply.think()
+              await buttons.reply.edit("uwu")
             }).catch((err) => {
               return;
             })
@@ -41,12 +38,7 @@ module.exports = {
         }
     },
     "ping":{
-      description: {zh_TW:"智乃延遲",en_US:"Chino ping",ja_JP:""},
-      authority: "everyone",
-      instructions: "ping",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "ping",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -55,9 +47,9 @@ module.exports = {
             if(message.author.bot) return;
           message.channel.send("pong!").then(( lastMessage) => {
             let time2 = new Date(),DBtime = new Date()
-            let time3 = (time2.getUTCMilliseconds() - time.getUTCMilliseconds())
             loadping(clientDB).then((ping) => {
             let DB2 = (new Date().getUTCMilliseconds() - DBtime.getUTCMilliseconds())
+            let time3 = (time2.getUTCMilliseconds() - time.getUTCMilliseconds())
             let time4 = new Date();
             if(lastMessage.content === `pong!`) {
               lastMessage.edit("pong!!").then((editmessage) => {
@@ -66,147 +58,112 @@ module.exports = {
           )}})})
     }},
     "date":{
-      description: {zh_TW:"現在日期",en_US:"now date",ja_JP:""},
-      authority: "everyone",
-      instructions: "date",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "日期",
         fun: function (bot, msg, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
             var Today=new Date();
             const TimeEmbed = new Discord.MessageEmbed()
-            .setTitle(lang.time.today + lang.word.yes + Today.getFullYear()+ lang.date.year + (Today.getMonth()+1) + lang.date.month + Today.getDate() + " "+lang.date.date+"  "+lang.date.week + Today.getDay(),)
+            .setTitle(lang.time.today + lang.word.yes + Today.getFullYear()+ lang.date.year + (Today.getMonth()+1) + lang.date.month + Today.getDate() + " "+lang.date.day+"  "+lang.date.week + Today.getDay(),)
             .addField(lang.time.time , Today.getHours() + ":" + Today.getMinutes() + ":" + Today.getSeconds() + ":" + Today.getMilliseconds(),)
-            {msg.channel.send({embeds: [TimeEmbed]})};
+            {msg.channel.send(TimeEmbed)};
           
         }
     },
     "avatar":{
-      description: {zh_TW:"成員的頭貼",en_US:"user's avatar",ja_JP:""},
-      authority: "everyone",
-      instructions: "avatar [@muention/ID＊]",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "大頭貼",
         fun: function (bot, message, p,clientDB,language,ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
-          let member = message.author 
-        if(message.mentions.users.size){
-                member=message.mentions.users.first()
-        }else if(ag[0] != null) {
-          member=bot.users.cache.get(ag[0])
-          if(!member) {
-            let nickname = message.guild.members.cache.find(m => m.displayName.includes(ag[0]))
-            if(nickname) member = nickname.user
-          }
-        }
-        if(member){
-          const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(member.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
-          .setDescription("[[📄Link]]("+member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})+")")
-          message.channel.send({embeds: [emb]})
+            if(ag[0] != null) {
+            if(message.mentions.users.size){
+                let member=message.mentions.users.first()
+            if(member){
+              const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(member.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
+              return  message.channel.send(emb)
+          }}else{              
+            let member=bot.users.cache.get(ag[0])
+            if(!isNaN(ag[0])) {
+              if (!member) member = message.author
+               }else{
+                 let nickname = message.guild.members.cache.find(m => m.displayName.includes(ag[0]))
+                 if(nickname) member = nickname.user }
+           if(member){
+              const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(member.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
+              message.channel.send(emb)
           }else{
-            return  message.channel.send(lang.error.Not_found_Member + ag)
+            return  message.channel.send(lang.error.Not_found_Member + ag)}
+            console.log()
+            }
+          }else{
+          const emb=new Discord.MessageEmbed().setImage(message.author.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(message.author.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
+          message.channel.send(emb)
           }
         }
     },
     "savatar":{
-      description: {zh_TW:"伺服器的頭貼",en_US:"server avatar",ja_JP:""},
-      authority: "everyone",
-      instructions: "savatar",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "群組大頭貼",
         fun: function (bot, message, p,clientDB,language,args) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
           if(!message.guild) return message.channel.send(lang.error.No_DM);
-          let guild = message.guild
-          if(args[0] != null) {
-            guild = bot.guilds.cache.get(args[0])
-            if(!guild) guild = message.guild
-          }
             const avatarEmbed = new Discord.MessageEmbed()
             .setColor('#2d9af8')
-            .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
-            .setImage(guild.iconURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
-            .setDescription("[[📄Link]]("+guild.iconURL({ format: "png", dynamic: true ,size: 2048})+")")
-            {message.channel.send({embeds: [avatarEmbed]})};
+            .setTitle(message.guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
+            .setImage(message.guild.iconURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
+            {message.channel.send(avatarEmbed)};
+          
         }
     },
     "serveravatar":{
-      description: {zh_TW:"伺服器頭貼",en_US:"server avatar",ja_JP:""},
-      authority: "everyone",
-      instructions: "serveravatar",
-      category: "normal",
-      vote: false,
-      help: false,
+      description: "群組大頭貼",
       fun: function (bot, message, p,clientDB,language,args) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
         }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
         if(!message.guild) return message.channel.send(lang.error.No_DM);
-        let guild = message.guild
-        if(args[0] != null) {
-          guild = bot.guilds.cache.get(args[0])
-          if(!guild) guild = message.guild
-        }
           const avatarEmbed = new Discord.MessageEmbed()
           .setColor('#2d9af8')
-          .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
-          .setImage(guild.iconURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
-          .setDescription("[[📄Link]]("+guild.iconURL({ format: "png", dynamic: true ,size: 2048})+")")
-          {message.channel.send({embeds: [avatarEmbed]})};
+          .setTitle(message.guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
+          .setImage(message.guild.iconURL({ format: "png", dynamic: true ,size: 2048}));
+          {message.channel.send(avatarEmbed)};
+        
       }
   },
   "banner":{
-    description: {zh_TW:"伺服器橫幅",en_US:"server banner",ja_JP:""},
-    authority: "everyone",
-    instructions: "banner",
-    category: "normal",
-    vote: false,
-    help: false,
+    description: "群組橫幅",
     fun: function (bot, message, p,clientDB,language,args) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
       }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
       if(!message.guild) return message.channel.send(lang.error.No_DM);
-      let guild = message.guild
-      if(args[0] != null) {
-        guild = bot.guilds.cache.get(args[0])
-        if(!guild) guild = message.guild
-      }
-      if(!guild.banner) return message.channel.send(useful2.avatar.No_banner)
+      if(!message.guild.banner) return message.channel.send(useful2.avatar.No_banner)
         const avatarEmbed = new Discord.MessageEmbed()
         .setColor('#2d9af8')
-        .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.banner)
-        .setImage(guild.bannerURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
-        .setDescription("[[📄Link]]("+guild.bannerURL({ format: "png", dynamic: true ,size: 2048})+")")
-        {message.channel.send({embeds: [avatarEmbed]})};
+        .setTitle(message.guild.name + ' '+lang.word.of+useful2.avatar.banner)
+        .setImage(message.guild.bannerURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
+        {message.channel.send(avatarEmbed)};
       
     }
 },
     "hooksay":{
       description: "測試",
-      vote: true,
-      help: false,
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
         }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
         if(!message.guild) return message.channel.send(lang.error.No_DM);
-        if(message.member.permissions.has(['MANAGE_CHANNELS']) || message.author.id === "546144403958398988") {
-        if(!message.guild.me.permissions.has(['MANAGE_WEBHOOKS'])) return message.channel.send(lang.error.No_perm_me+lang.word.add+"webhook .w.")
+        if(message.member.hasPermission(['MANAGE_CHANNELS']) || message.author.id === "546144403958398988") {
+        if(!message.guild.me.hasPermission(['MANAGE_WEBHOOKS'])) return message.channel.send(lang.error.No_perm_me+lang.word.add+"webhook .w.")
         if(ag.join == null || ag.join(" ") == "") return message.channel.send(lang.error.type_text)
         message.channel.createWebhook(message.author.username, {
           avatar: message.author.displayAvatarURL({format: "png", dynamic: true}),
           reason: 'Speak in'+message.channel.name+' by '+message.author.username}).then((hook) => {
         hook.send(ag.join(" ")).then(() => {
+        message.channel.stopTyping()
         message.delete()
         hook.delete()
         message.channel.send("Adding...").then((ms) => { ms.delete() })
@@ -216,27 +173,22 @@ module.exports = {
     }
   },
     "say": {
-      description: {zh_TW:"智乃說話",en_US:"Chino talk",ja_JP:""},
-      authority: "everyone",
-      instructions: "say [text]",
-      category: "normal",
-      vote: false,
-      help: false,
+        description: "機器人說話",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
           function delt() {
-            if(message.guild.me.permissions.has(['MANAGE_MESSAGES'])) {
+            if(message.guild.me.hasPermission(['MANAGE_MESSAGES'])) {
               message.delete();
             }
           }
-          if (message.member.permissions.has(['MANAGE_MESSAGES']) || message.author.id === "546144403958398988") {
+          if (message.member.hasPermission(['MANAGE_MESSAGES']) || message.author.id === "546144403958398988") {
             if(message.author.id === "546144403958398988") {
               {message.channel.send(ag.join(" ") )}
               delt();
             }else if(message.content.includes("@")) {
-                if(message.member.permissions.has(['MENTION_EVERYONE'])) {
+                if(message.member.hasPermission(['MENTION_EVERYONE'])) {
                   {message.channel.send("<:Transparent:751597051963506698> " + ag.join(" ") )}
                   delt();
                 }else{
@@ -250,72 +202,26 @@ module.exports = {
         }
       }
     },
-    "saychannel": {
-      description: {zh_TW:"智乃說話",en_US:"Chino talk",ja_JP:""},
-      authority: "everyone",
-      instructions: "say [#channel] [text]",
-      category: "normal",
-      vote: true,
-      help: false,
-        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-          let lang = lan.zh_TW,useful2 = useful.zh_TW
-          if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
-          }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
-          function delt() {
-            if(message.guild.me.permissions.has(['MANAGE_MESSAGES'])) {
-              message.delete();
-            }
-          }
-          let text = ag.join(" ")
-          let channel = message.channel
-          if(message.mentions.channels.first()) {
-            channel = message.mentions.channels.first()
-            text = text.replace("<#"+message.mentions.channels.first().id+">","")
-            message.channel.send("🖍已發送到 <#"+message.mentions.channels.first().id+">")
-          }else{
-            delt()
-          }
-          if (message.member.permissions.has(['MANAGE_MESSAGES']) || message.author.id === "546144403958398988") {
-            if(message.author.id === "546144403958398988") {
-              {channel.send(text )}
-            }else if(message.content.includes("@")) {
-                if(message.member.permissions.has(['MENTION_EVERYONE'])) {
-                  {channel.send("<:Transparent:751597051963506698> " + text )}
-                }else{
-                  channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2) }
-              }else{
-                  {channel.send("<:Transparent:751597051963506698> " + text )}
-            }
-        }else{
-          message.channel.send(lang.error.No_Prem+lang.prem.manage_messages+lang.error.No_Prem2)
-        }
-      }
-    },
     "tts": {
-      description: {zh_TW:"智乃說話(tts)",en_US:"chino talk(tts)",ja_JP:""},
-      authority: "everyone",
-      instructions: "tts",
-      category: "normal",
-      vote: true,
-      help: false,
+        description: "機器人說話(tts)",
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
           let lang = lan.zh_TW,useful2 = useful.zh_TW
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
         if(!message.guild) {
-          {message.channel.send({content: ag.join(" "),tts: true})}
+          {message.channel.send(ag.join(" ") ,{tts: true})}
         }else{
-          if (message.member.permissions.has(['MANAGE_MESSAGES'])) {
-        if(message.member.permissions.has(['SEND_TTS_MESSAGES'])) {
+          if (message.member.hasPermission(['MANAGE_MESSAGES'])) {
+        if(message.member.hasPermission(['SEND_TTS_MESSAGES'])) {
             if(message.content.includes("@")) {
-              if(message.member.permissions.has(['MENTION_EVERYONE'])) {
-                {message.channel.send({content: ag.join(" "),tts: true})}
+              if(message.member.hasPermission(['MENTION_EVERYONE'])) {
+                {message.channel.send(ag.join(" ") ,{tts: true})}
                 message.delete();
            }else{
             message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2)
           }
        }else{
-        {message.channel.send({content: ag.join(" "),tts: true})}
+        {message.channel.send(ag.join(" ") ,{tts: true})}
         message.delete();
        }
       }else{
@@ -328,12 +234,7 @@ module.exports = {
     }
     },
     "feedback": {
-      description: {zh_TW:"意見箱",en_US:"feedback",ja_JP:""},
-      authority: "everyone",
-      instructions: "feedback [text]",
-      category: "other",
-      vote: false,
-      help: false,
+      description: "意見箱",
       fun: function (bot, message, p,clientDB,language,hi, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -346,7 +247,7 @@ module.exports = {
           .setThumbnail(message.author.displayAvatarURL({format: "png", dynamic: true ,size: 512}), true)
           .setTimestamp()
           try{
-          bot.channels.cache.get("750279160743854091").send({embeds: [dbemd]})}
+          bot.channels.cache.get("750279160743854091").send(dbemd)}
           catch{message.channel.send(lang.error.send)}
           message.channel.send(lang.success.send)
 
@@ -356,12 +257,7 @@ module.exports = {
       }
     },
     "embed":{
-      description: {zh_TW:"自訂義embed",en_US:"Custom embed",ja_JP:""},
-      authority: "everyone",
-      instructions: "embed [title] [descrription] [author] [footer] [color#abcde] [image(URL)]",
-      category: "normal",
-      vote: true,
-      help: false,
+      description: "鑲入",
       fun: function (bot, message, p,clientDB,language,args, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -371,7 +267,7 @@ module.exports = {
           .setColor('#2d9af8')
           .setTitle(useful2.embed.title+p+useful2.embed.title2)
           .setDescription(useful2.embed.desc)
-          {message.channel.send({embeds: [myEmbed]})};
+          {message.channel.send(myEmbed)};
         }else{
           let myEmbed2 = new Discord.MessageEmbed()
           try {
@@ -390,19 +286,14 @@ module.exports = {
           if(args[4] != null) myEmbed2.setColor(args[4])
           myEmbed2.setTimestamp()
         } catch (error) {return message.channel.send(lang.error.Run_Command_error+error)}
-          {message.channel.send({embeds: [myEmbed2]})
+          {message.channel.send(myEmbed2)
             message.delete()
           };
         }
       }
     },
     "chinocode":{
-      description: {zh_TW:"智乃秘密代碼",en_US:"Chino secret code",ja_JP:""},
-      authority: "everyone",
-      instructions: "chinocode [code]\nwhere is the code??\nin my guild announcement :))",
-      category: "other",
-      vote: false,
-      help: false,
+      description: "測試",
       fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
         let lang = lan.zh_TW,useful2 = useful.zh_TW
         if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -451,12 +342,7 @@ module.exports = {
       }
   },
   "sauce":{
-    description: {zh_TW:"搜索圖片",en_US:"Search image",ja_JP:""},
-    authority: "everyone",
-    instructions: "sauce\n+ update some picture",
-    category: "other",
-    vote: true,
-    help: false,
+    description: "測試",
     fun: function (bot, message, p,clientDB,language,args2, ...ag) { 
       let lang = lan.zh_TW,useful2 = useful.zh_TW
       if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
@@ -473,17 +359,17 @@ module.exports = {
         /*result2 = JSON.stringify(result2)
         fs.writeFileSync("./events/test.json",result2)*/
       }).catch((err) => {
-        return message.channel.send("Image too big!");
+        console.log(err)
       })
       let page = 0
       function SendEmbed(result2) {
         let embed = new Discord.MessageEmbed()
         .setTitle("🔄Loading...")
-        let button = new Discord.MessageButton(),button2 = new Discord.MessageButton()
-        button.setStyle('gray').setCustomId("left").setEmoji('⬅')
-        button2.setStyle('gray').setCustomId("right").setEmoji("➡")
-        let row = new Discord.MessageActionRow().addComponents(button, button2);
-          message.channel.send({embeds: [embed],components: [row]}).then((w) => {
+        let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
+        button.setStyle('gray').setID("left").setEmoji('⬅')
+        button2.setStyle('gray').setID("right").setEmoji("➡")
+        let row = new disbut.MessageActionRow().addComponents(button, button2);
+          message.channel.send(embed,row).then((w) => {
             editEmbed(result2,w)
         })
       }
@@ -496,28 +382,22 @@ module.exports = {
     function editEmbed(result2,msg) {
           let length = result2.items.length
           let embed = new Discord.MessageEmbed()
-          embed.setAuthor("作者: "+" [未知]")
+          if(result2.items[page].source.author) {embed.setAuthor("作者: "+result2.items[page].source.author.name,null,result2.items[page].source.author.url)}
+          else{embed.setAuthor("作者: "+" [未知]")}
           let best = ""
           if(page <= 0) best = "[最佳比對]"
-          if(result2.items[page].source) {
-            embed.setTitle(`[${result2.items[page].source.type}] ${best}`)
-            .setDescription(result2.items[page].source.title)
-            //.setThumbnail(result2.items[page].thumbnailUrl)
-            .setImage(result2.items[page].thumbnailUrl)
-            .setURL(result2.items[page].source.url)
-          if(result2.items[page].source.author) {embed.setAuthor("作者: "+result2.items[page].source.author.name,null,result2.items[page].source.author.url)}
-          else{embed.setAuthor("作者: "+" [未知]")}}else{
-            embed.setTitle(`[無標題] [無出處]`)
-            .setDescription(`[無內文]`)
-            .setImage(result2.items[page].thumbnailUrl)
-          }
-          embed.setFooter(`[${page+1}/${length+1}] ${result2.items[page].height}x${result2.items[page].width}`)
-          let button = new Discord.MessageButton(),button2 = new Discord.MessageButton()
-          button.setStyle('gray').setCustomId("left").setEmoji('⬅')
-          button2.setStyle('gray').setCustomId("right").setEmoji("➡")
-          if(page <= 0) button.setStyle('grey').setCustomId("left").setEmoji('⬅').setDisabled(true)
-          if(page === length) button2.setStyle('grey').setCustomId("right").setEmoji("➡").setDisabled(true)
-          let row = new Discord.MessageActionRow().addComponents(button, button2);
+          embed.setTitle(`[${result2.items[page].source.type}] ${best}`)
+          .setDescription(result2.items[page].source.title)
+          //.setThumbnail(result2.items[page].thumbnailUrl)
+          .setImage(result2.items[page].thumbnailUrl)
+          .setURL(result2.items[page].source.url)
+          .setFooter(`[${page+1}/${length+1}] ${result2.items[page].height}x${result2.items[page].width}`)
+          let button = new disbut.MessageButton(),button2 = new disbut.MessageButton()
+          button.setStyle('gray').setID("left").setEmoji('⬅')
+          button2.setStyle('gray').setID("right").setEmoji("➡")
+          if(page <= 0) button.setStyle('grey').setID("left").setEmoji('⬅').setDisabled(true)
+          if(page === length) button2.setStyle('grey').setID("right").setEmoji("➡").setDisabled(true)
+          let row = new disbut.MessageActionRow().addComponents(button, button2);
           msg.edit(embed,row)
           const filter = (button) => button.clicker.id === message.author.id
           msg.awaitButtons(filter,{max: 1,time: 15000,errors:['time']})
@@ -532,20 +412,8 @@ module.exports = {
               return editEmbed(result2,msg)
             }
           }).catch((err) => {
-            let embederr = new Discord.MessageEmbed()
-            if(result2.items[page].source) {
-              let best2 = ""
-              if(page <= 0) best2 = "[最佳比對]"
-              embederr.setTitle(`[${result2.items[page].source.type}] ${best2}`)
-              .setDescription(result2.items[page].source.title)
-              .setURL(result2.items[page].source.url)
-              .setFooter(`${result2.items[page].height}x${result2.items[page].width}`)
-            }else{
-              embederr.setTitle(`[無標題] [無出處]`)
-              .setDescription(`[無內文]`)
-              .setFooter(`${result2.items[page].height}x${result2.items[page].width}`)
-            }
-            return msg.edit(embederr,null)
+            console.log(err)
+            return;
           })
         }
     }
