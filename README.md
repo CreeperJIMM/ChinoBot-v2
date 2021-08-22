@@ -8,7 +8,7 @@ Discord Bot V2
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/24105fa116084a40b2205dc09475b458)](https://www.codacy.com/gh/CreeperJIMM/ChinoBot-v2/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CreeperJIMM/ChinoBot-v2&amp;utm_campaign=Badge_Grade)
 <a href="https://codebeat.co/projects/github-com-creeperjimm-chinobot-v2-master"><img alt="codebeat badge" src="https://codebeat.co/badges/e1cdf66d-864b-4381-82ba-6e81a6f94c76" /></a>
 <br>
-This is Discord Chino Bot 6.1  
+This is Discord Chino Bot 7.0  
 By discord.js  
 Run node.js  
 Its fun to discord guild.  
@@ -16,7 +16,7 @@ You can type command play with Chino!
 Invite this bot in Discord!  
 Use `cr!help` to get help!  
 
-## Discord Chino Bot 6.0  
+## Discord Chino Bot 7.0  
 讓你的群組不無聊!  
 使用 `cr!help` 開啟幫助頁面.  
 
