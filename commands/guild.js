@@ -303,7 +303,7 @@ module.exports= {
                 let codeX = "CR" + Math.round(Math.random()*10) + Math.round(Math.random()*10) + Math.round(Math.random()*10) + Math.round(Math.random()*10)
               let codeEmbed = new Discord.MessageEmbed()
               .setColor('#2d9af8') .setTitle(k.code.title).setDescription(codeX).setFooter(k.code.use+message.author.username)
-              message.channel.send(codeEmbed).then((ms) => {
+              message.channel.send({embeds: [codeEmbed]}).then((ms) => {
                 const filter = m => m.author.id == message.author.id;
                 ms.channel.awaitMessages({filter,max: 1, time: 10000})
                   .then(collected => {
