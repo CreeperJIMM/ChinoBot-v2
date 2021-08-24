@@ -213,7 +213,7 @@ module.exports= {
             let l = lan.zh_TW,k = gameX.zh_TW
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
-            Mongo.Mongo.loadUser(clientDB,message.author.id).then((user) => {
+            Mongo.loadUser(clientDB,message.author.id).then((user) => {
                 if (user === false) {return message.channel.send(l.error.Try_again)}
                else{
                    Mongo.loadDaily(clientDB).then((users) => {
@@ -609,7 +609,7 @@ module.exports= {
                             return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                 message.channel.awaitMessages({filter, max: 1, time: 20000, errors: ['time'] })
                     .then((ms) => {
-                        if(ms.array()[0].content === "yes") {
+                        if(ms.first().content === "yes") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
                     message.edit({embeds: [marry2]});
                     let marry1 = new Discord.MessageEmbed().setTitle(k.marry.marry_complete).setDescription(user2.name + "💕" + user.name).setFooter(k.marry.marry_complete2).setTimestamp()
@@ -618,7 +618,7 @@ module.exports= {
                     Mongo.writeUser(clientDB,member.id,user)
                     user2.marry = member.id
                     Mongo.writeUser(clientDB,message2.author.id,user2)
-                }else if(ms.array()[0].content === "no") {
+                }else if(ms.first().content === "no") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                         message.edit({embeds: [marry2]})}
                     }).catch(() => {
@@ -650,12 +650,12 @@ module.exports= {
                 let marry = new Discord.MessageEmbed()
                 .setTitle(k.divorce.sure)
                 .setDescription(k.divorce.answer)
-                message2.channel.send(marry).then((message) => {
+                message2.channel.send({embeds:[marry]}).then((message) => {
                     const filter = answer => {
                         return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
             message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
                 .then((ms) => {
-                    if(ms.array()[0].content === "yes") {
+                    if(ms.first().content === "yes") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
                 message.edit({embeds: [marry2]});
                 let marry1 = new Discord.MessageEmbed().setTitle(k.divorce.divorce).setDescription(user2.name + "💔" + user.name).setFooter(k.divorce.divorce2).setTimestamp()
@@ -664,7 +664,7 @@ module.exports= {
                 Mongo.writeUser(clientDB,other,user)
                 user2.marry = ""
                 Mongo.writeUser(clientDB,message2.author.id,user2)
-            }else if(ms.array()[0].content === "no") {
+            }else if(ms.first().content === "no") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                 message.edit({embeds: [marry2]})}
                 }).catch(() => {
@@ -712,7 +712,7 @@ else{message2.channel.send(k.divorce.hasnt)
                                 return ['yes','no'].includes(answer.content) && answer.author.id === member.id;}
                     message.channel.awaitMessages({filter, max: 1, time: 20000, errors: ['time'] })
                         .then((ms) => {
-                            if(ms.array()[0].content === "yes") {
+                            if(ms.first().content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
                         message.edit({embeds: [marry2]});
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.add.complete_adot).setDescription(user2.name + "🔗" + user.name).setFooter(k.pet.add.complete_adot2).setTimestamp()
@@ -723,7 +723,7 @@ else{message2.channel.send(k.divorce.hasnt)
                         user2.pet.push(member.id)
                         user2.petname = user2.petname + member.username + "#" + member.discriminator+"\n"
                         Mongo.writeUser(clientDB,message2.author.id,user2)
-                            }else if(ms.array()[0].content === "no") {
+                            }else if(ms.first().content === "no") {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                                 message.edit({embeds: [marry2]})
                             }
@@ -763,7 +763,7 @@ else{message2.channel.send(k.divorce.hasnt)
                                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
                     message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
                         .then((ms) => {
-                            if(ms.array()[0].content === "yes") {
+                            if(ms.first().content === "yes") {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
                         message.edit({embeds: [marry2]});
                         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.remove.remome_adot).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.remove.remove_adot2).setTimestamp()
@@ -780,7 +780,7 @@ else{message2.channel.send(k.divorce.hasnt)
                         var str2 = user2.petname
                         user2.petname = str2.replace(member.username + "#" + member.discriminator + "\n", '').replace(member.username + "#" + member.discriminator, '')
                         Mongo.writeUser(clientDB,message2.author.id,user2)
-                            }else if(ms.array()[0].content === "no")  {
+                            }else if(ms.first().content === "no")  {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                                 message.edit({embeds: [marry2]})
                             }
@@ -808,7 +808,7 @@ else{message2.channel.send(k.divorce.hasnt)
                 return ['yes','no'].includes(answer.content) && answer.author.id === message2.author.id;}
     message.channel.awaitMessages({filter, max: 1, time: 10000, errors: ['time'] })
         .then((ms) => {
-            if(ms.array()[0].content === "yes") {
+            if(ms.first().content === "yes") {
         let marry2 = new Discord.MessageEmbed().setTitle(k.word.complete)
         message.edit({embeds: [marry2]});
         let marry1 = new Discord.MessageEmbed().setTitle(k.pet.disconnect.disconnect).setDescription(user2.name + "❌" + user.name).setFooter(k.pet.disconnect.disconnect2).setTimestamp()
@@ -825,7 +825,7 @@ else{message2.channel.send(k.divorce.hasnt)
         let str3 = user.petname
         user.petname = str3.replace(message2.author.username + "#" + message2.author.discriminator + "\n", '').replace(message2.author.username + "#" + message2.author.discriminator, '').replace(user2.name + "#" + message2.author.discriminator, '')
         Mongo.writeUser(clientDB,member.id,user)
-            }else if(ms.array()[0].content === "no")  {
+            }else if(ms.first().content === "no")  {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                 message.edit({embeds: [marry2]})
             }

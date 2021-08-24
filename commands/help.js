@@ -86,7 +86,7 @@ module.exports = {
             .setTitle(h.invite.inv)
             .setURL('https://discord.com/oauth2/authorize?client_id='+bot.user.id+'&scope=applications.commands%20bot&permissions=2134900215')
             .setAuthor(bot.user.username + "#" + bot.user.discriminator, bot.user.displayAvatarURL())
-            .setDescription(h.invite.desc+bot.user.id+h.invite.desc2)
+            .setDescription(`${h.invite.desc}${bot.user.id}${h.invite.desc2}`)
             .setThumbnail('https://cdn.discordapp.com/attachments/611040945495998464/732973619319275640/289100043sq324qp55p7.gif')
             .addFields(
               { name: h.invite.addF.a1, value: h.invite.addF.v1 },
@@ -114,7 +114,7 @@ module.exports = {
             .setTitle(h.invite.inv)
             .setURL('https://discord.com/oauth2/authorize?client_id='+bot.user.id+'&scope=applications.commands%20bot&permissions=2134900215')
             .setAuthor(bot.user.username + "#" + bot.user.discriminator, bot.user.displayAvatarURL())
-            .setDescription(h.invite.desc)
+            .setDescription(`${h.invite.desc}${bot.user.id}${h.invite.desc2}`)
             .setThumbnail('https://cdn.discordapp.com/attachments/611040945495998464/732973619319275640/289100043sq324qp55p7.gif')
             .addFields(
               { name: h.invite.addF.a1, value: h.invite.addF.v1 },

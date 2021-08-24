@@ -33,7 +33,6 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
         if (ser.language.run != num) return;
       }
       try {
-        setTimeout(() => {
           if (
             newMember.guild.channels.cache.find(
               (channel2) =>
@@ -46,7 +45,6 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
                 newMember.setChannel(channel2.id)
             );
           }
-        }, 2000);
       } catch (error) {
         throw error;
       }
@@ -92,7 +90,9 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
                 newMember.setChannel(Channel.id);
                 ser.voice.push(Channel.id);
                 Mongo.writeGuild(clientDB, newMember.guild.id, ser);
-              });
+              }).catch((err) => {
+                throw err;
+              })
           }
     } else if (oldUserChannel) {
       //Leave
@@ -127,14 +127,14 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
               }
             }
           } catch (error) {
-            return console.log(error);
+            throw error;
           }
         }
       });
     }
   } catch (error) {
     client.channels.cache.get("746185201675141241").send("錯誤! \n```js\n" + error + "\n```");
-    console.log(error);
+    throw error;
   }
 };
 

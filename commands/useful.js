@@ -257,7 +257,7 @@ module.exports = {
               message.delete();
             }
           }
-          let text = ag.join(" ")
+          let text = ag.join(" ").toString()
           let channel = message.channel
           if(message.mentions.channels.first()) {
             channel = message.mentions.channels.first()
@@ -294,19 +294,19 @@ module.exports = {
           if(language === "zh_TW") {lang = lan.zh_TW;useful2 = useful.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;useful2 = useful.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;useful2 = useful.ja_JP
           }else if(language === "en_US") {lang = lan.en_US;useful2 = useful.en_US}
         if(!message.guild) {
-          {message.channel.send({content: ag.join(" "),tts: true})}
+          {message.channel.send({content: ag.join(" ").toString(),tts: true})}
         }else{
           if (message.member.permissions.has(['MANAGE_MESSAGES'])) {
         if(message.member.permissions.has(['SEND_TTS_MESSAGES'])) {
             if(message.content.includes("@")) {
               if(message.member.permissions.has(['MENTION_EVERYONE'])) {
-                {message.channel.send({content: ag.join(" "),tts: true})}
+                {message.channel.send({content: ag.join(" ").toString(),tts: true})}
                 message.delete();
            }else{
             message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2)
           }
        }else{
-        {message.channel.send({content: ag.join(" "),tts: true})}
+        {message.channel.send({content: ag.join(" ").toString(),tts: true})}
         message.delete();
        }
       }else{

@@ -383,7 +383,7 @@ module.exports = {
                         let row = new Discord.MessageActionRow().addComponents([[buttonUP,buttonDOWN],[buttonHOME,buttonJUMP,buttonEND]])
                         im.edit({embeds: [reading],components:[row]})
                         const filter = (button) => button.user.id === message.author.id
-                        im.awaitMessageComponent({filter,max: 1,time: 10000,errors:['time']})
+                        im.awaitMessageComponent({filter,max: 1,time: 25000,errors:['time']})
                               .then(collected => {
                                         if (collected.customId == "last") {
                                             api.ping(bot,collected)
