@@ -36,10 +36,10 @@ module.exports = {
                     embed.setTitle(k.bs.bluff)
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send({embeds: [embed]})
+                    return message.channel.send({embeds: [embed]});
                 })
             } else {
-                message.channel.send(l.error.type_number + l.error.less_then + "1000")
+                return message.channel.send(l.error.type_number + l.error.less_then + "1000");
             }
         }
     },
@@ -76,7 +76,7 @@ module.exports = {
                 embed.setTitle(`${message.member.nickname} 的運勢`)
                 embed.setDescription(`${fort}`)
                 embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                message.channel.send({embeds: [embed]})
+                return message.channel.send({embeds: [embed]});
         }
     },
     "運勢": {
@@ -111,7 +111,7 @@ module.exports = {
                 embed.setTitle(`${message.member.nickname} 的運勢`)
                 embed.setDescription(`${fort}`)
                 embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                message.channel.send({embeds: [embed]})
+                return message.channel.send({embeds: [embed]});
         }
     },
     "covid-19": {
@@ -136,7 +136,7 @@ module.exports = {
                     embed.setTitle("<:covid:843663053852639292> 台灣新冠肺炎(COVID-19) 統計")
                     embed.setDescription(`**國內通報總計**\n📣通報數: ${data[0].送驗}\n✅已排除: ${data[0].排除}\n😷確診: ${data[0].確診}\n💀死亡: ${data[0].死亡} \n🔓解除隔離: ${data[0].解除隔離}\n\n**昨日新增**\n📣通報數: ${data[0].昨日送驗}\n✅已排除: ${data[0].昨日排除}\n😷確診: ${data[0].昨日確診}`)
                     embed.setFooter(`總計檢驗件數: ${time[0].檢驗件數}\n總計檢驗人數: ${time[0].檢驗人數}\n資料更新時間: ${time[0].資料更新時間}`, message.author.avatarURL())
-                    message.channel.send({embeds: [embed]})
+                    return message.channel.send({embeds: [embed]});
                 })
             })
         }
@@ -174,7 +174,7 @@ module.exports = {
                     embed.setTitle("你的蘿莉控程度為")
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send({embeds: [embed]})
+                    return message.channel.send({embeds: [embed]});
                 })
         }
     },
@@ -211,7 +211,7 @@ module.exports = {
                     embed.setTitle("你的正太控程度為")
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\n${c}\n`)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send({embeds: [embed]})
+                    return message.channel.send({embeds: [embed]});
                 })
         }
     },
@@ -240,7 +240,7 @@ module.exports = {
                     embed.setTitle(k.bs.bluff)
                     embed.setDescription(`${k.bs.theme}:\`${text.join(" ")}\`\n${k.bs.text}:\`\`\`fix\n${c}\n\`\`\``)
                     embed.setFooter(text = message.author.tag, iconURL = message.author.avatarURL())
-                    message.channel.send({embeds: [embed]})
+                    return message.channel.send({embeds: [embed]});
                 })
         }
     },
@@ -291,6 +291,7 @@ module.exports = {
                     .setTitle("一起在語音遊玩!")
                     .setDescription("使用 `cr!together [遊戲]` 來一起玩!\n- `poker` 德州撲克\n- `youtube` 觀看Youtube \n- `chess` 下棋\n-`betrayal` betrayal.io\n- `fish` 釣魚")
                     message.channel.send({embeds: [help]})
+                    return;
                 }
         }
     },
@@ -306,14 +307,15 @@ module.exports = {
             if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if(message.channel) {
-            /*    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-            .setColor("#E12323").setFooter("若有不便請見諒 > <");return message.channel.send(Coppa)}*/
-            if(!message.channel.nsfw) return message.channel.send("❌🔞請在限制級頻道使用此指令!")
-            if(isNaN(agrs[0])) return message.channel.send(k.henti.No_number)
-            nana.g(agrs[0]).then(async(g) => {
-                if(!g) return message.channel.send("❌"+k.henti.No_number)
-                let img = g.media_id                
+        /*    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
+        .setColor("#E12323").setFooter("若有不便請見諒 > <");return message.channel.send(Coppa)}*/
+        if(!message.channel.nsfw) return message.channel.send("❌🔞請在限制級頻道使用此指令!")
+        if(isNaN(agrs[0])) return message.channel.send(k.henti.No_number)
+        nana.g(agrs[0]).then(async(g) => {
+        if(!g) return message.channel.send("❌"+k.henti.No_number)
+        let img = g.media_id                
          let cover = null;
+         if(!g.images) return message.channel.send("❌"+k.henti.No_number)
          if(g.images.cover.t === "j") {cover = "jpg"}else if(g.images.cover.t === "p") {cover = "png"}
          const milliseconds = g.upload_date * 1000
          const dateObject = new Date(milliseconds)
@@ -412,25 +414,27 @@ module.exports = {
                                                 }else{
                                                 number = collected.first().content}                                                
                                                 collected.first().delete()
-                                                read(im)
+                                                return read(im)
                                             }else{
                                                 im.delete()
-                                                message.channel.send("❌你填入了不是數字的數值\n重打一次指令吧:(")
+                                                return message.channel.send("❌你填入了不是數字的數值\n重打一次指令吧:(")
                                             }
                                         }).catch((err) => {
                                             im.delete()
-                                            message.channel.send("❌你太慢輸入了\n重打一次指令吧:(")
+                                            return message.channel.send("❌你太慢輸入了\n重打一次指令吧:(")
                                         })
                                        }else if(collected.customId == "end") {
                                         collected.reply("🔰感謝你的閱讀!\n最後的頁數: "+number)
-                                        im.delete()
+                                        return im.delete()
                                     }
                                     }).catch(err => {
                                         im.delete()
-                                        message.reply("已取消閱讀")
+                                        return message.reply("已取消閱讀")
                                     })
                         }
                 });
+            }).catch((error) => {
+                return message.channel.send("❌"+k.henti.No_number)
             })
         }}
     },
@@ -454,7 +458,7 @@ module.exports = {
             var ant = "\u0489";
             let str = text.join(" ")
             var snd = str.replace(/(.{0})/g, '$1' + ant);
-            message.channel.send(snd)
+            return message.channel.send(snd);
         }
     },
     "election": {
@@ -492,10 +496,8 @@ module.exports = {
                 if(time.getHours() > 12) {var h = (time.getHours())-12;var h2 = "PM"}else{var h = time.getHours();var h2 = "AM"}
                 embed.setFooter("更新日期: "+ (time.getUTCMonth()+1)+"月"+time.getUTCDate()+"日 "+h+":"+time.getMinutes()+h2+"\n")
                 embed.setTimestamp()
-                message.channel.send({embeds: [embed]})
-                
+                return message.channel.send({embeds: [embed]});
             })
-
         }
     },
     "emoji": {
@@ -517,14 +519,14 @@ module.exports = {
           
             if (emoji = emoteRegex.exec(message)) {
             const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".png?v=1"
-            message.channel.send(url)
+            return message.channel.send(url);
             }
             else if (emoji = animatedEmoteRegex.exec(message)) {
             const url = "https://cdn.discordapp.com/emojis/" + emoji[1] + ".gif?v=1"
-            message.channel.send(url)
+            return message.channel.send(url);
             }
             else {
-            message.channel.send("Couldn't find an emoji to paste!")
+                return message.channel.send("Couldn't find an emoji to paste!");
             }
             }
         },
@@ -556,10 +558,10 @@ module.exports = {
                     message.channel.send("Added this emoji in this guild!") 
                     setTimeout(() => {
                     let emoji2 = `<a:${emoji.name}:${emoji.id}> `
-                    message.channel.send(emoji2+emoji2+emoji2)   
+                    return message.channel.send(emoji2+emoji2+emoji2);  
                 }, 1800);                
                 }).catch((err) => {
-                    message.channel.send(l.error.Run_Command_error+err)
+                    return message.channel.send(l.error.Run_Command_error+err);
                 })
                 }
                 else if (emoji = animatedEmoteRegex.exec(message)) {
@@ -571,14 +573,14 @@ module.exports = {
                     message.channel.send("Added this emoji in this guild!") 
                     setTimeout(() => {
                     let emoji2 = `<a:${emoji.name}:${emoji.id}> `
-                    message.channel.send(emoji2+emoji2+emoji2)
+                    return message.channel.send(emoji2+emoji2+emoji2);
                 }, 1800);                
                 }).catch((err) => {
-                    message.channel.send(l.error.Run_Command_error+err)
+                    return message.channel.send(l.error.Run_Command_error+err);
                 })
                 }
                 else {
-                message.channel.send("Couldn't find an emoji to paste!")
+                    return message.channel.send("Couldn't find an emoji to paste!");
                 }
                 }
             }

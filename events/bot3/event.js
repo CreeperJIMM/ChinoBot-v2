@@ -72,6 +72,8 @@ module.exports= [
       if (!msg.guild) return;
       if (msg.content.startsWith('cr**')) return;
       if (!msg.guild.me.permissions.has(['SEND_MESSAGES'])) return;
+      if(!msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')) return;
+      if(!msg.guild.me.permissionsIn(msg.channel).has('VIEW_CHANNEL')) return;
       if (channelcooldown.has(msg.channel.id)) return;
       if (msg.author.bot) return;
       msgcmd.ifban(banlist,why,msg)
@@ -98,14 +100,16 @@ module.exports= [
                       let lsay = languages.lan[user2.language].error.TooSpeed
                       msg.channel.send(lsay);
                       adv.speed(client, msg, user2.language)
+                      return;
                   } else {
                       msg.channel.send("請等等再來使用此指令!\nplease wait.");
                       speed(client, msg)
+                      return;
                   }
               } else {
                   let userlang = user2.language
                   if(userlang.length === 0) userlang = "zh_TW"
-                  zh_TW(client, msg, userlang,clientDB)
+                  return zh_TW(client, msg, userlang,clientDB)
               }
   }
 }
@@ -113,6 +117,8 @@ module.exports= [
 ]
 const language  = require("../../commands/lang.json");
 let DBL = require("dblapi.js")
+const {topToken} = require("../../token.json")
+const dbl = new DBL(topToken);
 ///////////////// Command ////////////////////////
 async function zh_TW(bot, msg, userlang,clientDB) {
   time(bot, msg)
@@ -120,8 +126,6 @@ async function zh_TW(bot, msg, userlang,clientDB) {
   channelcooldown.add(msg.channel.id)
   deleteCooldown(msg)
   if (Object.keys(command).includes(msg.content.replace(prefix, "").split(" ")[0])) {
-        const {topToken} = require("../../token.json")
-        const dbl = new DBL(topToken, {webhookAuth: 'ChinoBot'}, bot);
           try {
             let cmd = command[msg.content.replace(prefix, "").split(" ")[0]]
             if(!language[userlang]) userlang = "zh_TW"
@@ -140,9 +144,11 @@ async function zh_TW(bot, msg, userlang,clientDB) {
                   return msg.channel.send({embeds:[vote]})
                 }
             }else{
-              mainCommand()
+              return mainCommand()
             }
-          }else{mainCommand()};
+          }else{
+            return mainCommand()
+          };
           async function mainCommand() {
             let ag = msg.content.split(" ")
             ag.shift()
@@ -153,7 +159,10 @@ async function zh_TW(bot, msg, userlang,clientDB) {
                 .setFooter("📊類別: "+cmd.category+"\n🗳是否投票: "+cmd.vote+"\n🎭指令權限: "+cmd.authority+"\n註: ＊ 非必填")
                 return msg.channel.send({embeds:[helper]})
             }else{
+              if (!msg.guild.me.permissionsIn(msg.channel).has(['READ_MESSAGE_HISTORY'])) return msg.channel.send("⚠智乃有缺漏的權限可能會影響指令運作><!!\n缺漏權限: `READ_MESSAGE_HISTORY`(讀取歷史訊息)");
+              if (!msg.guild.me.permissionsIn(msg.channel).has(['EMBED_LINKS'])) return msg.channel.send("⚠智乃有缺漏的權限可能會影響指令運作><!!\n缺漏權限: `EMBED_LINKS`(嵌入連結)");
               command[msg.content.replace(prefix, "").split(" ")[0]]["fun"](bot, msg, prefix, clientDB, userlang, ag, ...ag)
+              return;
             }
           }
           } catch (error) {
@@ -161,8 +170,10 @@ async function zh_TW(bot, msg, userlang,clientDB) {
               bot.channels.cache.get("746185201675141241").send("錯誤!\n執行者:  " + msg.author.tag + ":" + msg.content + "\n```js\n" + error + "\n```")
               if (error) msg.react("<:error:787197851913945118>") //error
               console.log(msg.author.tag + ":" + msg.content)
-              console.log(error)
+              throw error;
           }
+  }else{
+    return;
   }
 };
 ////////////////////////////////////////////////////////////////

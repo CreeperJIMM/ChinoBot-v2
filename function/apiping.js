@@ -3,4 +3,5 @@ module.exports.ping = function(bot,reply) {
         data: {
         type: 6
     }})
+    return;
 }

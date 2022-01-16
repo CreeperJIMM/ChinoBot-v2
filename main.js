@@ -20,7 +20,7 @@ function main() {
     let onlineSET = require("./function/BotOnline")
     client.once('ready', async () => {
         onlineSET.main1(client,1,clientDB)
-        console.log(`苦力怕機器人讀取成功! 版本: ${version} Time: ` + new Date().toUTCString());
+        return console.log(`苦力怕機器人讀取成功! 版本: ${version} Time: ` + new Date().toUTCString());
     });
     ///////////////////////////////////////////
     client.commands = new Discord.Collection()
@@ -40,14 +40,14 @@ function main() {
                     try {
                         fun(client,clientDB,prefix, ...a)
                     } catch (error) {
-                        console.log(error)
+                        throw error;
                     }
                 }
             }
             client[file.type](file.name, w(file.fun))
         } catch (error) {
             console.log(`file:${file.name}\nError:\n`)
-            console.log(error)
+            throw error;
         }
     }
     /////////////// Language ////////////////////
@@ -76,9 +76,17 @@ function main() {
       })});
     //////////////// Slash command /////////////////////////
     let slash = require("./function/slashCommand")
-    slash.main(client,clientDB,prefix)
+    slash.main(client,clientDB,prefix)/*
+    client.on("interactionCreate",async interaction => {
+        if(!interaction.isCommand()) return;
+
+    })*/
     /////////////////////////////////////////////////////////////
     console.log(`該程序目前總共使用了${Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100}MB的RAM`)
     client.login(token);
+
+    let {clientId} = require("./token.json")
+    let slashswitch = require("./function/addslash")
+    //slashswitch(token,clientId)
 }
 main()

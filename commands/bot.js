@@ -19,6 +19,7 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             Mongo.loadUser(clientDB, message.author.id).then((user) => {
             if (user === false) {
+            let time = new Date().toDateString()
             var obj = {
                 name: [message.author.username],
                 user: {username: message.author.username,id: message.author.id ,avatar: message.author.avatar,locale: message.author.locale},
@@ -59,10 +60,11 @@ module.exports= {
             dbo.collection("users").insertMany(myobj, function (err, res) {
                 if (err) return message.channel.send("❌創建失敗! 請找苦力怕怕求助.");
                 console.log("新用戶!!" + message.author.username)
-                message.channel.send("✅創建成功! 開始你的智乃旅程吧!")
+                message.channel.send("✅創建成功! 開始你的智乃旅程吧!");
+                return;
             });
         }else{
-            message.channel.send("❌你已經有資料了! 若資料毀損請找苦力怕怕修復.")
+            return message.channel.send("❌你已經有資料了! 若資料毀損請找苦力怕怕修復.");
         }
     })
         }
@@ -101,7 +103,7 @@ module.exports= {
             .setTitle(k.bot.info)
             .addField(k.ram.all, (usedMemory/ Math.pow(1024, 3)).toFixed(2) +"GB / " + (totalMemory/ Math.pow(1024, 3)).toFixed(2) + "GB" )
             .addField(k.ram.use , getpercentage);
-             message.channel.send({embeds: [ramEmbed]});
+            return message.channel.send({embeds: [ramEmbed]});
         }
     },
     "cpu": {
@@ -124,10 +126,11 @@ module.exports= {
             .addField(k.cpu.all, (2.50 - f).toFixed(2) + "Ghz / "+ "2.50" + "Ghz" )
             .addField(k.cpu.use , (((2.50 - f).toFixed(2) /2.50) *100).toFixed(2) + "%")
             .addField(k.cpu.runing, (os.sysUptime()/60).toFixed(1) + l.time.minute )
-             message.channel.send({embeds: [cpuEmbed]});
+            return message.channel.send({embeds: [cpuEmbed]});
             })            
             } catch (error) {
              message.channel.send(`Error!\n\`\`\`js\n${error}\n\`\`\``)   
+             return;
             }
     }
     },
@@ -158,6 +161,7 @@ module.exports= {
             .setDescription(console.log)
             .setTimestamp()
             message.channel.send(debug)
+            return;
         }
     },
     "test": {
@@ -168,11 +172,13 @@ module.exports= {
             }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
             if (message.author.id !== '546144403958398988') return;
             message.author.send("uwu!")
+            return;
         }
     },
     "times": {
         description: "測試",
         fun: function(bot,message) {
+            return;
         }
     },
     "backupuser": {
@@ -193,6 +199,7 @@ module.exports= {
                     fs.writeFileSync('./backup/users/' + id + '.json', json);
                     }
                     message.channel.send("成功備份用戶檔案.")
+                    return;
                 }
             )
         }
@@ -215,6 +222,7 @@ module.exports= {
                     fs.writeFileSync('./backup/guilds/' + id + '.json', json);
                     }
                     message.channel.send("成功備份公會檔案.")
+                    return;
                 }
             )
         }
@@ -260,8 +268,8 @@ module.exports= {
            if(guildlist != "") {
             message.channel.send("[!]發現以下伺服器檔案有問題: "+guildlist.join("\n"))
            }else{
-            message.channel.send("✅所有伺服器檔案完美無缺!")}
-        }
+            message.channel.send("✅所有伺服器檔案完美無缺!")
+        }}
     },
     "getchannel": {
         description: "測試",
@@ -340,6 +348,7 @@ module.exports= {
                             fs.writeFileSync(filename, data);
                             message.channel.send(`Done fetching ${channel.name}`)
                             message.channel.send(`Download ${total} photo`)
+                            return;
                         })();
                     });
                 })
@@ -374,7 +383,7 @@ module.exports= {
                     .setTitle("📦所有咖啡廳☕")
                     .setDescription("群名稱| ID        |  成員數\n ```js\n"+list.join("\n") + "\n```")
                     .setFooter("此為全部群")
-                    message.channel.send({embeds: [levelembed]})
+                    return message.channel.send({embeds: [levelembed]});
                 }, 1000);
         }
     },
@@ -415,7 +424,7 @@ module.exports= {
             .addField("智乃小幫手•Canary#9156",k.status.inv3+"\n"+user.chinoc.member+"  |  "+user.chinoc.guild+"  |  "+user.chinoc.status+" |  `cr*`  |  ❌  |  ❌  |  ❌  |  ✅  |  ❌  |[測試用暫不開放]")
             .setFooter(k.status.footer)
             .setTimestamp()
-            message.channel.send({embeds: [bot]})
+            return message.channel.send({embeds: [bot]});
         }})
         }
     },
@@ -446,6 +455,7 @@ module.exports= {
                 .setFooter(k.post.time+user.post.time+" | ").setTimestamp()
                 loadmessage.edit(k.post.success_load)
                 loadmessage.edit({embeds: [post]})
+                return;
             }, 2000);
         })
     })}

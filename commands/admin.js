@@ -28,7 +28,7 @@ module.exports = {
                 if(Math.floor(Math.floor(args[0]).toFixed(2)) > 100) return message.channel.send(l.error.less_then+"100")
                 let clear = Math.floor(Math.floor(args[0]).toFixed(2))
                 if (message.member.permissions.has(['MANAGE_MESSAGES'])) {
-                    if (!message.member.guild.me.permissions.has(['MANAGE_MESSAGES'])) { return message.channel.send(h.clear.No_perm) }
+                    if (!message.guild.me.permissionsIn(message.channel).has(['MANAGE_MESSAGES'])) return message.channel.send(l.error.No_Prem + l.prem.manage_messages + l.error.No_Prem2);
                     if (args > 19) {
                         let button1 = new Discord.MessageButton(),button2 = new Discord.MessageButton()
                         button1.setStyle('SUCCESS').setLabel("Yes").setCustomId("yes")
@@ -42,8 +42,10 @@ module.exports = {
                                     if (collected.customId === 'yes') {
                                         await message.channel.bulkDelete(clear)
                                         message.channel.send(h.clear.moreDelete + clear + h.clear.messages);
+                                        return;
                                     } else if (collected.customId === 'no') {
                                         message.reply({conetnt: h.clear.cancelDelete,ephemeral: true })
+                                        return;
                                     }
                                 }).catch((error) => { 
                                     draw.edit(h.clear.cancelDelete); })
@@ -52,9 +54,10 @@ module.exports = {
                         message.delete()
                         message.channel.bulkDelete(clear)
                         message.channel.send(h.clear.Delete + clear + h.clear.messages);
+                        return;
                     }
                 } else {
-                    message.channel.send(l.error.No_Prem + l.prem.manage_messages + l.error.No_Prem2)
+                    return message.channel.send(l.error.No_Prem + l.prem.manage_messages + l.error.No_Prem2);
                 }
             }
         }
@@ -73,22 +76,25 @@ module.exports = {
             if (message.member.permissions.has(['KICK_MEMBERS'])) {
                 const user = message.mentions.users.first()
                 if (user) {
-                    const member = message.guild.member(user);
+                    const member = message.guild.members.cache.get(user.id);
                     if (member) {
                         member.kick(`${h.kick.ByAdmin} ${member} ${h.kick.kick}`).then(() => {
                             message.channel.send(` ${user.tag} ${h.kick.kick} ${message.guild.name}!`);
+                            return;
                         }).catch(err => {
                             message.reply(`${h.kick.error.kick_error} ${message.guild.name} :(`)
-                            console.log(err);
+                            throw err;
                         })
                     } else {
                         message.channel.send(l.error.Not_found_Member)
+                        return;
                     }
                 } else {
                     message.channel.send(h.kick.error.mention)
+                    return;
                 }
             } else {
-                message.channel.send(`${l.error.No_Prem} ${l.prem.kick_members} ${l.error.No_Prem2}`)
+                return message.channel.send(`${l.error.No_Prem} ${l.prem.kick_members} ${l.error.No_Prem2}`);
             }
         }
     },
@@ -110,18 +116,21 @@ module.exports = {
                     if (member) {
                         member.ban({ reason:`${h.ban.ByAdmin} ${member} ${h.ban.ban}!`}).then(() => {
                             message.channel.send(`${h.ban.success} ${user.tag} ${h.ban.from} ${message.guild.name} ${h.ban.in}${h.ban.ban}!`);
+                            return;
                         }).catch(err => {
                             message.reply(h.ban.error.kick_error)
-                            console.log(err);
+                            throw err;
                         })
                     } else {
                         message.channel.send(l.error.Not_found_Member)
+                        return;
                     }
                 } else {
                     message.channel.send(h.ban.error.mention)
+                    return;
                 }
             } else {
-                message.channel.send(l.error.No_Prem + l.prem.ban_members + l.error.No_Prem2)
+                return message.channel.send(l.error.No_Prem + l.prem.ban_members + l.error.No_Prem2);
             }
         }
     },
@@ -147,19 +156,20 @@ module.exports = {
             }else{
                 ag = ag.join(" ")
             }
-            setTimeout(() => {
-                if(mention.length !== 0) {
-                if (message.member.permissions.has(['MENTION_EVERYONE'])) {
-                    message.channel.send(mention)
-                }else{
-                    return message.channel.send(l.error.No_Prem + l.prem.mention_everyone+l.error.No_Prem2)
-                }}
-                        let voteEmbed = new Discord.MessageEmbed()
-                            .setColor('#2d9af8').setTitle(h.vote.vote).setDescription(ag).setFooter(h.vote.snd + message.author.username + "#" + message.author.discriminator, message.author.displayAvatarURL({ format: "png", dynamic: true, size: 512 }), true)
-                        message.channel.send({embeds:[voteEmbed]}).then((msg) => {
-                            msg.react("✅");
-                            msg.react("❌");
-                        }, 400);
+            if(mention.length !== 0) {
+            if (message.member.permissions.has(['MENTION_EVERYONE'])) {
+                message.channel.send(mention.toString());
+            }else{
+                return message.channel.send(l.error.No_Prem + l.prem.mention_everyone+l.error.No_Prem2);
+            }}
+            let voteEmbed = new Discord.MessageEmbed()
+            .setColor('#2d9af8').setTitle(h.vote.vote)
+            .setDescription(ag).setFooter(h.vote.snd + message.author.username + "#" + message.author.discriminator, message.author.displayAvatarURL({ format: "png", dynamic: true, size: 512 }), true)
+            message.channel.send({embeds:[voteEmbed]})
+            .then((msg) => {
+                msg.react("✅");
+                msg.react("❌");
+                return;
             })
         }
     },
@@ -189,7 +199,7 @@ module.exports = {
                 invites.forEach((invite) => {
                     userInviteCount += invite['uses'];
                 })
-                message.reply(user.username + ` ${h.invites.inv} ${userInviteCount} ${h.invites.inv2} ${message.guild.name}`);
+                return message.reply(user.username + ` ${h.invites.inv} ${userInviteCount} ${h.invites.inv2} ${message.guild.name}`);
             })
         }
     },

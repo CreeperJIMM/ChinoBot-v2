@@ -25,6 +25,7 @@ module.exports = {
               buttons = buttons
               await buttons.deferReply()
               await buttons.editReply("uwu")
+              return;
             }).catch((err) => {
               return;
             })
@@ -53,7 +54,7 @@ module.exports = {
             if(lastMessage.content === `pong!`) {
               lastMessage.edit("pong!!").then((editmessage) => {
                 let time5 = (new Date().getUTCMilliseconds() - time4.getUTCMilliseconds())
-              {return message.channel.send(lang.word.chino+ useful2.ping.delay + (Math.round((lastMessage.createdAt - message.createdAt)) + ' ms\n\n'+lang.word.message + useful2.ping.delay+': '+ time3 +' ms\n'+lang.word.edit+useful2.ping.delay+': '+ time5 +" ms"+`\nDatabase: ${DB2}ms` ))};}
+              {return message.channel.send(lang.word.chino+ useful2.ping.delay +" "+ (Math.round((lastMessage.createdAt - message.createdAt)) + ' ms\n\n'+lang.word.message + useful2.ping.delay+': '+ time3 +' ms\n'+lang.word.edit+useful2.ping.delay+': '+ time5 +" ms"+`\nDatabase: ${DB2}ms` ))};}
           )}})})
     }},
     "date":{
@@ -71,8 +72,7 @@ module.exports = {
             const TimeEmbed = new Discord.MessageEmbed()
             .setTitle(lang.time.today + lang.word.yes + Today.getFullYear()+ lang.date.year + (Today.getMonth()+1) + lang.date.month + Today.getDate() + " "+lang.date.date+"  "+lang.date.week + Today.getDay(),)
             .addField(lang.time.time , Today.getHours() + ":" + Today.getMinutes() + ":" + Today.getSeconds() + ":" + Today.getMilliseconds(),)
-            {msg.channel.send({embeds: [TimeEmbed]})};
-          
+            return msg.channel.send({embeds: [TimeEmbed]});
         }
     },
     "avatar":{
@@ -99,9 +99,9 @@ module.exports = {
         if(member){
           const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})).setTitle(member.username +" "+lang.word.of + useful2.avatar.avatar).setTimestamp().setFooter("🌎")
           .setDescription("[[📄Link]]("+member.displayAvatarURL({format: "png", dynamic: true ,size: 2048})+")")
-          message.channel.send({embeds: [emb]})
+          return message.channel.send({embeds: [emb]});
           }else{
-            return  message.channel.send(lang.error.Not_found_Member + ag)
+            return message.channel.send(lang.error.Not_found_Member + ag)
           }
         }
     },
@@ -127,7 +127,7 @@ module.exports = {
             .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
             .setImage(guild.iconURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
             .setDescription("[[📄Link]]("+guild.iconURL({ format: "png", dynamic: true ,size: 2048})+")")
-            {message.channel.send({embeds: [avatarEmbed]})};
+            return message.channel.send({embeds: [avatarEmbed]});
         }
     },
     "serveravatar":{
@@ -152,7 +152,7 @@ module.exports = {
           .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.guild+useful2.avatar.avatar)
           .setImage(guild.iconURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
           .setDescription("[[📄Link]]("+guild.iconURL({ format: "png", dynamic: true ,size: 2048})+")")
-          {message.channel.send({embeds: [avatarEmbed]})};
+          return message.channel.send({embeds: [avatarEmbed]});
       }
   },
   "banner":{
@@ -178,7 +178,7 @@ module.exports = {
         .setTitle(guild.name + ' '+lang.word.of+useful2.avatar.banner)
         .setImage(guild.bannerURL({ format: "png", dynamic: true ,size: 2048})).setTimestamp().setFooter("🌎")
         .setDescription("[[📄Link]]("+guild.bannerURL({ format: "png", dynamic: true ,size: 2048})+")")
-        {message.channel.send({embeds: [avatarEmbed]})};
+        return message.channel.send({embeds: [avatarEmbed]});
       
     }
 },
@@ -201,10 +201,12 @@ module.exports = {
         message.delete()
         hook.delete()
         message.channel.send("Adding...").then((ms) => { ms.delete() })
+        return;
       })
-          })
-      }else{return message.channel.send(lang.error.No_Prem+lang.prem.manage_channel+lang.error.No_Prem2)}
-    }
+    })
+  }else{
+    return message.channel.send(lang.error.No_Prem+lang.prem.manage_channel+lang.error.No_Prem2)
+  }}
   },
     "say": {
       description: {zh_TW:"智乃說話",en_US:"Chino talk",ja_JP:""},
@@ -236,8 +238,9 @@ module.exports = {
                   {message.channel.send("<:Transparent:751597051963506698> " + ag.join(" ") )}
                   delt();
             }
+            return;
         }else{
-          message.channel.send(lang.error.No_Prem+lang.prem.manage_messages+lang.error.No_Prem2)
+          return message.channel.send(lang.error.No_Prem+lang.prem.manage_messages+lang.error.No_Prem2);
         }
       }
     },
@@ -277,8 +280,9 @@ module.exports = {
               }else{
                   {channel.send("<:Transparent:751597051963506698> " + text )}
             }
+            return;
         }else{
-          message.channel.send(lang.error.No_Prem+lang.prem.manage_messages+lang.error.No_Prem2)
+          return message.channel.send(lang.error.No_Prem+lang.prem.manage_messages+lang.error.No_Prem2);
         }
       }
     },
@@ -309,11 +313,12 @@ module.exports = {
         {message.channel.send({content: ag.join(" ").toString(),tts: true})}
         message.delete();
        }
+       return;
       }else{
-        message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2);
+        return message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2);
         }
       }else{
-        message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2)
+        return message.channel.send(lang.error.No_Prem+lang.prem.mention_everyone+lang.error.No_Prem2);
       }
     }
     }
@@ -337,13 +342,14 @@ module.exports = {
           .setThumbnail(message.author.displayAvatarURL({format: "png", dynamic: true ,size: 512}), true)
           .setTimestamp()
           try{
-          bot.channels.cache.get("750279160743854091").send({embeds: [dbemd]})}
-          catch{message.channel.send(lang.error.send)}
-          message.channel.send(lang.success.send)
-
-        }else(
-          message.channel.send(lang.error.type_text)
-        )
+          bot.channels.cache.get("750279160743854091").send({embeds: [dbemd]})
+          return message.channel.send(lang.success.send);
+        }catch(error) {
+          message.channel.send(lang.error.send)
+          throw error;
+        }}else{
+         return message.channel.send(lang.error.type_text);
+        }
       }
     },
     "embed":{
@@ -383,6 +389,7 @@ module.exports = {
         } catch (error) {return message.channel.send(lang.error.Run_Command_error+error)}
           {message.channel.send({embeds: [myEmbed2]})
             message.delete()
+            return;
           };
         }
       }

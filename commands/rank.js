@@ -44,7 +44,7 @@ module.exports= {
                 .setTitle(k.rank.title + user.rank)
                 .setDescription(k.rank.exp + user.exp + "/" + (1000+50*user.rank))
                 .setFooter(member.username + k.rank.card + ((1000+50*user.rank) - user.exp) + k.rank.card2)
-                message.channel.send({embeds: [rankembed]})
+                return message.channel.send({embeds: [rankembed]});
                }
             })
         }
@@ -80,7 +80,7 @@ module.exports= {
                 .setTitle(k.money.money + user.money + "$")
                 .setDescription(k.money.daily + today)
                 .setFooter(member.username + k.money.wallet)
-                message.channel.send({embeds: [rankembed]})
+                return message.channel.send({embeds: [rankembed]});
                }
             )}})
             }
@@ -170,12 +170,13 @@ module.exports= {
                                         fishMain.setTitle(`釣魚場 [恭喜賺到 ${price}]`).setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                         money = money + price
                                         im.edit({embeds: [fishMain],components:[row]})
-                                        work_fish(im)
+                                        return work_fish(im);
                                         }else{
                                             fishMain.setTitle("釣魚場 [你釣到炸彈!] [遊戲結束]").setDescription(`⬛⬛💀⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                             im.edit({embeds: [fishMain],components:[row]})
                                             user.money = user.money + money
                                             Mongo.writeUser(clientDB,message.author.id,user)
+                                            return;
                                         }                                    
                                 }).catch((err) => {
                                     if(fishnum != 3) {
@@ -186,7 +187,7 @@ module.exports= {
                                     }else{
                                         fishMain.setTitle("釣魚場 [已跳過炸彈]").setDescription(`⬛⬛🚣⬛⬛\n🟦🟦${ro}🟦🟦\n🟦🟦🪝🟦🟦\n🟦🟦🟦🟦🟦\n🟦🟦🟦🟦🟦`)
                                         im.edit({embeds: [fishMain],components:[row]})
-                                        work_fish(im)
+                                        return work_fish(im)
                                     }
                                 })
                     }
@@ -248,10 +249,9 @@ module.exports= {
                 .setTitle(k.daily.clean)
                 .setDescription(k.daily.dec+user.worktoal.work+k.daily.dec2+(user.worktoal.work)*5+k.daily.dec3)
                 .setFooter(message.author.username + k.daily.pay)
-                message.channel.send({embeds: [rankembed]})
-                
-               }})}
-            })
+                return message.channel.send({embeds: [rankembed]});
+               }})
+            }})
         }
     },
     "levels": {
@@ -302,7 +302,7 @@ module.exports= {
             .setTitle(k.level.ranking.title)
             .setDescription(k.level.ranking.desc+"```js\n"+list.join("\n") + "\n```")
             .setFooter(k.level.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            return message.channel.send({embeds: [levelembed]});
         }, 600);
         })}
     },
@@ -356,7 +356,7 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            return message.channel.send({embeds: [levelembed]});
         }, 600);
     })
     }},
@@ -397,7 +397,7 @@ module.exports= {
             .setTitle(k.money.ranking.title)
             .setDescription("```js\n"+list.join("\n")+"\n```")
             .setFooter(k.money.ranking.footer)
-            message.channel.send({embeds: [levelembed]})
+            return message.channel.send({embeds: [levelembed]});
         }, 600);
     })
     }},
@@ -418,6 +418,7 @@ module.exports= {
                 user.money = (user.money + parseInt(args[1]))
                 message.channel.send("你讓用戶 " + user.name + "的金錢增加了 `" + args[1] + "`\n現在他有 `" + user.money + "`$ 了")
                 Mongo.writeUser(clientDB,args[0],user)
+                return;
             }})
         }
     },
@@ -438,6 +439,7 @@ module.exports= {
                 user.money = (user.money - parseInt(args[1]))
                 message.channel.send("你讓用戶 " + user.name + "的金錢減少了 `" + args[1] + "`\n現在他變成 `" + user.money + "`$ 了")
                 Mongo.writeUser(clientDB,args[0],user)
+                return;
             }})
         }
     },
@@ -458,6 +460,7 @@ module.exports= {
                 user.money = parseInt(args[1])
                 message.channel.send("你將用戶 " + user.name + "的金錢調成 `" + args[1] + "`$")
                 Mongo.writeUser(clientDB,args[0],user)
+                return;
             }})
         }
     },
@@ -514,7 +517,7 @@ module.exports= {
                 .addField("日本語","`ja_JP`")
                 .setFooter("◆本翻譯不是100%準確.\nThis translation is not 100% accurate.")
                 .setTimestamp()
-                message.channel.send({embeds: [langembed]})
+                return message.channel.send({embeds: [langembed]});
                 })
             }
         }
@@ -565,6 +568,7 @@ module.exports= {
                     message.channel.send({embeds: [pay]})
                     Mongo.writeUser(clientDB,member.id,user)
                     Mongo.writeUser(clientDB,message.author.id,user2)
+                    return;
                 }
                 })}
         })}
@@ -618,16 +622,20 @@ module.exports= {
                     Mongo.writeUser(clientDB,member.id,user)
                     user2.marry = member.id
                     Mongo.writeUser(clientDB,message2.author.id,user2)
+                    return;
                 }else if(ms.first().content === "no") {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                        message.edit({embeds: [marry2]})}
+                    return message.edit({embeds: [marry2]})}
                     }).catch(() => {
                         let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
                         message.edit({embeds: [marry2]})});
-               })}else{message.edit(k.marry.has_someone)}
-            }})})}}}
-    else{message2.channel.send(k.marry.you_have)
-}
+               })}else{return message.edit(k.marry.has_someone)}
+            }}
+        )}
+    )}
+}}else{
+        return message2.channel.send(k.marry.you_have)
+    }
 })}},
     "divorce": {
         description: {zh_TW:"與某人離婚",en_US:"Divorce someone.",ja_JP:""},
@@ -664,14 +672,18 @@ module.exports= {
                 Mongo.writeUser(clientDB,other,user)
                 user2.marry = ""
                 Mongo.writeUser(clientDB,message2.author.id,user2)
+                return;
             }else if(ms.first().content === "no") {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit({embeds: [marry2]})}
+                return message.edit({embeds: [marry2]})}
                 }).catch(() => {
                     let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                    message.edit({embeds: [marry2]})});
-                    })}})}
-else{message2.channel.send(k.divorce.hasnt)
+                    return message.edit({embeds: [marry2]})});
+                    })
+                }})
+            }
+else{
+    return message2.channel.send(k.divorce.hasnt)
 }
 })}},
 "pet": {
@@ -723,13 +735,14 @@ else{message2.channel.send(k.divorce.hasnt)
                         user2.pet.push(member.id)
                         user2.petname = user2.petname + member.username + "#" + member.discriminator+"\n"
                         Mongo.writeUser(clientDB,message2.author.id,user2)
-                            }else if(ms.first().content === "no") {
+                        return;
+                        }else if(ms.first().content === "no") {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit({embeds: [marry2]})
+                                return message.edit({embeds: [marry2]})
                             }
                         }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit({embeds: [marry2]})});
+                            return message.edit({embeds: [marry2]})});
                    })
                 }})})}
         }})}else if(args[0] === "remove") {
@@ -780,14 +793,16 @@ else{message2.channel.send(k.divorce.hasnt)
                         var str2 = user2.petname
                         user2.petname = str2.replace(member.username + "#" + member.discriminator + "\n", '').replace(member.username + "#" + member.discriminator, '')
                         Mongo.writeUser(clientDB,message2.author.id,user2)
-                            }else if(ms.first().content === "no")  {
+                        return;
+                        }else if(ms.first().content === "no")  {
                                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                                message.edit({embeds: [marry2]})
+                                return message.edit({embeds: [marry2]})
                             }
                     }).catch(() => {
                             let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                            message.edit({embeds: [marry2]})});
-                            })}})})}}})}
+                            return message.edit({embeds: [marry2]})});
+                            })}})})
+                        }}})}
                         }})
         }else if(args[0] === "disconnect") {
             Mongo.loadUser(clientDB,message2.author.id).then((user2) => {
@@ -825,9 +840,10 @@ else{message2.channel.send(k.divorce.hasnt)
         let str3 = user.petname
         user.petname = str3.replace(message2.author.username + "#" + message2.author.discriminator + "\n", '').replace(message2.author.username + "#" + message2.author.discriminator, '').replace(user2.name + "#" + message2.author.discriminator, '')
         Mongo.writeUser(clientDB,member.id,user)
+        return;
             }else if(ms.first().content === "no")  {
                 let marry2 = new Discord.MessageEmbed().setTitle(k.word.cancel)
-                message.edit({embeds: [marry2]})
+                return message.edit({embeds: [marry2]});
             }
         })
         })}})})})
@@ -837,7 +853,7 @@ else{message2.channel.send(k.divorce.hasnt)
 
         }else{
             let pethelp = new Discord.MessageEmbed().setColor( message2.member.roles.highest.color).setTitle(k.pet.help.title).setDescription(k.pet.help.desc).setTimestamp()
-            message2.channel.send({embeds: [pethelp]})
+            return message2.channel.send({embeds: [pethelp]});
         }
     }
 },
@@ -894,7 +910,7 @@ else{message2.channel.send(k.divorce.hasnt)
         .addField(k.card.work_all + user.work + k.card.times+" \n"+k.card.work_last + user.worktoal.work + l.date.day,k.card.work_first + user.time)
         .setFooter(k.card.ID_card+" ▋▏▎▍▋▍▋▏▏▍▋▏▍▍▋▏▋▍▉▏▍")
         .setTimestamp()
-        message.channel.send({embeds: [userdata]})
+        return message.channel.send({embeds: [userdata]});
 })}
 }},
     "permissions": {
@@ -904,7 +920,7 @@ else{message2.channel.send(k.divorce.hasnt)
         vote: false,
         help: false,
         fun: function(bot, message, prefix ,clientDB, language, args) {
-            access(bot,message,args,clientDB,language)
+            return access(bot,message,args,clientDB,language)
        }
     },
     "permission": {
@@ -914,7 +930,7 @@ else{message2.channel.send(k.divorce.hasnt)
         vote: false,
         help: false,
         fun: function(bot, message, prefix ,clientDB, language, args) {
-            access(bot,message,args,clientDB,language)
+            return access(bot,message,args,clientDB,language)
        }
     },
     "banlist": {
@@ -934,15 +950,13 @@ else{message2.channel.send(k.divorce.hasnt)
             }else{
                 guild = message.guild;}
             guild.bans.fetch()
-    .then(banned => {
-        let list = banned.map(ban => ban.user.tag).join('\n');
-
-        if (list.length >= 1950) list = `${list.slice(0, 1948)}...`;
-
-        message.channel.send(`**${banned.size} users are banned:**\n${list}`);
-    })
-    .catch(console.error);
-       }
+            .then(banned => {
+                let list = banned.map(ban => ban.user.tag).join('\n');
+                if (list.length >= 1950) list = `${list.slice(0, 1948)}...`;
+                return message.channel.send(`**${banned.size} users are banned:**\n${list}`);
+            })
+            .catch(console.error);
+        }
     },
     "perm": {
         description: {zh_TW:"成員的伺服器權限",en_US:"Member permissions of server.",ja_JP:""},
@@ -950,7 +964,7 @@ else{message2.channel.send(k.divorce.hasnt)
         instructions: "perm [@mention/ID＊]",
         category: "guild",
         fun: function(bot, message, prefix ,clientDB, language, args) {
-            access(bot,message,args,clientDB,language)
+            return access(bot,message,args,clientDB,language)
        }
     },
     "adv": {
@@ -980,7 +994,7 @@ else{message2.channel.send(k.divorce.hasnt)
                     .setTitle(message.member.displayName + " 成就表")
                     .setDescription(message.author.username+"#"+message.author.discriminator)
                     .addField("🏅成就表","\n " + adv)
-                    message.channel.send({embeds: [advs]})
+                    return message.channel.send({embeds: [advs]});
                 }})
         }}
 }
@@ -990,47 +1004,106 @@ async function access(bot,message,args,clientDB,language) {
     }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
     let guild2 = null
     if(!message.guild) return message.channel.send(l.error.server_cmd)
-    let member = null,member2 = null
+    let member = null,channel = null
     let user=bot.users.cache.get(args[0])
-    if(args[1] != null) {
-        if(bot.guilds.cache.get(args[1])) {
-       guild2 = bot.guilds.cache.get(args[1])
+    if(args[2] != null) {
+        if(bot.guilds.cache.has(args[2])) {
+       guild2 = bot.guilds.cache.get(args[2])
         }else{guild2 = message.guild}
     }else{guild2 = message.guild}
-    if (message.mentions.users.size) { 
+
+    if (message.mentions.channels.size) {
+        channel = message.mentions.channels.first()
+    }else if(args[1] != null) {
+        if(guild2.channels.cache.has(args[1])) {
+       channel = guild2.channels.cache.get(args[1])
+        }else{guild2 = message.guild}
+    }else{guild2 = message.guild}
+
+    if (message.mentions.users.size) {
         member = message.mentions.users.first()
-        member = guild2.member(member.id)
+        member = guild2.members.cache.get(member.id)
      } else if (args[0] != null) {
         if (user) { 
-            member = user
-            member = guild2.member(member.id)
+            member = guild2.members.cache.get(user.id)
          }else { member = message.member }
     } else { member = message.member }
     if(member){
-    if(member.presence.member.permissions.has(['ADMINISTRATOR'])) {var admi = "✅"}else{var admi = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_CHANNELS'])) {var manage = "✅"}else{var manage = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_GUILD'])) {var guild = "✅"}else{var guild = "❌"}
-    if(member.presence.member.permissions.has(['VIEW_AUDIT_LOG'])) {var log = "✅"}else{var log = "❌"}
-    if(member.presence.member.permissions.has(['KICK_MEMBERS'])) {var kick = "✅"}else{var kick = "❌"}
-    if(member.presence.member.permissions.has(['BAN_MEMBERS'])) {var ban = "✅"}else{var ban = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_ROLES'])) {var role = "✅"}else{var role = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_WEBHOOKS'])) {var hook = "✅"}else{var hook = "❌"}
-    if(member.presence.member.permissions.has(['MENTION_EVERYONE'])) {var tag = "✅"}else{var tag = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_EMOJIS'])) {var emoji = "✅"}else{var emoji = "❌"}
-    if(member.presence.member.permissions.has(['MANAGE_MESSAGES'])) {var msg = "✅"}else{var msg = "❌"}
-    if(member.presence.member.permissions.has(['CREATE_INSTANT_INVITE'])) {var inv = "✅"}else{var inv = "❌"}
+    if(channel) {
+        let admi,manage,kick,ban,role,hook,tag,emoji,msg,inv,send_msg,send_embed,send_file,
+        add_reaction,use_emoji,use_sticker,use_cmd,read_history;
+        if(member.permissionsIn(channel).has(['ADMINISTRATOR'])) { admi = "✅"}else{ admi = "❌"}
+        if(member.permissionsIn(channel).has(['MANAGE_CHANNELS'])) { manage = "✅"}else{ manage = "❌"}
+        if(member.permissionsIn(channel).has(['KICK_MEMBERS'])) { kick = "✅"}else{ kick = "❌"}
+        if(member.permissionsIn(channel).has(['BAN_MEMBERS'])) { ban = "✅"}else{ ban = "❌"}
+        if(member.permissionsIn(channel).has(['MANAGE_ROLES'])) { role = "✅"}else{ role = "❌"}
+        if(member.permissionsIn(channel).has(['MANAGE_WEBHOOKS'])) { hook = "✅"}else{ hook = "❌"}
+        if(member.permissionsIn(channel).has(['MENTION_EVERYONE'])) { tag = "✅"}else{ tag = "❌"}
+        if(member.permissionsIn(channel).has(['MANAGE_EMOJIS_AND_STICKERS'])) { emoji = "✅"}else{ emoji = "❌"}
+        if(member.permissionsIn(channel).has(['MANAGE_MESSAGES'])) { msg = "✅"}else{ msg = "❌"}
+        if(member.permissionsIn(channel).has(['SEND_MESSAGES'])) { send_msg = "✅"}else{ send_msg = "❌"}
+        if(member.permissionsIn(channel).has(['EMBED_LINKS'])) { send_embed = "✅"}else{ send_embed = "❌"}
+        if(member.permissionsIn(channel).has(['ATTACH_FILES'])) { send_file = "✅"}else{ send_file = "❌"}
+        if(member.permissionsIn(channel).has(['ADD_REACTIONS'])) { add_reaction = "✅"}else{ add_reaction = "❌"}
+        if(member.permissionsIn(channel).has(['USE_EXTERNAL_EMOJIS'])) { use_emoji = "✅"}else{ use_emoji = "❌"}
+        if(member.permissionsIn(channel).has(['USE_EXTERNAL_STICKERS'])) { use_sticker = "✅"}else{ use_sticker = "❌"}
+        if(member.permissionsIn(channel).has(['USE_APPLICATION_COMMANDS'])) { use_cmd = "✅"}else{ use_cmd = "❌"}
+        if(member.permissionsIn(channel).has(['READ_MESSAGE_HISTORY'])) { read_history = "✅"}else{ read_history = "❌"}
+        if(member.permissionsIn(channel).has(['CREATE_INSTANT_INVITE'])) {inv = "✅"}else{ inv = "❌"}
+        let owners = await guild2.fetchOwner(),owner = "❓"
+        if(owners.user.id == member.id) {owner = "👑 是"}else{owner = "💂‍♂️ 否"}   
+        let acc = new Discord.MessageEmbed()
+        .setColor(member.roles.highest.color)
+        .setTitle(member.user.username +k.prem.perm+k.prem.in+guild2.name+k.prem.in+`${channel.name}`)
+        .setDescription(k.prem.hight + "<@&" + member.roles.highest + "> \n"+k.prem.owner+ owner)
+        .addField(k.prem.prem2, 
+            `${l.prem.ADMINISTRATOR} `+admi+
+            `\n${l.prem.manage_channel} `+manage+
+            `\n${l.prem.kick_members} `+kick+ 
+            `\n${l.prem.ban_members} `+ban+
+            `\n${l.prem.manage_roles} `+role+
+            `\n${l.prem.manage_messages} `+msg+
+            `\n${l.prem.manage_webhooks} `+hook+
+            `\n${k.prem.emoji} `+emoji+
+            `\n${l.prem.mention_everyone} `+tag+
+            `\n${l.prem.read_message_history} `+read_history+
+            `\n${l.prem.send_messages} `+send_msg+
+            `\n${l.prem.embed_links} `+send_embed+
+            `\n${l.prem.attach_files} `+send_file+
+            `\n${l.prem.add_reactions} `+add_reaction+
+            `\n${l.prem.use_external_emoji} `+use_emoji+
+            `\n${l.prem.use_external_stickers} `+use_sticker+
+            `\n${l.prem.use_commands} `+use_cmd+
+            `\n${k.prem.ink} `+inv)
+        return message.channel.send({embeds: [acc]});
+    }else{
+    let admi,manage,guild,log,kick,ban,role,hook,tag,emoji,msg,inv;
+    if(member.permissions.has(['ADMINISTRATOR'])) { admi = "✅"}else{ admi = "❌"}
+    if(member.permissions.has(['MANAGE_CHANNELS'])) { manage = "✅"}else{ manage = "❌"}
+    if(member.permissions.has(['MANAGE_GUILD'])) { guild = "✅"}else{ guild = "❌"}
+    if(member.permissions.has(['VIEW_AUDIT_LOG'])) { log = "✅"}else{ log = "❌"}
+    if(member.permissions.has(['KICK_MEMBERS'])) { kick = "✅"}else{ kick = "❌"}
+    if(member.permissions.has(['BAN_MEMBERS'])) { ban = "✅"}else{ ban = "❌"}
+    if(member.permissions.has(['MANAGE_ROLES'])) { role = "✅"}else{ role = "❌"}
+    if(member.permissions.has(['MANAGE_WEBHOOKS'])) { hook = "✅"}else{ hook = "❌"}
+    if(member.permissions.has(['MENTION_EVERYONE'])) { tag = "✅"}else{ tag = "❌"}
+    if(member.permissions.has(['MANAGE_EMOJIS_AND_STICKERS'])) { emoji = "✅"}else{ emoji = "❌"}
+    if(member.permissions.has(['MANAGE_MESSAGES'])) { msg = "✅"}else{ msg = "❌"}
+    if(member.permissions.has(['CREATE_INSTANT_INVITE'])) { inv = "✅"}else{ inv = "❌"}
     let owners = await guild2.fetchOwner(),owner = "❓"
     if(owners.user.id == member.id) {owner = "👑 是"}else{owner = "💂‍♂️ 否"}   
     let acc = new Discord.MessageEmbed()
-    .setColor(member.presence.member.roles.highest.color)
+    .setColor(member.roles.highest.color)
     .setTitle(member.user.username +k.prem.perm+k.prem.in+guild2.name)
-    .setDescription(k.prem.hight + "<@&" + member.presence.member.roles.highest + "> \n"+k.prem.owner+ owner)
+    .setDescription(k.prem.hight + "<@&" + member.roles.highest + "> \n"+k.prem.owner+ owner)
     .addField(k.prem.prem2, `${l.prem.ADMINISTRATOR} `+admi+`\n${l.prem.manage_guild} `+guild+`\n${l.prem.manage_channel} `+manage+`\n${k.prem.log} `+log+`\n${l.prem.kick_members} `+kick+ `\n${l.prem.ban_members} `+ban+`\n${l.prem.manage_roles} `+role+`\n${l.prem.manage_messages} `+msg+`\n${l.prem.manage_webhooks} `+hook+`\n${l.prem.mention_everyone} `+tag+`\n${k.prem.emoji} `+emoji+`\n${k.prem.ink} `+inv)
-    message.channel.send({embeds: [acc]})
+    return message.channel.send({embeds: [acc]});
+    }
     }
 };
+
 async function payto(bot, message ,args) {
     setTimeout(() => {
-        payd.delete(message.author.id)
+        return payd.delete(message.author.id);
     }, 20000);
 };

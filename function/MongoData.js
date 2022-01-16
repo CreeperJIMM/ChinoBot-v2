@@ -17,6 +17,7 @@ module.exports.writeUser = function (client, id, data) {
   var newvalues = { $set: user };
   dbo.collection("users").updateOne(myquery, newvalues, function (err, res) {
     if (err) return err;
+    if(res) return true;
   });
 };
 module.exports.loadGuild = async (client, guildid) => {
@@ -37,6 +38,7 @@ module.exports.writeGuild = function (client, id, data) {
   var newvalues = { $set: user };
   dbo.collection("guilds").updateOne(myquery, newvalues, function (err, res) {
     if (err) return err;
+    if(res) return true;
   });
 };
 module.exports.loadDaily = async (client) => {

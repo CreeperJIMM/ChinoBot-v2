@@ -52,7 +52,7 @@ module.exports = {
             .setTitle(ag[0]+" 資訊")
             .addField("UUID",id)
             .setThumbnail(`https://visage.surgeplay.com/bust/${id}`)
-            message.channel.send({embeds: [mc_user]})
+            return message.channel.send({embeds: [mc_user]});
         }
     },
     "mc-user": {
@@ -74,7 +74,7 @@ module.exports = {
             .setTitle(ag[0]+" 資訊")
             .addField("UUID",id)
             .setThumbnail(`https://visage.surgeplay.com/bust/${id}`)
-            message.channel.send({embeds: [mc_user]})
+            return message.channel.send({embeds: [mc_user]});
         }
     },
     "mc-hypixel": {
@@ -137,9 +137,9 @@ module.exports = {
                 .addField("個人社群", club ,true)
                 .addField("所屬公會", gui ,true)
                 .setFooter(`語言: ${langes} \n首次上線: ${new Date(user.firstLogin).toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false})}\n最後上線: ${new Date(user.lastLogout).toLocaleString('zh-TW', {timeZone: 'Asia/Taipei',hour12: false}).toString()}`)
-                message.channel.send({embeds: [Hyp]})
+                return message.channel.send({embeds: [Hyp]});
             }).catch(error => {
-                message.channel.send("❌發生錯誤!" +error)
+                return message.channel.send("❌發生錯誤!" +error);
             })
         }
     },
@@ -208,9 +208,9 @@ module.exports = {
                         if(reponse.motdLine2 != null) {word2 = word2 +"\n"+ reponse.motdLine2.descriptionText.replace("§0","").replace("§1","").replace("§2","").replace("§3","").replace("§4","").replace("§5","").replace("§6","").replace("§7","").replace("§8","").replace("§9","").replace("§a","").replace("§b","".replace("§c","")).replace("§d","").replace("§e","").replace("§f","").replace("§k","").replace("§l","").replace("§m","").replace("§n","").replace("§o","").replace("§f","").replace("§7","").replace("§8","")}
                         mcEmbed.setDescription(word2)
                     setTimeout(() => {
-                      ms.edit({embeds: [mcEmbed]})}, 1000);
+                        return ms.edit({embeds: [mcEmbed]})}, 1000);
                     }).catch((error) => {
-                    ms.edit(k.mc.notfound +er+"\n⚠Loaded BE server error: `"+ error +"`")
+                        return ms.edit(k.mc.notfound +er+"\n⚠Loaded BE server error: `"+ error +"`");
                     }
                 )})
             })
@@ -299,7 +299,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "2") { //石頭
                                     win = 0;
                                     money = money + args[0] * 1.5 * -1
@@ -309,7 +309,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "3") { //布
                                     win++
                                     wincount++
@@ -321,7 +321,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 }
                             } else if (reaction.customId == "R") { //////////////////////////////////////////////
                                 let rond = Math.floor(Math.random() * 3) + 1
@@ -336,7 +336,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "2") { //石頭
                                     let rpsEmbed = new Discord.MessageEmbed().setColor('#2d9af8').setTitle(message.author.username + k.rps2.out.rock + k.rps2.state.tie).setDescription(message.author.username + ` ✊ vs ✊  ${l.word.chino}\n\n` + k.rps2.keepplay).setImage(rock).setFooter("[Tie] [" + win + " | " + wincount + "] [" + money + "$] " + k.rps2.player + message.author.username).setTimestamp()
                                     let buttonT = new Discord.MessageButton(),buttonF = new Discord.MessageButton()
@@ -344,7 +344,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "3") { //布
                                     win = 0;
                                     money = money + args[0] * 1.5 * -1
@@ -354,7 +354,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 }
                             } else if (reaction.customId == "P") { ///////////////////////////////////////////////
                                 let rond = Math.floor(Math.random() * 3) + 1
@@ -367,7 +367,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "2") { //石頭
                                     win++
                                     wincount++
@@ -379,7 +379,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 } else if (rond == "3") { //布
                                     let rpsEmbed = new Discord.MessageEmbed().setColor('#2d9af8').setTitle(message.author.username + k.rps2.out.paper + k.rps2.state.tie).setDescription(message.author.username + ` 🖐 vs 🖐  ${l.word.chino}\n\n` + k.rps2.keepplay).setImage(paper).setFooter("[Tie] [" + win + " | " + wincount + "] [" + money + "$] " + k.rps2.player + message.author.username).setTimestamp()
                                     let buttonT = new Discord.MessageButton(),buttonF = new Discord.MessageButton()
@@ -387,7 +387,7 @@ module.exports = {
                                     buttonF.setStyle('DANGER').setEmoji("❌").setCustomId("R")
                                     let row2 = new Discord.MessageActionRow().addComponents(buttonT,buttonF)
                                     ms.edit({embeds: [rpsEmbed],components: [row2]});                                    
-                                    playagain(ms)
+                                    return playagain(ms)
                                 }
                             }
                         }).catch(() => {
@@ -428,6 +428,7 @@ module.exports = {
                     time.delete(message.author.id);
                     user.money = parseInt(user.money) + money;
                     Mongo.writeUser(clientDB,message.author.id,user)
+                    return;
                 }
             })
         }
@@ -471,16 +472,19 @@ module.exports = {
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 1);
                                 Mongo.writeUser(clientDB,message.author.id,user)
+                                return;
                             } else if (math == "4") {
                                 let gu1 = new Discord.MessageEmbed().setTitle(k.door.game + " [x1.5]").setDescription(k.door.open + " \n" + k.door.event.cashbox).setTimestamp().setFooter("🚪[" + k.door.give + " " + args[0] * 1.5 + " $]")
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 1.5);
                                 Mongo.writeUser(clientDB,message.author.id,user)
+                                return;
                             } else if (math == "5" || math == "6") {
                                 let gu1 = new Discord.MessageEmbed().setTitle(k.door.game + " [Monster -x2]").setDescription(k.door.open + "\n...\n" + k.door.event.monster).setTimestamp().setFooter("🚪[" + k.door.lose + args[0] * 2 * -1 + " $]")
                                 ms.edit({embeds: [gu1],components: []})
                                 user.money = parseInt(user.money) + parseInt(args[0] * 3 * -1);
                                 Mongo.writeUser(clientDB,message.author.id,user)
+                                return;
                             }
                         }).catch(() => {
                             let guess = new Discord.MessageEmbed().setTitle(k.door.game).setDescription(k.word.slowchoose).setFooter("🚪").setTimestamp()
@@ -506,7 +510,7 @@ module.exports = {
             }else{
                 if(number > 1000000) {number = 1000000}
                 if(number < 0 && number < -1000000) {number = -1000000}
-            message.channel.send(k.math.type + Math.round(Math.random() * number) + k.math.dot)
+                return message.channel.send(k.math.type + Math.round(Math.random() * number) + k.math.dot);
             }
         }
     },
@@ -526,6 +530,7 @@ module.exports = {
                 try { eval(ag.join(' ')) } catch (error) { return message.channel.send(k.math.cantcount) }
                 setTimeout(() => { message.channel.send("📝 " + eval(ag.join(' '))) }, 300);
             }, 100);
+            return;
         }
     },
     "slot": {
@@ -551,7 +556,6 @@ module.exports = {
             for (let i = 0; i < 3; i++) {
                 rarray[i] = Math.floor(Math.random() * 5)
             }
-
             let rrarray = [];
             let text = [spin, spin, spin]
             if (time.has(message.author.id)) return message.channel.send(k.slot.speed)
@@ -594,6 +598,7 @@ module.exports = {
                 ms.edit({embeds: [slot2]}).then(() => {
                     time.delete(message.author.id);
                     server.delete(message.guild.id);
+                    return;
                 });
             })})
         }
@@ -634,7 +639,9 @@ module.exports = {
                         if(message.guild.members.cache.find(m => m.displayName.includes(args[1]))) {
                             member2 = message.guild.members.cache.find(m => m.displayName.includes(args[1])).user};}
             } else { member = message.author }
-            if (member.id != message.author.id) {
+            let memid = ""
+            if(member) memid = member.id
+            if (memid != message.author.id) {
                 owo = member.username;
                 owo2 = k.love.love
             } else {
@@ -721,31 +728,41 @@ module.exports = {
             let f = Math.floor(Math.random() * 6)
             let re = Math.floor(Math.random() * 100)
             ag = ag.join(" ")
+            let pickEmbed = new Discord.MessageEmbed()
+            .setColor('#2d9af8')
+            .setTitle(ag)
             if (f == 1 || f == 2 || f == 0) {
-                let pickEmbed = new Discord.MessageEmbed()
-                    .setColor('#2d9af8')
-                    .setTitle(ag)
-                    .setDescription(`${re}% `+k.pick.yes)
-                message.channel.send({embeds: [pickEmbed]});
+                    pickEmbed.setDescription(`${re}% `+k.pick.yes)
             } else if (f == 5 || f == 6) {
-                let pickEmbed2 = new Discord.MessageEmbed()
-                    .setColor('#2d9af8')
-                    .setTitle(ag)
-                    .setDescription(`${re}% `+k.pick.no)
-                message.channel.send({embeds: [pickEmbed2]});
+                pickEmbed.setDescription(`${re}% `+k.pick.no)
             } else if (f == 3) {
-                let pickEmbed2 = new Discord.MessageEmbed()
-                    .setColor('#2d9af8')
-                    .setTitle(ag)
-                    .setDescription(k.pick.maybe_yes)
-                message.channel.send({embeds: [pickEmbed2]});
+                pickEmbed.setDescription(k.pick.maybe_yes)
             } else if (f == 4) {
-                let pickEmbed2 = new Discord.MessageEmbed()
-                    .setColor('#2d9af8')
-                    .setTitle(ag)
-                    .setDescription(k.pick.maybe_no)
-                message.channel.send({embeds: [pickEmbed2]});
+                pickEmbed.setDescription(k.pick.maybe_no)
             }
+            return message.channel.send({embeds: [pickEmbed]});
+        }
+    },
+    "8ball": {
+        description: {zh_TW:"神奇八號球(他或許可以幫你解答)",en_US:"Yes or No.",ja_JP:""},
+        authority: "everyone",
+        instructions: "8ball [event(text)]",
+        category: "game",
+        vote: false,
+        help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+            let l = lan.zh_TW,k = gameX.zh_TW
+            if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+            }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+            ag = ag.join(" ")
+            let ballEmbed = new Discord.MessageEmbed()
+            .setColor('#2d9af8')
+            .setTitle(ag)
+            let answer = Math.floor(Math.random() * 20),icon = "";
+            if(answer <= 10) {icon="🟢"+k.ball.clor.green}else if(answer >= 16) {icon="🔴"+k.ball.clor.red}else if(answer >= 11 && answer <= 15) {icon="🔵"+k.ball.clor.blue}
+            ballEmbed.setDescription(`${k.ball.title} \n${k.ball.answer[answer-1]}`)
+            ballEmbed.setFooter(`${k.ball.footer}\n${icon}`)
+            return message.channel.send({embeds: [ballEmbed]});
         }
     },
     "osucard": {
@@ -777,7 +794,7 @@ module.exports = {
             let pickEmbed = new Discord.MessageEmbed()
                 .setTitle(args[0] + k.osu.grade)
                 .setImage("https://lemmmy.pw/osusig/sig.php?colour=hexf16ea9&uname=" + args[0] + "&mode="+mode+"&pp=2&removeavmargin&flagshadow&darktriangles&opaqueavatar&onlineindicator=undefined&xpbar&xpbarhex")
-            message.channel.send({embeds: [pickEmbed]});
+            return message.channel.send({embeds: [pickEmbed]});
 
         }
     },
@@ -812,8 +829,10 @@ module.exports = {
                     .setFooter(k.osu.score.joinTime + user.joinDate.getUTCFullYear(8) + "/" + user.joinDate.getUTCMonth(8) + "/" + user.joinDate.getUTCDate(8) + " • " + user.joinDate.getUTCHours(8) + l.time.hour + user.joinDate.getUTCMinutes(8) + l.time.minute + user.joinDate.getUTCSeconds(8) + l.time.minute)
                     .setTimestamp()
                     .setImage("https://lemmmy.pw/osusig/sig.php?colour=hexf16ea9&uname=" + ag + "&mode=0&pp=2&removeavmargin&flagshadow&darktriangles&opaqueavatar&onlineindicator=undefined&xpbar&xpbarhex")
-                message.channel.send({embeds: [pickEmbed]});
-            }).catch((err) => { message.channel.send(k.osu.not_found + " ||`" + err + "`||") })
+                    return message.channel.send({embeds: [pickEmbed]});
+            }).catch((err) => { 
+                return message.channel.send(k.osu.not_found + " ||`" + err + "`||") 
+            })
         }
     }
 }
@@ -921,5 +940,5 @@ async function seasen(bot, message) {
     })
 }
 async function rps(bot, message) {
-    message.channel.send("請打 `cr!rps [剪刀/石頭/布]`")
+    return message.channel.send("請打 `cr!rps [剪刀/石頭/布]`");
 }

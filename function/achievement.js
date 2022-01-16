@@ -9,8 +9,8 @@ module.exports.notfound = async function (bot, message ,lang,clientDB) {
       if (user.adv.indexOf("notfound") == "-1") {
         user.adv.push("notfound");
         message.author.send(lang);
-
         Mongo.writeUser(clientDB, message.author.id, user);
+        return;
       }
     }
   });
@@ -26,6 +26,7 @@ module.exports.speed = async function (bot, message ,lang,clientDB) {
         user.adv.push("speed");
         message.author.send(l);
         Mongo.writeUser(clientDB, message.author.id, user);
+        return;
       }
     }
   });

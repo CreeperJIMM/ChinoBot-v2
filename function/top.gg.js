@@ -10,19 +10,23 @@ module.exports.main = function(client) {
     try {
         dbl.on('posted', () => {
             dbl.postStats(client.guilds.size)
+            return;
         })
     } catch (error) { return; }
     
     dbl.on('error', e => {
         console.log(`錯誤! ${e}`);
+        return
     })
     dbl.webhook.on('ready', hook => {
         console.log(`Webhook in http://${hook.hostname}:${hook.port}${hook.path}`);
+        return;
     });
     dbl.webhook.on('vote', vote => {
         console.log(`感謝 ${vote.user} 的投票!`);
         let vote2 = new Discord.MessageEmbed().setColor("#2d9af8").setTitle("感謝投票!").setDescription("感謝 <@" + vote.user + "> 為智乃機器人增加了一票!")
         client.channels.cache.get(`767216526125957170`).send(vote2)
+        return;
     });
 }
 /*

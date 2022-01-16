@@ -15,7 +15,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            userinfo(bot,message,args,p,clientDB,language)
+            return userinfo(bot,message,args,p,clientDB,language)
         }
     },
     "uinfo":{
@@ -25,7 +25,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            userinfo(bot,message,args,p,clientDB,language)
+            return userinfo(bot,message,args,p,clientDB,language)
         }
     },
     "ui":{
@@ -35,7 +35,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            userinfo(bot,message,args,p,clientDB,language)
+            return userinfo(bot,message,args,p,clientDB,language)
         }
     },
     "sinfo":{
@@ -45,7 +45,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            server(bot,message,args,language)
+            return server(bot,message,args,language)
         }
     },
     "si":{
@@ -55,7 +55,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            server(bot,message,args,language)
+            return server(bot,message,args,language)
         }
     },
     "gi":{
@@ -65,7 +65,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            server(bot,message,args,language)
+            return server(bot,message,args,language)
         }
     },
     "guildinfo":{
@@ -76,7 +76,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            server(bot,message,args,language)
+            return server(bot,message,args,language)
         }
     },
     "serverinfo":{
@@ -86,7 +86,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            server(bot,message,args,language)
+            return server(bot,message,args,language)
         }
     },
     "binfo":{
@@ -96,7 +96,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            botinfo(bot,message,args,language)
+            return botinfo(bot,message,args,language)
         }
     },
     "bi":{
@@ -107,7 +107,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            botinfo(bot,message,args,p,language)
+            return botinfo(bot,message,args,p,language)
         }
     },
     "gm":{
@@ -118,7 +118,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            guildmember(bot,message,args,p,language)
+            return guildmember(bot,message,args,p,language)
         }
     },
     "guildmember":{
@@ -129,7 +129,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            guildmember(bot,message,args,p,language)
+            return guildmember(bot,message,args,p,language)
         }
     },
     "role":{
@@ -140,7 +140,7 @@ module.exports= {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            role(bot,message,args,p,language)
+            return role(bot,message,args,p,language)
         }
     }
 }
@@ -180,7 +180,7 @@ async function role(bot,message,args,p,language) {
             .setDescription("Name:  <@&"+member.id+"> \nID: "+member.id+"\nColor: ["+member.hexColor+"](https://www.color-hex.com/color/"+colo+")\n")
             .addField(h.guild.member.all + ` ${member.members.size}`, mem)
             .setFooter("Add date:\n"+time)
-            message.channel.send(roles)
+            return message.channel.send({embeds: [roles]});
         }
     }
 }
@@ -202,7 +202,7 @@ async function guildmember(bot,message,args,p,language) {
         .setThumbnail(message.guild.iconURL({format: "png", dynamic: true ,size: 512}))
         .addField(`${h.guild.member.all}` + message.guild.memberCount,`${h.guild.member.member}` + message.guild.members.cache.filter(member =>!member.user.bot).size + `\n` + `${h.guild.member.bot} ` + message.guild.members.cache.filter(users =>users.user.bot).size  , true)
         .addField(h.status.member + guild.presences.cache.size,`${h.status.online} ` + m.filter(m => m.presence.status === "online").size + `\n` + `${h.status.afk} ` + m.filter(m => m.presence.status === "idle").size + `\n` + `${h.status.dnd} ` + m.filter(m => m.presence.status === "dnd").size +"\n"+ `${h.status.offline} ` + m.filter(m => m.presence.status === "offline").size ,true)
-        message.channel.send({embeds: [gm]})
+        return message.channel.send({embeds: [gm]});
     }).catch((error) => {
         let gm = new Discord.MessageEmbed()
         .setTitle(message.guild.name)
@@ -210,7 +210,7 @@ async function guildmember(bot,message,args,p,language) {
         .setThumbnail(message.guild.iconURL({format: "png", dynamic: true ,size: 512}))
         .addField(`${h.guild.member.all}` + message.guild.memberCount,`${h.guild.member.member}` + message.guild.members.cache.filter(member =>!member.user.bot).size + `\n` + `${h.guild.member.bot} ` + message.guild.members.cache.filter(users =>users.user.bot).size  , true)
         try {gm.addField(h.status.member + guild.presences.cache.size,`${h.status.online} ` + guild.presences.cache.filter(user => user.member.presence.status === 'online').size + `\n` + `${h.status.afk} ` + guild.presences.cache.filter(user => user.member.presence.status === 'idle').size+ `\n` + `${h.status.dnd} ` + guild.presences.cache.filter(user => user.member.presence.status === 'dnd').size +"\n"+ `${h.status.offline} ` + guild.members.cache.filter(user => user.presence.status === 'offline').size ,true) }catch{gm.addField(h.status.member,h.status.error,true)}
-        message.channel.send({embeds: [gm]})
+        return message.channel.send({embeds: [gm]});
     })
     }else{
         if(member) {
@@ -226,7 +226,7 @@ async function guildmember(bot,message,args,p,language) {
             .addField(h.user.status, online + "\n\n**"+h.user.bot +"**\n"+ Bot ,true)
             .addField(h.guild.role + ` ${member2.roles.cache.sort((a,b) => b.position - a.position).map(r => r).length}`,member2.roles.cache.sort((a,b) => b.position - a.position).map(r => r) ,true)
             .setFooter(h.user.footer.user+h.user.footer.data+p+"ui"+h.user.footer.data2)
-            message.channel.send({embeds: [gm]})
+            return message.channel.send({embeds: [gm]});
         }
     }
 }
@@ -236,37 +236,44 @@ async function userinfo(bot,message,args,p,clientDB,language) {
     }else if(language === "en_US") {lang = lan.en_US;h = infoX.en_US}
     if(!message.guild) return;
         var member = null;
-        let user=bot.users.cache.get(args[0])
-        if(message.mentions.users.size) {member = message.mentions.users.first()}else if(args[0] != null) {
+        let user= message.guild.members.cache.get(args[0])
+        if(message.mentions.users.size) {
+            member = message.mentions.users.first()
+            member = message.guild.members.cache.get(member.id)
+        }else if(args[0] != null) {
             if(user) {member = user}}else{member = message.member}
-    if(member){
-      const presence = `${member.presence.status}`
-      const Bott = `${member.user.bot}`
-      let member2 = member
+        let presence = null,Bott = null
+        let time = "(未知)",time2 = "(未知)",clour = "#80ac76"
+        let member2 = member
+        if(member){
+        if(member.presence) {
+            presence = `${member.presence.status}`
+            Bott = `${member.user.bot}`
+            if(member2.presence.guild) {
+            clour= member2.presence.member.roles.highest.color
+            if(member2.presence.guild.joinedAt) {
+            let args = member2.presence.guild.joinedAt.toUTCString().split(" ")
+            if(args[2] == "Jan") {var mon = lang.date.months[1]}else if(args[2] == "Feb") {var mon = lang.date.months[2]}else if(args[2] == "Mar") {var mon = lang.date.months[3]}else if(args[2] == "Apr") {var mon = lang.date.months[4]}else if(args[2] == "May") {var mon = lang.date.months[5]}else if(args[2] == "Jun") {var mon = lang.date.months[6]}else if(args[2] == "Jul") {var mon = lang.date.months[7]}else if(args[2] == "Aug") {var mon = lang.date.months[8]}else if(args[2] == "Sep") {var mon = lang.date.months[9]}else if(args[2] == "Oct") {var mon = lang.date.months[10]}else if(args[2] == "Nov") {var mon = lang.date.months[11]}else if(args[2] == "Dec") {var mon = lang.date.months[12]};if(args[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args[0] == "Sun,") {var week = lang.date.weeks.Sun}
+            let hor = member2.presence.guild.joinedAt.getUTCHours(8);let H = (hor+8) + args[4].substring(2);time = args[3] + " " + H + " " + mon + " " + args[1] +`${lang.date.date} `+week + " UTC+8"
+            }
+            if(member2.user) {
+            let args2 = member2.user.createdAt.toUTCString().split(" ")
+            if(args2[2] == "Jan") {var mon = lang.date.months[1]}else if(args2[2] == "Feb") {var mon = lang.date.months[2]}else if(args2[2] == "Mar") {var mon = lang.date.months[3]}else if(args2[2] == "Apr") {var mon = lang.date.months[4]}else if(args2[2] == "May") {var mon = lang.date.months[5]}else if(args2[2] == "Jun") {var mon = lang.date.months[6]}else if(args2[2] == "Jul") {var mon = lang.date.months[7]}else if(args2[2] == "Aug") {var mon = lang.date.months[8]}else if(args2[2] == "Sep") {var mon = lang.date.months[9]}else if(args2[2] == "Oct") {var mon = lang.date.months[10]}else if(args2[2] == "Nov") {var mon = lang.date.months[11]}else if(args2[2] == "Dec") {var mon = lang.date.months[12]};if(args2[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args2[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args2[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args2[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args2[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args2[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args2[0] == "Sun,") {var week = lang.date.weeks.Sun}
+            let hor2 = member2.user.createdAt.getUTCHours(8);let H2 = (hor2+8) + args2[4].substring(2);time2 = args2[3] + " " + H2 + " " + mon + " " + args2[1] +`${lang.date.date} `+week + " UTC+8"
+            }
+        }
+        }
       if(message.guild.members.cache.has(member.id)) {
       member2 = message.guild.members.cache.get(member.id);}
-    if(Bott === "true") {var Bot = lang.word.yes}else if(Bott === "false") {var Bot = lang.word.no}
-    if(presence === "online") {var online = h.status.online}else if(presence === "idle") {var online = h.status.afk}else if(presence === "dnd") {var online = h.status.dnd}else if(presence === "offline") {var online = h.status.offline}
-    let time = "(未知)",time2 = "(未知)",clour = "#80ac76"
-    if(member2.presence.guild) {
-    clour= member2.presence.member.roles.highest.color
-    if(member2.presence.guild.joinedAt) {
-    let args = member2.presence.guild.joinedAt.toUTCString().split(" ")
-    if(args[2] == "Jan") {var mon = lang.date.months[1]}else if(args[2] == "Feb") {var mon = lang.date.months[2]}else if(args[2] == "Mar") {var mon = lang.date.months[3]}else if(args[2] == "Apr") {var mon = lang.date.months[4]}else if(args[2] == "May") {var mon = lang.date.months[5]}else if(args[2] == "Jun") {var mon = lang.date.months[6]}else if(args[2] == "Jul") {var mon = lang.date.months[7]}else if(args[2] == "Aug") {var mon = lang.date.months[8]}else if(args[2] == "Sep") {var mon = lang.date.months[9]}else if(args[2] == "Oct") {var mon = lang.date.months[10]}else if(args[2] == "Nov") {var mon = lang.date.months[11]}else if(args[2] == "Dec") {var mon = lang.date.months[12]};if(args[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args[0] == "Sun,") {var week = lang.date.weeks.Sun}
-    let hor = member2.presence.guild.joinedAt.getUTCHours(8);let H = (hor+8) + args[4].substring(2);time = args[3] + " " + H + " " + mon + " " + args[1] +`${lang.date.date} `+week + " UTC+8"
-    }
-    if(member2.user) {
-    let args2 = member2.user.createdAt.toUTCString().split(" ")
-    if(args2[2] == "Jan") {var mon = lang.date.months[1]}else if(args2[2] == "Feb") {var mon = lang.date.months[2]}else if(args2[2] == "Mar") {var mon = lang.date.months[3]}else if(args2[2] == "Apr") {var mon = lang.date.months[4]}else if(args2[2] == "May") {var mon = lang.date.months[5]}else if(args2[2] == "Jun") {var mon = lang.date.months[6]}else if(args2[2] == "Jul") {var mon = lang.date.months[7]}else if(args2[2] == "Aug") {var mon = lang.date.months[8]}else if(args2[2] == "Sep") {var mon = lang.date.months[9]}else if(args2[2] == "Oct") {var mon = lang.date.months[10]}else if(args2[2] == "Nov") {var mon = lang.date.months[11]}else if(args2[2] == "Dec") {var mon = lang.date.months[12]};if(args2[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args2[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args2[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args2[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args2[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args2[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args2[0] == "Sun,") {var week = lang.date.weeks.Sun}
-    let hor2 = member2.user.createdAt.getUTCHours(8);let H2 = (hor2+8) + args2[4].substring(2);time2 = args2[3] + " " + H2 + " " + mon + " " + args2[1] +`${lang.date.date} `+week + " UTC+8"
-    }
-}
+    if(Bott === "true") {var Bot = lang.word.yes}else if(Bott === "false") {var Bot = lang.word.no}else{var Bot = lang.word.no}
+    if(presence === "online") {var online = h.status.online}else if(presence === "idle") {var online = h.status.afk}else if(presence === "dnd") {var online = h.status.dnd}else if(presence === "offline") {var online = h.status.offline}else{var online = h.status.offline}
     let joindate = null;let nick = null;
     if(member.id == message.author.id) {joindate = h.user.firstJoin}else{joindate= h.user.lastJoin}
-    let act = null;let gameact = null;let gameing = null;
-    if(member.presence.activities[0] != undefined) {
-    if(member.presence.activities[0].name === "Custom Status") {if(member.presence.activities[0].emoji) {act = member.presence.activities[0].emoji.name+member.presence.activities[0].state}else{act =member.presence.activities[0].state}}else {act = lang.word.none}}else{act = lang.word.none}
-    if(member.presence.activities[1] != undefined || member.presence.activities[0] != undefined) {
+    let act = "(未知)";let gameact = null;let gameing = null;
+    if(member.presence) {
+    if(member.presence && member.presence.activities[0] != undefined) {
+    if(member.presence.activities[0].name === "Custom Status") {if(member.presence.activities[0].emoji) {act = member.presence.activities[0].emoji.name+member.presence.activities[0].state}else{act =member.presence.activities[0].state}}else {act = lang.word.none}}else{act = lang.word.none;gameact = lang.word.none;gameing = ""}
+    if(member.presence.activities && member.presence.activities[1] != undefined || member.presence.activities && member.presence.activities[0] != undefined) {
         if(member.presence.activities[0].name != "Custom Status") {
             let gm = member.presence.activities[0].type
             if(gm == "PLAYING") {gameing = h.user.gaming.Playing}else if(gm == "STREAMING") {gameing = h.user.gaming.Streaming}else if(gm == "LISTENING") {gameing = h.user.gaming.Listening}else if(gm == "WATCHING") {gameing = h.user.gaming.Watching}else{gameing = ""}
@@ -276,14 +283,15 @@ async function userinfo(bot,message,args,p,clientDB,language) {
             if(gm == "PLAYING") {gameing = h.user.gaming.Playing}else if(gm == "STREAMING") {gameing = h.user.gaming.Streaming}else if(gm == "LISTENING") {gameing = h.user.gaming.Listening}else if(gm == "WATCHING") {gameing = h.user.gaming.Watching}else{gameing = ""}
             gameact = member.presence.activities[1].name
             }else{gameact = lang.word.none;gameing = ""}}else{gameact = lang.word.none;gameing = ""}
+        }
     if(member2.nickname == null) {nick = ""}else{nick = "("+member2.nickname+")"}
     Mongo.loadUser(clientDB,member.id).then((user) => {
         if (user === false) {
     const infoEmbed = new Discord.MessageEmbed()
       .setColor( clour )
-      .setTitle(h.user.name +" " + member.username + "#" + member.discriminator + ` ${nick}`,true)
+      .setTitle(h.user.name +" " + member.user.username + "#" + member.user.discriminator + ` ${nick}`,true)
       .setDescription("ID:  " + member.id +`\n[[📄Link]](https://discordapp.com/users/${member.id})` ,true )
-      .setThumbnail(member.displayAvatarURL({format: "png", dynamic: true ,size: 512}), true)
+      .setThumbnail(member.user.displayAvatarURL({format: "png", dynamic: true ,size: 512}), true)
       .addField(h.user.bot , Bot ,true )
       .addField(h.user.status , online ,true)
       .addField(h.user.act, act ,true)
@@ -291,7 +299,8 @@ async function userinfo(bot,message,args,p,clientDB,language) {
       .addField(h.user.joinTime+joindate, `${time}`, false)
       .addField(h.user.createTime, `${time2}`, true)
       .setFooter(h.user.footer.user).setTimestamp()
-      {message.channel.send({embeds: [infoEmbed]})}}else{
+      return message.channel.send({embeds: [infoEmbed]});
+    }else{
         let mary = [user.marry]
         if(mary != "[object Object]" || mary != "") {
             const member=bot.users.cache.get(user.marry)
@@ -316,13 +325,13 @@ async function userinfo(bot,message,args,p,clientDB,language) {
                 role = role+"[智乃開發者]"}
         const infoEmbed = new Discord.MessageEmbed()
         .setColor( clour )
-        .setTitle(h.user.name + member.username + "#" + member.discriminator+` ${nick}` ,true)
+        .setTitle(h.user.name + member.user.username + "#" + member.user.discriminator+` ${nick}` ,true)
         .setDescription(`Role: ${role}\n`+"ID:  " + member.id +`\n[[📄Link]](https://discordapp.com/users/${member.id})`,true )
         .setThumbnail(member.user.displayAvatarURL({format: "png", dynamic: true ,size: 512}), true)
         .addField(h.user.bot , Bot ,true )
         .addField(h.user.status, online ,true)
         .addField(h.user.act, act,true)
-        .addField(h.user.gameAct, gameing + gameact,true)
+        .addField(h.user.gameAct, `${gameing} ${gameact}`,true)
         .addField(h.user.money, user.money.toString() , false)
         .addField(h.user.emotion["?"], mary2 ,true)
         .addField(h.user.host, "឵ ឵឵" + host ,false)
@@ -330,7 +339,7 @@ async function userinfo(bot,message,args,p,clientDB,language) {
         .addField(h.user.joinTime+joindate, `${time}`, false)
         .addField(h.user.createTime, `${time2}`, true)
         .setFooter(h.user.footer.user+h.user.footer.data+p+"card"+h.user.footer.data2).setTimestamp()
-        {message.channel.send({embeds: [infoEmbed]})}
+        return message.channel.send({embeds: [infoEmbed]});
       }}
 )}
 }
@@ -377,7 +386,7 @@ async function server(bot,message,ag,language) {
     infoEmbed.addField(`\n${h.guild.emoji.gif}\n`,emojilist2.toString(),true)
     infoEmbed.addField(h.guild.verification, guild.verificationLevel )
     infoEmbed.addField(h.guild.createTime, time )
-    message.channel.send({embeds:[infoEmbed]})
+    return message.channel.send({embeds:[infoEmbed]});
 }, 500);
 }
 const helpX = require('../language/help.json');
@@ -388,10 +397,10 @@ async function botinfo(bot,message,ag,language) {
     }else if(language === "en_US") {lang = lan.en_US;h = infoX.en_US;help= helpX.en_US}
     let Today=new Date();
     let member = bot.user
-    const member2 = message.guild.members.cache.get(bot.user.id);
+    const member2 = message.guild.me
     let args = message.guild.me.joinedAt.toUTCString().split(" ")
     if(args[2] == "Jan") {var mon = lang.date.months[1]}else if(args[2] == "Feb") {var mon = lang.date.months[2]}else if(args[2] == "Mar") {var mon = lang.date.months[3]}else if(args[2] == "Apr") {var mon = lang.date.months[4]}else if(args[2] == "May") {var mon = lang.date.months[5]}else if(args[2] == "Jun") {var mon = lang.date.months[6]}else if(args[2] == "Jul") {var mon = lang.date.months[7]}else if(args[2] == "Aug") {var mon = lang.date.months[8]}else if(args[2] == "Sep") {var mon = lang.date.months[9]}else if(args[2] == "Oct") {var mon = lang.date.months[10]}else if(args[2] == "Nov") {var mon = lang.date.months[11]}else if(args[2] == "Dec") {var mon = lang.date.months[12]};if(args[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args[0] == "Sun,") {var week = lang.date.weeks.Sun}
-    let hor = member2.presence.guild.joinedAt.getUTCHours(8);let H = (hor+8) + args[4].substring(2);let time = args[3] + " " + H + " " + mon + " " + args[1] +`${lang.date.date} `+week + " UTC+8"
+    let hor = member2.joinedAt.getUTCHours(8);let H = (hor+8) + args[4].substring(2);let time = args[3] + " " + H + " " + mon + " " + args[1] +`${lang.date.date} `+week + " UTC+8"
     let args2 = member2.user.createdAt.toUTCString().split(" ")
     if(args2[2] == "Jan") {var mon = lang.date.months[1]}else if(args2[2] == "Feb") {var mon = lang.date.months[2]}else if(args2[2] == "Mar") {var mon = lang.date.months[3]}else if(args2[2] == "Apr") {var mon = lang.date.months[4]}else if(args2[2] == "May") {var mon = lang.date.months[5]}else if(args2[2] == "Jun") {var mon = lang.date.months[6]}else if(args2[2] == "Jul") {var mon = lang.date.months[7]}else if(args2[2] == "Aug") {var mon = lang.date.months[8]}else if(args2[2] == "Sep") {var mon = lang.date.months[9]}else if(args2[2] == "Oct") {var mon = lang.date.months[10]}else if(args2[2] == "Nov") {var mon = lang.date.months[11]}else if(args2[2] == "Dec") {var mon = lang.date.months[12]};if(args2[0] == "Mon,") {var week = lang.date.weeks.Mon}else if(args2[0] == "Tue,") {var week = lang.date.weeks.Tue}else if(args2[0] == "Wed,") {var week = lang.date.weeks.Wed}else if(args2[0] == "Thu,") {var week = lang.date.weeks.Thur}else if(args2[0] == "Fri,") {var week = lang.date.weeks.Fir}else if(args2[0] == "Sat,") {var week = lang.date.weeks.Sat}else if(args2[0] == "Sun,") {var week = lang.date.weeks.Sun}
     let hor2 = member2.user.createdAt.getUTCHours(8);let H2 = (hor2+8) + args2[4].substring(2);let time2 = args2[3] + " " + H2 + " " + mon + " " + args2[1] +`${lang.date.date} `+week + " UTC+8"
@@ -405,12 +414,12 @@ async function botinfo(bot,message,ag,language) {
     .addField(h.bot.prefix, prefix ,true)
     .addField(h.bot.version, `${version}` ,true)
     .addField(h.bot.from, "JS(JavaScript) / Discord.js")
-    .addField(h.bot.from_version+" node/discord.js", "14.16.0(win7 32bit) / 12.5.1")
+    .addField(h.bot.from_version+" node.js/discord.js", "16.6.1(win7 32bit) / 13.1.0")
     .addField(h.bot.guild, `${bot.guilds.cache.size}` ,true) 
     .addField(h.bot.bootup, day+lang.date.day+hour + lang.time.hour + (Today.getMinutes() - Open.getMinutes()) + lang.time.minute ,true)
     .addField(h.bot.inviteTime, `${time}`)
     .addField(h.bot.createTime, `${time2}`, true)
     .setTimestamp()
     .setFooter(help.word.creater+help.word.me, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png')
-    {message.channel.send({embeds: [infoEmbed]})};
+    return message.channel.send({embeds: [infoEmbed]});
 }

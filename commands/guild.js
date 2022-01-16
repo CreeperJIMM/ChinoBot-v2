@@ -23,33 +23,33 @@ module.exports= {
           }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
           if(!message.guild) return message.channel.send(l.error.No_DM)
             if(args[0] == "text") {
-                text2(bot,message,clientDB,language)
+              return text2(bot,message,clientDB,language)
             }else if(args[0] == "voice") {
-                voice(bot,message,clientDB,language)
+              return voice(bot,message,clientDB,language)
             }else if(args[0] == "join") {
-                Join(bot,message,clientDB,language,args, nubmer, ...text)
+              return Join(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "leave") {
-                leave(bot,message,clientDB,language,args, nubmer, ...text)
+              return leave(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "rank") {
-                rank(bot,message,clientDB,language,args, nubmer, ...text)
+              return rank(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "language") {
-                lang(bot,message,clientDB,language,args, nubmer, ...text)
+              return lang(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "lang") {
-                lang(bot,message,clientDB,language,args, nubmer, ...text)
+              return lang(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "normal") {
-                nor(bot,message,clientDB,language,args, nubmer, ...text)
+              return nor(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "snipe") {
-                setsnipe(bot,message,clientDB,language,p,args, nubmer, ...text)
+              return setsnipe(bot,message,clientDB,language,p,args, nubmer, ...text)
             }else if(args[0] == "safe") {
-                setsafes(bot,message,clientDB,language,p,args, nubmer, ...text)
+              return setsafes(bot,message,clientDB,language,p,args, nubmer, ...text)
             }else if(args[0] == "react") {
-                setreact(bot,message,clientDB,language,p,args, nubmer, ...text)
+              return setreact(bot,message,clientDB,language,p,args, nubmer, ...text)
             }else if(args[0] == "slash") {
-                setslash(bot,message,clientDB,language,p,args, nubmer, ...text)
+              return setslash(bot,message,clientDB,language,p,args, nubmer, ...text)
             }else if(args[0] == "prefix") {
-                setprefix(bot,message,clientDB,language,p,args, nubmer, ...text)
+              return setprefix(bot,message,clientDB,language,p,args, nubmer, ...text)
             }else if(args[0] == "detect") {
-                  detects(bot,message,clientDB,language,args, nubmer, ...text)
+              return detects(bot,message,clientDB,language,args, nubmer, ...text)
             }else if(args[0] == "help") {
                 let sethelpEmbed = new Discord.MessageEmbed()
                 .setTitle(k.setup.help)
@@ -58,7 +58,7 @@ module.exports= {
                 sethelpEmbed.addField(k.setup.cmd.help , k.setup.cmd.help2)
                 sethelpEmbed.addField(k.setup.cmd.other,k.setup.cmd.other2)
                 sethelpEmbed.addField(k.setup.cmd.set,k.setup.cmd.set2)
-                message.channel.send({embeds:[sethelpEmbed]});
+                return message.channel.send({embeds:[sethelpEmbed]});
             }else{
               if(!message.guild) return message.channel.send(l.error.No_DM)
               loadGuild(clientDB,message.guild.id).then((ser) => {
@@ -68,9 +68,7 @@ module.exports= {
                         name: [message.guild.name],
                         language: {},
                         snipe: [],
-                        snipeid: {},
-                        snipefile: {},
-                        snipetime: {},
+                        edit: [],
                         rank: {},
                         rank2: [],
                         join: {},
@@ -89,9 +87,12 @@ module.exports= {
                       ];
                     let dbo=clientDB.db("mydb")
                     dbo.collection("guilds").insertMany(myobj, function(err, res) {
-                      if (err) throw err;})
-                     message.channel.send(k.setup.success)
-                    }else{message.channel.send(k.setup.used)}
+                      if (err) throw err;
+                    })
+                      return message.channel.send(k.setup.success);
+                    }else{
+                      return message.channel.send(k.setup.used);
+                    }
                 })
             }
         }
@@ -109,7 +110,7 @@ module.exports= {
                 .setTitle(k.help.text.title)
                 .setDescription(k.help.text.desc)
                 .setImage('https://cdn.discordapp.com/attachments/611040945495998464/746265308083519488/a59e501bd38b6299.gif')
-                message.channel.send({embeds: [textEmbed]});
+                return message.channel.send({embeds: [textEmbed]});
             }
         }
     },
@@ -126,7 +127,7 @@ module.exports= {
                 .setTitle(k.help.voice.title)
                 .setDescription(k.help.voice.desc)
                 .setImage('https://cdn.discordapp.com/attachments/611040945495998464/746265305042387074/1bca1519d1f116e3.gif')
-                message.channel.send({embeds: [voiceEmbed]});
+                return message.channel.send({embeds: [voiceEmbed]});
             }
         }
     },
@@ -142,7 +143,7 @@ module.exports= {
               let voiceEmbed = new Discord.MessageEmbed()
               .setTitle(k.help.join.title)
               .setDescription(k.help.join.desc)
-              message.channel.send({embeds: [voiceEmbed]});
+              return message.channel.send({embeds: [voiceEmbed]});
           }
       }
   },
@@ -158,7 +159,7 @@ module.exports= {
             let voiceEmbed = new Discord.MessageEmbed()
             .setTitle(k.help.leave.title)
             .setDescription(k.help.leave.desc)
-            message.channel.send({embeds: [voiceEmbed]});
+            return message.channel.send({embeds: [voiceEmbed]});
             }
         }
     },
@@ -200,8 +201,142 @@ module.exports= {
                   Channel.send("<@" + message.author.id + "> "+k.text.help)
                   user.text.push(Channel.id)
                   writeGuild(clientDB,message.guild.id,user)
-        })}else{message.channel.send(k.text.No_create)}}});
-        }
+        })}else{
+          return message.channel.send(k.text.No_create)}
+        }})
+      }
+    },
+    "thcreate":{
+      description: {zh_TW:"新建討論串頻道\n(必須在主動態頻道內使用)",en_US:"create dynamic channel.\n(Please use this command in master dynamic channel)",ja_JP:""},
+      authority: "everyone",
+      instructions: "create",
+      category: "guild",
+      vote: false,
+      help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+          let l = lan.zh_TW,k = gameX.zh_TW
+          if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+          }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+          if(!message.guild) return message.channel.send(l.error.No_DM)
+              loadGuild(clientDB,message.guild.id).then((user) => {
+                if (user === false) {
+                  message.channel.send(k.word.No_setup) }else{
+                if(user.text2.indexOf(message.channel.id) != "-1") {
+                  message.channel.send(k.word.crateing)
+                  setTimeout(() => {
+                    let name = message.author.username;
+                    let gid = message.channel.parentId
+                    let site = message.channel.parent.children.size
+                      message.channel.threads.create({
+                        name: name + k.text.channel,
+                        autoArchiveDuration: 1440,
+                        reason: '請用 `cr!thclose` 關閉',
+                      }).then((thread) =>{
+                        thread.send(`<@${message.author.id}> `+k.text.crated+"\n使用 `cr!thsave` 將討論串存檔\n使用 `cr!thclose` 刪除討論串")
+                        let thobj = {id: thread.id,owner: message.author.id,saved: false}
+                        if(!user.thread) user.thread = []
+                        user.thread.push(thobj)
+                        writeGuild(clientDB,message.guild.id,user)
+                    })              
+                  }, 800);
+              }else{
+          return message.channel.send(k.text.No_create)}
+        }})
+      }
+    },
+    "thclose":{
+      description: {zh_TW:"關閉你的動態頻道\n(必須在你個人的頻道使用)",en_US:"Close your dynmic channel\n(Please use this command in your own channel.)",ja_JP:""},
+      authority: "own",
+      instructions: "clo",
+      category: "guild",
+      vote: false,
+      help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+          let l = lan.zh_TW,k = gameX.zh_TW
+          if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+          }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+          if(!message.guild) return message.channel.send(l.error.No_DM)
+          if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
+          loadGuild(clientDB,message.guild.id).then(async(user) => {
+            if (user === false) {
+              return message.channel.send(k.word.No_setup)
+            }else{
+              if(user.text2.indexOf(message.channel.parentId) != "-1") {
+              if(message.channel.type.includes("_THREAD")) {
+              let thread = message.channel,hasperm = false,index = null
+              if(!user.thread) return message.channel.send(k.text.No_create)
+              user.thread.forEach((thread2,index2) => {
+                if(thread2.id == thread.id) {
+                  if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
+                  if(message.channel.parent.permissionOverwrites.cache.get(message.author.id) || thread2.owner == message.author.id) {
+                  hasperm = true,index = index2
+                  }else{
+                    return message.channel.send(k.text.No_owner)
+                  }
+                }
+              });
+              if(!hasperm) return;
+              thread.send(k.text.close)
+              setTimeout(() => {
+              thread.delete("The user delete this thread.")                
+              }, 2000);
+              user.thread.splice(index,1)
+              writeGuild(clientDB, message.guild.id, user);
+              return;
+              }else{
+                return message.channel.send("無法刪除不是討論串的頻道")         
+              }
+            }else{
+              return message.channel.send(k.text.No_create)}
+            }
+        })}
+    },
+    "thsave":{
+      description: {zh_TW:"關閉你的動態頻道\n(必須在你個人的頻道使用)",en_US:"Close your dynmic channel\n(Please use this command in your own channel.)",ja_JP:""},
+      authority: "own",
+      instructions: "clo",
+      category: "guild",
+      vote: false,
+      help: false,
+        fun: function (bot, message, p,clientDB,language,args, ...ag) { 
+          let l = lan.zh_TW,k = gameX.zh_TW
+          if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
+          }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
+          if(!message.guild) return message.channel.send(l.error.No_DM)
+          if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
+          loadGuild(clientDB,message.guild.id).then(async(user) => {
+            if (user === false) {
+              return message.channel.send(k.word.No_setup)
+            }else{
+              if(user.text2.indexOf(message.channel.parentId) != "-1") {
+              if(message.channel.type.includes("_THREAD")) {
+              let thread = message.channel,hasperm = false,index = null
+              if(!user.thread) return message.channel.send(k.text.No_create)
+              user.thread.forEach((thread2,index2) => {
+                if(thread2.id == thread.id) {
+                  if(!message.guild.me.permissions.has(['MANAGE_CHANNELS'])) return message.channel.send(l.error.No_perm_me + l.prem.manage_channel)
+                  if(message.channel.parent.permissionOverwrites.cache.get(message.author.id) || thread2.owner == message.author.id) {
+                  hasperm = true,index = index2
+                  }else{
+                    return message.channel.send(k.text.No_owner)
+                  }
+                }
+              });
+              if(!hasperm) return;
+              thread.send("🔄存檔中...\nSaving....")
+              setTimeout(() => {
+              thread.setArchived()              
+              }, 1500);
+              user.thread[index].saved = true
+              writeGuild(clientDB, message.guild.id, user);
+              return;
+              }else{
+                return message.channel.send("無法刪除不是討論串的頻道")         
+              }
+            }else{
+              return message.channel.send(k.text.No_create)}
+            }
+        })}
     },
     "clo":{
       description: {zh_TW:"關閉你的動態頻道\n(必須在你個人的頻道使用)",en_US:"Close your dynmic channel\n(Please use this command in your own channel.)",ja_JP:""},
@@ -219,8 +354,8 @@ module.exports= {
           if(!message.channel.permissionOverwrites.cache.get(message.author.id)) return message.channel.send(k.text.No_owner)
           loadGuild(clientDB,message.guild.id).then(async(user) => {
             if (user === false) {
-                  message.channel.send(k.word.No_setup)
-                }else{
+              return message.channel.send(k.word.No_setup)
+            }else{
                   if(user.text.indexOf(message.channel.id) != "-1") {
                   await message.channel.send(k.text.close)
                   var array = user.text
@@ -228,8 +363,9 @@ module.exports= {
                   if (index> -1) {array.splice(index, 1);}
                   await writeGuild(clientDB,message.guild.id,user)
                   message.channel.delete()
+                  return;
                 }else{
-                    message.channel.send(k.text.No_text)
+                  return message.channel.send(k.text.No_text);
                   }
             }
         })}
@@ -279,13 +415,15 @@ module.exports= {
                       message.channel.permissionOverwrites.create(message.guild.me ,{
                         SEND_MESSAGES: null,
                         VIEW_CHANNEL: null})
-                    message.channel.send(k.text.set.open)
+                      return message.channel.send(k.text.set.open)
                   }else if(args[0] == "nsfw") {
                     if(!message.channel.nsfw) {message.channel.setNSFW(true,"動態權限設置")}else{message.channel.setNSFW(false,"動態權限設置")}
-                    message.channel.send(k.text.set.setting)
-                  }else{message.channel.send(k.text.help2)}
+                    return message.channel.send(k.text.set.setting)
+                  }else{
+                    return message.channel.send(k.text.help2)
+                  }
               }else{
-                  message.channel.send(k.text.No_text)
+                return message.channel.send(k.text.No_text);
                 }
       })}
   },
@@ -316,9 +454,11 @@ module.exports= {
                 ms.edit({embeds: [codeEmbed2]})
                 code.add(message.author.id)
                 collected.first().delete()
+                return;
             }).catch(err => {
               let error = new Discord.MessageEmbed().setTitle(k.code.error).setDescription(k.code.tryagain).setFooter(k.code.use+message.author.username)
               ms.edit({embeds: [error]})
+              return;
                   })
               })
         }
@@ -336,45 +476,29 @@ module.exports= {
         }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
         if(!message.guild) return message.channel.send(l.error.No_DM);
         if(!message.member.permissions.has(['MENTION_EVERYONE'])) if(message.author.id == '546144403958398988') {}else{return message.channel.send("❌你沒有足夠的權限去察看這個.")}
-        loadGuild(clientDB,message.guild.id).then((user) => {
-          if (user === false) {return message.channel.send(k.snipe.no_support)}
-          var text = JSON.stringify(user.snipe);var text2 = text.toString();text2 = JSON.parse(text2);
-          var textid = JSON.stringify(user.snipeid);var textid2 = textid.toString();textid2 = JSON.parse(textid2);
-          var texttime = JSON.stringify(user.snipetime);var texttime2 = texttime.toString();texttime2 = JSON.parse(texttime2);
-          var textfile = JSON.stringify(user.snipefile);var textfile2 = textfile.toString();textfile2 = JSON.parse(textfile2);
-          if(text2.t1 == "[object Object]" || text2.t1 == "") return message.channel.send(k.snipe.no_snipe)
-          const member=bot.users.cache.get(textid2.t1)
-          const member2=bot.users.cache.get(textid2.t2)
-          const member3=bot.users.cache.get(textid2.t3)
-          const member4=bot.users.cache.get(textid2.t4)
-          const member5=bot.users.cache.get(textid2.t5)
-          const member6=bot.users.cache.get(textid2.t6)
-          const member7=bot.users.cache.get(textid2.t7)
-          const member8=bot.users.cache.get(textid2.t8)
-          const member9=bot.users.cache.get(textid2.t9)
-          const member10=bot.users.cache.get(textid2.t10)
-          if(member) {
+          loadGuild(clientDB,message.guild.id).then((user) => {
+            if (user === false) {return message.channel.send(k.snipe.no_support)}
+            if(user.language.setting) {
+              if(!user.language.setting.snipe) return message.channel.send(k.snipe.close_snipe)
+            }
+            if(user.snipe.t1) return message.channel.send("⚠此群組的snipe資料為舊版本!!\n請刪除一則訊息觸發更新!")
+            if(!user.snipe[0]) return message.channel.send(k.snipe.no_snipe)
+            let member = user.snipe[0].user
+            let time = new Date(user.snipe[0].time).toLocaleString()
             let snipe = new Discord.MessageEmbed()
             .setColor(message.member.roles.highest.color)
-            .setAuthor(member.username + "#" + member.discriminator, member.displayAvatarURL({format: "webp", dynamic: true ,size: 512}))
-            .setFooter(texttime2.t1)
-           var file = JSON.stringify(textfile2.t1)
-           var file2 = file.toString()
-           file2 = JSON.parse(file2);
-             if(file2.file != "無") snipe.setImage(file2.file)
-              snipe.setDescription(text2.t1)
-              if(member2) {snipe.addField(k.snipe.last+"2"+k.snipe.message +" - " + member2.username + "#" + member2.discriminator, text2.t2 +"\n"+texttime2.t2)}
-              if(member3) {snipe.addField(k.snipe.last+"3"+k.snipe.message +" - " + member3.username + "#" + member3.discriminator, text2.t3+"\n"+texttime2.t3)}
-              if(member4) {snipe.addField(k.snipe.last+"4"+k.snipe.message +" - "+ member4.username + "#" + member4.discriminator, text2.t4+"\n"+texttime2.t4)}
-              if(member5) {snipe.addField(k.snipe.last+"5"+k.snipe.message +" - "+ member5.username + "#" + member5.discriminator, text2.t5+"\n"+texttime2.t5)}
-              if(member6) {snipe.addField(k.snipe.last+"6"+k.snipe.message+" - "+ member6.username + "#" + member6.discriminator, text2.t6+"\n"+texttime2.t6)}
-              if(member7) {snipe.addField(k.snipe.last+"7"+k.snipe.message+" - "+ member7.username + "#" + member7.discriminator, text2.t7+"\n"+texttime2.t7)}
-              if(member8) {snipe.addField(k.snipe.last+"8"+k.snipe.message +" - "+ member8.username + "#" + member8.discriminator, text2.t8+"\n"+texttime2.t8)}
-              if(member9) {snipe.addField(k.snipe.last+"9"+k.snipe.message +" - "+ member9.username + "#" + member9.discriminator, text2.t9+"\n"+texttime2.t9)}
-              if(member10) {snipe.addField(k.snipe.last+"10"+k.snipe.message +" - "+ member10.username + "#" + member10.discriminator, text2.t10+"\n"+texttime2.t10)}
-              if(file2.file != "無") {
-                snipe.addField("\n\n"+k.snipe.file+" \n", `[${file2.name}](${file2.file})`)}
-            message.channel.send({embeds: [snipe]})}})
+            .setAuthor(member.name + "#" + member.tag, `https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.png?size=2048`)
+            .setFooter(time+`\n請使用 cr!snipe [數值]\n來查閱刪除訊息的附件(若有的話)`)
+            .setDescription(user.snipe[0].message)
+            let num = 1
+            user.snipe.shift()
+            user.snipe.forEach(snipes => {
+              num++
+              let times = new Date(snipes.time).toLocaleString()
+              snipe.addField(k.snipe.last+num+k.snipe.message +` - ${snipes.user.name}#${snipes.user.tag}`,`${snipes.message}\n${times}`)
+            });
+            return message.channel.send({embeds: [snipe]});
+            })
       }
     },
     "snipe":{
@@ -389,63 +513,36 @@ module.exports= {
         if(language === "zh_TW") {l = lan.zh_TW;k = gameX.zh_TW}else if(language === "zh_CN") {l = lan.zh_CN;k = gameX.zh_CN}else if(language === "ja_JP") {l = lan.ja_JP;k = gameX.ja_JP
         }else if(language === "en_US") {l = lan.en_US;k = gameX.en_US}
         if(!message.guild) return message.channel.send(l.error.No_DM);
-        if(args[0] == " " || args[0] == null) {
+        if(message) {
+          return message.channel.send(k.snipe.discord_snipe)
+        }
+        let num = 0
+        if(args[0]) {
+          if(!isNaN(parseInt(args[0]))) num = parseInt(args[0])-1
+        }
           loadGuild(clientDB,message.guild.id).then((user) => {
             if (user === false) {return message.channel.send(k.snipe.no_support)}
             if(user.language.setting) {
               if(!user.language.setting.snipe) return message.channel.send(k.snipe.close_snipe)
             }
-            var text = JSON.stringify(user.snipe);var text2 = text.toString();text2 = JSON.parse(text2);
-            var textid = JSON.stringify(user.snipeid);var textid2 = textid.toString();textid2 = JSON.parse(textid2);
-            var texttime = JSON.stringify(user.snipetime);var texttime2 = texttime.toString();texttime2 = JSON.parse(texttime2);
-            var textfile = JSON.stringify(user.snipefile);var textfile2 = textfile.toString();textfile2 = JSON.parse(textfile2);
-            if(text2.t1 == "[object Object]" || text2.t1 == "") return message.channel.send(k.snipe.no_snipe)
-            const member=bot.users.cache.get(textid2.t1)
-            if(member) {
-              let snipe = new Discord.MessageEmbed()
-              .setColor(message.member.roles.highest.color)
-              .setAuthor(member.username + "#" + member.discriminator, member.displayAvatarURL({format: "webp", dynamic: true ,size: 512}))
-              .setFooter(texttime2.t1)
-             var file = JSON.stringify(textfile2.t1)
-             var file2 = file.toString()
-             file2 = JSON.parse(file2);
-               if(file2.file != "無") snipe.setImage(file2.file)
-                snipe.setDescription(text2.t1)
-                if(file2.file != "無") {
-                  snipe.addField("\n📎附件 \n", `[${file2.name}](${file2.file})`)}
-              message.channel.send({embeds: [snipe]})}})
-          }else{
-          if(isNaN(args[0]) === true) {return message.channel.send(l.error.type_number)}
-          if(args[0] > 10) {return message.channel.send(l.error.less_then+"10")}
-          loadGuild(clientDB,message.guild.id).then((user) => {
-            if (user === false) {return message.channel.send(k.snipe.no_support)}
-            var text = JSON.stringify(user.snipe);var text2 = text.toString();text2 = JSON.parse(text2);
-            var textid = JSON.stringify(user.snipeid);var textid2 = textid.toString();textid2 = JSON.parse(textid2);
-            if(text2.t1 == "[object Object]" || text2.t1 == "") return message.channel.send(k.snipe.no_snipe)
-            var texttime = JSON.stringify(user.snipetime);var texttime2 = texttime.toString();texttime2 = JSON.parse(texttime2);
-            var textfile = JSON.stringify(user.snipefile);var textfile2 = textfile.toString();textfile2 = JSON.parse(textfile2);
-            if(args[0] == "1") {var text0 = text2.t1}else if(args[0] == "2") {var text0 = text2.t2}else if(args[0] == "3") {var text0 = text2.t3}else if(args[0] == "4") {var text0 = text2.t4}else if(args[0] == "5") {var text0 = text2.t5}else if(args[0] == "6") {var text0 = text2.t6}else if(args[0] == "7") {var text0 = text2.t7}else if(args[0] == "8") {var text0 = text2.t8}else if(args[0] == "9") {var text0 = text2.t9}else if(args[0] == "10") {var text0 = text2.t10}      
-            if(args[0] == "1") {var text1 = textid2.t1}else if(args[0] == "2") {var text1 = textid2.t2}else if(args[0] == "3") {var text1 = textid2.t3}else if(args[0] == "4") {var text1 = textid2.t4}else if(args[0] == "5") {var text1 = textid2.t5}else if(args[0] == "6") {var text1 = textid2.t6}else if(args[0] == "7") {var text1 = textid2.t7}else if(args[0] == "8") {var text1 = textid2.t8}else if(args[0] == "9") {var text1 = textid2.t9}else if(args[0] == "10") {var text1 = textid2.t10} 
-            if(args[0] == "1") {var text22 = texttime2.t1}else if(args[0] == "2") {var text22 = texttime2.t2}else if(args[0] == "3") {var text22 = texttime2.t3}else if(args[0] == "4") {var text22 = texttime2.t4}else if(args[0] == "5") {var text22 = texttime2.t5}else if(args[0] == "6") {var text22 = texttime2.t6}else if(args[0] == "7") {var text22 = texttime2.t7}else if(args[0] == "8") {var text22 = texttime2.t8}else if(args[0] == "9") {var text22 = texttime2.t9}else if(args[0] == "10") {var text22 = texttime2.t10} 
-            if(args[0] == "1") {var text3 = textfile2.t1}else if(args[0] == "2") {var text3 = textfile2.t2}else if(args[0] == "3") {var text3 = textfile2.t3}else if(args[0] == "4") {var text3 = textfile2.t4}else if(args[0] == "5") {var text3 = textfile2.t5}else if(args[0] == "6") {var text3 = textfile2.t6}else if(args[0] == "7") {var text3 = textfile2.t7}else if(args[0] == "8") {var text3 = textfile2.t8}else if(args[0] == "9") {var text3 = textfile2.t9}else if(args[0] == "10") {var text3 = textfile2.t10}
-            if(text0 == "[object Object]" || text0 == " " || text0 == null) return message.channel.send(k.snipe.no_fond +args[0]+k.snipe.message2)
-            if(text1 == "[object Object]" || text1 == " "|| text1 == null) return message.channel.send(k.snipe.no_fond +args[0]+k.snipe.message2)
-            if(text22 == "[object Object]" || text22 == " "|| text22 == null) return message.channel.send(k.snipe.no_fond +args[0]+k.snipe.message2)
-            const member=bot.users.cache.get(text1)
-            if(member) {
-              let snipe = new Discord.MessageEmbed()
-              .setColor(message.member.roles.highest.color)
-              .setAuthor(member.username + "#" + member.discriminator, member.displayAvatarURL({format: "webp", dynamic: true ,size: 512}))
-              .setFooter(text22)
-             var file = JSON.stringify(text3)
-             var file2 = file.toString()
-             file2 = JSON.parse(file2);
-               if(file2.file != "無") snipe.setImage(file2.file)
-                snipe.setDescription(text0)
-                if(file2.file != "無") {
-                  snipe.addField("\n"+k.snipe.file2+" \n", `[${file2.name}](${file2.file})`)}
-              message.channel.send({embeds: [snipe]})
-            }})}
+            if(user.snipe.t1) return message.channel.send("⚠此群組的snipe資料為舊版本!!\n請刪除一則訊息觸發更新!")
+            if(!user.snipe[0]) return message.channel.send(k.snipe.no_snipe)
+            if(num > 15) return message.channel.send(l.error.less_then+`**16**!`)
+            if(!user.snipe[num]) return message.channel.send(k.snipe.no_fond+(num+1)+k.snipe.message2)
+            let member = user.snipe[num].user
+            let time = new Date(user.snipe[num].time).toLocaleString()
+            let snipe = new Discord.MessageEmbed()
+            .setColor(message.member.roles.highest.color)
+            .setAuthor(member.name + "#" + member.tag, `https://cdn.discordapp.com/avatars/${member.id}/${member.avatar}.png?size=2048`)
+            .setFooter(time+`\n`+k.snipe.last+(num+1)+k.snipe.message)
+            .setDescription(user.snipe[num].message)
+            user.snipe[num].file.forEach(file => {
+              if(file.file != "無") snipe.setImage(file.file)
+              if(file.file != "無") {
+                snipe.addField("\n📎附件 \n", `[${file.name}](${file.file})`)}
+            });
+            return message.channel.send({embeds: [snipe]});
+            })
           }
     },
     "server":{
@@ -465,15 +562,13 @@ module.exports= {
           let args = message.channel.guild.createdAt.toUTCString().split(" ")
           if(args[2] == "Jan") {var mon = l.date.months[1]}else if(args[2] == "Feb") {var mon = l.date.months[2]}else if(args[2] == "Mar") {var mon = l.date.months[3]}else if(args[2] == "Apr") {var mon = l.date.months[4]}else if(args[2] == "May") {var mon = l.date.months[5]}else if(args[2] == "Jun") {var mon = l.date.months[6]}else if(args[2] == "Jul") {var mon = l.date.months[7]}else if(args[2] == "Aug") {var mon = l.date.months[8]}else if(args[2] == "Sep") {var mon = l.date.months[9]}else if(args[2] == "Oct") {var mon = l.date.months[10]}else if(args[2] == "Nov") {var mon = l.date.months[11]}else if(args[2] == "Dec") {var mon = l.date.months[12]};if(args[0] == "Mon,") {var week = l.date.weeks.Mon}else if(args[0] == "Tue,") {var week = l.date.weeks.Tue}else if(args[0] == "Wed,") {var week = l.date.weeks.Wed}else if(args[0] == "Thu,") {var week = l.date.weeks.Thur}else if(args[0] == "Fri,") {var week = l.date.weeks.Fir}else if(args[0] == "Sat,") {var week = l.date.weeks.Sat}else if(args[0] == "Sun,") {var week = l.date.weeks.Sun}
           let hor = message.channel.guild.createdAt.getUTCHours(8);let H = (hor+8) + args[4].substring(2);let time = args[3] + " " + H + " " + mon + " " + args[1] +`${l.date.date} `+week + " UTC+8"
-          var text = JSON.stringify(user.snipe);var text2 = text.toString();text2 = JSON.parse(text2);
-          var textid = JSON.stringify(user.snipeid);var textid2 = textid.toString();textid2 = JSON.parse(textid2);
-          if(text2.t1 == "[object Object]" || text2.t1 == "" || text2.t1 == null) {var snipe = "沒有"}else{var snipe = text2.t1}
+          let snipeid = user.snipe[0].user.id,snipe = user.snipe[0].message
           let server = new Discord.MessageEmbed()
           .setColor(message.member.roles.highest.color)
           .setTitle( message.guild.name + k.server.title)
           .setDescription("ID:  " + message.guild.id)
           if(user.language.lan) {if(user.language.lan == "zh_TW") {server.addField(k.server.lang, "繁體中文",true)}else if(user.language.lan == "en_US") {server.addField(k.server.lang, "English",true)}else if(user.language.lan == "ja_JP") {server.addField(k.server.lang, "日本語",true)}else if(user.language.lan == "zh_CN") {server.addField(k.server.lang, "简体中文",true)}}else{server.addField(k.server.lang, k.server.default+"(中文)",true)}
-          server.addField(k.server.delmeg," <@" + textid2.t1 + "> \n◆"+snipe,true)
+          server.addField(k.server.delmeg," <@" + snipeid + "> \n◆"+snipe,true)
           server.addField(k.server.member, message.guild.memberCount.toString(),true)
           try{server.addField(k.server.owner," <@" + message.guild.owner.user.id + "> \n◆" + `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`,true)}catch{server.addField(k.server.owner,"發生錯誤QwQ",true)}
           if(user.language.run) {if(user.language.run == "1") {server.addField(k.server.detect, "智乃小幫手#5407",true)}else if(user.language.run == "2") {server.addField(k.server.detect, "智乃小幫手2#5127",true)}}else{server.addField(k.server.detect, k.server.default,true)}

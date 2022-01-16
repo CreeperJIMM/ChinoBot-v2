@@ -52,6 +52,7 @@ module.exports = {
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.chino}${h.word.ordered2} ${Chino} ${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
                                     msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Chino", "No", rp) });
+                                    return;
                                 })
                             })
                             if (user2.chino > 10) {
@@ -62,9 +63,7 @@ module.exports = {
                     }
                 })
             } else {
-                if(msg.channel) {
-                    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-                    .setColor("#E12323").setFooter("若有不便請見諒 > <");return msg.channel.send(Coppa)}
+
                     Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                         if (user2 === false) {
                         msg.channel.send(l.error.Try_again);
@@ -94,7 +93,9 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.chino}${h.word.ordered2}${Chino}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [chino18Embed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Chino", "Yes", rp) })
+                                    msg.channel.send({embeds: [chino18Embed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Chino", "Yes", rp) 
+                                    return;
+                                })
                                     if (user2.chino > 10) {
                                         chino10(bot, msg,clientDB);
                                         chino(bot, msg,clientDB);
@@ -133,9 +134,9 @@ module.exports = {
                                 user2.money = (user2.money - 25)
                             msg.channel.send("☕" + h.word.ordered + h.role.cocoa + "\n" + h.word.cost + "`25`$  " + h.word.last + " `" + user2.money + "`$")
                             Mongo.writeUser(clientDB,msg.author.id,user2) 
-                            fs.readFile('./data.json', function(err, userInfo) {
-                                if (err) {
-                                    console.log(l.error.Run_Command_error, err);
+                            Mongo.loaddata(clientDB) .then((user) => {
+                                if(user === false) {
+                                    console.log("錯誤!", err);
                                     bot.channels.cache.get(`746185201675141241`).send(`錯誤!` + err);
                                 }
                                 user.data.Cocoa++
@@ -150,16 +151,16 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.cocoa}${h.word.ordered2}${Cocoa}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Cocoa", "No", rp) })
+                                    msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Cocoa", "No", rp) 
+                                    return;
+                                })
                                 })
                             })
                         }
                     }
                 })
             } else {
-                if(msg.channel) {
-                    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-                    .setColor("#E12323").setFooter("若有不便請見諒 > <");return msg.channel.send(Coppa)}
+
                     Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                         if (user2 === false) {
                         msg.channel.send(l.error.Try_again);
@@ -186,7 +187,7 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.cocoa}${h.word.ordered2}${Cocoa}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Cocoa", "Yes", rp) })
+                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Cocoa", "Yes", rp) })
                                 })
                             })
                         }
@@ -252,7 +253,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.tippy}${h.word.ordered2}${Tippy}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Tippy", "No", rp) })
+                                msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Tippy", "No", rp) })
                             })
                         })
                     }
@@ -274,7 +275,7 @@ module.exports = {
             if (!msg.guild) return msg.channel.send(l.error.No_DM);
             Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                 if (user2 === false) {
-                    msg.channel.send(l.error.Try_again);
+                    msg.channel.send(lang.error.Try_again);
                 } else {
                     if (user2.money < 35) { return msg.channel.send(h.word.No_money + h.role.other +"...")} else {
                         user2.other++
@@ -299,7 +300,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.other}${h.word.ordered2}${Other}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Other", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Other", "No", rp) })
                             })
                         })
                     }
@@ -347,16 +348,14 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.fubuki}${h.word.ordered2}${Fubuki}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Fubuki", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Fubuki", "No", rp) })
                             })
                         })
                     }
                 }
             })
             }else {
-                if(msg.channel) {
-                    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-                    .setColor("#E12323").setFooter("若有不便請見諒 > <");return msg.channel.send(Coppa)}
+
                     Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                         if (user2 === false) {
                         msg.channel.send(l.error.Try_again);
@@ -383,7 +382,7 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.fubuki}${h.word.ordered2}${Cocoa}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Fubuki", "Yes", rp) })
+                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Fubuki", "Yes", rp) })
                                 })
                             })
                         }
@@ -426,11 +425,11 @@ module.exports = {
                                 const attachment = new Discord.MessageAttachment("./pitrue/shota/" + f, f);
                                 const cocoaEmbed = new Discord.MessageEmbed()
                                     .setColor('#2d9af8')
-                                    .setTitle(msg.author.username + " "+h.word.ordered)
+                                    .setTitle(msg.author.username + " "+h.word.ordered+ h.role.shota)
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.shota}${h.word.ordered2}${Shota}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Shota", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Shota", "No", rp) })
                             })
                         })
                     }
@@ -477,16 +476,14 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.loli}${h.word.ordered2}${Cocoa}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "loli", "No", rp) })
+                                    msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "loli", "No", rp) })
                                 })
                             })
                         }
                     }
                 })
             } else {
-                if(msg.channel) {
-                    let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-                    .setColor("#E12323").setFooter("若有不便請見諒 > <");return msg.channel.send(Coppa)}
+
                     Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                         if (user2 === false) {
                         msg.channel.send(l.error.Try_again);
@@ -513,7 +510,7 @@ module.exports = {
                                         .setImage('attachment://' + f)
                                         .setTimestamp()
                                         .setFooter(`◆${h.role.loli}${h.word.ordered2}${Cocoa}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "loli", "Yes", rp) })
+                                    msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "loli", "Yes", rp) })
                                 })
                             })
                         }
@@ -560,7 +557,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.chen}${h.word.ordered2}${Other}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Chen", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Chen", "No", rp) })
                             })
                         })
                     }
@@ -606,7 +603,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.Nakkar}${h.word.ordered2}${Other}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Nakkar", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Nakkar", "No", rp) })
                             })
                         })
                     }
@@ -652,7 +649,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.vtuber}${h.word.ordered2}${Other}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "vtuber", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "vtuber", "No", rp) })
                             })
                         })
                     }
@@ -698,7 +695,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.peko}${h.word.ordered2}${Other}${h.word.time}\n${h.word.copy}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Pekora", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Pekora", "No", rp) })
                             })
                         })
                     }
@@ -744,7 +741,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.S1}${h.word.ordered2}${S1}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Rabbit_S1", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Rabbit_S1", "No", rp) })
                             })
                         })
                     }
@@ -790,7 +787,7 @@ module.exports = {
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.S2}${h.word.ordered2}${S1}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Rabbit_S2", "No", rp) })
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Rabbit_S2", "No", rp) })
                             })
                         })
                     }
@@ -834,12 +831,11 @@ module.exports = {
                                 const cocoaEmbed = new Discord.MessageEmbed()
                                     .setColor('#2d9af8')
                                     .setTitle(msg.author.username + " "+h.word.ordered+h.role.S1)
-                                    
                                     .setImage('attachment://' + f)
                                     .setTimestamp()
                                     .setFooter(`◆${h.role.S3}${h.word.ordered2}${S1}${h.word.time}\n${h.word.copy}\n${h.word.copy_rabbit}`);
-                                S3_(bot,msg,clientDB)
-                                    msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Rabbit_S2", "No", rp) })
+                                    S3_(bot,msg,clientDB)
+                                msg.channel.send({embeds: [cocoaEmbed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Rabbit_S2", "No", rp) })
                             })
                         })
                     }
@@ -894,6 +890,7 @@ module.exports = {
                     .setTimestamp()
                     .setFooter(h.data.footer + (Chino + Cocoa + Tippy + Other + S1 + S2 + S3) + h.data.footer2 + (shark + fubuki + peko) + h.word.time)
                 msg.channel.send({embeds: [dataEmbed]});
+                return;
             })
         }
     }
@@ -931,6 +928,7 @@ async function shark0(bot, msg,clientDB,language) {
                                 .setFooter(`◆${h.role.gura}${h.word.ordered2}${Shark}${h.word.time}\n${h.word.copy}`);
                                 msg.channel.send({embeds: [chinoEmbed],files:[attachment],components: [row]}).then((rp) => {
                                 report(bot, msg,clientDB, f, "Shark", "No", rp)
+                                return;
                             })
                         })
                     })
@@ -938,9 +936,6 @@ async function shark0(bot, msg,clientDB,language) {
             }
         })
     } else {
-        if(msg.channel) {
-            let Coppa = new Discord.MessageEmbed().setTitle("❌此功能無法使用!").setDescription("| 根據 __[兒童線上隱私權保護法](https://www.jdsupra.com/legalnews/no-discord-here-caru-determines-social-95054/)__`（Children's Online Privacy Protection Act，COPPA）`|\n**智乃小幫手** 將停止提供NSFW內容查詢/閱讀")
-            .setColor("#E12323").setFooter("若有不便請見諒 > <");return msg.channel.send(Coppa)}
             Mongo.loadUser(clientDB,msg.author.id).then((user2) => {
                 if (user2 === false) {
                 msg.channel.send(l.error.Try_again);
@@ -968,7 +963,7 @@ async function shark0(bot, msg,clientDB,language) {
                                 .setImage('attachment://' + f)
                                 .setTimestamp()
                                 .setFooter(`◆${h.role.gura}${h.word.ordered2}${Shark}${h.word.time}\n${h.word.copy}`);
-                            msg.channel.send({embeds: [chino18Embed],files:[attachment],components: [row]}).then((rp) => { report(bot, msg,clientDB, f, "Shark", "Yes", rp) })
+                            msg.channel.send({embeds: [chino18Embed],files:[attachment],components: [row]}).then((rp) => {return report(bot, msg,clientDB, f, "Shark", "Yes", rp) })
                         })
                     })
                 }
@@ -985,6 +980,7 @@ async function chino(bot, message,clientDB) {
                 user.adv.push("chino");
                 message.author.send("🏅**獲得成就!!**  智乃初見面!");
                 Mongo.writeUser(clientDB,message.author.id,user) 
+                return;
             }
         }
     })
@@ -998,6 +994,7 @@ async function chino10(bot, message,clientDB) {
                 user.adv.push("chino10");
                 message.author.send("🏅**獲得成就!!**  智乃熟客!");
                 Mongo.writeUser(clientDB,message.author.id,user)
+                return;
             }
         }
     })
@@ -1011,6 +1008,7 @@ async function nomoneychino(bot, message,clientDB) {
                 user.adv.push("nomoneychino");
                 message.author.send("🏅**獲得成就!!**  就算沒錢我也要買智乃!");
                 Mongo.writeUser(clientDB,message.author.id,user)
+                return;
             }
         }
     })
@@ -1024,6 +1022,7 @@ async function specaial(bot, message,clientDB) {
                 user.adv.push("specaial");
                 message.author.send("🏅**獲得成就!!**  特別服務>w<");
                 Mongo.writeUser(clientDB,message.author.id,user)
+                return;
             }
         }
     })
@@ -1061,18 +1060,20 @@ async function report(bot, message,clientDB, number, spot, r18, draw) {
                             user.report.push(number)
                             Mongo.writePicture(clientDB,user)
                             }
+                            return;
                         } else if (collected.customId === 'B') {
                             message.reply(h.report.love)
                             var embed = draw.embeds[0];
                             let file = embed.image.url;
                             user2.picture.love.push({type:"Picture",name: spot,file: number,nsfw: r18,url: file})
-                            Mongo.writeUser(clientDB,message.author.id,user2) 
+                            Mongo.writeUser(clientDB,message.author.id,user2)
+                            return;
                         } else if (collected.customId === 'C') {
                             var embed = draw.embeds[0];
                             let file = embed.image.url;
                             if (r18 == "Yes") { var r18Y = "R18" } else if (r18 == "No") { var r18Y = "Normal" } else { var r18Y = "Unknown" }
                             let share = new Discord.MessageEmbed().setTitle(h.report.share).setDescription(h.report.url).addField("[" + spot + "] [" + r18Y + "] [" + number + "]", `[[${number}]](${file})`).setTimestamp().setFooter(message.author.username, message.author.displayAvatarURL())
-                            message.channel.send({embeds: [share]})
+                            return message.channel.send({embeds: [share]});
                         }
                     }).catch(collected => { return; })
             })

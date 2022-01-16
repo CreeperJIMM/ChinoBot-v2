@@ -20,13 +20,23 @@ module.exports = {
             let lang = lan.zh_TW,h = helpX.zh_TW
             if(language === "zh_TW") {lang = lan.zh_TW;h = helpX.zh_TW}else if(language === "zh_CN") {lang = lan.zh_CN;h = helpX.zh_CN}else if(language === "ja_JP") {lang = lan.ja_JP;h = helpX.ja_JP
             }else if(language === "en_US") {lang = lan.en_US;h = helpX.en_US}
+            let BUTTON1 = new Discord.MessageButton().setStyle('LINK')
+            let BUTTON2 = new Discord.MessageButton().setStyle('LINK')
+            let BUTTON3 = new Discord.MessageButton().setStyle('LINK')
+            let BUTTON4 = new Discord.MessageButton().setStyle('LINK')
+            let row = new Discord.MessageActionRow().addComponents([
+                BUTTON1.setLabel("點我邀請到你的Server!").setURL('https://discord.com/oauth2/authorize?client_id='+bot.user.id+'&scope=applications.commands%20bot&permissions=1476668478'),
+                BUTTON2.setLabel("官方網站").setURL("https://dckabicord.com/main"),
+                BUTTON3.setLabel("官方群組").setURL("https://discord.gg/P2yg5V2"),
+                BUTTON4.setLabel("官方文檔(Beta)").setURL("https://docs.dckabicord.com/")
+            ])
             const helpEmbed = new Discord.MessageEmbed()
             .setColor('#2d9af8')
             .setAuthor(bot.user.username + "#" + bot.user.discriminator+` `+h.help.command+`  V.${version}` , bot.user.displayAvatarURL())
             .setDescription(h.help.desc +p+ h.help.desc2 +p+ h.help.desc3)
             .addField(h.help.addA ,h.help.addF +p+h.help.addF2+p+h.help.addF3+p+h.help.addF4+p+h.help.addF5+p+h.help.addF6+bot.user.id+h.help.addF7+p+h.help.addF8+p+h.help.addF9)
             .setFooter(h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-            {message.channel.send({embeds: [helpEmbed]})};
+            return message.channel.send({embeds: [helpEmbed],components:[row]});
         }
     },
     "oldcommand":{
@@ -37,7 +47,7 @@ module.exports = {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            help(bot,message,language,p,args)
+            return help(bot,message,language,p,args)
         }
     },
     "oldcmd":{
@@ -47,7 +57,7 @@ module.exports = {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) { 
-            help(bot,message,language,p,args)
+            return help(bot,message,language,p,args)
         }
     },
     "cmd":{
@@ -57,7 +67,7 @@ module.exports = {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) {
-            newcmd(bot,message,language,p,args)
+            return newcmd(bot,message,language,p,args)
         }
     },
     "command":{
@@ -67,7 +77,7 @@ module.exports = {
         vote: false,
         help: false,
         fun: function (bot, message, p,clientDB,language,args, ...ag) {
-            newcmd(bot,message,language,p,args)
+            return newcmd(bot,message,language,p,args)
         }
     },
     "invite":{
@@ -96,7 +106,7 @@ module.exports = {
             .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
             .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
             .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send({embeds: [invEmbed]})};
+            return message.channel.send({embeds: [invEmbed]});
         }
     },
     "inv":{
@@ -124,7 +134,7 @@ module.exports = {
             .addField(h.invite.addF2.a1,h.invite.addF2.v1, true)
             .setImage('https://cdn.discordapp.com/attachments/611040945495998464/732975856754098236/78469703_p0.jpg')
             .setFooter( h.word.all, 'https://images-ext-2.discordapp.net/external/z2VL24Kx8kArxG96MNM-GsQf1oMKADfewPobcVW41sk/%3Fv%3D1/https/cdn.discordapp.com/emojis/681075641096863868.png');
-          {message.channel.send({embeds: [invEmbed]})};
+            return message.channel.send({embeds: [invEmbed]});
         }
     },
     "ver":{
@@ -143,7 +153,7 @@ module.exports = {
             }else if(ag[0] == "4") {
                 ver4(bot,message,language)
             }else{
-            execute(bot,message,p,language)
+                return execute(bot,message,p,language)
         }}
     },
     "version":{
@@ -163,7 +173,7 @@ module.exports = {
             }else if(ag[0] == "4") {
                 ver4(bot,message,language)
             }else{
-            execute(bot,message,p,language)
+                return execute(bot,message,p,language)
         }}
     },
 }

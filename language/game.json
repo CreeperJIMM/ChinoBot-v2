@@ -89,6 +89,37 @@
             "maybe_yes": "🤔或許是",
             "maybe_no": "🤔也許不是"
         },
+        "ball":{
+            "title":"🎱神奇八號球的回答:",
+            "footer":"你的問題為:",
+            "clor":{
+            "red":"否定回答.",
+            "blue":"模稜兩可或提示再問一次.",
+            "green":"肯定回答."
+            },
+            "answer":[
+                "這是必然",
+                "這是肯定的",
+                "不用懷疑",
+                "毫無疑問",
+                "你能依靠他",
+                "如我所見，是的",
+                "很有可能",
+                "外表很好",
+                "是的",
+                "種種跡象指出「是的」",
+                "回復攏統，再試試",
+                "待會再問",
+                "最好現在不告訴你",
+                "現在無法預測",
+                "專心再問一遍",
+                "想的美",
+                "我的回答是「不」",
+                "我的來源說「不」",
+                "前景不太好",
+                "很可疑, `sus`"
+            ]
+        },
         "word": {
             "typemoney": "❌請填入賭注金額!",
             "hasgame": "❌你有一個遊戲在進行!",
@@ -201,6 +232,37 @@
             "no": "😒不是",
             "maybe_yes": "🤔或许是",
             "maybe_no": "🤔也许不是"
+        },
+        "ball":{
+            "title":"🎱神奇八号球的回答:",
+            "footer":"你的问题为:",
+            "clor":{
+            "red":"否定回答.",
+            "blue":"模棱两可或提示再问一次.",
+            "green":"肯定回答."
+            },
+            "answer":[
+                "这是必然",
+                "这是肯定的",
+                "不用怀疑",
+                "毫无疑问",
+                "你能依靠他",
+                "如我所见，是的",
+                "很有可能",
+                "外表很好",
+                "是的",
+                "种种迹象指出 \"是的\"",
+                "回复拢统，再试试",
+                "待会再问",
+                "最好现在不告诉你",
+                "现在无法预测",
+                "专心再问一遍",
+                "想的美",
+                "我的回答是\"不\"",
+                "我的来源说\"不\"",
+                "前景不太好",
+                "很可疑, `sus`"
+            ]
         },
         "word": {
             "typemoney": "❌请填入赌注金额!",
@@ -315,6 +377,37 @@
             "maybe_yes": "🤔Maybe it is",
             "maybe_no": "🤔Maybe not"
         },
+        "ball":{
+            "title":"🎱Answer to the Magic Eight Ball:",
+            "footer":"Your question is:",
+             "clor":{
+             "red":"Negative answer.",
+             "blue":"Ambiguous or prompt to ask again.",
+             "green": "Affirmative answer."
+             },
+            "answer":[
+                "It is certain.",
+                "It is decidedly so.",
+                "Without a doubt.",
+                "Yes, definitely.",
+                "You may rely on it.",
+                "As I see it, yes.",
+                "Most likely.",
+                "Outlook good.",
+                "Yes",
+                "Signs point to `yes`.",
+                "Reply hazy try again.",
+                "Ask again later.",
+                "Better not to tell you now.",
+                "Cannot predict now.",
+                "Concentrate and ask again.",
+                "Don't count on it.",
+                "My reply is `no`.",
+                "My source says `No`.",
+                "Outlook not so good.",
+                "Very doubtful, `sus`"
+            ]
+        },
         "word": {
             "typemoney": "❌Please fill in the bet amount!",
             "hasgame": "❌You have a game in progress!",
@@ -427,6 +520,37 @@
             "no": "😒ではありません",
             "maybe_yes": "🤔おそらく",
             "maybe_no": "🤔そうでないかもしれない"
+        },
+        "ball":{
+            "title":"🎱🎱マジックエイトボールへの回答：",
+            "footer": "あなたの質問は:",
+             "clor": {
+             "red":"否定的な答え",
+             "blue": "あいまいであるか、もう一度尋ねるプロンプトが表示されます。",
+             "green":"肯定的な答え"
+             },
+            "answer":[
+                "It is certain.",
+                "It is decidedly so.",
+                "Without a doubt.",
+                "Yes, definitely.",
+                "You may rely on it.",
+                "As I see it, yes.",
+                "Most likely.",
+                "Outlook good.",
+                "Yes",
+                "Signs point to `yes`.",
+                "Reply hazy try again.",
+                "Ask again later.",
+                "Better not to tell you now.",
+                "Cannot predict now.",
+                "Concentrate and ask again.",
+                "Don't count on it.",
+                "My reply is `no`.",
+                "My source says `No`.",
+                "Outlook not so good.",
+                "Very doubtful, `sus`"
+            ]
         },
         "word": {
             "typemoney": "❌賭け金額を記入してください！",

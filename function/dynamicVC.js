@@ -1,9 +1,4 @@
 let Mongo = require('./MongoData')
-
-const UserCache = new Map()
-setInterval(() => {
-  UserCache.clear()
-}, 600000);
 const GuildCache = new Map()
 setInterval(() => {
   GuildCache.clear()
@@ -16,8 +11,7 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
     if (
       oldMember.channel &&
       newMember.channel &&
-      oldUserChannel != newUserChannel
-    ) {
+      oldUserChannel != newUserChannel) {
       let gid = oldMember.guild.id;
       let ser = GuildCache.get(gid);
       if (!ser) {
@@ -51,6 +45,8 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
     } else if (newUserChannel) {
       //Join
       let gid = newMember.guild.id;
+      if(!newMember.channel) return;
+      let parentid = newMember.channel.parentId;
       let ser = GuildCache.get(gid);
       if (!ser) {
         await Mongo.loadGuild(clientDB, gid).then((user) => {
@@ -76,7 +72,6 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
             return;
           }
           if (ser.voice2.indexOf(newUserChannel) != "-1") {
-            let gid = newMember.channel.parentId;
             let site = newMember.channel.parent.children.size
             newMember.channel
               .clone(
@@ -84,12 +79,14 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
                 { type: "voice" ,userLimit: 0 ,position: site}
               )
               .then((Channel) => {
-                Channel.setParent(gid, { lockPermissions: false });
+                if(!Channel) return;
+                Channel.setParent(parentid, { lockPermissions: false });
                 Channel.edit({ userLimit: 0 });
                 Channel.setPosition(site)
                 newMember.setChannel(Channel.id);
                 ser.voice.push(Channel.id);
                 Mongo.writeGuild(clientDB, newMember.guild.id, ser);
+                return;
               }).catch((err) => {
                 throw err;
               })
@@ -97,6 +94,8 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
     } else if (oldUserChannel) {
       //Leave
       let gid = oldMember.guild.id;
+      let leavechannel = oldMember.channel;
+      if(!leavechannel) leavechannel = oldMember.guild.channels.cache.get(oldMember.channelId)
       let ser = GuildCache.get(gid);
       if (!ser) {
         await Mongo.loadGuild(clientDB, gid).then((user) => {
@@ -110,20 +109,21 @@ module.exports.main = async function (oldMember, newMember, num, clientDB,client
       if (ser.language.run) {
         if (ser.language.run != num) return;
       }
-      Mongo.loadGuild(clientDB, oldMember.guild.id).then((user) => {
+      Mongo.loadGuild(clientDB, gid).then((user) => {
         if (user === false) {
           return;
         } else {
           try {
             if (ser.voice.indexOf(oldUserChannel) != "-1") {
-              if (oldMember.channel.members.size === 0) {
-                oldMember.channel.delete();
+              if (leavechannel.members.size === 0) {
+                leavechannel.delete();
                 var array = ser.voice;
                 var index = array.indexOf(oldUserChannel);
                 if (index > -1) {
                   array.splice(index, 1);
                 }
-                Mongo.writeGuild(clientDB, oldMember.guild.id, ser);
+                Mongo.writeGuild(clientDB, gid, ser);
+                return;
               }
             }
           } catch (error) {

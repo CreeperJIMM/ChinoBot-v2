@@ -1,8 +1,4 @@
 let Mongo = require('./MongoData')
-const UserCache = new Map()
-setInterval(() => {
-  UserCache.clear()
-}, 600000);
 const GuildCache = new Map()
 setInterval(() => {
   GuildCache.clear()
@@ -11,9 +7,9 @@ setInterval(() => {
 let cooldown = new Set(),channelcooldown = new Set();
 function deleteCooldown(message) {
     setTimeout(() => {
-      cooldown.delete(message.author.id)}, 1 * 900)
+        return cooldown.delete(message.author.id)}, 1 * 900)
     setTimeout(() => {
-      channelcooldown.delete(message.channel.id)}, 1 * 700)
+        return channelcooldown.delete(message.channel.id)}, 1 * 700)
   }
 let times = 1
 module.exports.send = function(text1, text2, text3, text4,text5,text6, author = null) {
@@ -26,12 +22,12 @@ module.exports.send = function(text1, text2, text3, text4,text5,text6, author = 
                 if(!sendtext[rand]) return;
                 msg.channel.send(sendtext[rand])
                 cooldown.add(msg.author.id)
-                deleteCooldown(msg)
+                return deleteCooldown(msg)
             } else {
                 if (msg.author.id === author) {
                     msg.channel.send("指令已使用 " + times + "次。");
                     cooldown.add(msg.author.id)
-                    deleteCooldown(msg)
+                    return deleteCooldown(msg)
                 }
             }
         }
@@ -70,19 +66,16 @@ module.exports.data = {
 module.exports.detectsay = async function (msg,num,clientDB) {
     if (!msg.guild) return;
     if (msg.author.bot) return;
-    let ser= UserCache.get(msg.author.id)
+    let ser = GuildCache.get(msg.author.id)
     if(!ser) {
-      await Mongo.loadGuild(clientDB,msg.guild.id).then((user) => {
-        ser = user
-        GuildCache.set(msg.guild.id,user)
-    })}
-    if (ser === false) { return }
-    Mongo.loadGuild(clientDB,msg.guild.id).then((ser) => {
-        if (ser === false) { return }
-        if (ser.language) { if (ser.language.run != num) return;}
-        if(ser.language.setting) {if(ser.language.setting.react === false) return;}
-        let a = Math.round(Math.random() * 6)
-        if (Object.keys(this.data).includes(msg.content))
-            this.data[`${msg.content}`](a, msg)
-        });
+    ser = await Mongo.loadGuild(clientDB,msg.guild.id)
+    GuildCache.set(msg.guild.id,ser)
+    }
+    if (ser === false) return;
+    if (ser.language) { if (ser.language.run != num) return;}
+    if(ser.language.setting) {if(ser.language.setting.react === false) return;}
+    let a = Math.round(Math.random() * 6)
+    if (Object.keys(this.data).includes(msg.content))
+        this.data[`${msg.content}`](a, msg)
+        return;
 };

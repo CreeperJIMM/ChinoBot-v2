@@ -78,6 +78,8 @@ module.exports= [
       if (!msg.guild) return;
       if (msg.content.startsWith('cr??')) return;
       if (!msg.guild.me.permissions.has(['SEND_MESSAGES'])) return;
+      if(!msg.guild.me.permissionsIn(msg.channel).has('SEND_MESSAGES')) return;
+      if(!msg.guild.me.permissionsIn(msg.channel).has('VIEW_CHANNEL')) return;
       if (channelcooldown.has(msg.channel.id)) return;
       if (msg.author.bot) return;
       msgcmd.ifban(banlist,why,msg)
@@ -104,13 +106,15 @@ module.exports= [
                       let lsay = languages[user2.language].error.TooSpeed
                       msg.channel.send(lsay);
                       adv.speed(client, msg, user2.language,clientDB)
+                      return;
                   } else {
                       msg.channel.send("請等等再來使用此指令!\nplease wait.");
                       speed(client, msg)
+                      return;
                   }
               } else {
                   let userlang = user2.language
-                  zh_TW(client, msg, userlang,clientDB)
+                  return zh_TW(client, msg, userlang,clientDB)
               }
   }
 }
@@ -119,7 +123,7 @@ module.exports= [
   "name":"voiceStateUpdate",
   "type":"on",
   "fun": function(client,clientDB,prefix,oldMember,newMember) {
-    voiceDVC.main(oldMember,newMember,2,clientDB,client)
+    return voiceDVC.main(oldMember,newMember,2,clientDB,client)
   }
  },
  {
@@ -133,7 +137,7 @@ module.exports= [
        ser = user
        GuildCache.set(gid,user)
    })}
-   memJoLe.join(ser,member,clientDB,client,2)
+   return memJoLe.join(ser,member,clientDB,client,2)
   }
  },
  {
@@ -147,9 +151,9 @@ module.exports= [
         ser = user
         GuildCache.set(gid,user)
     })}
-    memJoLe.leave(ser,member,clientDB,client,2)
+    return memJoLe.leave(ser,member,clientDB,client,2)
   }
- },
+ },/*
  {
    "name":"messageDelete",
    "type":"on",
@@ -171,7 +175,7 @@ module.exports= [
         Mongo.loadGuild(clientDB, message.guild.id).then((user) => {
             if (user === false) { return } else {
                 snipecool.add(message.author.id)
-                deleteSnipe.main(message,clientDB,user)
+                //deleteSnipe.main(message,clientDB,user)
             }
         })
         setTimeout(() => { snipecool.delete(message.author.id) }, 1000);
@@ -183,7 +187,7 @@ module.exports= [
  fun: function(client,clientDB,prefix,oldmessage, newmessage) {
   if (!oldmessage.guild) return;
   if (oldmessage.content === newmessage.content) return;
-  detects(client,oldmessage, newmessage, "edit", newmessage.guild.id,"",clientDB)
+  return detects(client,oldmessage, newmessage, "edit", newmessage.guild.id,"",clientDB)
  }
  },
  {
@@ -193,12 +197,14 @@ module.exports= [
     if (!message.first().guild) return;
     let length = message.size
     let channel = message.first().channel.name
-    detects(client,message, channel, "deleBulk", message.first().guild.id, length,clientDB)
+    return detects(client,message, channel, "deleBulk", message.first().guild.id, length,clientDB)
   }
-},
+},*/
 ]
 const language  = require("../../commands/lang.json");
 let DBL = require("dblapi.js")
+const {topToken} = require("../../token.json")
+const dbl = new DBL(topToken);
 ///////////////// Command ////////////////////////
 async function zh_TW(bot, msg, userlang,clientDB) {
   time(bot, msg)
@@ -206,8 +212,6 @@ async function zh_TW(bot, msg, userlang,clientDB) {
   channelcooldown.add(msg.channel.id)
   deleteCooldown(msg)
   if (Object.keys(command).includes(msg.content.replace(prefix, "").split(" ")[0])) {
-        const {topToken} = require("../../token.json")
-        const dbl = new DBL(topToken, { webhookAuth: 'ChinoBot'}, bot);
           try {
             let cmd = command[msg.content.replace(prefix, "").split(" ")[0]]
             if(!language[userlang]) userlang = "zh_TW"
@@ -226,39 +230,51 @@ async function zh_TW(bot, msg, userlang,clientDB) {
                   return msg.channel.send({embeds:[vote]})
               }
             }else{
-              mainCommand()
+              return mainCommand(msg,cmd,bot,clientDB,userlang)
           }
-        }else{mainCommand()};
-          async function mainCommand() {
-            let ag = msg.content.split(" ")
-            ag.shift()
-            if(!cmd.help && ag[0] === "help") {
-                let helper = new Discord.MessageEmbed()
-                .setTitle(msg.content.replace(prefix, "").split(" ")[0])
-                .setDescription("📄說明:\n"+cmd.description.zh_TW+`\n\n✏使用方式:\n${cmd.instructions}\n`)
-                .setFooter("📊類別: "+cmd.category+"\n🗳是否投票: "+cmd.vote+"\n🎭指令權限: "+cmd.authority+"\n註: ＊ 非必填")
-                return msg.channel.send({embeds:[helper]})
-            }else{
-              command[msg.content.replace(prefix, "").split(" ")[0]]["fun"](bot, msg, prefix, clientDB, userlang, ag, ...ag)
-            }
-          }
+        }else{
+          return mainCommand(msg,cmd,bot,clientDB,userlang)
+        };
           } catch (error) {
               msg.channel.send("❌嘗試執行發生錯誤!\n```js\n" + error + "\n```")
               bot.channels.cache.get("746185201675141241").send("錯誤!\n執行者:  " + msg.author.tag + ":" + msg.content + "\n```js\n" + error + "\n```")
               if (error) msg.react("<:error:787197851913945118>") //error
               console.log(msg.author.tag + ":" + msg.content)
-              console.log(error)
+              throw error;
           }
+  }else{
+    return;
+  }
+}
+async function mainCommand(msg,cmd,bot,clientDB,userlang) {
+  let ag = msg.content.split(" ")
+  ag.shift()
+  if(!cmd.help && ag[0] === "help") {
+      let helper = new Discord.MessageEmbed()
+      .setTitle(msg.content.replace(prefix, "").split(" ")[0])
+      .setDescription("📄說明:\n"+cmd.description.zh_TW+`\n\n✏使用方式:\n${cmd.instructions}\n`)
+      .setFooter("📊類別: "+cmd.category+"\n🗳是否投票: "+cmd.vote+"\n🎭指令權限: "+cmd.authority+"\n註: ＊ 非必填")
+      return msg.channel.send({embeds:[helper]})
+  }else{
+    try {
+    if (!msg.guild.me.permissionsIn(msg.channel).has(['READ_MESSAGE_HISTORY'])) return msg.channel.send("⚠智乃有缺漏的權限可能會影響指令運作><!!\n缺漏權限: `READ_MESSAGE_HISTORY`(讀取歷史訊息)");
+    if (!msg.guild.me.permissionsIn(msg.channel).has(['EMBED_LINKS'])) return msg.channel.send("⚠智乃有缺漏的權限可能會影響指令運作><!!\n缺漏權限: `EMBED_LINKS`(嵌入連結)");
+    command[msg.content.replace(prefix, "").split(" ")[0]]["fun"](bot, msg, prefix, clientDB, userlang, ag, ...ag)
+    return;      
+    } catch (error) {
+      throw error;
+    }
+
   }
 }
 /////////////////////////// Rank ////////////////////////////
 let rank = new Set();
 function deleRank(message) {
     if (message.author.bot) return;
-    setTimeout(() => { rank.delete(message.author.id) }, 120000)
+    setTimeout(() => {return rank.delete(message.author.id) }, 120000)
 }
 let openServer = true;
-setTimeout(() => {openServer = false;}, 40000);
+setTimeout(() => { openServer = false;}, 40000);
 
 let rankMain = require("../../function/Rank")
 async function detectrank(message,clientDB,client) {
@@ -271,16 +287,17 @@ async function detectrank(message,clientDB,client) {
         if(!cache) {
             await Mongo.loadUser(clientDB,message.author.id).then((user) => {
             cache = user
+            if(user === false) return rankMain.main(message,user,clientDB,client,2)
             UserCache.set(message.author.id,user)
         })}
         let user = cache
-        rankMain.main(message,user,clientDB,client,2)
+        return rankMain.main(message,user,clientDB,client,2)
 }
 };
 /////////////////////////////////////////////////////////////
 function deleteMessage(message,clientDB,client) {
 if (!message.guild) return;
-detects(client,message, message.guild, "dele", message.guild.id,"",clientDB)
+return detects(client,message, message.guild, "dele", message.guild.id,"",clientDB)
 }
 ////////////////////////////////////////////////////////////////
 let detectMsg = require("../../function/detectMessage")
@@ -292,5 +309,5 @@ async function detects(client,message, guild, channel, gid, length,clientDB) {
         GuildCache.set(gid,user)
     })}
         if (ser === false) { return }
-        detectMsg.main(message, guild, channel, gid, length,clientDB,client,ser,2)
+        return detectMsg.main(message, guild, channel, gid, length,clientDB,client,ser,2)
 };

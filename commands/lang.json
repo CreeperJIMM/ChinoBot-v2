@@ -119,7 +119,15 @@
             "ban_members": "驅逐成員",
             "send_tts_messages": "發送TTS訊息",
             "mention_everyone": "提及所有人",
-            "ADMINISTRATOR": "管理者"
+            "ADMINISTRATOR": "管理者",
+            "send_messages":"發送訊息",
+            "embed_links":"嵌入連結",
+            "attach_files":"附加檔案",
+            "add_reactions":"新增表情",
+            "use_external_emoji":"使用外部表情符號",
+            "use_external_stickers":"使用外部貼圖",
+            "use_commands":"使用斜槓指令",
+            "read_message_history":"讀取歷史訊息"
         }
     },
     "zh_CN": {
@@ -242,7 +250,15 @@
             "ban_members": "驱逐成员",
             "send_tts_messages": "发送TTS讯息",
             "mention_everyone": "提及所有人",
-            "ADMINISTRATOR": "管理者"
+            "ADMINISTRATOR": "管理者",
+            "send_messages":"发送讯息",
+            "embed_links":"嵌入连结",
+            "attach_files":"附加档案",
+            "add_reactions":"新增表情",
+            "use_external_emoji":"使用外部表情符号",
+            "use_external_stickers":"使用外部贴图",
+            "use_commands":"使用斜杠指令",
+            "read_message_history":"读取历史讯息"
         }
     },
     "en_US": {
@@ -365,7 +381,15 @@
             "ban_members": "Ban members",
             "send_tts_messages": "Send TTS messages",
             "mention_everyone": "Mention everyone",
-            "ADMINISTRATOR": "Adminstrator"
+            "ADMINISTRATOR": "Adminstrator",
+            "send_messages":"Send Messages",
+             "embed_links":"Embed Links",
+             "attach_files":"Attach files",
+             "add_reactions":"Add emoji",
+             "use_external_emoji":"Use external emoji",
+             "use_external_stickers":"Use external stickers",
+             "use_commands":"Use slash commands",
+             "read_message_history":"Read history message"
         }
     },
     "ja_JP": {
@@ -488,7 +512,15 @@
             "ban_members": "BAN メンバー ",
             "send_tts_messages": "TTSメッセージを送信する",
             "mention_everyone": "みんなに言及する",
-            "ADMINISTRATOR": "マネージャー"
+            "ADMINISTRATOR": "マネージャー",
+            "send_messages": "メッセージの送信",
+             "embed_links": "埋め込みリンク",
+             "attach_files": "ファイルを添付",
+             "add_reactions": "絵文字を追加",
+             "use_external_emoji": "外部絵文字を使用",
+             "use_external_stickers": "外部ステッカーを使用",
+             "use_commands": "スラッシュコマンドを使用する",
+             "read_message_history": "履歴メッセージの読み取り"
         }
     },
     "es_ES": {
